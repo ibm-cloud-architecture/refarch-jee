@@ -1,8 +1,16 @@
 # Enterprise Application Modernization through Java EE on Cloud
 
-TBD Introduction
+This project provides a reference implementation for modernizing Java EE-based applications, running on present-day application servers (ie WebSphere Application Server), to run on the Cloud and outside the walls of traditional datacenters.  This is an iterative process, as these applications have traditionally grown to be quite large over time, allowing teams to adopt and build best practices as they progress.  This repository provides the content for both the overall strategy required for these types of modernizations, as well as reference implementation code that can be used to walk through the iterative process on your own.
 
-**TOC TBD**
+The end result of this modernization effort is to build applications that are more nimble, more resilient, and more secure.  At the "end" of this modernization, users will generally be building microservices-based applications.  These applications contain components that are much smaller in nature, much more distributed, and much more autonomous.  However, the power of these smaller components is realized when they are able to evolve much more rapidly than the existing traditional enterprise applications.  
+
+**Contents**
+- [Strategy](#strategy)
+  - [Phases](#phases)
+  - [Techniques & Design Decisions](#techniques-and-design-decisions)
+- [Repositories](#repositories)
+- [Getting Started](#getting-started)
+
 
 ## Strategy
 
@@ -45,7 +53,7 @@ Through iterative assessment, teams move to microservices on a per-business capa
 The most practical pattern for this approach is the [Strangler Pattern](https://www.ibm.com/developerworks/cloud/library/cl-strangler-application-pattern-microservices-apps-trs/index.html), which sections off business capability to be reimplemented in a new microservice while the rest of the existing application functions as-is.  
 
 
-### Techniques & Design Decisions
+### Techniques and Design Decisions
 
 _TBD Cover each Aspect_
 
