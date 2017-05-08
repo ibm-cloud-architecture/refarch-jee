@@ -27,7 +27,7 @@ This phase is the ASIS, current state of the existing applications.  These are o
 
 ![Phase 1 Application Architecture](static/imgs/apparch-pc-phase1-onprem.png?raw=true)
 
-Initial need to migrate to current runtimes, projects, and supporting libraries on WAS 8.5.X, as it’s an intermediate modernization step.  This phase focuses on modernizing application components to present-day versions, as well as development environments and delivery pipelines to modern practices.
+Initial need to migrate to current runtimes, projects, and supporting libraries on WAS 8.5.5 or WAS 9.0, as it’s an intermediate modernization step and not a complete rearchitecture.  This phase focuses on modernizing application components to present-day versions, as well as development environments and delivery pipelines to modern practices.
 
 #### **Phase 2: Mitigation Phase**
 
@@ -86,4 +86,9 @@ There are several components of the overall application architecture:
 
 ## Getting Started
 
-Details to be added later
+These phases are iterative in nature and require the previous Phases to be completed before moving on.  In the links below, you will be able to move through the Phases of modernizing the reference application leveraging your own cloud resources.
+
+- [Phase 1: Modernizing the Existing Application](phases/phase1.md) _Currently underway_
+- [Phase 2: Mitigation Phase](#phase-2-mitigation-phase)
+- [Phase 3: Production Lift & Shift](#phase-3-production-lift--shift)
+- [Phase 4: Evolve to Microservices](#phase-4-evolve-to-microservices)
