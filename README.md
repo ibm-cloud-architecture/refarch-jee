@@ -42,7 +42,7 @@ Adoption of newer cloud-based services, such as newer databases and messaging ca
 
 Through iterative assessment, teams move to microservices on a per-business capability basis, depending on prioritized pain-points the existing lifted monolith is still presenting.  This is done repeatedly until the application teams can move at the speed the business requires.
 
-The most practical pattern for this approach is the [Strangler Pattern](#tbd-kyle-article), which sections off business capability to be reimplemented in a new microservice while the rest of the existing application functions as-is.  
+The most practical pattern for this approach is the [Strangler Pattern](https://www.ibm.com/developerworks/cloud/library/cl-strangler-application-pattern-microservices-apps-trs/index.html), which sections off business capability to be reimplemented in a new microservice while the rest of the existing application functions as-is.  
 
 
 ### Techniques & Design Decisions
@@ -65,8 +65,8 @@ Details to be added later
 ## Repositories
 
 - [Customer Order](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder)
-  - Branch [RAD96 & WAS855](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder)
-  - Branch [RAD96 & WAS7](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder)
+  - Branch [RAD96 & WAS855](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad-9-6-was-8-5-5)
+  - Branch [RAD96 & WAS7](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70)
 - [Inventory System](https://github.com/ibm-cloud-architecture/refarch-jee-inventorysystem)
 
 ## Getting Started
