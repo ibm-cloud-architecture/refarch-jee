@@ -79,9 +79,9 @@ There are several components of the overall application architecture:
 
 ## Repositories
 
-- [Customer Order](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder)
-  - Branch [RAD96 & WAS855](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad-9-6-was-8-5-5)
-  - Branch [RAD96 & WAS7](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70)
+- [Customer Order](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder) - Main application
+  - Branch [RAD96 & WAS7](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70): Currently deployed & operationally stable.
+  - Branch [RAD96 & WAS855](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad-96-was855): Pending migration target branch, currently unstable.
 - [Inventory System](https://github.com/ibm-cloud-architecture/refarch-jee-inventorysystem)
 
 ## Getting Started
