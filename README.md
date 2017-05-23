@@ -74,8 +74,7 @@ Details to be added later
 
 The application is a simple store front shopping application, built during the early days of the Web 2.0 movement several years ago.  As such, it is in major need of upgrades from both the technology and business point of view.  Users interact directly with a browser-based interface and manage their cart to submit orders.  This application is built using the traditional [3-Tier Architecture](#tbd) model, with an HTTP server, an application server, and a supporting database.
 
-There are several components of the overall application architecture:
-- Details to be added later
+Application architecture details are detailed at length in the [Customer Order](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder#application-overview) repository.
 
 ## Repositories
 
