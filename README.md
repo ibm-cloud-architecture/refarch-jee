@@ -56,19 +56,11 @@ The most practical pattern for this approach is the [Strangler Pattern](https://
 
 ### Techniques and Design Decisions
 
-_TBD Cover each Aspect_
+#### [DevOps](aspects/devops.md)
 
-#### DevOps
+#### [Hybrid Connectivity](aspects/hybrid-connectivity.md)
 
-Details to be added later
-
-#### Hybrid Connectivity
-
-Details to be added later
-
-#### Security
-
-Details to be added later
+#### [Security](aspects/security.md)
 
 ## Application Overview
 
