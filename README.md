@@ -87,6 +87,6 @@ These phases are iterative in nature and require the previous Phases to be compl
 
 ## Additional Resources
 
-- [WebSphere... on Cloud? webinare ](https://www.ibm.com/blogs/cloud-computing/2016/05/wait-websphere-cloud/) - Learn how to "Life & Shift" your WebSphere Applications to the Cloud
+- [WebSphere... on Cloud? webinar ](https://www.ibm.com/blogs/cloud-computing/2016/05/wait-websphere-cloud/) - Learn how to "Life & Shift" your WebSphere Applications to the Cloud
 - [WebSphere Application Server Migration Toolkit](https://developer.ibm.com/wasdev/docs/migration/) - The WebSphere migration toolkit provides a rich set of tools that help you migrate between versions of traditional WebSphere, to Liberty, to cloud platforms such as Liberty for Java on IBM Bluemix Instant Runtimes, and from non-IBM application servers.
 - [IBM WebSphere Application Server V9.x Developer Tools](https://marketplace.eclipse.org/content/ibm-websphere-application-server-v9x-developer-tools#group-details) - An eclipse 4.x IDE for building and deploying Java EE, OSGi and Web 2.0 applications to WebSphere Application Server traditional V9.x with Java EE 7.
