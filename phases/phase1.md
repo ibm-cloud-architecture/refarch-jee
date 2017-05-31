@@ -13,7 +13,28 @@ That process is captured here for the transition from [Customer Order Services f
 
 ### Plan
 
-Details to be added later
+Moving your application to newer versions of WebSphere requires proper planning. The following resources helps you to plan successfully.
+
+#### Migration Strategy Tool
+
+Before moving to a new version of Websphere, you need to know all the options available for your migration. This tool helps you in evaluating different options available for your WebSphere applications.
+
+![Migration Strategy Tool-1](/phases/phase1_images/StrategyTool1.png?raw=true)
+![Migration Strategy Tool-2](/phases/phase1_images/StrategyTool2.png?raw=true)
+
+This tool can be accessed at http://whichwas.mybluemix.net/ 
+
+#### Migration Discovery Tool
+
+This tool helps in migrating your applications to WebSphere by estimating the effort required. This estimates the size as well as the scope of migration. Planning and budget assumptions can be done. Based upon the answers to the questionnaire, historical data and effort hours, this tool generates a rough estimation for migration.
+
+![Migration Discovery Tool-1](/phases/phase1_images/DiscoveryTool1.png?raw=true)
+
+This walks you through a couple of Questions related to the installation, application and testing. Based upon your answers, it generates a summary of the information provided, rough order of magnitude estimations, scope, timeline etc.
+
+![Migration Strategy Tool-2](/phases/phase1_images/DiscoveryTool2.png?raw=true)
+
+This tool can be accessed at http://ibm.biz/MigrationDiscovery.
 
 ### Assess
 
