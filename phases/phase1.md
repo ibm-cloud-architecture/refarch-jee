@@ -38,7 +38,27 @@ This tool can be accessed at http://ibm.biz/MigrationDiscovery.
 
 ### Assess
 
-Details to be added later
+Assessing your application helps you to understand all the potential issues during the migration process.
+
+#### Migration Toolkit for binaries
+
+This toolkit generates a set of reports which helps us in rapid deployment. This toolkit can be accessed at https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries.
+
+##### Evaluation
+
+This report helps you to rapidly assess the application for latest versions of WebSphere or Liberty. It helps in recognizing various Java programming models in the application and suggests the right fit IBM WebSphere Version.
+
+To get the report, run `java -jar binaryAppScanner.jar binaryInputPath`
+
+![Evaluation Report](/phases/phase1_images/EvaluationReport.png?raw=true)
+
+##### Inventory
+
+Details to be added
+
+##### Analysis
+
+Details to be added
 
 ### Source Migration
 
