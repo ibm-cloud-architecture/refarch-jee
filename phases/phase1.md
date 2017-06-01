@@ -107,13 +107,19 @@ Choose your environment and proceed with the migration.
 
 `./wsadmin.sh –lang jython –c “AdminTask.extractConfigProperties(‘[-propertiesFileName my.props]’)”`
 
+After executing this command, my.props file will be generated. The properties file for this sample application can be accessed here [my.props](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_assets/my.props) 
+
 ![Eclipse Plugin3](/phases/phase1_images/EclipsePlugin3.png?raw=true)
 
 ![Eclipse Plugin4](/phases/phase1_images/EclipsePlugin4.png?raw=true)
 
 ![Eclipse Plugin5](/phases/phase1_images/EclipsePlugin5.png?raw=true)
 
-At this step, save your configuration file and Finish the migration. By the end, you will have jython script saved as the configuration file. Finally stop the source server.
+At this step, save your configuration file and Finish the migration. By the end, you will have jython script saved as the configuration file. 
+
+The configuration file generated for this sample application can be accessed here [migConfig.py](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_assets/migConfig.py) 
+
+Finally stop the source server.
 
 Now, start your target server. 
 
