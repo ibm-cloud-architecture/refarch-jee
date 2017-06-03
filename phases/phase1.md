@@ -119,7 +119,7 @@ Once it has been installed, create a new _Software Analyzer Configuration_ with 
 
 ![Source report 1](/phases/phase1_images/source_report/Source1.png?raw=true)
 
-After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. In here, we should have the exact same errors and warnings as the _Analyzer report_ in the previous section. As you can see in the image, one warning that will always appear in when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
+After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. In here, we should have the exact same errors and warnings as the _Analyzer report_ in the previous section. The Software Analyzer rules are categorised and so are the errors and warnings produced in its report. As you can see in the image, one warning that will always appear in when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
 
 ![Source report 2](/phases/phase1_images/source_report/Source2.png?raw=true)
 
@@ -131,10 +131,33 @@ Setting the appropriate target runtime and removing previous WebSphere Applicati
 
 ![Source report 4](/phases/phase1_images/source_report/Source4.png?raw=true)
 
-At this point, we must look at the other errors reported by the WebSphere Application Server Migration Toolkit since they often are because of previous WebSphere Application Server version specific libraries not available (initially) in the new WebSphere Application Server version. In our case, we see that the problems in the code are due to the _org.apache.wink_ library missing which is something the Analyze report and the Migration Toolkit report too:
+At this point, we must look at the other errors reported by the WebSphere Application Server Migration Toolkit since they often are because of previous WebSphere Application Server version specific libraries not available (initially) in the new WebSphere Application Server version. In our case, we see that the problems in the code are due to the _org.apache.wink_ library missing which is something the Analyze report and the Migration Toolkit also flag:
+
+![Source report 5](/phases/phase1_images/source_report/Source5.png?raw=true)
+
+As we said previously, there are pros and cons of using the Migration Toolkit for Application Binaries Analyze report over the eclipse-based WebSphere Application Server Migration Toolkit plugin to migrate your code to a newer WebSphere Application Server version and viceversa. Therefore, we suggest to use both in conjunction. The advantage of using the eclipse-based WebSphere Application Server Migration Toolkit plugin is, in fact, because it is used in an IDE so you can take advantage of using IDE's suggestions, tools and help:
+
+![Source report 6](/phases/phase1_images/source_report/Source6.png?raw=true)
+
+However, the Migration Toolkit for Application Binaries Analyze report has the advantage of comming with an explanation of the rule being applied so that the user can better understand the reason why a warning or error has been reported:
+
+![Source report 7](/phases/phase1_images/source_report/Source7.png?raw=true)
+
+We have to be careful and thoroughly review each of the errors and warning either of the toolkits report since there might be some that actually do not apply due to the possibility of having WebSphere Application Server fixpacks or feature packs installed. For instance, in our case, both toolkits report an error because we are using the _org.codehaus.jackson_ packages that are exposed as a third-party API in JAX-RS 1.1 but are not part of the new JAX-RS 2.0 version WebSphere Application Server V9.0 comes initially with. However, we find out that our WebSphere Application Server V9.0 comes with such packages possibly because of later fix packs installed as we are really using the 9.0.0.3 version of WebSphere Application Server:
+
+![Source report 8](/phases/phase1_images/source_report/Source8.png?raw=true)
+
+The last error reported is about the JPA version used in our code. In the WebSphere Application Server V7.0 we are migrating our code from, we were using its Feature Pack for OSGI and JPA which comes with the JPA 2.0 version. In contrast, the WebSphere Application Server V9.0 which we want to migrate our code to uses JPA 2.1 where the provider has changed from being _openJPA_ to _eclipseLink_. As a result, methods, annotations, etc are no longer valid or its behaviour has changed:
+
+![Source report 9](/phases/phase1_images/source_report/Source9.png?raw=true)
+![Source report 10](/phases/phase1_images/source_report/Source10.png?raw=true)
 
 
+However, new WebSphere Application Server versions should have backwards compatibility in most of the JavaEE technologies and turns out that JPA is one of those. Remember that our goal is to migrate our existing code/apps running on WebSphere Application Server V7.0 to run on a newer WebSphere Application Server version supported by WASaaS on Bluemix but with the minimum possible changes which is what the 'lift & shift' pattern consist of (modernization of your application, Java technologies wise, might be carried out on a later stage). Because of this, we can take advantage of the backwards compatibility on the JPA version and providers the new WebSphere Application Server V9.0 comes with and configure it to use JPA 2.0 so that we do not need to change anything in our app at all:
 
+![Source report 11](/phases/phase1_images/source_report/Source11.png?raw=true)
+
+We have finally review all the errors reported by either the Migration Toolkit for Application Binaries or the eclipse-based WebSphere Application Server Migration Toolkit plugin. Now, the application and code should be deeply and carfully tested in order to make sure that the migration to a newer WebSphere Application Server version has not changed its behaviour at all. Hence, the more unit test, integration test and test in general your application and code had already implemented and come with for the old WebSphere Application Server version, the better, easier and trustworthy will this migration verification and validation process be.
 
 ### Config Migration
 
