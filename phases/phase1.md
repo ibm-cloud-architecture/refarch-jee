@@ -2,14 +2,14 @@
 
 ## Phase 1 - Modernizing the Existing Application
 
-Prescriptive WebSphere guidance provides a process for modernizing WebSphere applications through four steps:
+WebSphere Application Server as a Service on IBM Bluemix allows existing IBM customers running WebSphere applications on-premise and new IBM customers to run these very same WebSphere applications and workloads on the IBM Cloud. However, this WebSphere Application Server as a Service on Bluemix supports only WebSphere Application Server version 8.5.5 onwards. As a result, prescriptive WebSphere guidance for modernizing WebSphere applications has been delivered and it is implemented through the following four steps:
 
 1.  Plan
 2.  Assess
 3.  Source Migration
 4.  Config Migration
 
-That process is captured here for the transition from [Customer Order Services for WAS 7.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70) to [Customer Order Serivces for WAS 9.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/eclipse-was90).
+This readme aims to drive readers through the WebSphere guidance for modernizing WebSphere applications process by using our Customer Order Services reference application for the transition from [Customer Order Services for WAS 7.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70) to [Customer Order Serivces for WAS 9.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/eclipse-was90).
 
 ### Plan
 
@@ -26,11 +26,11 @@ This tool can be accessed at http://whichwas.mybluemix.net/
 
 #### Migration Discovery Tool
 
-This tool helps in migrating your applications to WebSphere by estimating the effort required. This estimates the size as well as the scope of migration. Planning and budget assumptions can be done. Based upon the answers to the questionnaire, historical data and effort hours, this tool generates a rough estimation for migration.
+This tool helps in migrating your applications to WebSphere by estimating the effort required. This tool estimates the size as well as the scope of migration. Planning and budget assumptions can be done. Based upon the answers to the questionnaire, historical data and effort hours, this tool generates a rough estimation for migration.
 
 ![Migration Discovery Tool-1](/phases/phase1_images/DiscoveryTool1.png?raw=true)
 
-This walks you through a couple of Questions related to the installation, application and testing. Based upon your answers, it generates a summary of the information provided, rough order of magnitude estimations, scope, timeline etc.
+The tool walks you through a couple of Questions related to the installation, application and testing. Based upon your answers, it generates a summary of the information provided, rough order of magnitude estimations, scope, timeline etc.
 
 ![Migration Strategy Tool-2](/phases/phase1_images/DiscoveryTool2.png?raw=true)
 
@@ -38,7 +38,7 @@ This tool can be accessed at http://ibm.biz/MigrationDiscovery.
 
 ### Assess
 
-Assessing your application helps you to understand all the potential issues during the migration process. During this phase, we will evaluate the programming models in our application and what WebSphere products support them. We will use the [WebSphere Migration Toolkit for Application Binaries](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries).
+Assessing your application helps you to understand all the potential issues during the migration process. During this phase, we will evaluate the programming models in our application and what WebSphere products support them. We will use the [WebSphere Migration Toolkit for Application Binaries](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries) and its [manual](https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/downloads/wamt/ApplicationBinaryTP/MigrationToolkit_Application_Binaries_en_US.pdf) for this process.
 
 #### Evaluation
 
@@ -209,7 +209,7 @@ Once the migration is completed, it returns you the migration results. Check the
 
 This procedure can be followed only if the migration is between different versions of WebSphere.
 
-#### Third Party Application Servers / Traditional WebSphere Application Server
+ Third Party Application Servers / Traditional WebSphere Application Server
 
 [Eclipse-based application migration tool](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit) can be used to migrate the configuration from different types of servers to WebSphere application server. This tool supports Traditional WebSphere Applications as well as the Third-party server applications.
 
@@ -252,9 +252,12 @@ Once the script gets executed successfully, the migration is complete.
 You can verify the migration by opening your admin console and then check if all the resources are correct.
 
 
+### Other useful links
 
-
-
+* [Migrating to WAS 8.5.5](http://www.redbooks.ibm.com/abstracts/sg248048.html) - (Redbook)
+* [Migration](https://developer.ibm.com/wasdev/docs/migration/) - (developerWorks Blog)
+* [IBM WebSphere Application Server Migration Toolkit](https://www.ibm.com/developerworks/library/mw-1701-was-migration/index.html) - (developerWorks Blog)
+* [WebSphere Migration Knowledge Collection](http://www-01.ibm.com/support/docview.wss?uid=swg27008728)
 
 
 
