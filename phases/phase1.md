@@ -9,7 +9,7 @@ Prescriptive WebSphere guidance provides a process for modernizing WebSphere app
 3.  Source Migration
 4.  Config Migration
 
-That process is captured here for the transition from [Customer Order Services for WAS 7.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70) to [Customer Order Serivces for WAS 8.5.5](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was855).
+That process is captured here for the transition from [Customer Order Services for WAS 7.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70) to [Customer Order Serivces for WAS 9.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/eclipse-was90).
 
 ### Plan
 
