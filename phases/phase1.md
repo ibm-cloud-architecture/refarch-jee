@@ -1,21 +1,19 @@
-# Enterprise Application Modernization through Java EE on Cloud
-
-## Phase 1 - Modernizing the Existing Application
+# Phase 1 - Modernizing the Existing Application
 
 WebSphere Application Server as a Service on IBM Bluemix allows existing IBM customers running WebSphere applications on-premise and new IBM customers to run these very same WebSphere applications and workloads on the IBM Cloud. However, this WebSphere Application Server as a Service on Bluemix supports only WebSphere Application Server version 8.5.5 onwards. As a result, prescriptive WebSphere guidance for modernizing WebSphere applications has been delivered and it is implemented through the following four steps:
 
-1.  Plan
-2.  Assess
-3.  Source Migration
-4.  Config Migration
+1.  [Plan](#plan)
+2.  [Assess](#assess)
+3.  [Source Migration](#source-migration)
+4.  [Config Migration](#config-migration)
 
 This readme aims to drive readers through the WebSphere guidance for modernizing WebSphere applications process by using our Customer Order Services reference application for the transition from [Customer Order Services for WAS 7.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70) to [Customer Order Serivces for WAS 9.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/eclipse-was90).
 
-### Plan
+## Plan
 
 Moving your application to newer versions of WebSphere requires proper planning. The following resources helps you to plan successfully.
 
-#### Migration Strategy Tool
+### Migration Strategy Tool
 
 Before moving to a new version of Websphere, you need to know all the options available for your migration. This tool helps you in evaluating different options available for your WebSphere applications.
 
@@ -24,7 +22,7 @@ Before moving to a new version of Websphere, you need to know all the options av
 
 This tool can be accessed at http://whichwas.mybluemix.net/ 
 
-#### Migration Discovery Tool
+### Migration Discovery Tool
 
 This tool helps in migrating your applications to WebSphere by estimating the effort required. This tool estimates the size as well as the scope of migration. Planning and budget assumptions can be done. Based upon the answers to the questionnaire, historical data and effort hours, this tool generates a rough estimation for migration.
 
@@ -36,11 +34,11 @@ The tool walks you through a couple of Questions related to the installation, ap
 
 This tool can be accessed at http://ibm.biz/MigrationDiscovery.
 
-### Assess
+## Assess
 
 Assessing your application helps you to understand all the potential issues during the migration process. During this phase, we will evaluate the programming models in our application and what WebSphere products support them. We will use the [WebSphere Migration Toolkit for Application Binaries](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries) and its [manual](https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/downloads/wamt/ApplicationBinaryTP/MigrationToolkit_Application_Binaries_en_US.pdf) for this process.
 
-#### Evaluation
+### Evaluation
 
 The Migration Toolkit for Application Binaries can generate an evaluation report that helps to evaluate the Java
 technologies that are used by your application. The report gives a high-level review of the programming
@@ -54,7 +52,7 @@ _(I) binaryInputPath, which is an absolute or relative path to a J2EE archive fi
 
 As we can see in the picture above, our Customer Order Services app fit a numerous IBM platforms such as the new Liberty profile either on-premises and on Bluemix as well as the traditional WebSphere server and deployment.
 
-#### Inventory
+### Inventory
 
 The Migration Toolkit for Application Binaries can generate an inventory report that contains a high-level inventory of the content and structure of each application and information about potential deployment problems. The report includes a dashboard that reports the number and types of archives found. The counts of Java Servlets, JSP files, JPA entities, EJB beans, and web services are reported per application as well as in an overall summary. For each archive, the Java EE module type and version are included. And for utility JAR files, the contained packages are reported up to and including the third sub package.
 
@@ -107,7 +105,7 @@ Finally, we have repackaged and refactor our application structure to a situatio
 
 [**Final Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_InventoryReport_Final.html)
 
-#### Analysis
+### Analysis
 
 The Migration Toolkit for Application Binaries can generate an analysis report that contains details about potential migration issues in your application. The tool helps you quickly and easily evaluate WebSphere Application Server traditional applications for their readiness to run on Liberty in both cloud and on-premises environments. The tool also supports migrating between versions of WebSphere traditional, starting with WebSphere Application Server Version 6.1.
 
@@ -130,7 +128,7 @@ In this first phase, the goal is to 'lift & shift' our WebSphere applications wi
 
 We are going to use the Eclipse WebSphere Migration Toolkit plugin to look at and fix the errors above since changing code, libraries, etc is easier in an IDE.
 
-### Source Migration
+## Source Migration
 
 The migration toolkit provides a rich set of tools that help you migrate applications from third-party application servers, between versions of WebSphere Application Server, to Liberty, and to cloud platforms such as Liberty for Java on IBM Bluemix, IBM WebSphere on Cloud and Docker.
 
@@ -180,7 +178,7 @@ However, new WebSphere Application Server versions should have backwards compati
 
 We have finally review all the errors reported by either the Migration Toolkit for Application Binaries or the eclipse-based WebSphere Application Server Migration Toolkit plugin. Now, the application and code should be deeply and carfully tested in order to make sure that the migration to a newer WebSphere Application Server version has not changed its behaviour at all. Hence, the more unit test, integration test and test in general your application and code had already implemented and come with for the old WebSphere Application Server version, the better, easier and trustworthy will this migration verification and validation process be.
 
-### Config Migration
+## Config Migration
 
 Migration of configuration should be done before deploying the application on the latest versions of WebSphere. The configurations can be migrated from traditional WebSphere application servers or from third party application servers too. 
 
@@ -189,7 +187,7 @@ Below are the two tools available for Configuration migration.
 1. WebSphere Customization Toolbox
 2. [Eclipse-based application migration tool](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit)
 
-#### Traditional WebSphere Applications
+### Traditional WebSphere Applications
 
 Version to version configuration migration support is incorporated within the WebSphere Application Server itself. There is an inbuilt Configuration Migration Tool within the server and this tool provides walks you through the migration wizard which helps you in the migration process.
 
@@ -252,18 +250,9 @@ Once the script gets executed successfully, the migration is complete.
 You can verify the migration by opening your admin console and then check if all the resources are correct.
 
 
-### Other useful links
+## Other useful links
 
 * [Migrating to WAS 8.5.5](http://www.redbooks.ibm.com/abstracts/sg248048.html) - (Redbook)
 * [Migration](https://developer.ibm.com/wasdev/docs/migration/) - (developerWorks Blog)
 * [IBM WebSphere Application Server Migration Toolkit](https://www.ibm.com/developerworks/library/mw-1701-was-migration/index.html) - (developerWorks Blog)
 * [WebSphere Migration Knowledge Collection](http://www-01.ibm.com/support/docview.wss?uid=swg27008728)
-
-
-
-
-
-
-
-
-
