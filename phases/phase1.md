@@ -3,9 +3,15 @@
 WebSphere Application Server as a Service on IBM Bluemix allows existing IBM customers running WebSphere applications on-premise and new IBM customers to run these very same WebSphere applications and workloads on the IBM Cloud. However, this WebSphere Application Server as a Service on Bluemix supports only WebSphere Application Server version 8.5.5 onwards. As a result, prescriptive WebSphere guidance for modernizing WebSphere applications has been delivered and it is implemented through the following four steps:
 
 1.  [Plan](#plan)
+    * [Migration Strategy Tool](#migration-strategy-tool)
+    * [Migration Discovery Tool](#migration-discovery-tool)
 2.  [Assess](#assess)
+    * [Evaluation](#evaluation)
+    * [Inventory](#inventory)
+    * [Analysis](#analysis)
 3.  [Source Migration](#source-migration)
 4.  [Config Migration](#config-migration)
+    * [Traditional WebSphere Applications](#traditional-websphere-applications)
 
 This readme aims to drive readers through the WebSphere guidance for modernizing WebSphere applications process by using our Customer Order Services reference application for the transition from [Customer Order Services for WAS 7.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70) to [Customer Order Serivces for WAS 9.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/eclipse-was90).
 
