@@ -72,19 +72,40 @@ To get the report, run `java -jar binaryAppScanner.jar binaryInputPath --invento
 
 _(I) binaryInputPath, which is an absolute or relative path to a J2EE archive file or directory that contains J2EE archive files_
 
--- EVALUATION REPORT --
+[**Initial Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_InventoryReport_Initial.html)
 
-As we can see in the report, there are several concerning facts such as duplicate or unused libraries we should pay attention to and which we higly recommend fixing before migrating your application to a newer WebSphere version and/or IBM platform. Hence, we will go through the process of fixing these potential future problems by making use of this inventory report.
+As we can see in the report, there are several concerning facts such as duplicate or unused libraries we should pay attention to and which we higly recommend fixing before migrating your application to a newer WebSphere Application Server version and/or different IBM platform. Hence, we will go through the process of fixing these potential future problems by making use of this inventory report.
 
-Firstly, we see a summary section which might already raise concerns in us such as the high amount of utility JARs found in the J2EE archive of our Customer Order Service application. As we scroll down, we rapidly get to the _Inventory Details by Application_ where we find out that there are several libraries being marked as duplicate or unused we certainly need to look at:
+Firstly, we see a summary section which might already raise concerns in us such as the high amount of utility JARs found in the J2EE archive of our Customer Order Services application. As we scroll down, we rapidly get to the _Inventory Details by Application_ where we find out that there are several libraries being marked as duplicate or unused which we certainly need to look at:
 
--- EVALUATION REPORT INITIAL --
+![Inventory report](/phases/phase1_images/inventory_report/Inventory1.png?raw=true)
 
+After removing the unused libraries and verifying that this does not introduce any other problem/error in the code, we look at the ear structure, its ejb, web and test projects. We realise that there are several libraries being used by multiple projects but yet included in each of them as opposed to packaging them at the ear level as a shared library among all ear project components. After repackaging libraries at the ear level, this is how the inventory report looks like:
 
+![Inventory report 2](/phases/phase1_images/inventory_report/Inventory2.png?raw=true)
 
+We see now that both web projects and the ejb project look fine library wise. However, the report indicates that there are still several duplicate libraries. Looking in detail at what packages those duplicate libraries come with, we realise that, in effect, several libraries packages are included by others (normally broader and heavier Java libraries. For instance, the _jackson-all_ library includes all packages the other three lighter and more specific jackson libraries come with). We then remove remaining duplicate libraries and run the report again:
 
+![Inventory report 3](/phases/phase1_images/inventory_report/Inventory3.png?raw=true)
 
+Now, we do not see any more duplicate libraries. However, we still see warnings due to libraries we are packaging our application with which either include Open Source Software, Java EE or SE classes or WebSphere system classes. Reading at the rules explanation, we are suggested to review what libraries our WebSphere Application Server plus Java Runtime Environment come with since they might already be included:
 
+![Inventory report 4](/phases/phase1_images/inventory_report/Inventory4.png?raw=true)
+
+It is important to use, as much as possible, the libraries that already come with your middleware stack so that we avoid class loading issues. Hence, we look at the WebSphere Application Server and Java Runtime Environment libraries in our environment and we effectively verify that we were including libraries again that were already packaged with our WebSphere Application Server version:
+
+![Inventory report 5](/phases/phase1_images/inventory_report/Inventory5.png?raw=true)
+
+Again, we remove these libraries and run the report. This time, the report comes finally clean except from some warnings regarding missing dependencies on some projects/libraries.
+
+![Inventory report 6](/phases/phase1_images/inventory_report/Inventory6.png?raw=true)
+![Inventory report 7](/phases/phase1_images/inventory_report/Inventory7.png?raw=true)
+
+Looking at those, we find out that libraries reporting missing dependencies for the ejb, test and web project are not, in fact, missing so then we should be good there. Classes reported are missing in the _DBUnit.jar_ library are never used so we are good there too.
+
+Finally, we have repackaged and refactor our application structure to a situation were we do not have duplicate or unused libraries and the libraries we want/need to include are packaged in the proper location. At this point, we are now ready to start the migration to the newer WebSphere Application Server version or IBM Platform.
+
+[**Final Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_InventoryReport_Final.html)
 
 #### Analysis
 
@@ -101,7 +122,7 @@ _(I) binaryInputPath, which is an absolute or relative path to a J2EE archive fi
 _(II) in our case, the [OPTIONS] are: --sourceAppServer=was70 --targetAppServer=was90 --sourceJava=ibm6 --targetJava=ibm8
 --targetJavaEE=ee7_
 
-[**Report**](/phase1_reports/CustomerOrderServicesApp.ear_AnalysisReport.html)
+[**Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_AnalysisReport.html)
 
 In this first phase, the goal is to 'lift & shift' our WebSphere applications with the minimum effort/change. As a result, we will only look at the errors reported which in our case are:
 
