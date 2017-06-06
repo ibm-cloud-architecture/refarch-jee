@@ -182,7 +182,17 @@ However, new WebSphere Application Server versions should have backwards compati
 
 ![Source report 11](/phases/phase1_images/source_report/Source11.png?raw=true)
 
-We have finally review all the errors reported by either the Migration Toolkit for Application Binaries or the eclipse-based WebSphere Application Server Migration Toolkit plugin. Now, the application and code should be deeply and carfully tested in order to make sure that the migration to a newer WebSphere Application Server version has not changed its behaviour at all. Hence, the more unit test, integration test and test in general your application and code had already implemented and come with for the old WebSphere Application Server version, the better, easier and trustworthy will this migration verification and validation process be.
+We have finally review all the errors reported by either the Migration Toolkit for Application Binaries or the eclipse-based WebSphere Application Server Migration Toolkit plugin. Now, the application and code should be deeply and carfully tested in order to make sure that the migration to a newer WebSphere Application Server version has not changed its behaviour at all.
+
+As an example, WebSphere Application Server V9.0, which we have migrated our code to work on, uses a newer version of the openjpa driver (V2.2.3) which handles booleans at the persistence layer differently. As a result, when we test our migrated code we see the following exceptions being thrown in the WebSphere Application Server log files:
+
+![Source report 12](/phases/phase1_images/source_report/Source12.png?raw=true)
+
+We then make the following changes at the persistence layer for the appropriate POJO classes so that booleans are converted to strings beforehand the persistence layer (or OpenJPA driver) takes over and viceversa:
+
+![Source report 13](/phases/phase1_images/source_report/Source13.png?raw=true)
+
+Hence, **the more unit test, integration test and test in general** your application and code had already implemented and come with for the old WebSphere Application Server version, **the better, easier and trustworthy will this migration verification and validation process be.**
 
 ## Config Migration
 
