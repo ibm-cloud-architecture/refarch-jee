@@ -10,6 +10,8 @@ WebSphere Application Server as a Service on IBM Bluemix allows existing IBM cus
     * [Inventory](#inventory)
     * [Analysis](#analysis)
 3.  [Source Migration](#source-migration)
+    * [Development Environment](#development-environment)
+    * [Code Migration](#code-migration)
 4.  [Config Migration](#config-migration)
     * [Traditional WebSphere Applications](#traditional-websphere-applications)
 
@@ -140,11 +142,37 @@ We are going to use the Eclipse WebSphere Migration Toolkit plugin to look at an
 
 ## Source Migration
 
+### Development Environment
+
+In order to carry out the migration of your source code from an old WebShere Application Server version to a newer one, we must set up a proper development environment for the task. In this case, we want to move away from IBM proprietary tools as much as possible. Hence, this is the stack of our development environment:
+
+* [Eclipse Mars 2 for JEE developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/mars2)
+* [IBM WebSphere Application Server V9.x Developer Tools for Eclipse](https://marketplace.eclipse.org/content/ibm-websphere-application-server-v9x-developer-tools#group-details)
+* [IBM Installation Manager](http://www-01.ibm.com/support/docview.wss?uid=swg27025142) - (Recommended for the installation of the IBM WebSphere Application Server V9.0)
+* IBM WebSphere Application Server V9.0
+
+To install the IBM WebSphere Application Server V9.x Developer Tools for Eclipse:
+
+1. Open eclipse.
+2. Drag and drop the Install button into the eclipse main window.
+3. Select all the options available.
+
+![Source report 15](/phases/phase1_images/source_report/Source15.png?raw=true)
+
+To install the IBM WebSphere Application Server V9.0:
+
+1. Open the IBM Installation Manager.
+2. Click on File --> Preferences...
+3. Add the following repository: https://www.ibm.com/software/repositorymanager/V9WASILAN
+4. Install the IBM WebSphere Application Server V9.0 with its latest fixpack and the IBM Java SDK Version 8. (There is no need to install Liberty for now).
+
+![Source report 14](/phases/phase1_images/source_report/Source14.png?raw=true)
+
+### Code Migration
+
 The migration toolkit provides a rich set of tools that help you migrate applications from third-party application servers, between versions of WebSphere Application Server, to Liberty, and to cloud platforms such as Liberty for Java on IBM Bluemix, IBM WebSphere on Cloud and Docker.
 
-The eclipse-based WebSphere Application Server Migration Toolkit can be downloaded [here](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit).
-
-Once it has been installed, create a new _Software Analyzer Configuration_ with your migration specifications. In our case, we set the configuration to a WAS 7.0 to WAS 9.0 migration taking JPA and JAX-RS into account.
+To install the eclipse-based WebSphere Application Server Migration Toolkit plugin, follow the instructions on the previous [Development Environment](#development-environment) section. Once it has been installed, create a new _Software Analyzer Configuration_ with your migration specifications. In our case, we set the configuration to a WAS 7.0 to WAS 9.0 migration taking JPA and JAX-RS into account.
 
 ![Source report 1](/phases/phase1_images/source_report/Source1.png?raw=true)
 
