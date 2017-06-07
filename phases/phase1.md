@@ -107,7 +107,11 @@ Again, we remove these libraries and run the report. This time, the report comes
 
 Looking at those, we find out that libraries reporting missing dependencies for the ejb, test and web project are not, in fact, missing so then we should be good there. Classes reported are missing in the _DBUnit.jar_ library are never used so we are good there too.
 
-Finally, we have repackaged and refactor our application structure to a situation were we do not have duplicate or unused libraries and the libraries we want/need to include are packaged in the proper location. At this point, we are now ready to start the migration to the newer WebSphere Application Server version or IBM Platform.
+Finally, we move the _DBunit.jar, junit.jar and junitee.jar_ libraries back into the test project which is where they are needed. No other project uses them so no need for keeping them at the ear level. In fact, due to class loading order and scope, if the _junitee.jar_ librarie is not placed at the test project level, the JUnitEE Servlet might not find the test cases to be run. Hence, this is the final look of our application library/structure wise:
+
+![Inventory report 8](/phases/phase1_images/inventory_report/Inventory8.png?raw=true)
+
+We have repackaged and refactor our application structure to a situation were we do not have duplicate or unused libraries and the libraries we want/need to include are packaged in the proper location. At this point, we are now ready to start the migration to the newer WebSphere Application Server version or IBM Platform.
 
 [**Final Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_InventoryReport_Final.html)
 
