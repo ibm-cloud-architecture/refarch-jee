@@ -2,10 +2,10 @@
 
 This phase focuses on moving core pieces of compute-based business logic to cloud-based services while most existing database and messaging capabilities are left in-tact on the customer on-premise resources. Additional networking and security practices are usually defined during this phase, as the scenario we are entering into is a hybrid cloud scenario.
 
-* [WebSphere Application Server as a Service (WASaaS)](#websphere-application-server-as-a-service-(wasaas))
+* [WebSphere Application Server as a Service (WASaaS)](#websphere-application-server-as-a-service-wasaas)
 * [Code Analysis](#code-analysis)
 * [Network](#network)
-    * [Configuring a VPN](#configure-a-vpn)
+    * [Configuring a VPN](#configuring-a-vpn)
 * [Security](#security)
 
 ## WebSphere Application Server as a Service (WASaaS)
