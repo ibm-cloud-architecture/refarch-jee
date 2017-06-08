@@ -81,7 +81,7 @@ Application architecture details are detailed at length in the [Customer Order](
 These phases are iterative in nature and require the previous Phases to be completed before moving on.  In the links below, you will be able to move through the Phases of modernizing the reference application leveraging your own cloud resources.
 
 - [Phase 1: Modernizing the Existing Application](phases/phase1.md) _Currently underway_
-- [Phase 2: Mitigation Phase](#phase-2-mitigation-phase)
+- [Phase 2: Mitigation Phase](phases/phase2.md) _Currently underway_
 - [Phase 3: Production Lift & Shift](#phase-3-production-lift--shift)
 - [Phase 4: Evolve to Microservices](#phase-4-evolve-to-microservices)
 
