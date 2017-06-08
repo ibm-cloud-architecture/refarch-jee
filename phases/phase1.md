@@ -15,7 +15,7 @@ WebSphere Application Server as a Service on IBM Bluemix allows existing IBM cus
 4.  [Config Migration](#config-migration)
     * [Traditional WebSphere Applications](#traditional-websphere-applications)
 
-This readme aims to drive readers through the WebSphere guidance for modernizing WebSphere applications process by using our Customer Order Services reference application for the transition from [Customer Order Services for WAS 7.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70) to [Customer Order Serivces for WAS 9.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/eclipse-was90).
+This readme aims to drive readers through the WebSphere guidance for modernizing WebSphere applications process by using our Customer Order Services reference application for the transition from [Customer Order Services for WAS 7.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was70-dev) to [Customer Order Serivces for WAS 9.0](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was90-dev).
 
 ## Plan
 
