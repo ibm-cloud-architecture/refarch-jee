@@ -4,13 +4,36 @@ This phase focuses on moving core pieces of compute-based business logic to clou
 
 * [WebSphere Application Server as a Service (WASaaS)](#websphere-application-server-as-a-service-wasaas)
 * [Code Analysis](#code-analysis)
-* [Network](#network)
-    * [Configuring a VPN](#configuring-a-vpn)
+* [Connectivity](#connectivity)
 * [Security](#security)
 
 ## WebSphere Application Server as a Service (WASaaS)
 
-`TBD: Document WASaaS concerns/assets/learning`
+[IBM® WebSphere Application Server in IBM® Bluemix®](https://console.ng.bluemix.net/docs/services/ApplicationServeronCloud/index.html#getting_started) is a service that facilitates quick setup on a pre-configured WebSphere Application Server Liberty, Traditional Network Deployment, or Traditional WebSphere Java EE instance in a hosted cloud environment on Bluemix on a virtual machine guests with root access to the guest operating system.
+
+The WebSphere Application Server in Bluemix Network Deployment Plan consists of a WebSphere Application Server Network Deployment cell environment with two or more virtual machines. The first virtual machine contains the Deployment Manager and IBM HTTP Server and the remaining virtual machines contain custom nodes (node agents) federated to the Deployment Manager.
+
+![WASaaS Image 1](/phases/phase2_images/WAS1.png?raw=true)
+
+IBM WebSphere Application Server in Bluemix is a service that returns guests (virtual machines) in a shared environment for consumers to deploy applications. A VPN protects the public service from generic port scans and other unsolicited network-based attacks. However, it is important to note that **the service VPN you use to access your service instance might be shared between multiple Bluemix organizations and users.**
+
+![WASaaS Image 2](/phases/phase2_images/WAS2.png?raw=true)
+
+### Network
+
+After your WebSphere Application Server in Bluemix service instance is provisioned, you can access your VM in several ways. You can connect over a secure VPN to get SSH, traditional WebSphere Admin Console, and application access to your VM. You can also connect your VM to the internet with a public IP address.
+
+![Network Image 1](/phases/phase2_images/Network1.png?raw=true)
+
+#### Private VPN Access
+
+The VPN configuration is scoped to your organization and region. It is valid for one year from the time created. Multiple OpenVPN client connections can be established simultaneously by using the same VPN configuration. You connect to your VM's private IP address over the VPN connection. Your Liberty Admin Center (9080, 9443), traditional WebSphere Admin Console (9060, 9043), SSH (22), and ports other than 80/443 are only accessible through the VPN connection.
+
+Any agent installed (monitoring, management such as UCD, database connection, etc) needs explicit port open on OUTPUT chain to work. That is, you need to open the ports you need for INPUT and/or OUTPUT in the **iptables** of your WAS VM.
+
+#### Public Internet Access
+
+Optionally, you can request a public IP address for your WebSphere server VM. When you open access to your public IP, the IP address is associated with your VM, and ports 80 and 443 are opened at the gateway. However, by default, Liberty Core, and traditional WebSphere Base servers do not open ports 80 and 443. Conversely, ports 80 and 443 are opened by default on the IBM HTTP Server. Therefore, you might need to [configure your Liberty Core and traditional WebSphere Base servers to listen for application traffic on port 80/443](https://www.ibm.com/support/knowledgecenter/SSEQTP_8.5.5/com.ibm.websphere.nd.doc/ae/trun_chain_transport.html) when you use public IP.
 
 ## Code Analysis
 
@@ -68,11 +91,8 @@ In summary, migrating your WebSphere Application Server applications from your o
 1. On-premise resources your applications will still need to connect to like databases or security registries. For that, IBM Bluemix offers services like [Secure Gateway](https://console.ng.bluemix.net/docs/services/SecureGateway/secure_gateway.html)
 2. URL hosts and ports used by your applications since they won't be running on the same well known static resources and won't use same ports.
 
-## Network
 
-`TBD: Document network concerns/assets/learning`
-
-### Configuring a VPN
+## Connectivity
 
 To securely connect cloud applications to on-premises or cloud-based remote locations, you can use a VPN tunnel such as the Bluemix Secure Gateway or SoftLayer Gateway as a Service.
 
