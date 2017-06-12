@@ -72,8 +72,12 @@ Application architecture details are detailed at length in the [Customer Order](
 ## Repositories
 
 - [Customer Order](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder) - Main application
-  - Branch [RAD96 & WAS7](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad96-was70): Currently deployed & operationally stable.
-  - Branch [RAD96 & WAS855](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/rad-96-was855): Pending migration target branch, currently unstable.
+  - Branch [was70-dev](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was70-dev) - Development branch for WebSphere Application Server V7.0 application code. Development Environment: RAD V9.6 + WAS V7.0. Builds either from RAD or using Maven.
+  - Branch [was70-prod](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was70-prod) - Production branch for WebSphere Application Server V7.0 application code. Does not contain any IDE specific file. Builds only using Maven.
+  - Branch [was90-dev](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was90-dev) - Development branch for WebSphere Application Server V9.0 application code. Development Environment: eclipse MARS 2 + WAS V9.0. Builds either from eclipse or using Maven.
+  - Branch [was90-prod](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was90-prod) - Production branch for WebSphere Application Server V9.0 application code. Does not contain any IDE specific file. Builds only using Maven.
+
+  
 - [Inventory System](https://github.com/ibm-cloud-architecture/refarch-jee-inventorysystem)
 
 ## Getting Started
