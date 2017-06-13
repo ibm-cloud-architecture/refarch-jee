@@ -93,7 +93,9 @@ In summary, migrating your WebSphere Application Server applications from your o
 
 ## Hybrid Integration
 
-We are moving our compute-based traditional WAS resources to the cloud but we still need them to connect to our on-premise resources so that they can access application data and security registries. To securely connect cloud applications to on-premises or cloud-based remote locations, you can use a VPN tunnel such as the Bluemix Secure Gateway or SoftLayer Gateway as a Service.
+We are moving our compute-based traditional WAS resources to the cloud but we still need them to securely connect to our on-premise resources so that they can access application data and security registries for authentication and authorization purposes.
+
+To securely connect cloud applications to on-premises or cloud-based remote locations, you can use a VPN tunnel such as the Bluemix Secure Gateway or SoftLayer Gateway as a Service.
 
 For more information about the Bluemix Secure Gateway, see
 
@@ -114,4 +116,10 @@ and LDAP server
 
 ## Security
 
-`TBD: Document Security concerns/assets/learning`
+Security will remain as it is. That is, WebSphere Application Server as a Service instances will
+
+* Authenticate users using an LDAP server, which is located on premises and accessed through the Secure Gateway service explained in the previous section.
+* Authorize users based on their role.
+* Use LTPA tokens to encrypt athentication information exchanged by servers.
+
+For more info on the security mechanisms and considerations for both the application and the web server, read the [Customer Order Services security readme](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/blob/master/Serurity.md)
