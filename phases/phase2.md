@@ -4,7 +4,7 @@ This phase focuses on moving core pieces of compute-based business logic to clou
 
 * [WebSphere Application Server as a Service (WASaaS)](#websphere-application-server-as-a-service-wasaas)
 * [Code Analysis](#code-analysis)
-* [Connectivity](#connectivity)
+* [Hybrid Integration](#hybrid-integration)
 * [Security](#security)
 
 ## WebSphere Application Server as a Service (WASaaS)
@@ -91,17 +91,26 @@ In summary, migrating your WebSphere Application Server applications from your o
 1. On-premise resources your applications will still need to connect to like databases or security registries. For that, IBM Bluemix offers services like [Secure Gateway](https://console.ng.bluemix.net/docs/services/SecureGateway/secure_gateway.html)
 2. URL hosts and ports used by your applications since they won't be running on the same well known static resources and won't use same ports.
 
+## Hybrid Integration
 
-## Connectivity
-
-To securely connect cloud applications to on-premises or cloud-based remote locations, you can use a VPN tunnel such as the Bluemix Secure Gateway or SoftLayer Gateway as a Service.
+We are moving our compute-based traditional WAS resources to the cloud but we still need them to connect to our on-premise resources so that they can access application data and security registries. To securely connect cloud applications to on-premises or cloud-based remote locations, you can use a VPN tunnel such as the Bluemix Secure Gateway or SoftLayer Gateway as a Service.
 
 For more information about the Bluemix Secure Gateway, see
 
-[Getting started with the Secure Gateway](https://console.ng.bluemix.net/docs/services/SecureGateway/secure_gateway.html)
-[Bluemix Secure Gateway: Yes, you CAN get there from here!](https://www.ibm.com/blogs/bluemix/2015/03/bluemix-secure-gateway-yes-can-get/)
+* [Getting started with the Secure Gateway](https://console.ng.bluemix.net/docs/services/SecureGateway/secure_gateway.html)
+* [Bluemix Secure Gateway: Yes, you CAN get there from here!](https://www.ibm.com/blogs/bluemix/2015/03/bluemix-secure-gateway-yes-can-get/)
 
-For more information about configuring the SoftLayer Gateway as a Service, see [Help for Gateway as a Service](https://gateway-as-a-service.com/gaas/ui/help).
+For more information about configuring the SoftLayer Gateway as a Service, see
+
+* [Help for Gateway as a Service](https://gateway-as-a-service.com/gaas/ui/help).
+
+In our case, we have configured our WebSphere Application Server as a Service instances to use the IBM Bluemix Secure Gateway service to connect the application server, and so its applications, to our on-premise DB2 database instance
+
+![Hybrid 1](/phases/phase2_images/analyze_report/Analyze4.png?raw=true)
+
+and LDAP server
+
+![Hybrid 2](/phases/phase2_images/Hybrid1.png?raw=true)
 
 ## Security
 
