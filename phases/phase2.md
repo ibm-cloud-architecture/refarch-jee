@@ -122,4 +122,4 @@ Security will remain as it is. That is, WebSphere Application Server as a Servic
 * Authorize users based on their role.
 * Use LTPA tokens to encrypt athentication information exchanged by servers.
 
-For more info on the security mechanisms and considerations for both the application and the web server, read the [Customer Order Services security readme](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/blob/master/Serurity.md)
+For more info on the security mechanisms and considerations for both the application and the web server, read the [Customer Order Services security readme](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/blob/master/Security.md)
