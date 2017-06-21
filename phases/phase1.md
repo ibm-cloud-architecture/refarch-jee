@@ -266,9 +266,15 @@ WASPreUpgarde and WASPostUpgrade commands can be used to perform the migration u
 
 **WASPostUpgrade** - This allows you to merge all the source data into the new target profile.
 
+./WASPreUpgrade.sh /home/vagrant/IBM/WASMigration /home/vagrant/IBM/WebSphere/AppServer/ -oldProfile AppSrv01 -username admin -password password
+
 ![WASPreUpgrade](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_images/WASConfig/WASPreUpgarde.png)
 
+./manageprofiles.sh -create -profileName AppSrv01 -profilePath /home/vagrant/IBM/WebSphere/AppServer_2/profiles/AppSrv01 -templatePath /home/vagrant/IBM/WebSphere/AppServer_2/profileTemplates/default -defaultPorts -enableAdminSecurity true -adminUserName admin -adminPassword password
+
 ![WASProfileManagement](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_images/WASConfig/WASProgileMgt.png)
+
+./WASPostUpgrade.sh /home/vagrant/IBM/WebSphere/WSMigration -username admin -password password -oldProfile AppSrv01 -profileName AppSrv01 -setPorts generateNew -resolvePortConflicts incrementCurrent -includeApps false -clone true
 
 ![WASPostUpgrade](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_images/WASConfig/WASPostUpgrade.png)
 
