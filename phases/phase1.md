@@ -129,8 +129,7 @@ To get the report, run `java -jar binaryAppScanner.jar binaryInputPath --analyze
 
 _(I) binaryInputPath, which is an absolute or relative path to a JEE archive file or directory that contains JEE archive files_
 
-_(II) in our case, the [OPTIONS] are: --sourceAppServer=was70 --targetAppServer=was90 --sourceJava=ibm6 --targetJava=ibm8
---targetJavaEE=ee7_
+_(II) in our case, the [OPTIONS] are: --sourceAppServer=was70 --targetAppServer=was90 --sourceJava=ibm6 --targetJava=ibm8 --targetJavaEE=ee7 --*includePackages=org.pwte.example*_
 
 [**Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_AnalysisReport.html)
 
