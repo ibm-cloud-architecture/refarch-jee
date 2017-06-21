@@ -138,7 +138,7 @@ In this first phase, the goal is to 'lift & shift' our WebSphere applications wi
 
 ![Analyze report](/phases/phase1_images/analyze_report/Analyze1.png?raw=true)
 
-We are going to use the Eclipse WebSphere Migration Toolkit plugin to look at and fix the errors above since changing code, libraries, etc is easier in an IDE.
+Again, the Migration Toolkit for Application Binaries Analyze report is used for assessment. That is, its main goal is to *quantify the migration effort*. It should not be used for repackaging the application or make code changes. For doing so, we are going to use the Eclipse WebSphere Migration Toolkit plugin in the next section.
 
 ## Source Migration
 
@@ -192,19 +192,16 @@ At this point, we must look at the other errors reported by the WebSphere Applic
 
 ![Source report 5](/phases/phase1_images/source_report/Source5.png?raw=true)
 
-As we said previously, there are pros and cons of using the Migration Toolkit for Application Binaries Analyze report over the eclipse-based WebSphere Application Server Migration Toolkit plugin to migrate your code to a newer WebSphere Application Server version and viceversa. Therefore, we suggest you to use whichever you feel more comfortable with, or even better, both in conjunction.
+As we said previously, the Migration Toolkit for Application Binaries Analyze report is used for assessment. That is, its main goal is to *quantify the migration effort*. It should not be used for repackaging the application or make code changes. Instead, we should use the Eclipse based WebSphere Application Server Migration Toolkit plugin for the source code migration as it should present the user with, at least, the same information as the Migration Toolkit for Application Binaries Analyze report presents the user with.
 
-The advantage of using the eclipse-based WebSphere Application Server Migration Toolkit plugin is, in fact, because it is used in an IDE so you can take advantage of using IDE's suggestions, tools and help:
+Among other things, the advantage of using the Eclipse based WebSphere Application Server Migration Toolkit plugin is, in fact, because it is used in an IDE so you can take advantage of using IDE's suggestions, tools and help:
 
 ![Source report 6](/phases/phase1_images/source_report/Source6.png?raw=true)
 
-However, if you want to read the explanation of the rule being applied (and the potential solution it sometimes comes along with) you have to open the help view (window => show view => other => help => help). If you scroll down to the bottom and press on the "detailed help" button it will show you additional ideas on how to resolve that problem:
+If you want to read the explanation of the rule being applied (and the potential solution it sometimes comes along with) you have to open the help view (window => show view => other => help => help). If you scroll down to the bottom and press on the "detailed help" button it will show you additional ideas on how to resolve that problem:
 
 ![Source report 16](/phases/phase1_images/source_report/Source16.png?raw=true)
-
-By contrast, the Migration Toolkit for Application Binaries Analyze report has the advantage of presenting the user with the explanation of the rule being applied and the potential solution along with the error/warning being reported all together so that the user does not need to jump to other tabs/views:
-
-![Source report 7](/phases/phase1_images/source_report/Source7.png?raw=true)
+![Source report 17](/phases/phase1_images/source_report/Source17.png?raw=true)
 
 We have to be careful and thoroughly review each of the errors and warning either of the toolkits report since there might be some that actually do not apply due to the possibility of having WebSphere Application Server fixpacks or feature packs installed. For instance, in our case, both toolkits report an error because we are using the _org.codehaus.jackson_ packages that are exposed as a third-party API in JAX-RS 1.1 but are not part of the new JAX-RS 2.0 version WebSphere Application Server V9.0 comes initially with. However, we find out that our WebSphere Application Server V9.0 comes with such packages possibly because of later fix packs installed as we are really using the 9.0.0.3 version of WebSphere Application Server:
 
