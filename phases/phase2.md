@@ -43,7 +43,7 @@ We are going to use the [Migration Toolkit for Application Binaries](https://dev
 
 For doing so, we run again the same command: `java -jar binaryAppScanner.jar binaryInputPath --analyze [OPTIONS]`.
 
-_(I) binaryInputPath is an absolute or relative path to a J2EE archive file or directory that contains J2EE archive files._
+_(I) binaryInputPath is an absolute or relative path to a JEE archive file or directory that contains JEE archive files._
 _(II) in this case, we need to update the options to the current WebSphere Application Server version as well as to the target IBM platform. That is, our [OPTIONS] this time are: `--sourceAppServer=was90 --targetAppServer=was90 --sourceJava=ibm8 --targetJava=ibm8 --targetJavaEE=ee7 --targetCloud=wasVM`_
 
 [**Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase2_reports/CustomerOrderServicesApp.ear_AnalysisReport.html)

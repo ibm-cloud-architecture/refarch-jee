@@ -50,11 +50,11 @@ Assessing your application helps you to understand all the potential issues duri
 
 The Migration Toolkit for Application Binaries can generate an evaluation report that helps to evaluate the Java
 technologies that are used by your application. The report gives a high-level review of the programming
-models found in the application, the WebSphere products that support these programming models and the right-fit IBM platforms for your J2EE application.
+models found in the application, the WebSphere products that support these programming models and the right-fit IBM platforms for your JEE application.
 
 To get the report, run `java -jar binaryAppScanner.jar binaryInputPath --evaluate`
 
-_(I) binaryInputPath, which is an absolute or relative path to a J2EE archive file or directory that contains J2EE archive files_
+_(I) binaryInputPath, which is an absolute or relative path to a JEE archive file or directory that contains JEE archive files_
 
 ![Evaluation Report](/phases/phase1_images/EvaluationReport.png?raw=true)
 
@@ -76,13 +76,13 @@ The report also includes a section for each application about potential deployme
 
 To get the report, run `java -jar binaryAppScanner.jar binaryInputPath --inventory`
 
-_(I) binaryInputPath, which is an absolute or relative path to a J2EE archive file or directory that contains J2EE archive files_
+_(I) binaryInputPath, which is an absolute or relative path to a JEE archive file or directory that contains JEE archive files_
 
 [**Initial Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_InventoryReport_Initial.html)
 
 As we can see in the report, there are several concerning facts such as duplicate or unused libraries we should pay attention to and which we higly recommend fixing before migrating your application to a newer WebSphere Application Server version and/or different IBM platform. Hence, we will go through the process of fixing these potential future problems by making use of this inventory report.
 
-Firstly, we see a summary section which might already raise concerns in us such as the high amount of utility JARs found in the J2EE archive of our Customer Order Services application. As we scroll down, we rapidly get to the _Inventory Details by Application_ where we find out that there are several libraries being marked as duplicate or unused which we certainly need to look at:
+Firstly, we see a summary section which might already raise concerns in us such as the high amount of utility JARs found in the JEE archive of our Customer Order Services application. As we scroll down, we rapidly get to the _Inventory Details by Application_ where we find out that there are several libraries being marked as duplicate or unused which we certainly need to look at:
 
 ![Inventory report](/phases/phase1_images/inventory_report/Inventory1.png?raw=true)
 
@@ -127,7 +127,7 @@ This analysis report should flag the same issues as the following Eclipse WebSph
 
 To get the report, run `java -jar binaryAppScanner.jar binaryInputPath --analyze [OPTIONS]`
 
-_(I) binaryInputPath, which is an absolute or relative path to a J2EE archive file or directory that contains J2EE archive files_
+_(I) binaryInputPath, which is an absolute or relative path to a JEE archive file or directory that contains JEE archive files_
 
 _(II) in our case, the [OPTIONS] are: --sourceAppServer=was70 --targetAppServer=was90 --sourceJava=ibm6 --targetJava=ibm8
 --targetJavaEE=ee7_
