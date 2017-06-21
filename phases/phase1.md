@@ -192,11 +192,17 @@ At this point, we must look at the other errors reported by the WebSphere Applic
 
 ![Source report 5](/phases/phase1_images/source_report/Source5.png?raw=true)
 
-As we said previously, there are pros and cons of using the Migration Toolkit for Application Binaries Analyze report over the eclipse-based WebSphere Application Server Migration Toolkit plugin to migrate your code to a newer WebSphere Application Server version and viceversa. Therefore, we suggest to use both in conjunction. The advantage of using the eclipse-based WebSphere Application Server Migration Toolkit plugin is, in fact, because it is used in an IDE so you can take advantage of using IDE's suggestions, tools and help:
+As we said previously, there are pros and cons of using the Migration Toolkit for Application Binaries Analyze report over the eclipse-based WebSphere Application Server Migration Toolkit plugin to migrate your code to a newer WebSphere Application Server version and viceversa. Therefore, we suggest you to use whichever you feel more comfortable with, or even better, both in conjunction.
+
+The advantage of using the eclipse-based WebSphere Application Server Migration Toolkit plugin is, in fact, because it is used in an IDE so you can take advantage of using IDE's suggestions, tools and help:
 
 ![Source report 6](/phases/phase1_images/source_report/Source6.png?raw=true)
 
-However, the Migration Toolkit for Application Binaries Analyze report has the advantage of comming with an explanation of the rule being applied so that the user can better understand the reason why a warning or error has been reported:
+However, if you want to read the explanation of the rule being applied (and the potential solution it sometimes comes along with) you have to open the help view (window => show view => other => help => help). If you scroll down to the bottom and press on the "detailed help" button it will show you additional ideas on how to resolve that problem:
+
+![Source report 16](/phases/phase1_images/source_report/Source16.png?raw=true)
+
+By contrast, the Migration Toolkit for Application Binaries Analyze report has the advantage of presenting the user with the explanation of the rule being applied and the potential solution along with the error/warning being reported all together so that the user does not need to jump to other tabs/views:
 
 ![Source report 7](/phases/phase1_images/source_report/Source7.png?raw=true)
 
@@ -204,7 +210,7 @@ We have to be careful and thoroughly review each of the errors and warning eithe
 
 ![Source report 8](/phases/phase1_images/source_report/Source8.png?raw=true)
 
-The last error reported is about the JPA version used in our code. In the WebSphere Application Server V7.0 we are migrating our code from, we were using its Feature Pack for OSGI and JPA which comes with the JPA 2.0 version. In contrast, the WebSphere Application Server V9.0 which we want to migrate our code to uses JPA 2.1 where the provider has changed from being _openJPA_ to _eclipseLink_. As a result, methods, annotations, etc are no longer valid or its behaviour has changed:
+The last error reported is on the persistence.xml file for the JPA version used in our code. In the WebSphere Application Server V7.0, where we are migrating our code from, we were using its Feature Pack for OSGI and JPA which comes with the JPA 2.0 version for which OpenJPA is its provider. In contrast, the WebSphere Application Server V9.0, which we want to migrate our code to, uses the JPA 2.1 version for which eclipselink is its provider. Then, the problem is that some JPA annotations and attributes declared in the persistence.xml file are OpenJPA proprietary:
 
 ![Source report 9](/phases/phase1_images/source_report/Source9.png?raw=true)
 ![Source report 10](/phases/phase1_images/source_report/Source10.png?raw=true)
