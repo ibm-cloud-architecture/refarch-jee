@@ -175,7 +175,9 @@ To install the eclipse-based WebSphere Application Server Migration Toolkit plug
 
 ![Source report 1](/phases/phase1_images/source_report/Source1.png?raw=true)
 
-After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. In here, we should have the exact same errors and warnings as the _Analyzer report_ in the previous section. The Software Analyzer rules are categorised and so are the errors and warnings produced in its report. As you can see in the image, one warning that will always appear in when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
+After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. The number of results from the _Software Analyzer_ and the _Analyze report_ from the previous section can be different (due to scanning class files vs source files), but the same rules should be flagged. The only case where this might not be true is JPA. There were several very complex JPA rules that were not implemented in the binary scanner. But the binary scanner flag JPA migration issues, just not as extensively (since many of these more complex rules were to provide quick fixes which are not even available in the binary scanner).
+
+The Software Analyzer rules are categorised and so are the errors and warnings produced in its report. As you can see in the image, one warning that will always appear in when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
 
 ![Source report 2](/phases/phase1_images/source_report/Source2.png?raw=true)
 
