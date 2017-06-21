@@ -145,7 +145,7 @@ Again, the Migration Toolkit for Application Binaries Analyze report is used for
 
 In order to carry out the migration of your source code from an old WebShere Application Server version to a newer one, we must set up a proper development environment for the task. In this case, we want to move away from IBM proprietary tools as much as possible. Hence, this is the stack of our development environment:
 
-* [Eclipse Mars 2 for JEE developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/mars2)
+* [Eclipse Neon 3 for JEE developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon3)
 * [IBM WebSphere Application Server V9.x Developer Tools for Eclipse](https://marketplace.eclipse.org/content/ibm-websphere-application-server-v9x-developer-tools#group-details)
 * [IBM Installation Manager](http://www-01.ibm.com/support/docview.wss?uid=swg27025142) - (Recommended for the installation of the IBM WebSphere Application Server V9.0)
 * IBM WebSphere Application Server V9.0
