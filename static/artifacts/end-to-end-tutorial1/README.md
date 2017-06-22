@@ -181,7 +181,7 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 
 ![LDAP_CONFIGURE](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_configure.png)
 
-4. Set the Primary administrative user name to **uid=wasadmin,ou=caseinc,o=root**.
+4. Set the Primary administrative user name to **uid=wasadmin,ou=caseinc,o=sample**.
 
 5. Select **IBM Tivoli Directory Server** from the Type of LDAP server dropdown menu.
 
