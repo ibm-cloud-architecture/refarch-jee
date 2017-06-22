@@ -42,6 +42,22 @@ The tool walks you through a couple of Questions related to the installation, ap
 
 This tool can be accessed at http://ibm.biz/MigrationDiscovery.
 
+### WAS V9 TCA Calculator (Subscription and Support Cost Calculator)
+
+This [tool](https://advantage.ibm.com/2015/04/02/was-vs-jboss-license-and-support-cost-calculator-updated/) helps you in evaluating licensing options for various available Java application servers like IBM WebSphere, Oracle WebLogic, Red Hat JBoss and Pivotal tc Server and helps you to make the right choice among them. 
+
+The Total Cost of Acquisition (TCA) calculator is a quick tool that helps you to compare your existing S&S costs against the latest WAS V9 financial benefits.
+
+![Licensing Options](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_images/TCO_licensing.png)
+
+![TCA Calculator](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_images/TCO_cost_est.png)
+
+### WAS V9 TCO Calculator (On-Premise and In Cloud Cost Calculator)
+
+This [tool](https://roi-calculator.mybluemix.net/) helps you to view all the initial projection costs for creating new applications or to move the existing applications to bluemix. This information helps you to decide whether to keep your application on-premise or to move it to Bluemix. 
+
+![roi-calculator](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_images/TCO_cost_calculator.png)
+
 ## Assess
 
 Assessing your application helps you to understand all the potential issues during the migration process. During this phase, we will evaluate the programming models in our application and what WebSphere products support them. We will use the [WebSphere Migration Toolkit for Application Binaries](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries) and its [manual](https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/downloads/wamt/ApplicationBinaryTP/MigrationToolkit_Application_Binaries_en_US.pdf) for this process.
@@ -129,7 +145,8 @@ To get the report, run `java -jar binaryAppScanner.jar binaryInputPath --analyze
 
 _(I) binaryInputPath, which is an absolute or relative path to a JEE archive file or directory that contains JEE archive files_
 
-_(II) in our case, the [OPTIONS] are: --sourceAppServer=was70 --targetAppServer=was90 --sourceJava=ibm6 --targetJava=ibm8 --targetJavaEE=ee7 --*includePackages=org.pwte.example*_
+_(II) in our case, the [OPTIONS] are: --sourceAppServer=was70 --targetAppServer=was90 --sourceJava=ibm6 --targetJava=ibm8
+--targetJavaEE=ee7_
 
 [**Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_AnalysisReport.html)
 
@@ -145,7 +162,7 @@ Again, the Migration Toolkit for Application Binaries Analyze report is used for
 
 In order to carry out the migration of your source code from an old WebShere Application Server version to a newer one, we must set up a proper development environment for the task. In this case, we want to move away from IBM proprietary tools as much as possible. Hence, this is the stack of our development environment:
 
-* [Eclipse Neon 3 for JEE developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon3)
+* [Eclipse Mars 2 for JEE developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/mars2)
 * [IBM WebSphere Application Server V9.x Developer Tools for Eclipse](https://marketplace.eclipse.org/content/ibm-websphere-application-server-v9x-developer-tools#group-details)
 * [IBM Installation Manager](http://www-01.ibm.com/support/docview.wss?uid=swg27025142) - (Recommended for the installation of the IBM WebSphere Application Server V9.0)
 * IBM WebSphere Application Server V9.0
@@ -175,9 +192,7 @@ To install the eclipse-based WebSphere Application Server Migration Toolkit plug
 
 ![Source report 1](/phases/phase1_images/source_report/Source1.png?raw=true)
 
-After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. The number of results from the _Software Analyzer_ and the _Analyze report_ from the previous section can be different (due to scanning class files vs source files), but the same rules should be flagged. The only case where this might not be true is JPA. There were several very complex JPA rules that were not implemented in the binary scanner. But the binary scanner flag JPA migration issues, just not as extensively (since many of these more complex rules were to provide quick fixes which are not even available in the binary scanner).
-
-The Software Analyzer rules are categorised and so are the errors and warnings produced in its report. As you can see in the image, one warning that will always appear in when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
+After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. In here, we should have the exact same errors and warnings as the _Analyzer report_ in the previous section. The Software Analyzer rules are categorised and so are the errors and warnings produced in its report. As you can see in the image, one warning that will always appear in when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
 
 ![Source report 2](/phases/phase1_images/source_report/Source2.png?raw=true)
 
@@ -236,12 +251,36 @@ Migration of configuration should be done before deploying the application on th
 
 Below are the two tools available for Configuration migration.
 
-1. WebSphere Customization Toolbox
-2. [Eclipse-based application migration tool](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit)
+1. [Migration Wizard](https://www.ibm.com/support/knowledgecenter/en/SSAW57_9.0.0/com.ibm.websphere.migration.nd.doc/ae/tmig_profiles_gui.html)
+2. [Eclipse based configuration migration tool]( https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Configuration_Migration_Tool)
 
-### Traditional WebSphere Applications
+### Traditional WebSphere (Profile Migration)
 
-Version to version configuration migration support is incorporated within the WebSphere Application Server itself. There is an inbuilt Configuration Migration Tool within the server and this tool provides walks you through the migration wizard which helps you in the migration process.
+Full profile migration can be done using WASPreUpgrade and WASPostUpgrade commands as well using the graphical user interface, the Configuration Migration Tool.
+
+#### Cloning the profile using the command line
+
+WASPreUpgarde and WASPostUpgrade commands can be used to perform the migration using the command line.
+
+**WASPreUpgrade** - This allows you to backup all the configuration data from the source profile into a migration backup directory.
+
+**WASPostUpgrade** - This allows you to merge all the source data into the new target profile.
+
+`./WASPreUpgrade.sh /home/vagrant/IBM/WASMigration /home/vagrant/IBM/WebSphere/AppServer/ -oldProfile AppSrv01 -username admin -password password`
+
+![WASPreUpgrade](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_images/WASConfig/WASPreUpgarde.png)
+
+`./manageprofiles.sh -create -profileName AppSrv01 -profilePath /home/vagrant/IBM/WebSphere/AppServer_2/profiles/AppSrv01 -templatePath /home/vagrant/IBM/WebSphere/AppServer_2/profileTemplates/default -defaultPorts -enableAdminSecurity true -adminUserName admin -adminPassword password`
+
+![WASProfileManagement](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_images/WASConfig/WASProgileMgt.png)
+
+`./WASPostUpgrade.sh /home/vagrant/IBM/WebSphere/WSMigration -username admin -password password -oldProfile AppSrv01 -profileName AppSrv01 -setPorts generateNew -resolvePortConflicts incrementCurrent -includeApps false -clone true`
+
+![WASPostUpgrade](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_images/WASConfig/WASPostUpgrade.png)
+
+#### Cloning the profile using the Configuration MigrationTool
+
+Version to version configuration migration support is incorporated within the WebSphere Application Server itself. There is an inbuilt Configuration Migration Tool within the server and this tool walks you through the migration wizard which helps you in the migration process.
 
 IBM WebSphere Application Server V9.0 contains a WebSphere Customization toolbox.
 
@@ -259,9 +298,13 @@ Once the migration is completed, it returns you the migration results. Check the
 
 This procedure can be followed only if the migration is between different versions of WebSphere.
 
- Third Party Application Servers / Traditional WebSphere Application Server
+The above tools are best suited for the scenarios where the migration of cells is similar. They are great where the target cell has the same number of node agents, the same number of clusters, the same number of cluster members, etc. 
 
-[Eclipse-based application migration tool](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit) can be used to migrate the configuration from different types of servers to WebSphere application server. This tool supports Traditional WebSphere Applications as well as the Third-party server applications.
+These tools do not work well if there is some consolidation or other re-architecture of their topologies. When there is refactoring of the topologies then you can make use of Eclipse WebSphere Configuration Migration tool(WCMT).
+
+### Traditional WebSphere (Resource Migration)
+
+[Eclipse-based WebSphere Configuration Migration tool](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Configuration_Migration_Tool) can be used to migrate the configuration from different types of servers to WebSphere application server. This tool supports Traditional WebSphere Applications as well as the Third-party server applications.
 
 Once this tool gets installed in your IDE, you can access it using the option Migration Tools.
 
