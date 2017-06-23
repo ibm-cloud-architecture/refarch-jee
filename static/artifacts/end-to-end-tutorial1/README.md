@@ -22,7 +22,7 @@ There are several components of the overall application architecture:
 The following are prerequisites for completing this tutorial:
 - Bluemix Services:
   - [WebSphere Application Server Version 9](https://console.bluemix.net/catalog/services/websphere-application-server) - Referred to as _WASaaS_ throughout the rest of the tutorial
-  - [DB2 on Cloud SQL DB](https://console.bluemix.net/catalog/services/db2-on-cloud-sql-db-formerly-dashdb-tx) 
+  - [DB2 on Cloud SQL DB](https://console.bluemix.net/catalog/services/db2-on-cloud-sql-db-formerly-dashdb-tx)
 - Command line tools:
   - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
   - VPN Client for connectivity to WASaaS private network
@@ -33,15 +33,15 @@ The following are prerequisites for completing this tutorial:
   - SSH capability
     - Windows users will need [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or [OpenSSH](https://www.openssh.com/)
   - [WebSphere Application Server Migration Toolkit for Application Binaries](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries)
- 
+
 ### Step 1: Getting the project repository
-  		  
+
 You can clone the repository from its main GitHub repository page and checkout the appropriate branch for this version of the application.
-  		  
+
 1. `git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git`  		   
 2. `cd refarch-jee-customerorder`
 3. `git checkout was90-prod`
- 
+
 ### Step 2: Perform assessment walkthrough
 
 #### Step 2.1: Use the Migration Toolkit for Application Binaries to evaluate the applications
@@ -103,52 +103,52 @@ TODO Details to be added:  Merge from Don's work
 
 3. Once the service instance is created, provision a **WebSphere Version 9.0.0.0** server of size **Medium**.  This should be a server deployment taking up 2 of your 2 trial credits.  This step can take up to 30 minutes to complete.
 
-4. Once done, you can access the Admin console using the **Open the Admin Console** option. In order to access the Admin console, install the [VPN](https://console.bluemix.net/docs/services/ApplicationServeronCloud/systemAccess.html#setup_openvpn) as instructed. 
+4. Once done, you can access the Admin console using the **Open the Admin Console** option. In order to access the Admin console, install the [VPN](https://console.bluemix.net/docs/services/ApplicationServeronCloud/systemAccess.html#setup_openvpn) as instructed.
 
    - [Windows 64-Bit (OpenVPN)](https://swupdate.openvpn.org/community/releases/openvpn-install-2.3.11-I001-x86_64.exe)
    - [Windows 32-Bit (OpenVPN)](https://swupdate.openvpn.org/community/releases/openvpn-install-2.3.11-I001-i686.exe)
    - [Linux (OpenVPN)](https://openvpn.net/index.php/access-server/download-openvpn-as-sw.html)
    - [Mac (Tunnelblick)](https://tunnelblick.net/)  
-   
+
    Download, extract, and install the VPN configuration files by clicking the **Download** button.
-   
+
    **VPN - Windows Configuration**
-   
+
    1. From the [openVPN Windows download](http://swupdate.openvpn.org/community/releases/) link, download
       [openvpn-install-2.3.4-I001-x86_64.exe](https://swupdate.openvpn.org/community/releases/openvpn-install-2.3.4-I001-x86_64.exe) for 64-bit, or
       [openvpn-install-2.3.4-I001-i686.exe](https://swupdate.openvpn.org/community/releases/openvpn-install-2.3.4-I001-i686.exe) for 32-bit.
-      
+
    2. Ensure you [Run as a Windows Administrator](https://technet.microsoft.com/en-us/magazine/ff431742.aspx) and openVPN is installed.
-   
-   3. Download the VPN configuration files from the OpenVPN download link of the WebSphere Application Server in Bluemix instance in the service dashboard. Extract all four files in the compressed file to the {OpenVPN home}\config directory. 
-   
+
+   3. Download the VPN configuration files from the OpenVPN download link of the WebSphere Application Server in Bluemix instance in the service dashboard. Extract all four files in the compressed file to the {OpenVPN home}\config directory.
+
    `C:\Program Files\OpenVPN\Config`
-   
+
    4. Start the openVPN client program "OpenVPN GUI". Ensure that you select [Run as a Windows Administrator](https://technet.microsoft.com/en-us/magazine/ff431742.aspx) to start the program. If you do not, you might not be able to connect.
 
    **VPN - Linux Configuration**
- 
+
    1. To install openVPN, follow the [instructions](https://openvpn.net/index.php/access-server/docs/admin-guides/182-how-to-connect-to-access-server-with-linux-clients.html).
-   
+
       If you need to manually download and install the RPM Package Manager, go to [openVPN unix/linux download](https://openvpn.net/index.php/access-server/download-openvpn-as-sw.html). You might need assistance from your Linux administrator.
 
    2. Download the VPN configuration files from the OpenVPN download link of the WebSphere Application Server in Bluemix instance in the service dashboard. Extract the files into the directory from which you plan to start the openVPN client. You need all four files in the same directory.
-   
+
    3. Start the openVPN client program. Open a terminal window and go to the directory that contains the config files. Run the following command as root:
-   
+
    `openvpn --config vt-wasaas-wasaas.ovpn`
-   
+
    **VPN - MAC configuration**
-   
+
    1. One method is to install [Tunnelblick](https://tunnelblick.net/), an open source software product.
-   
+
    2. Extract the VPN configuration files from the WebSphere service. Tunnelblick prompts for your admin password for Mac and adds the config to the set of VPNs you can use to connect.
-   
+
    3. Connect to the VPN network and then you can access your virtual machine. After your first access, Tunnelblick caches the configuration and you can connect from [Tunnelblick](https://tunnelblick.net/). You can put an icon on the top menu bar for easy access.
-   
+
 Once the VPN is configured, you can access the Admin console. Please add the exception for insecure connection when it prompts to access the admin console.
-   
-5. Get a public IP address. This can be done using the [**Manage Public IP Access**](https://console.bluemix.net/docs/services/ApplicationServeronCloud/networkEnvironment.html#networkEnvironment) option. 
+
+5. Get a public IP address. This can be done using the [**Manage Public IP Access**](https://console.bluemix.net/docs/services/ApplicationServeronCloud/networkEnvironment.html#networkEnvironment) option.
 
 6. You can **ssh** into the WebSphere Application Server instance using the Admin Username **root** and Password provided in your bluemix instance.
 
@@ -167,7 +167,7 @@ Once the VPN is configured, you can access the Admin console. Please add the exc
 
 ![Readme 1](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme1.png)
 
-##### LDAP Configuration 
+##### LDAP Configuration
 
 In order to manually set WebSphere up to use a standalone LDAP registry for Authentication and Authorization of application users, follow these instructions:
 
@@ -190,7 +190,7 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 7. Set the LDAP admin credentials using the Bind distinguished name and password below:
    * Bind distinguished name (DN)     : **cn=root**
    * Bind password                    : **purpleTDS!**
- 
+
 ![LDAP_TestConn](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_TestConn.png)
 
 8. Click **OK** to confirm the settings.
@@ -204,12 +204,23 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 11. Set the User filter and group filter.
 
     **User filter: (&(uid=%v)(objectclass=inetorgperson))**
-    
+
     **Group filter: (&(cn=%v)(objectclass=groupOfUniqueNames))**
-    
+
 ![LDAP Advanced Settings](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_Adv_Settings.png)
 
 12. Apply the changes and save the settings.
+
+13. You will now need to restart the server.  For this, you will need to return to your **ssh** session on the WebSphere Application Server instance.  Perform the following commands to restart the server:
+
+`cd /opt/IBM/WebSphere/Profiles/DefaultAppSrv01/bin`  
+`./stopServer.sh server1 -username wsadmin -password <YOUR PASSWORD>` where _<YOUR PASSWORD>_ is found on the service instance details page in Bluemix.  
+`./startServer.sh server1`  
+
+14. Now you will log back into the Admin Console but use a different set of credentials, now that we're connected to the remote LDAP as our user registry.  Use the credentials below to login to the Admin Console:
+
+**Username:** `uid=wasadmin,ou=caseinc,o=sample`  
+**Password:** `websphereUser!`  
 
 ##### Configuring JDBC Resources
 
@@ -261,7 +272,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
       - Mapping-configuration alias: **DefaultPrincipalMapping**
       - Container-managed authentication alias: **DB2User-ORDERDB**
         ![Readme 12](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme12.png)
-      
+
 6. Once this is done, under Preferences, there will be a new resource called **OrderDS**. Make sure that the resources got connected using **Test Connection** option. You will see a success message if the connection is established successfully.
 
 ![Readme 13](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme13.png)
@@ -300,14 +311,15 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
    -  Select **Applications > Application Types > WebSphere enterprise applications**
    -  Choose **Install > Browse the EAR > Next > Choose Detailed**
    -  Click on **Step 12**.
-   -  Customize the environment variables for your **DBUser-ORDERDB** instance:
-      - **DBUNIT_SCHEMA:** BLUDB
-      - **DBUNIT_USERNAME:** bluadmin
+   -  Customize the environment variables for your **DB2 on Cloud - ORDERDB** instance:
+      - **DBUNIT_CONNECTION_URL:** `jdbc:db2://{YOUR HOST}:50000/BLUDB` where {YOUR HOST} is the `host` value from your credentials
+      - **DBUNIT_SCHEMA:** `BLUDB`
+      - **DBUNIT_USERNAME:** `bluadmin`
       - **DBUNIT_PASSWORD:** _(Value acquired in Step 3.4)_
    -  Click on **Step 13** to map the necessary users to the application.
       - Click on the checkbox for the **SecureShopper** Role.
-      - Then click on **Map Users**.  
-      - Click **Search** and select the `rbarcia` & `kbrown` users.
+      - Then click on **Map Groups**.  
+      - Click **Search** and select the `SecureShopper`group.
       - Click the right-facing arrow to move those selected users into the **Selected** box on the right.
       - Click **OK**
    -  Click on **Summary** (Step 18) and click **Finish**.
@@ -317,7 +329,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 4.  Initial users can be created by running the **JPA** tests in the **https://<i></i>your-host/CustomerOrderServicesTest** web application.
 
-5.  Prime the database with the JPA tests avaiable at **https://<i></i>your-host/CustomerOrderServicesTest** . 
+5.  Prime the database with the JPA tests avaiable at **https://<i></i>your-host/CustomerOrderServicesTest** .
 
 6.  Login as the user `rbarcia` with the password of `bl0wfish`.  
 
@@ -327,6 +339,6 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 9.  Login as the user `rbarcia` with the password of `bl0wfish`.  
 
-10.  Add an item to the cart by clicking on an available item.  Drag and drop the item to the cart. 
+10.  Add an item to the cart by clicking on an available item.  Drag and drop the item to the cart.
 
 11.  Take a screencap and submit the image to the available proctors as proof of completion.
