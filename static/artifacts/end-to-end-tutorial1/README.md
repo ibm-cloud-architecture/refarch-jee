@@ -197,8 +197,91 @@ Target cloud runtime: **None**
 
 16. Close **CustomerOrderRESTTest.java**
 
+17. In the **Java Code Review** section, click on the **Java Persistence API (JPA)** result to display the related help in the Eclipse Help view.
 
-TODO Details to be added:  Merge from Don's work
+![Java Persistence API (JPA)](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JPA_API.png)
+
+18. WAMT has detected that JPA is part of this application and given that you stated in Step #6 that you do not intend to upgrade to JPA 2.1, WAMT is drawing your attention to the fact that JPA 2.0 will run on tWAS V9 but only when explicitly configured. Click **Detailed help**.
+
+![JPA Detailed Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/tWASDetailedHelp.png)
+
+19. Review the information provided in the detailed help which discusses why this rule was executed and provides a link to the Information Center describing how to identify and modify the JPA level on a tWAS V9 server. **Note that had you specified that you wanted to upgrade to JPA 2.1 when configuring the WAMT rules, there are quick fixes and additional rules to help with the code migration.**
+
+![JPA Rule](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JPARules.png)
+
+20. In the **Java Code Review** section, double-click on the AbstractCustomer.java result.
+
+![AbstractCustomer.java](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/AbstractCust.png)
+
+21. AbstracCustomer.java is displayed with the import for **javax.persisence.CascadeType** highlighted. Note that WAMT only reports the first instance of a result for this rule per Java source.
+
+![javax Cascade type](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/javax.png)
+
+22. Close **AbstractCustomer.java**.
+
+23. In the **Java Code Review** section, expand the **Java EE 7 -> CDI** section and click on **CDI recognizes implicit bean archives** to display the related help in the Eclipse Help view.
+
+![CDI implicit bean archives](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDI.png)
+
+24. WAMT detected two Java files with bean-defining annotations without corresponding beans.xml file. This means that their WAR or JAR modules would not be scanned for implicit beans in WAS 7.0, but they would be scanned in WAS 9.  Click **Detailed help**.
+
+![CDI detailed help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDIHelp.png)
+
+25. Review the information provided in the detailed help which discusses why this rule was executed and provides a solution to disable this CDI 1.2 behavior for the web modules and EJB modules.
+
+![CDI Behavior](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDI_Bean_Archives.png)
+
+26. In the **Java Code Review** section,double-click on **CustomerOrderServicesImpl.java**
+
+![CDI Implicit beans](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDIImplicitBean.png)
+
+27. CustomerOrderServiceImpl.java is displayed which defines the EJB Stateless Session Bean with the @Stateless annotation highlighted. 
+
+![Statless Annotation](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Stateless.png)
+
+28. Close **CustomerOrderServicesImpl.java**.
+
+29. In the **Java Code Review** section, open the **Java EE 7 -> WebSphere version migration** section and click on **Check for a behavior change in JPA cascade strategy** to display the related help.
+
+![Behavior Change JPA Cascade](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BehaviorChange.png)
+
+30. This rule flags the use of the JPA entity relationships that use cascade types PERSIST, MERGE, or ALL as their behaviorhas changed in WAS V8.5 and later. Click **Detailed help**.
+
+![Behavior Change Detailed Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BehaviorChange_HElp.png)
+
+31. The detailed help describes how the JPA cascade strategy has changed in WAS V8.5 and later. This behavior does not impact most applications, but if so the detailed help shows you how to go back to the earlier behavior.
+
+![JPA Cascade Strategy Behavior Change](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JPACascadeStrategy.png)
+
+32. In the **Java Code Review** section, double-click on **AbstractCustomer.java**.
+
+![AbstractCustomer behavior change](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/AbsCust_BehaviorChange.png)
+
+33. The **AbstractCustomer.java** file is displayed with the line that triggered the rule highlighted. That line defines JPA OneToOne relationship with CascadeType of MERGE.
+
+![AbstractCustomer Cascade Type](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CascadeType.png)
+
+34. Close **AbstractCustomer.java**.
+
+35. In the **File Review** section, expand the **Project Review** section and click on the **CDI scans for implicit beans when there is no beans.xml** file result to display the related help in the Eclipse Help view.
+
+![File Review](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BeansXML.png)
+
+36. WAMT has again detected that there are projects that don’t contain a beans.xml file which means that the project will be scanned for implicit beans on application startup which can degrade performance.
+
+![CDI scans no beans.xml](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDI_BeansXML.png)
+
+37. The table below summarizes the results and the recommended actions.
+
+| **WAMT Result** | **Recommended Action** |
+| ------- | ------- |
+| Java API for RESTful Web Services (JAX-RS) | WebSphereApplication Server traditionalversion 9 supports both Java™ API for RESTful Web Services (JAX-RS) 2.0 and JAX-RS 1.1 features. In version 9 and its later versions, you can switch among different JAX-RS providers.The default JAX-RS provider on WebSphere Application Server traditionalversion 9 is Apache CXF-based JAX-RS 2.0. You can also switch to Apache Wink-based JAX-RS 1.1 either by using command prompt or administrative console.A migration approach to migration that focuses on avoiding code changes would continue to use the JAX-RS 1.1 provider while a migration approach to eliminate technical debt would migrate to JAX-RS 2.0 |
+| Java Persistence API (JPA) | Starting with WebSphere Application Server Version 9, Eclipselink is the default JPA 2.1 persistence provider when JPA 2.1 is the active specification level. Before version 9, WSJPA, the IBM JPA provider based on Apache OpenJPA, which supports the JPA 2.0 specification, was the default provider. Because JPA providers differ in both behavior and vendor-specific APIs, and OpenJPA is not available as a JPA 2.1 specification implementation, the product provides a JPA 2.0 specification compatibility mode. WAS V9 bundles the following persistence providers: Eclipselink 2.6.x_WAS (default for JPA 2.1), WSJPA 2.2.x (default for JPA 2.0). You can also use third-party JPA persistence providers such as Hibernate. The third-party provider must match the enabled JPA specification level.A migration approach that focuses on avoiding code changes would enablethe JPA 2.0 specification and use a JPA 2.0 provider while a migration approach to eliminate technical debt would migrate to JPA 2.1  |
+| CDI recognizes implicit bean archives | The change in CDI 1.1 means that WAR and JAR files are scanned for implicit beans even if they don’t have a beans.xml file. The concern here is two-fold: first, the application startup time is increased as every WAR and JAR without a beans.xml file is scanned; second,the beans that weren’t detected in CDI 1.0 will now be detected and started which might change the application functionality. The recommendation here is to add a beans.xml file to all WAR and JAR files that either states that no beans are present or correctly identifies the beans to ensure that scanning is kept to a minimum and only the expected beans are started. |
+| Check for a behavior change in JPA cascade strategy | Code should be reviewed based on the information provided in the WAMT detailed help to ensure that that the new exception is handled correctly. |
+| Target runtime not set | The recommendation is to specify the correct target runtime which requires installation of the WebSphere Developer Tools |
+
+**Summary: Although a few sections of code should be reviewed by a developer, the application will run on traditional WebSphere Application Server V9 on-prem without changes. Strategically it would be wise to consider upgrading the JAX-RS to 2.0 and upgrading JPA to 2.1.**
 
 ### Step 3: Create DB2 service instance for ORDERDB
 
