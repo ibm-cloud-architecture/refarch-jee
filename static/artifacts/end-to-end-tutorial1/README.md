@@ -44,7 +44,11 @@ You can clone the repository from its main GitHub repository page and checkout t
 
 ### Step 2: Perform assessment walkthrough
 
-#### Step 2.1: Use the Migration Toolkit for Application Binaries to evaluate the applications
+#### Step 2.1 Use the Migration Toolkit for Application Binaries to evaluate the applications
+
+In this section you will use the Migration Toolkit for Application Binaries to generate evaluation reports for the EAR file CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear. It the original app that runs on WAS V7. 
+
+##### 2.1.1: Use the Migration Toolkit for Application Binaries to evaluate the applications
 
 In this section you will generate and review the Application Evaluation Report for [**CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear**](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear)
 
@@ -66,7 +70,7 @@ This report gives a quick evaluation of the Java EEtechnologies that an applicat
 
 *Customer Decision: At this point the customer has decided to move the application to tWAS V9.It is important to remember that CustomerOrderServicesAppwould have been completely supported not only by tWAS V9, but also Liberty for Java, Liberty Core, Liberty, and so forth.*
 
-#### Step 2.2: Generate the Application Inventory Report for CustomerOrderServicesApp
+##### 2.1.2: Generate the Application Inventory Report for CustomerOrderServicesApp
 
 In this section, you will generate and review the Application Inventory Report for CustomerOrderServicesApp which will document the application structure as well as list any possible deployment problems that may be encountered. 
 
@@ -92,13 +96,107 @@ In this section, you will generate and review the Application Inventory Report f
 
 5. **Close** the browser
 
+#### Step 2.2: Analyze the CustomerOrderServicesApp Application code
 
+In this section you will use the WebSphere Application Migration Toolkit (WAMT) to analyze the CustomerOrderServicesApp application code for readiness to run on traditional WebSphere Application ServerV9 (tWAS V9). An Eclipse Workspace has been provided with the CustomerOrderServicesAppApplication Source Code already imported. The following features have been installed in to [EclipseIDE for Java EE Developers](http://www.eclipse.org/downloads/packages/release/Neon/3):
 
+- [WebSphere Developer Tools for Eclipse Neon](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Developer_Tools_for_Eclipse_Neon)
+- [WebSphere Application Server Migration Toolkit](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit)
 
+##### 2.2.1: Review the CustomerOrderServicesAppApplication Code
 
-TODO Insert & format Don's document from https://ibm.box.com/s/icn00hjcv2hejpnmvpl90oxkvacwgjmp
+In this section you will open a provided Eclipse workspace containing the CustomerOrderServicesApp source code in Eclipse Neon
 
-#### Step 2.2: TBD
+1. Navigate to the eclipse directoryand run eclipse:
+
+`cd {ECLIPSE_NEON_HOME}
+eclipse {-clean}`
+
+2. When the **Workspace Launcher** dialog is displayed, ensure that the **{ECLIPSE_WORKSPACE_LOCATION}/refarch-jee-customerorder-was70-dev** workspace is selected and click **OK**
+
+![Eclipse Workspace](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EclipseWorkspace.png)
+
+3. The Java EE Perspective will be displayed with the projects that make up the CustomerOrderServicesApp-0.1.0-SNAPSHOT.earapplication already imported. Take a moment to familiarize yourself with the projects.
+
+![Eclipse Enterprise Explorer](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EnterpriseExplorer.png)
+
+- **CustomerOrderServices-0.1.0-SNAPSHOT** is the EJB Module for the application
+- **CustomerOrderServicesApp-0.1.0-SNAPSHOT** is the EAR for the application
+- **CustomerOrderServicesTest-SNAPSHOT** is the Web Module for the application
+- **CustomerOrderServicesWeb-SNAPSHOT** is the Web Module for integration tests
+
+##### 2.2.2. Execute the WAMT rules for traditional WAS V9 on-prem
+
+In this section,you will use WAMT to analyze the CustomerOrderServicesAppapplication source code for readiness for migration to run on WebSphere Application Server V9 in a non-Cloud environment.
+
+1. In Eclipse, click **Run -> Analysis... (move your mouse pointer to the menu bar at the top of the Eclipse Neonwindow to make the menu names appear as they are hidden by default)**
+
+![Analysis](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Analysis.png)
+
+2. When the Software Analyzer Configurations dialog is displayed, **right-click** on **Software Analyzer** and select **New** to create a new configuration.
+
+![Software Analyzer](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SoftwareAnalyzer.png)
+
+3. Enter **“WAS V9 on-prem”** in the **Name** box and click on the **Rules** tab.
+
+![WAS V9 on-prem](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Rules.png)
+
+4. Validate that the correct number of rules are shown in the **Java Code Review** section (the value should be **595**). If the correct number of rules are not shown, exit and start eclipse with the –clean parameter (eclipse –clean) and repeat steps 1-3 in this section)
+
+![Rule Set](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RulesV9.png)
+
+5. Select **WebSphere Application Server Version Migration** from the **Rule Sets** drop down then click **Set...**
+
+![WebSphere Application Server Version Migration](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/WASVersionMig.png)
+
+6. When the Rule set configuration panel is displayed select the following values and click **OK**
+
+Source application server: **WebSphere Application Server V7.0**
+Target application server: **WebSphere Application Server traditional V9.0**
+Target cloud runtime: **None**
+
+**NOTE:** It is important to note the six options that exist in the Java EE 7 technologies section. Traditional WAS V9 (tWAS V9) is a Java EE 7 runtimewhich by default runs newer levels of the CDI, EL, JAX-RS, JMS, JPA and Servlet specifications. These options allow you to state whetheryou intend to upgrade your application code to the latest specification during migration or not. In this case, you do **not** plan to upgrade the application from JPA 2.0 to JPA 2.1 (JPA 2.1 is now the default implementation for tWAS V9) or from JAX-RS 1.1 to JAX-RS 2.0(JAX-RS 2 is now the default for tWAS V9) so leave those boxes unchecked.
+
+![Rule Set Configuration](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RuleSet.png)
+
+7. Note that rules have been selected for you based on the configuration parameters you provided in the previous step. Take a moment to expandthe selected sections andtoreview the selected rules. 
+
+![Selected Rule Set](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SelectedRules.png)
+
+8. Click **Apply** and then click **Analyze**.
+
+![Apply and Analyze](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Apply%26Analyze.png)
+
+9. When the analysis is complete, the **Software Analyzer Results** panel willbe displayed with four tabs shown below: XML Code Review, XML File Review, JSP Code Review, and File Review.
+
+![Software Analyzer Results](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SAResults.png)
+
+10. In the Eclipse menu bar, click **Help -> Show Contextual Help** to display the Eclipse Help on the right side of the workspace.
+
+![Contextual Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Help.png)
+
+11. In the **Java Code Review** section, expandthe **Java EE 6** result tree and click on the **Java API for RESTful Web Services (JAX-RS)** result to display the related help in the Eclipse Help view.
+
+![Java Code Review](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JavaCodeReview.png)
+
+12. WAMT has detected that JAX-RS is part of this application and given that you stated in step #6 that you do not intend to upgrade to JAX-RS 2.0, WAMT is drawing your attention to the fact that JAX-RS 1.1 will run on tWAS V9 but only when explicitly configured. Click **Detailed help**.
+
+![JAX RS Detailed Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/DetailedHelp.png)
+
+13. Review the information provided in the detailed help which discusses why this rule was executed and provides a link to the Information Center describing how the server can be configured to use JAX-RS 1.1. **Note that had you specified that you wanted to upgrade to JAX-RS 2.0when configuring the WAMT rules, there are quick fixes and additional rules to help with the code migration.**
+
+![JAX RS Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JAXRS.png)
+
+14. In the **Java Code Review** section, double-click on CustomerOrderRESTTest.java
+
+![CustomerOrderRESTTest](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RestTest.png)
+
+15. CustomerOrderRESTTest.java is displayed with the import for **javax.ws.rs.core.MediaType** highlighted. Note that WAMT only reports the first instance of a result for this rule per Java file.
+
+![javax.ws.rs.core.MediaType](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RestTestCode.png)
+
+16. Close **CustomerOrderRESTTest.java**
+
 
 TODO Details to be added:  Merge from Don's work
 
