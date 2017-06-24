@@ -46,6 +46,56 @@ You can clone the repository from its main GitHub repository page and checkout t
 
 #### Step 2.1: Use the Migration Toolkit for Application Binaries to evaluate the applications
 
+In this section you will generate and review the Application Evaluation Report for [**CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear**](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear)
+
+1. Navigate to **{binaryAppScanner.jar_LOCATION}** by issuing the command:
+
+`cd {bianryAppScanner.jar_LOCATION}`
+
+2. Run the Migration Toolkit for Application Binaries passingthebinaryInputPathtoCustomerOrderServicesApp and the –evaluate action as shown below:
+
+`java –jarbinaryAppScanner.jar {CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear_LOCATION}/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear--evaluate`
+
+The Application Evaluation Report will be displayed in the browser. 
+
+![Application Evaluation Report](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/AppEvalReport.png)
+
+This report gives a quick evaluation of the Java EEtechnologies that an application uses andwhether each of the WebSphere runtimes support the given technologies. **This report can be used to determine whether a WebSphere Application Server runtime supports the technologies required by the application.** For example, this CustomerOrderServicesApp **is a perfect match for any of the WAS runtimes.**
+
+3. **Review** the report and then **close** the browser.
+
+*Customer Decision: At this point the customer has decided to move the application to tWAS V9.It is important to remember that CustomerOrderServicesAppwould have been completely supported not only by tWAS V9, but also Liberty for Java, Liberty Core, Liberty, and so forth.*
+
+#### Step 2.2: Generate the Application Inventory Report for CustomerOrderServicesApp
+
+In this section, you will generate and review the Application Inventory Report for CustomerOrderServicesApp which will document the application structure as well as list any possible deployment problems that may be encountered. 
+
+1. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the –inventory action as shown below.
+
+`java –jar binaryAppScanner.jar {CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear_LOCATION}/CustomerOrderServicesAppV8-0.1.0-SNAPSHOT.ear–inventory`
+
+2. The Application Inventory Report will be displayed in the web browser. 
+
+![Inventory Report](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/Inventory.png)
+
+3. **Scroll** down through the report and **review** the information provided. The **Inventory** section of the report provides information about the type and quantity of the different components contained in the application. The **Potential Deployment Problems** section details potential issues that might be encountered if the application was deployed to WAS V9.
+
+- **Archives not referenced in the application.**You can ignore this potential problem.
+
+- **Archives missing dependencies in the application.** You will need to find missing dependencies. Most of the time you can find the missing dependencies in a shared library. Click the **Show details** button to see the missing dependencies.
+
+![Potential Problems](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/DeploymentProb.png)
+
+4. The Missing Dependencies report describes the problem and recommendation for how to deal with this problem then provides a table with additional information to help you solve the problem. The table shows Missing Dependencies (classes) and the Archive from the CustomerOrderServicesApp that is dependent upon them. 
+
+![Missing Dependencies](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/DeploymentProb.png)
+
+5. **Close** the browser
+
+
+
+
+
 TODO Insert & format Don's document from https://ibm.box.com/s/icn00hjcv2hejpnmvpl90oxkvacwgjmp
 
 #### Step 2.2: TBD
