@@ -442,13 +442,17 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 
 12. Apply the changes and save the settings.
 
-13. You will now need to restart the server.  For this, you will need to return to your **ssh** session on the WebSphere Application Server instance.  Perform the following commands to restart the server:
+13. Click **OK** to go back to the Global Security page.
+
+14. Set **Standalone LDAP registry** as the current realm definition by clicking **Set as Current**.
+
+15. You will now need to restart the server.  For this, you will need to return to your **ssh** session on the WebSphere Application Server instance.  Perform the following commands to restart the server:
 
 `cd /opt/IBM/WebSphere/Profiles/DefaultAppSrv01/bin`  
 `./stopServer.sh server1 -username wsadmin -password <YOUR PASSWORD>` where _<YOUR PASSWORD>_ is found on the service instance details page in Bluemix.  
 `./startServer.sh server1`  
 
-14. Now you will log back into the Admin Console but use a different set of credentials, now that we're connected to the remote LDAP as our user registry.  Use the credentials below to login to the Admin Console:
+16. Now you will log back into the Admin Console but use a different set of credentials, now that we're connected to the remote LDAP as our user registry.  Use the credentials below to login to the Admin Console:
 
 **Username:** `uid=wasadmin,ou=caseinc,o=sample`  
 **Password:** `websphereUser!`  
