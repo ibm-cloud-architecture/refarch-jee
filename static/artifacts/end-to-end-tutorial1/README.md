@@ -46,7 +46,7 @@ You can clone the repository from its main GitHub repository page and checkout t
 
 #### Step 2.1 Use the Migration Toolkit for Application Binaries to evaluate the applications
 
-In this section you will use the Migration Toolkit for Application Binaries to generate evaluation reports for the EAR file CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear. It the original app that runs on WAS V7. 
+In this section you will use the Migration Toolkit for Application Binaries to generate evaluation reports for the EAR file **[CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear)**. It is the original app that runs on WAS V7. 
 
 ##### 2.1.1: Use the Migration Toolkit for Application Binaries to evaluate the applications
 
@@ -56,27 +56,27 @@ In this section you will generate and review the Application Evaluation Report f
 
 `cd {bianryAppScanner.jar_LOCATION}`
 
-2. Run the Migration Toolkit for Application Binaries passingthebinaryInputPathtoCustomerOrderServicesApp and the –evaluate action as shown below:
+2. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the `–evaluate` action as shown below:
 
-`java –jarbinaryAppScanner.jar {CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear_LOCATION}/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear--evaluate`
+`java –jarbinaryAppScanner.jar {CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear_LOCATION}/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear --evaluate`
 
 The Application Evaluation Report will be displayed in the browser. 
 
 ![Application Evaluation Report](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/AppEvalReport.png)
 
-This report gives a quick evaluation of the Java EEtechnologies that an application uses andwhether each of the WebSphere runtimes support the given technologies. **This report can be used to determine whether a WebSphere Application Server runtime supports the technologies required by the application.** For example, this CustomerOrderServicesApp **is a perfect match for any of the WAS runtimes.**
+This report gives a quick evaluation of the Java EE technologies that an application uses and whether each of the WebSphere runtimes support the given technologies. **This report can be used to determine whether a WebSphere Application Server runtime supports the technologies required by the application.** For example, this CustomerOrderServicesApp **is a perfect match for any of the WAS runtimes.**
 
 3. **Review** the report and then **close** the browser.
 
-*Customer Decision: At this point the customer has decided to move the application to tWAS V9.It is important to remember that CustomerOrderServicesAppwould have been completely supported not only by tWAS V9, but also Liberty for Java, Liberty Core, Liberty, and so forth.*
+*Customer Decision: At this point the customer has decided to move the application to tWAS V9.It is important to remember that CustomerOrderServicesApp would have been completely supported not only by tWAS V9, but also Liberty for Java, Liberty Core, Liberty, and so forth.*
 
 ##### 2.1.2: Generate the Application Inventory Report for CustomerOrderServicesApp
 
 In this section, you will generate and review the Application Inventory Report for CustomerOrderServicesApp which will document the application structure as well as list any possible deployment problems that may be encountered. 
 
-1. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the –inventory action as shown below.
+1. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the `–inventory` action as shown below.
 
-`java –jar binaryAppScanner.jar {CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear_LOCATION}/CustomerOrderServicesAppV8-0.1.0-SNAPSHOT.ear–inventory`
+`java –jar binaryAppScanner.jar {CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear_LOCATION}/CustomerOrderServicesAppV8-0.1.0-SNAPSHOT.ear –inventory`
 
 2. The Application Inventory Report will be displayed in the web browser. 
 
@@ -84,13 +84,13 @@ In this section, you will generate and review the Application Inventory Report f
 
 3. **Scroll** down through the report and **review** the information provided. The **Inventory** section of the report provides information about the type and quantity of the different components contained in the application. The **Potential Deployment Problems** section details potential issues that might be encountered if the application was deployed to WAS V9.
 
-- **Archives not referenced in the application.**You can ignore this potential problem.
+- **Archives not referenced in the application.** You can ignore this potential problem.
 
 - **Archives missing dependencies in the application.** You will need to find missing dependencies. Most of the time you can find the missing dependencies in a shared library. Click the **Show details** button to see the missing dependencies.
 
 ![Potential Problems](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/DeploymentProb.png)
 
-4. The Missing Dependencies report describes the problem and recommendation for how to deal with this problem then provides a table with additional information to help you solve the problem. The table shows Missing Dependencies (classes) and the Archive from the CustomerOrderServicesApp that is dependent upon them. 
+4. The Missing Dependencies report describes the problem and recommendation for how to deal with this problem, then provides a table with additional information to help you solve the problem. The table shows Missing Dependencies (classes) and the Archive from the CustomerOrderServicesApp that is dependent upon them. 
 
 ![Missing Dependencies](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/DeploymentProb.png)
 
@@ -98,7 +98,7 @@ In this section, you will generate and review the Application Inventory Report f
 
 #### Step 2.2: Analyze the CustomerOrderServicesApp Application code
 
-In this section you will use the WebSphere Application Migration Toolkit (WAMT) to analyze the CustomerOrderServicesApp application code for readiness to run on traditional WebSphere Application ServerV9 (tWAS V9). An Eclipse Workspace has been provided with the CustomerOrderServicesAppApplication Source Code already imported. The following features have been installed in to [EclipseIDE for Java EE Developers](http://www.eclipse.org/downloads/packages/release/Neon/3):
+In this section you will use the WebSphere Application Migration Toolkit (WAMT) to analyze the CustomerOrderServicesApp application code for readiness to run on traditional WebSphere Application ServerV9 (tWAS V9). An Eclipse Workspace has been provided with the CustomerOrderServicesApp Application Source Code already imported. The following features have been installed in to [EclipseIDE for Java EE Developers](http://www.eclipse.org/downloads/packages/release/Neon/3):
 
 - [WebSphere Developer Tools for Eclipse Neon](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Developer_Tools_for_Eclipse_Neon)
 - [WebSphere Application Server Migration Toolkit](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit)
@@ -127,9 +127,9 @@ eclipse {-clean}`
 
 ##### 2.2.2. Execute the WAMT rules for traditional WAS V9 on-prem
 
-In this section,you will use WAMT to analyze the CustomerOrderServicesAppapplication source code for readiness for migration to run on WebSphere Application Server V9 in a non-Cloud environment.
+In this section,you will use WAMT to analyze the CustomerOrderServicesApp application source code for readiness for migration to run on WebSphere Application Server V9 in a non-Cloud environment.
 
-1. In Eclipse, click **Run -> Analysis... (move your mouse pointer to the menu bar at the top of the Eclipse Neonwindow to make the menu names appear as they are hidden by default)**
+1. In Eclipse, click **Run -> Analysis... (move your mouse pointer to the menu bar at the top of the Eclipse Neon window to make the menu names appear as they are hidden by default)**
 
 ![Analysis](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Analysis.png)
 
@@ -155,11 +155,11 @@ Source application server: **WebSphere Application Server V7.0**
 Target application server: **WebSphere Application Server traditional V9.0**
 Target cloud runtime: **None**
 
-**NOTE:** It is important to note the six options that exist in the Java EE 7 technologies section. Traditional WAS V9 (tWAS V9) is a Java EE 7 runtimewhich by default runs newer levels of the CDI, EL, JAX-RS, JMS, JPA and Servlet specifications. These options allow you to state whetheryou intend to upgrade your application code to the latest specification during migration or not. In this case, you do **not** plan to upgrade the application from JPA 2.0 to JPA 2.1 (JPA 2.1 is now the default implementation for tWAS V9) or from JAX-RS 1.1 to JAX-RS 2.0(JAX-RS 2 is now the default for tWAS V9) so leave those boxes unchecked.
+**NOTE:** It is important to note the six options that exist in the Java EE 7 technologies section. Traditional WAS V9 (tWAS V9) is a Java EE 7 runtimewhich by default runs newer levels of the CDI, EL, JAX-RS, JMS, JPA and Servlet specifications. These options allow you to state whether you intend to upgrade your application code to the latest specification during migration or not. In this case, you do **not** plan to upgrade the application from JPA 2.0 to JPA 2.1 (JPA 2.1 is now the default implementation for tWAS V9) or from JAX-RS 1.1 to JAX-RS 2.0(JAX-RS 2 is now the default for tWAS V9) so leave those boxes unchecked.
 
 ![Rule Set Configuration](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RuleSet.png)
 
-7. Note that rules have been selected for you based on the configuration parameters you provided in the previous step. Take a moment to expandthe selected sections andtoreview the selected rules. 
+7. Note that rules have been selected for you based on the configuration parameters you provided in the previous step. Take a moment to expand the selected sections and to review the selected rules. 
 
 ![Selected Rule Set](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SelectedRules.png)
 
@@ -175,7 +175,7 @@ Target cloud runtime: **None**
 
 ![Contextual Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Help.png)
 
-11. In the **Java Code Review** section, expandthe **Java EE 6** result tree and click on the **Java API for RESTful Web Services (JAX-RS)** result to display the related help in the Eclipse Help view.
+11. In the **Java Code Review** section, expand the **Java EE 6** result tree and click on the **Java API for RESTful Web Services (JAX-RS)** result to display the related help in the Eclipse Help view.
 
 ![Java Code Review](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JavaCodeReview.png)
 
@@ -183,7 +183,7 @@ Target cloud runtime: **None**
 
 ![JAX RS Detailed Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/DetailedHelp.png)
 
-13. Review the information provided in the detailed help which discusses why this rule was executed and provides a link to the Information Center describing how the server can be configured to use JAX-RS 1.1. **Note that had you specified that you wanted to upgrade to JAX-RS 2.0when configuring the WAMT rules, there are quick fixes and additional rules to help with the code migration.**
+13. Review the information provided in the detailed help which discusses why this rule was executed and provides a link to the Information Center describing how the server can be configured to use JAX-RS 1.1. **Note that had you specified that you wanted to upgrade to JAX-RS 2.0 when configuring the WAMT rules, there are quick fixes and additional rules to help with the code migration.**
 
 ![JAX RS Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JAXRS.png)
 
@@ -245,7 +245,7 @@ Target cloud runtime: **None**
 
 ![Behavior Change JPA Cascade](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BehaviorChange.png)
 
-30. This rule flags the use of the JPA entity relationships that use cascade types PERSIST, MERGE, or ALL as their behaviorhas changed in WAS V8.5 and later. Click **Detailed help**.
+30. This rule flags the use of the JPA entity relationships that use cascade types PERSIST, MERGE, or ALL as their behavior has changed in WAS V8.5 and later. Click **Detailed help**.
 
 ![Behavior Change Detailed Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BehaviorChange_HElp.png)
 
@@ -275,9 +275,9 @@ Target cloud runtime: **None**
 
 | **WAMT Result** | **Recommended Action** |
 | ------- | ------- |
-| Java API for RESTful Web Services (JAX-RS) | WebSphereApplication Server traditionalversion 9 supports both Java™ API for RESTful Web Services (JAX-RS) 2.0 and JAX-RS 1.1 features. In version 9 and its later versions, you can switch among different JAX-RS providers.The default JAX-RS provider on WebSphere Application Server traditionalversion 9 is Apache CXF-based JAX-RS 2.0. You can also switch to Apache Wink-based JAX-RS 1.1 either by using command prompt or administrative console.A migration approach to migration that focuses on avoiding code changes would continue to use the JAX-RS 1.1 provider while a migration approach to eliminate technical debt would migrate to JAX-RS 2.0 |
+| Java API for RESTful Web Services (JAX-RS) | WebSphere Application Server traditional version 9 supports both Java™ API for RESTful Web Services (JAX-RS) 2.0 and JAX-RS 1.1 features. In version 9 and its later versions, you can switch among different JAX-RS providers.The default JAX-RS provider on WebSphere Application Server traditional version 9 is Apache CXF-based JAX-RS 2.0. You can also switch to Apache Wink-based JAX-RS 1.1 either by using command prompt or administrative console.A migration approach to migration that focuses on avoiding code changes would continue to use the JAX-RS 1.1 provider while a migration approach to eliminate technical debt would migrate to JAX-RS 2.0 |
 | Java Persistence API (JPA) | Starting with WebSphere Application Server Version 9, Eclipselink is the default JPA 2.1 persistence provider when JPA 2.1 is the active specification level. Before version 9, WSJPA, the IBM JPA provider based on Apache OpenJPA, which supports the JPA 2.0 specification, was the default provider. Because JPA providers differ in both behavior and vendor-specific APIs, and OpenJPA is not available as a JPA 2.1 specification implementation, the product provides a JPA 2.0 specification compatibility mode. WAS V9 bundles the following persistence providers: Eclipselink 2.6.x_WAS (default for JPA 2.1), WSJPA 2.2.x (default for JPA 2.0). You can also use third-party JPA persistence providers such as Hibernate. The third-party provider must match the enabled JPA specification level.A migration approach that focuses on avoiding code changes would enablethe JPA 2.0 specification and use a JPA 2.0 provider while a migration approach to eliminate technical debt would migrate to JPA 2.1  |
-| CDI recognizes implicit bean archives | The change in CDI 1.1 means that WAR and JAR files are scanned for implicit beans even if they don’t have a beans.xml file. The concern here is two-fold: first, the application startup time is increased as every WAR and JAR without a beans.xml file is scanned; second,the beans that weren’t detected in CDI 1.0 will now be detected and started which might change the application functionality. The recommendation here is to add a beans.xml file to all WAR and JAR files that either states that no beans are present or correctly identifies the beans to ensure that scanning is kept to a minimum and only the expected beans are started. |
+| CDI recognizes implicit bean archives | The change in CDI 1.1 means that WAR and JAR files are scanned for implicit beans even if they don’t have a beans.xml file. The concern here is two-fold: first, the application startup time is increased as every WAR and JAR without a beans.xml file is scanned; second, the beans that weren’t detected in CDI 1.0 will now be detected and started which might change the application functionality. The recommendation here is to add a beans.xml file to all WAR and JAR files that either states that no beans are present or correctly identifies the beans to ensure that scanning is kept to a minimum and only the expected beans are started. |
 | Check for a behavior change in JPA cascade strategy | Code should be reviewed based on the information provided in the WAMT detailed help to ensure that that the new exception is handled correctly. |
 | Target runtime not set | The recommendation is to specify the correct target runtime which requires installation of the WebSphere Developer Tools |
 
@@ -392,7 +392,7 @@ Once the VPN is configured, you can access the Admin console. Please add the exc
 `cd /opt/IBM/WebSphere/AppServer/virtual/bin`  
 `sudo ./openFirewallPorts.sh -ports 50000:tcp,17830:tcp -persist true`  
 
-2. Log into the Admin Console via the adddress accessible from your service instance page.
+2. Log into the Admin Console via the address accessible from your service instance page.
 
 3. In the Global security section, check **Enable application security** and click **Save**.
 
@@ -402,7 +402,7 @@ Once the VPN is configured, you can access the Admin console. Please add the exc
 
 In order to manually set WebSphere up to use a standalone LDAP registry for Authentication and Authorization of application users, follow these instructions:
 
-1. Open WebSphere Admin Console and go to Security --> Global Security.
+1. Open WebSphere Admin Console and go to **Security --> Global Security**.
 
 ![LDAP_HOME](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_home.png)
 
