@@ -4,7 +4,9 @@
 
 The application is a simple store-front shopping application, built during the early days of the Web 2.0 movement.  As such, it is in major need of upgrades from both the technology and business point of view.  Users interact directly with a browser-based interface and manage their cart to submit orders.  This application is built using the traditional [3-Tier Architecture](http://www.tonymarston.net/php-mysql/3-tier-architecture.html) model, with an HTTP server, an application server, and a supporting database.
 
-![Phase 0 Application Architecture](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/apparch-pc-phase0-customerorderservices.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/apparch-pc-phase0-customerorderservices.png">
+</p>
 
 There are several components of the overall application architecture:
 - Starting with the database, the application leverages two SQL-based databases running on [IBM DB2](https://www.ibm.com/analytics/us/en/technology/db2/).
@@ -62,7 +64,9 @@ In this section you will generate and review the Application Evaluation Report f
 
 The Application Evaluation Report will be displayed in the browser. 
 
-![Application Evaluation Report](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/AppEvalReport.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/AppEvalReport.png">
+</p>
 
 This report gives a quick evaluation of the Java EE technologies that an application uses and whether each of the WebSphere runtimes support the given technologies. **This report can be used to determine whether a WebSphere Application Server runtime supports the technologies required by the application.** For example, this CustomerOrderServicesApp **is a perfect match for any of the WAS runtimes.**
 
@@ -80,7 +84,9 @@ In this section, you will generate and review the Application Inventory Report f
 
 2. The Application Inventory Report will be displayed in the web browser. 
 
-![Inventory Report](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/Inventory.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/Inventory.png">
+</p>
 
 3. **Scroll** down through the report and **review** the information provided. The **Inventory** section of the report provides information about the type and quantity of the different components contained in the application. The **Potential Deployment Problems** section details potential issues that might be encountered if the application was deployed to WAS V9.
 
@@ -88,11 +94,15 @@ In this section, you will generate and review the Application Inventory Report f
 
 - **Archives missing dependencies in the application.** You will need to find missing dependencies. Most of the time you can find the missing dependencies in a shared library. Click the **Show details** button to see the missing dependencies.
 
-![Potential Problems](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/DeploymentProb.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/DeploymentProb.png">
+</p>
 
 4. The Missing Dependencies report describes the problem and recommendation for how to deal with this problem, then provides a table with additional information to help you solve the problem. The table shows Missing Dependencies (classes) and the Archive from the CustomerOrderServicesApp that is dependent upon them. 
 
-![Missing Dependencies](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/DeploymentProb.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/MissDependencies.png">
+</p>
 
 5. **Close** the browser
 
@@ -114,11 +124,15 @@ eclipse {-clean}`
 
 2. When the **Workspace Launcher** dialog is displayed, ensure that the **{ECLIPSE_WORKSPACE_LOCATION}/refarch-jee-customerorder-was70-dev** workspace is selected and click **OK**
 
-![Eclipse Workspace](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EclipseWorkspace.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EclipseWorkspace.png">
+</p>
 
 3. The Java EE Perspective will be displayed with the projects that make up the CustomerOrderServicesApp-0.1.0-SNAPSHOT.earapplication already imported. Take a moment to familiarize yourself with the projects.
 
-![Eclipse Enterprise Explorer](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EnterpriseExplorer.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EnterpriseExplorer.png">
+</p>
 
 - **CustomerOrderServices-0.1.0-SNAPSHOT** is the EJB Module for the application
 - **CustomerOrderServicesApp-0.1.0-SNAPSHOT** is the EAR for the application
@@ -131,23 +145,33 @@ In this section,you will use WAMT to analyze the CustomerOrderServicesApp applic
 
 1. In Eclipse, click **Run -> Analysis... (move your mouse pointer to the menu bar at the top of the Eclipse Neon window to make the menu names appear as they are hidden by default)**
 
-![Analysis](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Analysis.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Analysis.png">
+</p>
 
 2. When the Software Analyzer Configurations dialog is displayed, **right-click** on **Software Analyzer** and select **New** to create a new configuration.
 
-![Software Analyzer](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SoftwareAnalyzer.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SoftwareAnalyzer.png">
+</p>
 
 3. Enter **“WAS V9 on-prem”** in the **Name** box and click on the **Rules** tab.
 
-![WAS V9 on-prem](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Rules.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Rules.png">
+</p>
 
 4. Validate that the correct number of rules are shown in the **Java Code Review** section (the value should be **595**). If the correct number of rules are not shown, exit and start eclipse with the –clean parameter (eclipse –clean) and repeat steps 1-3 in this section)
 
-![Rule Set](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RulesV9.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RulesV9.png">
+</p>
 
 5. Select **WebSphere Application Server Version Migration** from the **Rule Sets** drop down then click **Set...**
 
-![WebSphere Application Server Version Migration](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/WASVersionMig.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/WASVersionMig.png">
+</p>
 
 6. When the Rule set configuration panel is displayed select the following values and click **OK**
 
@@ -157,119 +181,173 @@ Target cloud runtime: **None**
 
 **NOTE:** It is important to note the six options that exist in the Java EE 7 technologies section. Traditional WAS V9 (tWAS V9) is a Java EE 7 runtimewhich by default runs newer levels of the CDI, EL, JAX-RS, JMS, JPA and Servlet specifications. These options allow you to state whether you intend to upgrade your application code to the latest specification during migration or not. In this case, you do **not** plan to upgrade the application from JPA 2.0 to JPA 2.1 (JPA 2.1 is now the default implementation for tWAS V9) or from JAX-RS 1.1 to JAX-RS 2.0(JAX-RS 2 is now the default for tWAS V9) so leave those boxes unchecked.
 
-![Rule Set Configuration](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RuleSet.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RuleSet.png">
+</p>
 
 7. Note that rules have been selected for you based on the configuration parameters you provided in the previous step. Take a moment to expand the selected sections and to review the selected rules. 
 
-![Selected Rule Set](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SelectedRules.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SelectedRules.png">
+</p>
 
 8. Click **Apply** and then click **Analyze**.
 
-![Apply and Analyze](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Apply%26Analyze.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Apply%26Analyze.png">
+</p>
 
 9. When the analysis is complete, the **Software Analyzer Results** panel willbe displayed with four tabs shown below: XML Code Review, XML File Review, JSP Code Review, and File Review.
 
-![Software Analyzer Results](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SAResults.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SAResults.png">
+</p>
 
 10. In the Eclipse menu bar, click **Help -> Show Contextual Help** to display the Eclipse Help on the right side of the workspace.
 
-![Contextual Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Help.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Help.png">
+</p>
 
 11. In the **Java Code Review** section, expand the **Java EE 6** result tree and click on the **Java API for RESTful Web Services (JAX-RS)** result to display the related help in the Eclipse Help view.
 
-![Java Code Review](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JavaCodeReview.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JavaCodeReview.png">
+</p>
 
 12. WAMT has detected that JAX-RS is part of this application and given that you stated in step #6 that you do not intend to upgrade to JAX-RS 2.0, WAMT is drawing your attention to the fact that JAX-RS 1.1 will run on tWAS V9 but only when explicitly configured. Click **Detailed help**.
 
-![JAX RS Detailed Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/DetailedHelp.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/DetailedHelp.png">
+</p>
 
 13. Review the information provided in the detailed help which discusses why this rule was executed and provides a link to the Information Center describing how the server can be configured to use JAX-RS 1.1. **Note that had you specified that you wanted to upgrade to JAX-RS 2.0 when configuring the WAMT rules, there are quick fixes and additional rules to help with the code migration.**
 
-![JAX RS Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JAXRS.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JAXRS.png">
+</p>
 
 14. In the **Java Code Review** section, double-click on CustomerOrderRESTTest.java
 
-![CustomerOrderRESTTest](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RestTest.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RestTest.png">
+</p>
 
 15. CustomerOrderRESTTest.java is displayed with the import for **javax.ws.rs.core.MediaType** highlighted. Note that WAMT only reports the first instance of a result for this rule per Java file.
 
-![javax.ws.rs.core.MediaType](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RestTestCode.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RestTestCode.png">
+</p>
 
 16. Close **CustomerOrderRESTTest.java**
 
 17. In the **Java Code Review** section, click on the **Java Persistence API (JPA)** result to display the related help in the Eclipse Help view.
 
-![Java Persistence API (JPA)](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JPA_API.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JPA_API.png">
+</p>
 
 18. WAMT has detected that JPA is part of this application and given that you stated in Step #6 that you do not intend to upgrade to JPA 2.1, WAMT is drawing your attention to the fact that JPA 2.0 will run on tWAS V9 but only when explicitly configured. Click **Detailed help**.
 
-![JPA Detailed Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/tWASDetailedHelp.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/tWASDetailedHelp.png">
+</p>
 
 19. Review the information provided in the detailed help which discusses why this rule was executed and provides a link to the Information Center describing how to identify and modify the JPA level on a tWAS V9 server. **Note that had you specified that you wanted to upgrade to JPA 2.1 when configuring the WAMT rules, there are quick fixes and additional rules to help with the code migration.**
 
-![JPA Rule](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JPARules.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JPARules.png">
+</p>
 
 20. In the **Java Code Review** section, double-click on the AbstractCustomer.java result.
 
-![AbstractCustomer.java](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/AbstractCust.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/AbstractCust.png">
+</p>
 
 21. AbstracCustomer.java is displayed with the import for **javax.persisence.CascadeType** highlighted. Note that WAMT only reports the first instance of a result for this rule per Java source.
 
-![javax Cascade type](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/javax.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/javax.png">
+</p>
 
 22. Close **AbstractCustomer.java**.
 
 23. In the **Java Code Review** section, expand the **Java EE 7 -> CDI** section and click on **CDI recognizes implicit bean archives** to display the related help in the Eclipse Help view.
 
-![CDI implicit bean archives](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDI.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDI.png">
+</p>
 
 24. WAMT detected two Java files with bean-defining annotations without corresponding beans.xml file. This means that their WAR or JAR modules would not be scanned for implicit beans in WAS 7.0, but they would be scanned in WAS 9.  Click **Detailed help**.
 
-![CDI detailed help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDIHelp.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDIHelp.png">
+</p>
 
 25. Review the information provided in the detailed help which discusses why this rule was executed and provides a solution to disable this CDI 1.2 behavior for the web modules and EJB modules.
 
-![CDI Behavior](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDI_Bean_Archives.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDI_Bean_Archives.png">
+</p>
 
 26. In the **Java Code Review** section,double-click on **CustomerOrderServicesImpl.java**
 
-![CDI Implicit beans](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDIImplicitBean.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDIImplicitBean.png">
+</p>
 
 27. CustomerOrderServiceImpl.java is displayed which defines the EJB Stateless Session Bean with the @Stateless annotation highlighted. 
 
-![Statless Annotation](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Stateless.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Stateless.png">
+</p>
 
 28. Close **CustomerOrderServicesImpl.java**.
 
 29. In the **Java Code Review** section, open the **Java EE 7 -> WebSphere version migration** section and click on **Check for a behavior change in JPA cascade strategy** to display the related help.
 
-![Behavior Change JPA Cascade](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BehaviorChange.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BehaviorChange.png">
+</p>
 
 30. This rule flags the use of the JPA entity relationships that use cascade types PERSIST, MERGE, or ALL as their behavior has changed in WAS V8.5 and later. Click **Detailed help**.
 
-![Behavior Change Detailed Help](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BehaviorChange_HElp.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BehaviorChange_HElp.png">
+</p>
 
 31. The detailed help describes how the JPA cascade strategy has changed in WAS V8.5 and later. This behavior does not impact most applications, but if so the detailed help shows you how to go back to the earlier behavior.
 
-![JPA Cascade Strategy Behavior Change](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JPACascadeStrategy.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/JPACascadeStrategy.png">
+</p>
 
 32. In the **Java Code Review** section, double-click on **AbstractCustomer.java**.
 
-![AbstractCustomer behavior change](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/AbsCust_BehaviorChange.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/AbsCust_BehaviorChange.png">
+</p>
 
 33. The **AbstractCustomer.java** file is displayed with the line that triggered the rule highlighted. That line defines JPA OneToOne relationship with CascadeType of MERGE.
 
-![AbstractCustomer Cascade Type](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CascadeType.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CascadeType.png">
+</p>
 
 34. Close **AbstractCustomer.java**.
 
 35. In the **File Review** section, expand the **Project Review** section and click on the **CDI scans for implicit beans when there is no beans.xml** file result to display the related help in the Eclipse Help view.
 
-![File Review](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BeansXML.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/BeansXML.png">
+</p>
 
 36. WAMT has again detected that there are projects that don’t contain a beans.xml file which means that the project will be scanned for implicit beans on application startup which can degrade performance.
 
-![CDI scans no beans.xml](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDI_BeansXML.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDI_BeansXML.png">
+</p>
 
 37. The table below summarizes the results and the recommended actions.
 
@@ -396,7 +474,9 @@ Once the VPN is configured, you can access the Admin console. Please add the exc
 
 3. In the Global security section, check **Enable application security** and click **Save**.
 
-![Readme 1](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme1.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme1.png">
+</p>
 
 ##### LDAP Configuration
 
@@ -404,13 +484,17 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 
 1. Open WebSphere Admin Console and go to **Security --> Global Security**.
 
-![LDAP_HOME](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_home.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_home.png">
+</p>
 
 2. In the *User account repository section* at the bottom of the page, select **Standalone LDAP registry** from the *Available realm definition* dropdown menu.
 
 3. Click on Configure...
 
-![LDAP_CONFIGURE](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_configure.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_configure.png">
+</p>
 
 4. Set the Primary administrative user name to **uid=wasadmin,ou=caseinc,o=sample**.
 
@@ -422,7 +506,9 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
    * Bind distinguished name (DN)     : **cn=root**
    * Bind password                    : **purpleTDS!**
 
-![LDAP_TestConn](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_TestConn.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_TestConn.png">
+</p>
 
 8. Click **OK** to confirm the settings.
 
@@ -430,7 +516,9 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 
 10. Go to the Additional Properties at the bottom of the page and click on **Advanced Lightweight Directory Access Protocol (LDAP) user registry settings**
 
-![LDAP Advanced](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_Adv.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_Adv.png">
+</p>
 
 11. Set the User filter and group filter.
 
@@ -438,7 +526,9 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 
     **Group filter: (&(cn=%v)(objectclass=groupOfUniqueNames))**
 
-![LDAP Advanced Settings](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_Adv_Settings.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_Adv_Settings.png">
+</p>
 
 12. Apply the changes and save the settings.
 
@@ -461,62 +551,85 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 
 Under **Global Security**, expand **Java Authentication and Autorization Service** and choose **J2C authentication data**. Create a new user named **DBUser-ORDERDB** using your DB2 on Cloud instance and password.  The user will be `bluadmin` and the password will be specific to the instance you named **DB2 on Cloud - ORDERDB**.
 
-![Readme 4](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme4.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme4.png">
+</p>
 
 On the same page, create another new user named **DBUsuer-INVENTORYDB** using your DB2 on Cloud instance and password.  The user will again be `bluadmin`, but the password will be different as you are connecting to a different DB2 database on a different Bluemix service instance.
 
-![Readme 4](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme4.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme4.png">
+</p>
 
 1. Go to the **Resources > JDBC > JDBC Providers** section and ensure that you are at the **Cell** scope.
 
-![Readme 5](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme5.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme5.png">
+</p>
 
 2. Click the New Button to create a new JDBC provider.
     -  Database type : **DB2**
     -  Provider type : **DB2 Using IBM JCC Driver**
     -  Implementation type : **XA data source**
 
-![Readme 6](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme6.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme6.png">
+</p>
 
 3. You need to enter the database classpath information for the DB2 driver JARs.  This value should be `/opt/IBM/WebSphere/AppServer/deploytool/itp/plugins/com.ibm.datatools.db2_2.2.200.v20150728_2354/driver` for your new WebSphere Application Server instance.
 
-![Readme 7](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme7.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme7.png">
+</p>
 
 4. Press **Next** and then **Finish**. Save the Configuration.
 
-![Readme 8](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme8.png)
+<p align="center">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme8.png">
+</p>
 
 5. Go to the **Resources > JDBC > Data sources** section to create a new data source.
    1. Make sure that the scope is at **Cell** level and click **New**
    2. OrderDB - Step 1
       -  Data source name: **OrderDS**
-      -  JNDI name: **jdbc/orderds**      
-         ![Readme 9](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme9.png)
+      -  JNDI name: **jdbc/orderds** 
+      <p align="center">
+      <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme9.png">
+      </p>    
    3. OrderDB - Step 2
       - Select an existing JDBC provider --> **DB2 Using IBM JCC Driver (XA)**
-        ![Readme 10](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme10.png)
+      <p align="center">
+      <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme10.png">
+      </p>
    4. ORDERDB - Step 3
       - Driver Type: **4**
       - Database name: **BLUDB**
       - Server name: **The DB2 host from your "DB2 on Cloud - ORDERDB" service instance**
       - Port number: **The DB2 port from your "DB2 on Cloud - ORDERDB" service instance***
-        ![Readme 11](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme11.png)
+      <p align="center">
+      <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme11.png">
+      </p>
    5. OrderDB - Step 4
       - Authentication alias for XA recovery: **DB2User-ORDERDB**
       - Component-managed authentication alias: **DB2User-ORDERDB**
       - Mapping-configuration alias: **DefaultPrincipalMapping**
       - Container-managed authentication alias: **DB2User-ORDERDB**
-        ![Readme 12](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme12.png)
+       <p align="center">
+       <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme12.png">
+       </p>
 
 6. Once this is done, under Preferences, there will be a new resource called **OrderDS**. Make sure that the resources got connected using **Test Connection** option. You will see a success message if the connection is established successfully.
 
-![Readme 13](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme13.png)
+<p align="center">
+<img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme13.png">
+</p>
 
 7. Check the Data source and select Test Connection to ensure you created the database correctly.  If the connection fails, a few things to check are
       - Your database is started as we did in the beginning.  
       - Your host and port number are correct.
       - The classpath for the Driver is set properly.  
       - Check the WebSphere Variables.  You may want to change them to point to your local DB2 install.
+      
 8. Create the INVENTORYDB data source using the same process as before.  Click **New**.
    1. InventoryDB - Step 1
       -  Data source name: **INDS**
@@ -533,6 +646,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
       - Component-managed authentication alias: **DB2User-INVENTORYDB**
       - Mapping-configuration alias: **DefaultPrincipalMapping**
       - Container-managed authentication alias: **DB2User-INVENTORYDB**
+      
 9. Remember to save and test the connection again.
 
 **Note**: Whenever you make any changes to the WebSphere Configuration Settings, it prompts you with a warning message. Please review and save the modifications.
