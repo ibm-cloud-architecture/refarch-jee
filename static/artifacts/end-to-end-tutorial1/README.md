@@ -683,7 +683,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 ### Step 7: Install Customer Order Services application
 
-1.  We have provided a built EAR that has had the previously discussed changes for installation on WAS V9.0.  It is available at [https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-WAS9.ear](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-WAS9.ear) for download.
+1.  We have provided a built EAR that has had the previously discussed changes for installation on WAS V9.0.  It is available at [https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-WAS9.ear](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-WAS9.ear) for download.
 
 2.  Install the EAR to the Admin console.
    -  Login to the Administrative Console.
@@ -692,7 +692,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
    -  Click on **Step 12**.
    -  Customize the environment variables for your **DB2 on Cloud - ORDERDB** instance:
       - **DBUNIT_CONNECTION_URL:** `jdbc:db2://{YOUR HOST}:50000/BLUDB` where {YOUR HOST} is the `host` value from your credentials
-      - **DBUNIT_SCHEMA:** `BLUDB`
+      - **DBUNIT_SCHEMA:** `BLUADMIN` - **NOTE:** This must be upper-case
       - **DBUNIT_USERNAME:** `bluadmin`
       - **DBUNIT_PASSWORD:** _(Value acquired in Step 3.4)_
    -  Click on **Step 13** to map the necessary users to the application.
@@ -706,15 +706,15 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 3.  Go back to the Enterprise Applications list, select the application, and click **Start**.
 
-4.  Initial users can be created by running the **JPA** tests in the **https://<i></i>your-host/CustomerOrderServicesTest** web application.
+4.  Prime the database with the **JPA** tests available at **https://<i>your-host</i>:9443/CustomerOrderServicesTest** .
 
-5.  Prime the database with the JPA tests avaiable at **https://<i></i>your-host/CustomerOrderServicesTest** .
+5.  Login as the user `rbarcia` with the password of `bl0wfish`.  
 
-6.  Login as the user `rbarcia` with the password of `bl0wfish`.  
+6.  Select the checkboxes for the **org.pwte.example.jpa.test.CustomerOrderServicesTest** and **org.pwte.example.jpa.test.ProductSearchServiceTest** tests.  Then click **Run**.  
 
-7.  Select the first two tests and click `Run`
+7.  You should see a screen with 10 successful tests.  If you do not, you should verify the connectivity information you updated during application installation.  This is available in the Admin Console via the `Applications > WebSphere enterprise applications > CustomerOrderServicesApp > Environment entries for Web modules` page.
 
-8.  Access the application at **https://<i></i>your-host/CustomerOrderServicesWeb/#shopPage**
+8.  Access the application at **https://<i>your-host</i>:9443/CustomerOrderServicesWeb/#shopPage**
 
 9.  Login as the user `rbarcia` with the password of `bl0wfish`.  
 
