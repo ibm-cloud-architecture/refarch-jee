@@ -58,8 +58,8 @@ In this section you will generate and review the Application Evaluation Report f
 
 2. In a terminal, navigate to the location of the download (generally **Downloads**) and then install the toolkit:
 
-`cd ~/Downloads`
-`java -jar binaryAppScannerInstaller.jar`
+`cd ~/Downloads`  
+`java -jar binaryAppScannerInstaller.jar`  
 
 After accepting the license agreement, and specifying the target directory for the installation, the tool is installed in the `<target directory>/wamt` directory.
 
