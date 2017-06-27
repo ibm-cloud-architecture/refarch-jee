@@ -129,6 +129,7 @@ In this section you will open a provided Eclipse workspace containing the Custom
 1. You can download the **Eclipse** image containing all the necessary packages already installed at the following links.
 
 [Windows](https://ibm.box.com/s/nenauh6xvanxls83mpcwo3koig23g3mf)
+
 [MAC]( https://ibm.box.com/s/xjla05bqqqgjsoaj09d62b01q59az7bu)
 
 Download the workspace [**refarch-jee-customerorder-was70-dev (Export-Archive-File).zip**](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7)
@@ -137,8 +138,9 @@ Download the workspace [**refarch-jee-customerorder-was70-dev (Export-Archive-Fi
 
 Navigate to the eclipse directory and run eclipse:
 
-`cd {ECLIPSE_NEON_HOME}
-eclipse {-clean}`
+`cd {ECLIPSE_NEON_HOME}`
+
+`eclipse {-clean}`
 
 In Eclipse, go to the **File** menu and choose **Import...**.
 
@@ -148,7 +150,7 @@ Choose the option **Select Archive File** and then browse the workspace [**refar
 
 Ensure all the four **CustomerOrderServices** projects are selected and click **Finish** to complete the import.
 
-When the **Workspace Launcher** dialog is displayed, ensure that the **{ECLIPSE_WORKSPACE_LOCATION}/refarch-jee-customerorder-was70-dev** workspace is selected and click **OK**
+If you want to use your own eclipse environment, make sure you install all the necessary packages. Also, when the **Workspace Launcher** dialog is displayed, ensure that the **{ECLIPSE_WORKSPACE_LOCATION}/refarch-jee-customerorder-was70-dev** workspace is selected and click **OK**
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EclipseWorkspace.png">
@@ -202,10 +204,12 @@ In this section,you will use WAMT to analyze the CustomerOrderServicesApp applic
 6. When the Rule set configuration panel is displayed select the following values and click **OK**
 
 Source application server: **WebSphere Application Server V7.0**
+
 Target application server: **WebSphere Application Server traditional V9.0**
+
 Target cloud runtime: **None**
 
-**NOTE:** It is important to note the six options that exist in the Java EE 7 technologies section. Traditional WAS V9 (tWAS V9) is a Java EE 7 runtimewhich by default runs newer levels of the CDI, EL, JAX-RS, JMS, JPA and Servlet specifications. These options allow you to state whether you intend to upgrade your application code to the latest specification during migration or not. In this case, you do **not** plan to upgrade the application from JPA 2.0 to JPA 2.1 (JPA 2.1 is now the default implementation for tWAS V9) or from JAX-RS 1.1 to JAX-RS 2.0(JAX-RS 2 is now the default for tWAS V9) so leave those boxes unchecked.
+**NOTE:** It is important to note the six options that exist in the Java EE 7 technologies section. Traditional WAS V9 (tWAS V9) is a Java EE 7 runtime which by default runs newer levels of the CDI, EL, JAX-RS, JMS, JPA and Servlet specifications. These options allow you to state whether you intend to upgrade your application code to the latest specification during migration or not. In this case, you do **not** plan to upgrade the application from JPA 2.0 to JPA 2.1 (JPA 2.1 is now the default implementation for tWAS V9) or from JAX-RS 1.1 to JAX-RS 2.0(JAX-RS 2 is now the default for tWAS V9) so leave those boxes unchecked.
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RuleSet.png">
@@ -223,7 +227,7 @@ Target cloud runtime: **None**
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Apply%26Analyze.png">
 </p>
 
-9. When the analysis is complete, the **Software Analyzer Results** panel willbe displayed with four tabs shown below: XML Code Review, XML File Review, JSP Code Review, and File Review.
+9. When the analysis is complete, the **Software Analyzer Results** panel will be displayed with four tabs shown below: XML Code Review, XML File Review, JSP Code Review, and File Review.
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SAResults.png">
@@ -379,8 +383,8 @@ Target cloud runtime: **None**
 
 | **WAMT Result** | **Recommended Action** |
 | ------- | ------- |
-| Java API for RESTful Web Services (JAX-RS) | WebSphere Application Server traditional version 9 supports both Java™ API for RESTful Web Services (JAX-RS) 2.0 and JAX-RS 1.1 features. In version 9 and its later versions, you can switch among different JAX-RS providers.The default JAX-RS provider on WebSphere Application Server traditional version 9 is Apache CXF-based JAX-RS 2.0. You can also switch to Apache Wink-based JAX-RS 1.1 either by using command prompt or administrative console.A migration approach to migration that focuses on avoiding code changes would continue to use the JAX-RS 1.1 provider while a migration approach to eliminate technical debt would migrate to JAX-RS 2.0 |
-| Java Persistence API (JPA) | Starting with WebSphere Application Server Version 9, Eclipselink is the default JPA 2.1 persistence provider when JPA 2.1 is the active specification level. Before version 9, WSJPA, the IBM JPA provider based on Apache OpenJPA, which supports the JPA 2.0 specification, was the default provider. Because JPA providers differ in both behavior and vendor-specific APIs, and OpenJPA is not available as a JPA 2.1 specification implementation, the product provides a JPA 2.0 specification compatibility mode. WAS V9 bundles the following persistence providers: Eclipselink 2.6.x_WAS (default for JPA 2.1), WSJPA 2.2.x (default for JPA 2.0). You can also use third-party JPA persistence providers such as Hibernate. The third-party provider must match the enabled JPA specification level.A migration approach that focuses on avoiding code changes would enablethe JPA 2.0 specification and use a JPA 2.0 provider while a migration approach to eliminate technical debt would migrate to JPA 2.1  |
+| Java API for RESTful Web Services (JAX-RS) | WebSphere Application Server traditional version 9 supports both Java™ API for RESTful Web Services (JAX-RS) 2.0 and JAX-RS 1.1 features. In version 9 and its later versions, you can switch among different JAX-RS providers.The default JAX-RS provider on WebSphere Application Server traditional version 9 is Apache CXF-based JAX-RS 2.0. You can also switch to Apache Wink-based JAX-RS 1.1 either by using command prompt or administrative console. A migration approach to migration that focuses on avoiding code changes would continue to use the JAX-RS 1.1 provider while a migration approach to eliminate technical debt would migrate to JAX-RS 2.0. |
+| Java Persistence API (JPA) | Starting with WebSphere Application Server Version 9, Eclipselink is the default JPA 2.1 persistence provider when JPA 2.1 is the active specification level. Before version 9, WSJPA, the IBM JPA provider based on Apache OpenJPA, which supports the JPA 2.0 specification, was the default provider. Because JPA providers differ in both behavior and vendor-specific APIs, and OpenJPA is not available as a JPA 2.1 specification implementation, the product provides a JPA 2.0 specification compatibility mode. WAS V9 bundles the following persistence providers: Eclipselink 2.6.x_WAS (default for JPA 2.1), WSJPA 2.2.x (default for JPA 2.0). You can also use third-party JPA persistence providers such as Hibernate. The third-party provider must match the enabled JPA specification level. A migration approach that focuses on avoiding code changes would enable the JPA 2.0 specification and use a JPA 2.0 provider while a migration approach to eliminate technical debt would migrate to JPA 2.1.  |
 | CDI recognizes implicit bean archives | The change in CDI 1.1 means that WAR and JAR files are scanned for implicit beans even if they don’t have a beans.xml file. The concern here is two-fold: first, the application startup time is increased as every WAR and JAR without a beans.xml file is scanned; second, the beans that weren’t detected in CDI 1.0 will now be detected and started which might change the application functionality. The recommendation here is to add a beans.xml file to all WAR and JAR files that either states that no beans are present or correctly identifies the beans to ensure that scanning is kept to a minimum and only the expected beans are started. |
 | Check for a behavior change in JPA cascade strategy | Code should be reviewed based on the information provided in the WAMT detailed help to ensure that that the new exception is handled correctly. |
 | Target runtime not set | The recommendation is to specify the correct target runtime which requires installation of the WebSphere Developer Tools |
@@ -568,8 +572,10 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 
 15. You will now need to restart the server.  For this, you will need to return to your **ssh** session on the WebSphere Application Server instance.  Perform the following commands to restart the server:
 
-`cd /opt/IBM/WebSphere/Profiles/DefaultAppSrv01/bin`  
+`cd /opt/IBM/WebSphere/Profiles/DefaultAppSrv01/bin` 
+
 `./stopServer.sh server1 -username wsadmin -password <YOUR PASSWORD>` where _<YOUR PASSWORD>_ is found on the service instance details page in Bluemix.  
+
 `./startServer.sh server1`  
 
 16. Now you will log back into the Admin Console but use a different set of credentials, now that we're connected to the remote LDAP as our user registry.  Use the credentials below to login to the Admin Console:
@@ -579,7 +585,9 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 
 ##### Configuring JDBC Resources
 
-Under **Global Security**, expand **Java Authentication and Autorization Service** and choose **J2C authentication data**. Create a new user named **DBUser-ORDERDB** using your DB2 on Cloud instance and password.  The user will be `bluadmin` and the password will be specific to the instance you named **DB2 on Cloud - ORDERDB**.
+Under **Global Security**, expand **Java Authentication and Autorization Service** and choose **J2C authentication data**. 
+
+Create a new user named **DBUser-ORDERDB** using your DB2 on Cloud instance and password.  The user will be `bluadmin` and the password will be specific to the instance you named **DB2 on Cloud - ORDERDB**.
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme4.png">
@@ -588,7 +596,7 @@ Under **Global Security**, expand **Java Authentication and Autorization Service
 On the same page, create another new user named **DBUsuer-INVENTORYDB** using your DB2 on Cloud instance and password.  The user will again be `bluadmin`, but the password will be different as you are connecting to a different DB2 database on a different Bluemix service instance.
 
 <p align="center">
-  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme4.png">
+  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme4_1.png">
 </p>
 
 1. Go to the **Resources > JDBC > JDBC Providers** section and ensure that you are at the **Cell** scope.
@@ -679,6 +687,47 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 9. Remember to save and test the connection again.
 
+##### Configuring JPA Specification
+
+1. In the admin console, go to **Servers** and expand **Server Types**.
+
+2. Select **WebSphere application servers**.
+
+<p align="center">
+<img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/JPA_Specification/JPA1.png">
+</p>
+
+3. Click on **server1** from the Application Servers list.
+
+<p align="center">
+<img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/JPA_Specification/JPA2.png">
+</p>
+
+4. In the **Configuration** tab, expand **Container Services**
+
+<p align="center">
+<img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/JPA_Specification/JPA3.png">
+</p>
+
+5. Choose **Default Java Persistence API settings**
+
+<p align="center">
+<img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/JPA_Specification/JPA4.png">
+</p>
+
+6. Go to **JPA Specification** option and choose **2.0**
+
+<p align="center">
+<img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/JPA_Specification/JPA5.png">
+</p>
+
+<p align="center">
+<img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/JPA_Specification/JPA6.png">
+</p> 
+
+7. Click **Apply** and **Save** the configuration.
+
+
 **Note**: Whenever you make any changes to the WebSphere Configuration Settings, it prompts you with a warning message. Please review and save the modifications.
 
 ### Step 7: Install Customer Order Services application
@@ -698,7 +747,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
    -  Click on **Step 13** to map the necessary users to the application.
       - Click on the checkbox for the **SecureShopper** Role.
       - Then click on **Map Groups**.  
-      - Click **Search** and select the `SecureShopper`group.
+      - Click **Search** and select the `SecureShopper` group.
       - Click the right-facing arrow to move those selected users into the **Selected** box on the right.
       - Click **OK**
    -  Click on **Summary** (Step 18) and click **Finish**.
@@ -706,7 +755,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 3.  Go back to the Enterprise Applications list, select the application, and click **Start**.
 
-4.  Prime the database with the **JPA** tests available at **https://<i>your-host</i>:9443/CustomerOrderServicesTest** .
+4.  Prime the database with the **JPA** tests available at **https://<i>your-host</i>:9443/CustomerOrderServicesTest** , where **your_host** is the **Host** address of your WAS instance displayed in **Application Hosts/Nodes** section.
 
 5.  Login as the user `rbarcia` with the password of `bl0wfish`.  
 
@@ -714,7 +763,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 7.  You should see a screen with 10 successful tests.  If you do not, you should verify the connectivity information you updated during application installation.  This is available in the Admin Console via the `Applications > WebSphere enterprise applications > CustomerOrderServicesApp > Environment entries for Web modules` page.
 
-8.  Access the application at **https://<i>your-host</i>:9443/CustomerOrderServicesWeb/#shopPage**
+8.  Access the application at **https://<i>your-host</i>:9443/CustomerOrderServicesWeb/#shopPage** , where **your_host** is the **Host** address of your WAS instance displayed in **Application Hosts/Nodes** section.
 
 9.  Login as the user `rbarcia` with the password of `bl0wfish`.  
 
