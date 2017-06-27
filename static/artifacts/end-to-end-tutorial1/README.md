@@ -126,18 +126,35 @@ In this section you will use the WebSphere Application Migration Toolkit (WAMT) 
 
 In this section you will open a provided Eclipse workspace containing the CustomerOrderServicesApp source code in Eclipse Neon
 
-1. Navigate to the eclipse directoryand run eclipse:
+1. You can download the **Eclipse** image containing all the necessary packages already installed at the following links.
+
+[Windows](https://ibm.box.com/s/nenauh6xvanxls83mpcwo3koig23g3mf)
+[MAC]( https://ibm.box.com/s/xjla05bqqqgjsoaj09d62b01q59az7bu)
+
+Download the workspace [**refarch-jee-customerorder-was70-dev (Export-Archive-File).zip**](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7)
+
+2. Once this is done, Open the Eclipse with a clean workspace.
+
+Navigate to the eclipse directory and run eclipse:
 
 `cd {ECLIPSE_NEON_HOME}
 eclipse {-clean}`
 
-2. When the **Workspace Launcher** dialog is displayed, ensure that the **{ECLIPSE_WORKSPACE_LOCATION}/refarch-jee-customerorder-was70-dev** workspace is selected and click **OK**
+In Eclipse, go to the **File** menu and choose **Import...**.
+
+Expand **General** option and select **Existing Projects into Workspace**.
+
+Choose the option **Select Archive File** and then browse the workspace [**refarch-jee-customerorder-was70-dev (Export-Archive-File).zip**](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7). 
+
+Ensure all the four **CustomerOrderServices** projects are selected and click **Finish** to complete the import.
+
+When the **Workspace Launcher** dialog is displayed, ensure that the **{ECLIPSE_WORKSPACE_LOCATION}/refarch-jee-customerorder-was70-dev** workspace is selected and click **OK**
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EclipseWorkspace.png">
 </p>
 
-3. The Java EE Perspective will be displayed with the projects that make up the CustomerOrderServicesApp-0.1.0-SNAPSHOT.earapplication already imported. Take a moment to familiarize yourself with the projects.
+3. The Java EE Perspective will be displayed with the projects that make up the CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear application already imported. Take a moment to familiarize yourself with the projects.
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EnterpriseExplorer.png">
