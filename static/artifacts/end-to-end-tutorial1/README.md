@@ -117,7 +117,7 @@ In this section, you will generate and review the Application Inventory Report f
 
 #### Step 2.2: Analyze the CustomerOrderServicesApp Application code
 
-In this section you will use the WebSphere Application Migration Toolkit (WAMT) to analyze the CustomerOrderServicesApp application code for readiness to run on traditional WebSphere Application ServerV9 (tWAS V9). An Eclipse Workspace has been provided with the CustomerOrderServicesApp Application Source Code already imported. The following features have been installed in to [EclipseIDE for Java EE Developers](http://www.eclipse.org/downloads/packages/release/Neon/3):
+In this section you will use the WebSphere Application Migration Toolkit (WAMT) to analyze the CustomerOrderServicesApp application code for readiness to run on traditional WebSphere Application ServerV9 (tWAS V9). An Eclipse Workspace has been provided with the CustomerOrderServicesApp Application Source Code already imported. The following features have been installed in to [Eclipse IDE for Java EE Developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon3):
 
 - [WebSphere Developer Tools for Eclipse Neon](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Developer_Tools_for_Eclipse_Neon)
 - [WebSphere Application Server Migration Toolkit](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit)
