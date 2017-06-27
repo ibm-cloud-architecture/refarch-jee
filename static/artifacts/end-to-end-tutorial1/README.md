@@ -17,8 +17,6 @@ There are several components of the overall application architecture:
 - The application's user interface is exposed through the **CustomerOrderServicesWeb** component as well, in the form of a [Dojo Toolkit](#tbd)-based JavaScript application.  Delivering the user interface and business APIs in the same component is one major inhibitor our migration strategy will help to alleviate in the long-term.
 - Finally, there is an additional integration testing component, named **CustomerOrderServicesTest** that is built to quickly validate an application's build and deployment to a given application server.  This test component contains both **JPA** and **JAX-RS**-based tests.  
 
-## Building and deploying the application on WebSphere Application Server 9
-
 ### Step 0: Prerequisites
 
 The following are prerequisites for completing this tutorial:
@@ -44,15 +42,17 @@ You can clone the repository from its main GitHub repository page and checkout t
 2. `cd refarch-jee-customerorder`
 3. `git checkout was90-prod`
 
+## Application Modernization Assessment
+
 ### Step 2: Perform assessment walkthrough
 
 #### Step 2.1 Use the Migration Toolkit for Application Binaries to evaluate the applications
 
-In this section you will use the Migration Toolkit for Application Binaries to generate evaluation reports for the EAR file **[CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear)**. It is the original app that runs on WAS V7. 
+In this section you will use the Migration Toolkit for Application Binaries to generate evaluation reports for the EAR file **[CustomerOrderServicesApp-0.1.0-WAS7.ear](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS7/CustomerOrderServicesApp-0.1.0-WAS7.ear)**. It is the original app that runs on WAS V7.
 
 ##### 2.1.1: Use the Migration Toolkit for Application Binaries to evaluate the applications
 
-In this section you will generate and review the Application Evaluation Report for [**CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear**](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear)
+In this section you will generate and review the Application Evaluation Report for [**CustomerOrderServicesApp-0.1.0-WAS7.ear**](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS7/CustomerOrderServicesApp-0.1.0-WAS7.ear)
 
 1. In a browser, download the [WebSphere Application Server Migration Toolkit for Application Binaries](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries) by clicking the **Download** button on the opened page.
 
@@ -69,9 +69,9 @@ After accepting the license agreement, and specifying the target directory for t
 
 4. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the `–evaluate` action as shown below:
 
-`java –jar binaryAppScanner.jar {CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear_LOCATION}/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear --evaluate`
+`java –jar binaryAppScanner.jar ~/Downloads/CustomerOrderServicesApp-0.1.0-WAS7.ear --evaluate`
 
-The Application Evaluation Report will be displayed in the browser. 
+The Application Evaluation Report will be displayed in the browser.
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/AppEvalReport.png">
@@ -81,17 +81,17 @@ This report gives a quick evaluation of the Java EE technologies that an applica
 
 5. **Review** the report and then **close** the browser.
 
-*Customer Decision: At this point the customer has decided to move the application to tWAS V9.It is important to remember that CustomerOrderServicesApp would have been completely supported not only by tWAS V9, but also Liberty for Java, Liberty Core, Liberty, and so forth.*
+*Customer Decision: At this point the customer has decided to move the application to tWAS V9.  It is important to remember that CustomerOrderServicesApp would have been completely supported not only by tWAS V9, but also Liberty for Java, Liberty Core, Liberty, and so forth.*
 
 ##### 2.1.2: Generate the Application Inventory Report for CustomerOrderServicesApp
 
-In this section, you will generate and review the Application Inventory Report for CustomerOrderServicesApp which will document the application structure as well as list any possible deployment problems that may be encountered. 
+In this section, you will generate and review the Application Inventory Report for CustomerOrderServicesApp which will document the application structure as well as list any possible deployment problems that may be encountered.
 
 1. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the `–inventory` action as shown below.
 
-`java –jar binaryAppScanner.jar {CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear_LOCATION}/CustomerOrderServicesAppV8-0.1.0-SNAPSHOT.ear –inventory`
+`java –jar binaryAppScanner.jar ~/Downloads/CustomerOrderServicesApp-0.1.0-WAS7.ear –inventory`
 
-2. The Application Inventory Report will be displayed in the web browser. 
+2. The Application Inventory Report will be displayed in the web browser.
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/Inventory.png">
@@ -107,7 +107,7 @@ In this section, you will generate and review the Application Inventory Report f
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/DeploymentProb.png">
 </p>
 
-4. The Missing Dependencies report describes the problem and recommendation for how to deal with this problem, then provides a table with additional information to help you solve the problem. The table shows Missing Dependencies (classes) and the Archive from the CustomerOrderServicesApp that is dependent upon them. 
+4. The Missing Dependencies report describes the problem and recommendation for how to deal with this problem, then provides a table with additional information to help you solve the problem. The table shows Missing Dependencies (classes) and the Archive from the CustomerOrderServicesApp that is dependent upon them.
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/MissDependencies.png">
@@ -144,7 +144,7 @@ In Eclipse, go to the **File** menu and choose **Import...**.
 
 Expand **General** option and select **Existing Projects into Workspace**.
 
-Choose the option **Select Archive File** and then browse the workspace [**refarch-jee-customerorder-was70-dev (Export-Archive-File).zip**](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7). 
+Choose the option **Select Archive File** and then browse the workspace [**refarch-jee-customerorder-was70-dev (Export-Archive-File).zip**](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7).
 
 Ensure all the four **CustomerOrderServices** projects are selected and click **Finish** to complete the import.
 
@@ -211,7 +211,7 @@ Target cloud runtime: **None**
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RuleSet.png">
 </p>
 
-7. Note that rules have been selected for you based on the configuration parameters you provided in the previous step. Take a moment to expand the selected sections and to review the selected rules. 
+7. Note that rules have been selected for you based on the configuration parameters you provided in the previous step. Take a moment to expand the selected sections and to review the selected rules.
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/SelectedRules.png">
@@ -323,7 +323,7 @@ Target cloud runtime: **None**
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/CDIImplicitBean.png">
 </p>
 
-27. CustomerOrderServiceImpl.java is displayed which defines the EJB Stateless Session Bean with the @Stateless annotation highlighted. 
+27. CustomerOrderServiceImpl.java is displayed which defines the EJB Stateless Session Bean with the @Stateless annotation highlighted.
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Stateless.png">
@@ -386,6 +386,10 @@ Target cloud runtime: **None**
 | Target runtime not set | The recommendation is to specify the correct target runtime which requires installation of the WebSphere Developer Tools |
 
 **Summary: Although a few sections of code should be reviewed by a developer, the application will run on traditional WebSphere Application Server V9 on-prem without changes. Strategically it would be wise to consider upgrading the JAX-RS to 2.0 and upgrading JPA to 2.1.**
+
+## WebSphere On The Cloud
+
+You will now switch over to deploying a migrated version of the EAR to a managed WebSphere instance on Bluemix.
 
 ### Step 3: Create DB2 service instance for ORDERDB
 
@@ -618,7 +622,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
    1. Make sure that the scope is at **Cell** level and click **New**
    2. OrderDB - Step 1
       -  Data source name: **OrderDS**
-      -  JNDI name: **jdbc/orderds** 
+      -  JNDI name: **jdbc/orderds**
       <p align="center">
       <img src="https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Customer_README/Readme9.png">
       </p>    
@@ -655,7 +659,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
       - Your host and port number are correct.
       - The classpath for the Driver is set properly.  
       - Check the WebSphere Variables.  You may want to change them to point to your local DB2 install.
-      
+
 8. Create the INVENTORYDB data source using the same process as before.  Click **New**.
    1. InventoryDB - Step 1
       -  Data source name: **INDS**
@@ -672,14 +676,14 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
       - Component-managed authentication alias: **DB2User-INVENTORYDB**
       - Mapping-configuration alias: **DefaultPrincipalMapping**
       - Container-managed authentication alias: **DB2User-INVENTORYDB**
-      
+
 9. Remember to save and test the connection again.
 
 **Note**: Whenever you make any changes to the WebSphere Configuration Settings, it prompts you with a warning message. Please review and save the modifications.
 
 ### Step 7: Install Customer Order Services application
 
-1.  We have provided a built EAR that has had the previously discussed changes for installation on WAS V9.0.  It is available at [https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear) for download.
+1.  We have provided a built EAR that has had the previously discussed changes for installation on WAS V9.0.  It is available at [https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-WAS9.ear](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-WAS9.ear) for download.
 
 2.  Install the EAR to the Admin console.
    -  Login to the Administrative Console.
