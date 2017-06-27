@@ -87,9 +87,9 @@ This report gives a quick evaluation of the Java EE technologies that an applica
 
 In this section, you will generate and review the Application Inventory Report for CustomerOrderServicesApp which will document the application structure as well as list any possible deployment problems that may be encountered.
 
-1. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the `–inventory` action as shown below.
+1. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the `--inventory` action as shown below.
 
-`java -jar binaryAppScanner.jar ~/Downloads/CustomerOrderServicesApp-0.1.0-WAS7.ear –inventory`
+`java -jar binaryAppScanner.jar ~/Downloads/CustomerOrderServicesApp-0.1.0-WAS7.ear --inventory`
 
 2. The Application Inventory Report will be displayed in the web browser.
 
