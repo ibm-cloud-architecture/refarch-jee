@@ -69,7 +69,7 @@ After accepting the license agreement, and specifying the target directory for t
 
 4. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the `–evaluate` action as shown below:
 
-`java –jar binaryAppScanner.jar ~/Downloads/CustomerOrderServicesApp-0.1.0-WAS7.ear --evaluate`
+`java -jar binaryAppScanner.jar ~/Downloads/CustomerOrderServicesApp-0.1.0-WAS7.ear --evaluate`
 
 The Application Evaluation Report will be displayed in the browser.
 
@@ -89,7 +89,7 @@ In this section, you will generate and review the Application Inventory Report f
 
 1. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the `–inventory` action as shown below.
 
-`java –jar binaryAppScanner.jar ~/Downloads/CustomerOrderServicesApp-0.1.0-WAS7.ear –inventory`
+`java -jar binaryAppScanner.jar ~/Downloads/CustomerOrderServicesApp-0.1.0-WAS7.ear –inventory`
 
 2. The Application Inventory Report will be displayed in the web browser.
 
