@@ -128,29 +128,29 @@ In this section you will open a provided Eclipse workspace containing the Custom
 
 1. You can download the **Eclipse** image containing all the necessary packages already installed at the following links.
 
-[Windows](https://ibm.box.com/s/nenauh6xvanxls83mpcwo3koig23g3mf)
+- [Eclipse for Windows](https://ibm.box.com/s/nenauh6xvanxls83mpcwo3koig23g3mf)  
 
-[MAC]( https://ibm.box.com/s/xjla05bqqqgjsoaj09d62b01q59az7bu)
+- [Eclipse for Mac]( https://ibm.box.com/s/xjla05bqqqgjsoaj09d62b01q59az7bu)  
 
-Download the workspace [**refarch-jee-customerorder-was70-dev (Export-Archive-File).zip**](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7)
+- [Eclipse Workspace - Cross-platform](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7)
 
-2. Once this is done, Open the Eclipse with a clean workspace.
+2. Once this is done, open Eclipse with a clean workspace.
 
-Navigate to the eclipse directory and run eclipse:
+Navigate to the Eclipse directory and run Eclipse:
 
-`cd {ECLIPSE_NEON_HOME}`
+`cd {ECLIPSE_NEON_HOME}`  
+`eclipse {-clean}`  
 
-`eclipse {-clean}`
+- In Eclipse, go to the **File** menu and choose **Import...**.
 
-In Eclipse, go to the **File** menu and choose **Import...**.
+- Expand **General** option and select **Existing Projects into Workspace**.
 
-Expand **General** option and select **Existing Projects into Workspace**.
+- Choose the option **Select Archive File** and then browse the workspace [**refarch-jee-customerorder-was70-dev (Export-Archive-File).zip**](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7).
 
-Choose the option **Select Archive File** and then browse the workspace [**refarch-jee-customerorder-was70-dev (Export-Archive-File).zip**](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7).
+- Ensure all four of the **CustomerOrderServices** projects are selected and click **Finish** to complete the import.
 
-Ensure all the four **CustomerOrderServices** projects are selected and click **Finish** to complete the import.
+- If you want to use your own Eclipse environment, make sure you install all the necessary packages referenced at the beginning of [Step 2.2](#step-22-analyze-the-customerorderservicesapp-application-code).
 
-If you want to use your own eclipse environment, make sure you install all the necessary packages. Also, when the **Workspace Launcher** dialog is displayed, ensure that the **{ECLIPSE_WORKSPACE_LOCATION}/refarch-jee-customerorder-was70-dev** workspace is selected and click **OK**
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EclipseWorkspace.png">
@@ -572,7 +572,7 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 
 15. You will now need to restart the server.  For this, you will need to return to your **ssh** session on the WebSphere Application Server instance.  Perform the following commands to restart the server:
 
-`cd /opt/IBM/WebSphere/Profiles/DefaultAppSrv01/bin` 
+`cd /opt/IBM/WebSphere/Profiles/DefaultAppSrv01/bin`
 
 `./stopServer.sh server1 -username wsadmin -password <YOUR PASSWORD>` where _<YOUR PASSWORD>_ is found on the service instance details page in Bluemix.  
 
@@ -585,7 +585,7 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 
 ##### Configuring JDBC Resources
 
-Under **Global Security**, expand **Java Authentication and Autorization Service** and choose **J2C authentication data**. 
+Under **Global Security**, expand **Java Authentication and Autorization Service** and choose **J2C authentication data**.
 
 Create a new user named **DBUser-ORDERDB** using your DB2 on Cloud instance and password.  The user will be `bluadmin` and the password will be specific to the instance you named **DB2 on Cloud - ORDERDB**.
 
@@ -723,7 +723,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 <p align="center">
 <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/JPA_Specification/JPA6.png">
-</p> 
+</p>
 
 7. Click **Apply** and **Save** the configuration.
 
