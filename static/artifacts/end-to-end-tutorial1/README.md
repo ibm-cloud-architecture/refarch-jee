@@ -170,10 +170,10 @@ In this section,you will use WAMT to analyze the CustomerOrderServicesApp applic
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/Rules.png">
 </p>
 
-4. Validate that the correct number of rules are shown in the **Java Code Review** section (the value should be **595**). If the correct number of rules are not shown, exit and start eclipse with the –clean parameter (eclipse –clean) and repeat steps 1-3 in this section)
+4. Validate that the correct number of rules are shown in the **Java Code Review** section (the value should be **598**). If the correct number of rules are not shown, exit and start eclipse with the –clean parameter (eclipse –clean) and repeat steps 1-3 in this section)
 
 <p align="center">
-  <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RulesV9.png">
+  <!-- <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/RulesV9.png"> -->
 </p>
 
 5. Select **WebSphere Application Server Version Migration** from the **Rule Sets** drop down then click **Set...**
