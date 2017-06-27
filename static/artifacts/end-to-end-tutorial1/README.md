@@ -54,13 +54,22 @@ In this section you will use the Migration Toolkit for Application Binaries to g
 
 In this section you will generate and review the Application Evaluation Report for [**CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear**](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear)
 
-1. Navigate to **{binaryAppScanner.jar_LOCATION}** by issuing the command:
+1. In a browser, download the [WebSphere Application Server Migration Toolkit for Application Binaries](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries) by clicking the **Download** button on the opened page.
 
-`cd {bianryAppScanner.jar_LOCATION}`
+2. In a terminal, navigate to the location of the download (generally **Downloads**) and then install the toolkit:
 
-2. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the `–evaluate` action as shown below:
+`cd ~/Downloads`
+`java -jar binaryAppScannerInstaller.jar`
 
-`java –jarbinaryAppScanner.jar {CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear_LOCATION}/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear --evaluate`
+After accepting the license agreement, and specifying the target directory for the installation, the tool is installed in the `<target directory>/wamt` directory.
+
+3. Navigate to the location of **{binaryAppScanner.jar}** by issuing the command:
+
+`cd wamt`
+
+4. Run the Migration Toolkit for Application Binaries passing the binaryInputPath to CustomerOrderServicesApp and the `–evaluate` action as shown below:
+
+`java –jar binaryAppScanner.jar {CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear_LOCATION}/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear --evaluate`
 
 The Application Evaluation Report will be displayed in the browser. 
 
@@ -70,7 +79,7 @@ The Application Evaluation Report will be displayed in the browser.
 
 This report gives a quick evaluation of the Java EE technologies that an application uses and whether each of the WebSphere runtimes support the given technologies. **This report can be used to determine whether a WebSphere Application Server runtime supports the technologies required by the application.** For example, this CustomerOrderServicesApp **is a perfect match for any of the WAS runtimes.**
 
-3. **Review** the report and then **close** the browser.
+5. **Review** the report and then **close** the browser.
 
 *Customer Decision: At this point the customer has decided to move the application to tWAS V9.It is important to remember that CustomerOrderServicesApp would have been completely supported not only by tWAS V9, but also Liberty for Java, Liberty Core, Liberty, and so forth.*
 
