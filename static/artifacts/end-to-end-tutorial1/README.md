@@ -372,7 +372,7 @@ Target cloud runtime: **None**
 
 ### Step 3: Create DB2 service instance for ORDERDB
 
-1. Create an instance of `Db2 on Cloud SQL DB (formerly dashDB TX)` and name it `DB2 on Cloud - ORDERDB`
+1. Go to your [Bluemix console](https://new-console.ng.bluemix.net/) and create an instance of [`Db2 on Cloud SQL DB (formerly dashDB TX)`](https://console.bluemix.net/catalog/services/db2-on-cloud-sql-db-formerly-dashdb-tx) and name it `DB2 on Cloud - ORDERDB`
 2. When you are redirected back to your Services dashboard, click on the new database service instance.
 2. Click on `Service Credentials` and then click on `New credential`.
 3. Click `Add` and then click on `View credentials`.
@@ -392,7 +392,7 @@ Target cloud runtime: **None**
 
 ### Step 4: Create DB2 service instance for INVENTORYDB
 
-1. Create an instance of `Db2 on Cloud SQL DB (formerly dashDB TX)` and name it `DB2 on Cloud - INVENTORYDB`
+1. Go to your [Bluemix console](https://new-console.ng.bluemix.net/) and create an instance of [`Db2 on Cloud SQL DB (formerly dashDB TX)`](https://console.bluemix.net/catalog/services/db2-on-cloud-sql-db-formerly-dashdb-tx) and name it `DB2 on Cloud - INVENTORYDB`
 2. When you are redirected back to your Services dashboard, click on the new database service instance.
 3. Click on `Service Credentials` and then click on `New credential`.
 4. Click `Add` and then click on `View credentials`.
