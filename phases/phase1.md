@@ -118,8 +118,7 @@ To get the report, run `java -jar binaryAppScanner.jar binaryInputPath --analyze
 
 _(I) binaryInputPath, which is an absolute or relative path to a JEE archive file or directory that contains JEE archive files_
 
-_(II) in our case, the [OPTIONS] are: --sourceAppServer=was70 --targetAppServer=was90 --sourceJava=ibm6 --targetJava=ibm8
---targetJavaEE=ee7_
+_(II) in our case, the [OPTIONS] are: --sourceAppServer=was70 --targetAppServer=was90 --sourceJava=ibm6 --targetJava=ibm8 --targetJavaEE=ee7 --*includePackages=org.pwte.example*_
 
 [**Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_AnalysisReport.html)
 
@@ -135,7 +134,7 @@ Again, the Migration Toolkit for Application Binaries Analyze report is used for
 
 In order to carry out the migration of your source code from an old WebShere Application Server version to a newer one, we must set up a proper development environment for the task. In this case, we want to move away from IBM proprietary tools as much as possible. Hence, this is the stack of our development environment:
 
-* [Eclipse Mars 2 for JEE developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/mars2)
+* [Eclipse Neon 3 for JEE developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon3)
 * [IBM WebSphere Application Server V9.x Developer Tools for Eclipse](https://marketplace.eclipse.org/content/ibm-websphere-application-server-v9x-developer-tools#group-details)
 * [IBM Installation Manager](http://www-01.ibm.com/support/docview.wss?uid=swg27025142) - (Recommended for the installation of the IBM WebSphere Application Server V9.0)
 * IBM WebSphere Application Server V9.0
@@ -165,7 +164,9 @@ To install the eclipse-based WebSphere Application Server Migration Toolkit plug
 
 ![Source report 1](/phases/phase1_images/source_report/Source1.png?raw=true)
 
-After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. In here, we should have the exact same errors and warnings as the _Analyzer report_ in the previous section. The Software Analyzer rules are categorised and so are the errors and warnings produced in its report. As you can see in the image, one warning that will always appear in when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
+After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. The number of results from the _Software Analyzer_ and the _Analyze report_ from the previous section can be different (due to scanning class files vs source files), but the same rules should be flagged. The only case where this might not be true is JPA. There were several very complex JPA rules that were not implemented in the binary scanner. But the binary scanner flag JPA migration issues, just not as extensively (since many of these more complex rules were to provide quick fixes which are not even available in the binary scanner).
+
+The Software Analyzer rules are categorised and so are the errors and warnings produced in its report. As you can see in the image, one warning that will always appear in when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
 
 ![Source report 2](/phases/phase1_images/source_report/Source2.png?raw=true)
 
