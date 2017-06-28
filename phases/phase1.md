@@ -122,9 +122,7 @@ _(II) in our case, the [OPTIONS] are: --sourceAppServer=was70 --targetAppServer=
 
 [**Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_AnalysisReport.html)
 
-In this first phase, the goal is to 'lift & shift' our WebSphere applications with the minimum effort/change. As a result, we will only look at the errors reported which in our case are:
-
-![Analyze report](/phases/phase1_images/analyze_report/Analyze1.png?raw=true)
+![Analyze report](/phases/phase1_images/analyze_report/Analyze2.png?raw=true)
 
 Again, the Migration Toolkit for Application Binaries Analyze report is used for assessment. That is, its main goal is to *quantify the migration effort*. It should not be used for repackaging the application or make code changes. For doing so, we are going to use the Eclipse WebSphere Migration Toolkit plugin in the next section.
 
