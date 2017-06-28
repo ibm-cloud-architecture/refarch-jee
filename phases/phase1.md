@@ -94,44 +94,17 @@ To get the report, run `java -jar binaryAppScanner.jar binaryInputPath --invento
 
 _(I) binaryInputPath, which is an absolute or relative path to a JEE archive file or directory that contains JEE archive files_
 
-[**Initial Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_InventoryReport_Initial.html)
+[**Full Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_InventoryReport.html)
 
-As we can see in the report, there are several concerning facts such as duplicate or unused libraries we should pay attention to and which we higly recommend fixing before migrating your application to a newer WebSphere Application Server version and/or different IBM platform. Hence, we will go through the process of fixing these potential future problems by making use of this inventory report.
+This is the inventory summary for our application where we can see the information about the type and quantity of the different components contained in it. We should review the information presented in this report in order to make sure we are aware of all the pieces involved in the migration of our application.
 
-Firstly, we see a summary section which might already raise concerns in us such as the high amount of utility JARs found in the JEE archive of our Customer Order Services application. As we scroll down, we rapidly get to the _Inventory Details by Application_ where we find out that there are several libraries being marked as duplicate or unused which we certainly need to look at:
+![New inventory report](/phases/phase1_images/inventory_report/new/NewInventory1.png?raw=true)
 
-![Inventory report](/phases/phase1_images/inventory_report/Inventory1.png?raw=true)
+If we scroll down, we get to the **Potential Deployment Problems** section which we should pay even more attention to as the earlier problems are detected and addressed if possible, the better.
 
-After removing the unused libraries and verifying that this does not introduce any other problem/error in the code, we look at the ear structure, its ejb, web and test projects. We realise that there are several libraries being used by multiple projects but yet included in each of them as opposed to packaging them at the ear level as a shared library among all ear project components. After repackaging libraries at the ear level, this is how the inventory report looks like:
+![New inventory report 2](/phases/phase1_images/inventory_report/new/NewInventory2.png?raw=true)
 
-![Inventory report 2](/phases/phase1_images/inventory_report/Inventory2.png?raw=true)
-
-We see now that both web projects and the ejb project look fine library wise. However, the report indicates that there are still several duplicate libraries. Looking in detail at what packages those duplicate libraries come with, we realise that, in effect, several libraries packages are included by others (normally broader and heavier Java libraries. For instance, the _jackson-all_ library includes all packages the other three lighter and more specific jackson libraries come with). We then remove remaining duplicate libraries and run the report again:
-
-![Inventory report 3](/phases/phase1_images/inventory_report/Inventory3.png?raw=true)
-
-Now, we do not see any more duplicate libraries. However, we still see warnings due to libraries we are packaging our application with which either include Open Source Software, Java EE or SE classes or WebSphere system classes. Reading at the rules explanation, we are suggested to review what libraries our WebSphere Application Server plus Java Runtime Environment come with since they might already be included:
-
-![Inventory report 4](/phases/phase1_images/inventory_report/Inventory4.png?raw=true)
-
-It is important to use, as much as possible, the libraries that already come with your middleware stack so that we avoid class loading issues. Hence, we look at the WebSphere Application Server and Java Runtime Environment libraries in our environment and we effectively verify that we were including libraries again that were already packaged with our WebSphere Application Server version:
-
-![Inventory report 5](/phases/phase1_images/inventory_report/Inventory5.png?raw=true)
-
-Again, we remove these libraries and run the report. This time, the report comes finally clean except from some warnings regarding missing dependencies on some projects/libraries.
-
-![Inventory report 6](/phases/phase1_images/inventory_report/Inventory6.png?raw=true)
-![Inventory report 7](/phases/phase1_images/inventory_report/Inventory7.png?raw=true)
-
-Looking at those, we find out that libraries reporting missing dependencies for the ejb, test and web project are not, in fact, missing so then we should be good there. Classes reported are missing in the _DBUnit.jar_ library are never used so we are good there too.
-
-Finally, we move the _DBunit.jar, junit.jar and junitee.jar_ libraries back into the test project which is where they are needed. No other project uses them so no need for keeping them at the ear level. In fact, due to class loading order and scope, if the _junitee.jar_ librarie is not placed at the test project level, the JUnitEE Servlet might not find the test cases to be run. Hence, this is the final look of our application library/structure wise:
-
-![Inventory report 8](/phases/phase1_images/inventory_report/Inventory8.png?raw=true)
-
-We have repackaged and refactor our application structure to a situation were we do not have duplicate or unused libraries and the libraries we want/need to include are packaged in the proper location. At this point, we are now ready to start the migration to the newer WebSphere Application Server version or IBM Platform.
-
-[**Final Report**](http://htmlpreview.github.com/?https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/phases/phase1_reports/CustomerOrderServicesApp.ear_InventoryReport_Final.html)
+We strongly recommend to click on the _Show details_ button on the _Problem Details_ subsection so that we can inspect each of the potential problems and determine whether this will be a problem or not.
 
 ### Analysis
 
