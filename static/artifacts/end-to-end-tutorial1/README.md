@@ -33,14 +33,18 @@ The following are prerequisites for completing this tutorial:
   - SSH capability
     - Windows users will need [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or [OpenSSH](https://www.openssh.com/)
   - [WebSphere Application Server Migration Toolkit for Application Binaries](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries)
+- File downloads:
+  - [Eclipse for Windows](http://ibm.biz/BdiTNM)  
+  - [Eclipse for Mac](ibm.biz/BdiTNv)  
+  - [Eclipse Workspace - Cross-platform](http://ibm.biz/BdiTNy)
 
 ### Step 1: Getting the project repository
 
 You can clone the repository from its main GitHub repository page and checkout the appropriate branch for this version of the application.
 
-1. `git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git`  		   
-2. `cd refarch-jee-customerorder`
-3. `git checkout was90-prod`
+1. `git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git`  
+2. `cd refarch-jee-customerorder`  
+3. `git checkout was90-prod`  
 
 ## Application Modernization Assessment
 
@@ -126,13 +130,13 @@ In this section you will use the WebSphere Application Migration Toolkit (WAMT) 
 
 In this section you will open a provided Eclipse workspace containing the CustomerOrderServicesApp source code in Eclipse Neon
 
-1. You can download the **Eclipse** image containing all the necessary packages already installed at the following links.
+1. You can download the **Eclipse** image containing all the necessary packages already installed at the following links.  (You may have previously downloaded these in the prerequisites section.)
 
-- [Eclipse for Windows](https://ibm.box.com/s/nenauh6xvanxls83mpcwo3koig23g3mf)  
+- [Eclipse for Windows](http://ibm.biz/BdiTNM)  
 
-- [Eclipse for Mac]( https://ibm.box.com/s/xjla05bqqqgjsoaj09d62b01q59az7bu)  
+- [Eclipse for Mac](ibm.biz/BdiTNv)  
 
-- [Eclipse Workspace - Cross-platform](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7)
+- [Eclipse Workspace - Cross-platform](http://ibm.biz/BdiTNy)
 
 2. Once this is done, open Eclipse with a clean workspace.
 
