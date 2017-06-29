@@ -585,7 +585,18 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 16. Now you will log back into the Admin Console but use a different set of credentials, now that we're connected to the remote LDAP as our user registry.  Use the credentials below to login to the Admin Console:
 
 **Username:** `uid=wasadmin,ou=caseinc,o=sample`  
-**Password:** `websphereUser!`  
+**Password:** `websphereUser!` 
+
+17.  You will now need to add an SSL Certificate into the WebSphere SSL Key Store for cross-server communication
+  1. Log back into the administrative console.  
+  2. Expand **Global Security** and click **SSL certificate and key management**. Under _Configuration settings_, click **Manage endpoint security configurations**. 
+  3. Select the appropriate outbound configuration to get to the **(cell):CloudBurstCell_123XYZ:(node):CloudBurstNode_123XYZ** management scope. 
+  4. Under _Related Items_, click **Key stores and certificates** and click the **NodeDefaultTrustStore** key store. 
+  5. Under _Additional Properties_, click **Signer certificates** and  **Retrieve From Port**.  
+  6. In the _Host_ field, enter **hooks.slack.com** in the host name field, enter **443** in the _Port_ field, and **hooks.slack.com_cert** in the _Alias_ field. 
+  7. Click **Retrieve Signer Information**.  
+  8. Verify that the certificate information is for a certificate that you can trust. 
+  9. Click **Apply** and **Save**.
 
 ##### Configuring JDBC Resources
 
@@ -736,7 +747,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 ### Step 7: Install Customer Order Services application
 
-1.  We have provided a built EAR that has had the previously discussed changes for installation on WAS V9.0.  It is available at [https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-WAS9.ear](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.1.0-WAS9.ear) for download.
+1.  We have provided a built EAR that has had the previously discussed changes for installation on WAS V9.0.  It is available at [https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.2.0-WAS9.ear](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.2.0-WAS9.ear) for download.
 
 2.  Install the EAR to the Admin console.
    -  Login to the Administrative Console.
@@ -744,6 +755,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
    -  Choose **Install > Browse the EAR > Next > Choose Detailed**
    -  Click on **Step 12**.
    -  Customize the environment variables for your **DB2 on Cloud - ORDERDB** instance:
+      - **DEPLOYER_EMAIL:** Enter your IBM email address in the form of _name@xx.ibm.com_.  **NOTE:**  This is important as this is how you will get credit for completing the lab.
       - **DBUNIT_CONNECTION_URL:** `jdbc:db2://{YOUR HOST}:50000/BLUDB` where {YOUR HOST} is the `host` value from your credentials
       - **DBUNIT_SCHEMA:** `BLUADMIN` - **NOTE:** This must be upper-case
       - **DBUNIT_USERNAME:** `bluadmin`
@@ -773,4 +785,4 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 10.  Add an item to the cart by clicking on an available item.  Drag and drop the item to the cart.
 
-11.  Take a screencap and submit the image to the available proctors as proof of completion.
+11.  You should see the contents of your cart updated in the top right of the screen.
