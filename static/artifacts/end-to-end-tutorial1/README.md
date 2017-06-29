@@ -23,6 +23,7 @@ The following are prerequisites for completing this tutorial:
 - Bluemix Services:
   - [WebSphere Application Server Version 9](https://console.bluemix.net/catalog/services/websphere-application-server) - Referred to as _WASaaS_ throughout the rest of the tutorial
   - [DB2 on Cloud SQL DB](https://console.bluemix.net/catalog/services/db2-on-cloud-sql-db-formerly-dashdb-tx)
+    - NOTE: Your Bluemix account may not be able to provision the desired Db2 on Cloud SQL DB (formerly dashDB TX) service instances as requested below. If that is the case, your lab proctor has been provided with shared credentials for you to use for this lab.
 - Command line tools:
   - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
   - VPN Client for connectivity to WASaaS private network
