@@ -170,11 +170,11 @@ Click on **Run -> Analysis...** This will open the **Software Analyzer** which w
 
 ![Source report 1](/phases/phase1_images/source_report/Source1.png?raw=true)
 
-Now, **right-click** on _Sofwtare Analyzer_ and select **New**. Give a relevant and appropriate name to the new configuration and click on the **Rules** tab for this configuration. Select the **WebSphere Application Server Version Migration** option for the Rule Sets dropdown menu and click **Set...**
+Now, **right-click** on _Sofwtare Analyzer_ and select **New**. Give a relevant and appropriate name to the new configuration and click on the **Rules** tab for this configuration. Select the **WebSphere Application Server Version Migration** option for the _Rule Sets_ dropdown menu and click **Set...**
 
 ![Source report 19](/phases/phase1_images/source_report/Source19.png?raw=true)
 
-The _Rule set configuration_ panel shoul be displayed. This panel must be configured so that the appropriate set of rules  based on our migration requirements are applied during the software analysis of our code.
+The _Rule set configuration_ panel should be displayed. This panel must be configured so that the appropriate set of rules  based on our migration requirements are applied during the software analysis of our applications.
 
 ![Source report 20](/phases/phase1_images/source_report/Source20.png?raw=true)
 
@@ -182,29 +182,31 @@ The _Rule set configuration_ panel shoul be displayed. This panel must be config
 
 #### Running the Software Analyzer
 
-After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. The number of results from the _Software Analyzer_ and the _Analyze report_ from the previous section can be different (due to scanning class files vs source files), but the same rules should be flagged. The only case where this might not be true is JPA. There were several very complex JPA rules that were not implemented in the binary scanner. But the binary scanner flag JPA migration issues, just not as extensively (since many of these more complex rules were to provide quick fixes which are not even available in the binary scanner).
+After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. The number of results from the _Software Analyzer_ and the _Analyze report for application binaries_ from the previous section can be different (due to scanning class files vs source files), but the same rules should be flagged. The only case where this might not be true is JPA. There were several very complex JPA rules that were not implemented in the binary scanner. But the binary scanner flag JPA migration issues, just not as extensively (since many of these more complex rules were to provide quick fixes which are not even available in the binary scanner).
 
-The Software Analyzer rules are categorised, and so are the errors and warnings produced in its report, in four categories: Java Code Review, XML File Review, JSP Code Review and File Review. We must go through each of these tabs/categories and review the errors and warnings as code/configuration changes might be needed.
+The Software Analyzer rules are categorised, and so are the errors and warnings produced in its report, in four categories: **Java Code Review, XML File Review, JSP Code Review and File Review**. We must go through each of these tabs/categories and review the errors and warnings as code/configuration changes might be needed.
 
 ![Source report 21](/phases/phase1_images/source_report/Source21.png?raw=true)
 
-If we inspect the four categories, we will find out that the **JSP Code Review** and **XML File review** come out clean. As a result, we need to take care of the other two categories only. We will start off with the **File Review** analysis tab. As you can see in the image below, one warning that will always appear when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
+If we inspect the four categories, we find out that the **JSP Code Review** and **XML File review** come out clean. That is, the Software Analyzer that comes with the WebSphere Application Migration Toolkit has not found any concern in either the JSP code of our applications (mostly because we are not implementing any JSP at all) or the XML files in them. As a result, we only need to take care of the other two categories.
+
+We will start off with the **File Review** analysis tab. As you can see in the image below, one warning that will always appear when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
 
 ![Source report 2](/phases/phase1_images/source_report/Source2.png?raw=true)
 
-Along with the warning and errors reported after analyzing the code, the WebSphere Application Migration Toolkit comes also with information about the rule that flagged the error/warning as well as possible solutions for it. In order to see this info and help, click on **Help -> Show Contextual Help**. This will open the help portlet in eclipse.
+Along with the warning and errors reported, the WebSphere Application Migration Toolkit also comes with information about the rule that flagged the each error/warning and the possible solutions for them. In order to see this info and help, click on **Help -> Show Contextual Help**. This will open the help portlet in eclipse.
 
 ![Source report 16](/phases/phase1_images/source_report/Source16.png?raw=true)
 
 If you scroll down to the bottom and press on the "detailed help" button it will show you additional ideas on how to resolve that problem.
 
-![Source report 17](/phases/phase1_images/source_report/Source16.png?raw=true)
+![Source report 17](/phases/phase1_images/source_report/Source17.png?raw=true)
 
-As suggested by the help information coming along with the WebSphere Application Migration Toolkit, we select _WebSphere Application Server traditional V9.0_ as the **targeted runtime** for each of the projects.
+As suggested in the detailed help information, we set the appropriate target runtime for our applications by selecting _WebSphere Application Server traditional V9.0_ as the **targeted runtime** for each of the projects in eclipse.
 
 ![Source report 22](/phases/phase1_images/source_report/Source22.png?raw=true)
 
-The next warning on this same **File Review** section is about the _Context and Dependency Injection_
+The next warning on this same **File Review** section is about the _Context and Dependency Injection_:
 
 ![Source report 23](/phases/phase1_images/source_report/Source23.png?raw=true)
 
@@ -212,7 +214,7 @@ And this is what the detailed help tells us:
 
 ![Source report 24](/phases/phase1_images/source_report/Source24.png?raw=true)
 
-We can see that the WebSphere Application Migration Toolkit is warning us of a CDI scan behaviour change which might result on a degraded startup performance. Ideally, we should address this issue. However, since we are **lifting and shifting** the app, we are only changing those pieces of code/configuration that will prevent our app to run on a newer WebSphere Application Server version and different IBM platform. Therefore, we can just bear this warning in mind for a future refactoring/enhancement of our apps.
+We can see that the WebSphere Application Migration Toolkit is warning us of a CDI scan behaviour change which might result on a degraded startup performance of our applications. Ideally, we should address this issue. However, since we are **lifting and shifting** our applications, we are only changing those pieces of code/configuration that will prevent our applications from running on the newer WebSphere Application Server version. Therefore, we can just bear this warning in mind for a future refactoring/enhancement of our apps.
 
 Moving on to the **Java Code Review** category tab, these are the aspects the WebSphere Application Migration Toolkit warns us about:
 
@@ -246,7 +248,7 @@ That is, our apps were built based on an older JPA version than what the WAS ver
 
 ![Source report 32](/phases/phase1_images/source_report/Source32.png?raw=true)
 
-The thrid aspect the WebSphere Application Migration Toolkit flags is again about the Context and Dependency Injection:
+The thrid aspect the WebSphere Application Migration Toolkit flags is about the Context and Dependency Injection again:
 
 ![Source report 33](/phases/phase1_images/source_report/Source33.png?raw=true)
 
@@ -254,7 +256,7 @@ for which we get the following detailed information:
 
 ![Source report 34](/phases/phase1_images/source_report/Source34.png?raw=true)
 
-After reading the detialed info for the CDI warning we realise is the exact same issue we have already addressed in the **File Review** section so we can skip it as long as the appropriate actions were already taken.
+After reading the detialed info for the CDI warning we realise it is the exact same issue we have already addressed in the **File Review** section so we can skip it as long as the appropriate actions were already taken.
 
 Last aspect in this **Java Code Review** section has to do with a change in the JPA cascade strategy:
 
@@ -264,15 +266,15 @@ and its detailed information says the following:
 
 ![Source report 36](/phases/phase1_images/source_report/Source36.png?raw=true)
 
-As we can read in the detailed info above, the change in the JPA cascade strategy is not expected to affect most applications. Also, this new cascade strategy can be mitigated by simply reverting to the previous behaviour by setting the _openjpa.Compatibility_ peroperty in the persistence.xml file. Hence, we just need to bear this potential issue in mind during the testing phase of our apps on the new WAS version and IBM platform and take the appropriate action if they happen to be affected.
+As we can read in the detailed info above, the change in the JPA cascade strategy is not expected to affect most applications. Also, this new cascade strategy can be mitigated by simply reverting to the previous behaviour by setting the _openjpa.Compatibility_ peroperty in the _persistence.xml_ file. Hence, we just need to bear this potential issue in mind during the testing phase of our applications on the new WAS version and take the appropriate actions if they happen to be affected.
 
 #### Summary
 
-In this section, we have seen how to configure and run the Software Analyzer the WebSphere Application Migration Toolkit comes with which helps you out identifying potential issues when migrating your applications to a newer WebSphere Application Server version and/or to a different IBM Platform. It is then down to developers to review all these potential issues and make the appropriate changes in advance. In our case, we have seen that no code changes are needed. Instead, a simply set up of the targeted runtime for our applications and an appropriate version configuration for the Java Technologies our apps use (such as JAX-RS and JPA) in WebSphere Application Server administrative console should suffice to get our applications to run on WebSphere Application Server 9.0.
+In this section, we have seen **how to configure and run the Software Analyzer** the WebSphere Application Migration Toolkit comes with which **helps you out identifying potential issues when migrating your applications** to a newer WebSphere Application Server version. It is then down to developers to review all the potential issues found by the Software Analyzer and make the appropriate changes in advance. In our case, we have seen that **no code changes are needed**. Instead, a simply set up of the targeted runtime for our applications in eclipse and an appropriate version configuration for the Java Technologies our applications use (such as JAX-RS and JPA) in the WebSphere Application Server administrative console should suffice to get our applications to run on WebSphere Application Server 9.0.
 
-Nonetheless, our migrated applications must go through a thorough test phase in order to make sure their behaviour has not changed at all and, if so, developers must work on appropriate code fixes.
+Nonetheless, our migrated **applications must go through a thorough test phase** in order to make sure their behaviour has not changed at all and, if so, developers must work on appropriate code fixes.
 
-Finally, it is recommended to consider upgrading the Java Technologies your applications use to the newest implementation levels and drivers not only to get the best support for them both from IBM and the community in general but also to get the best performance out of the newer WebSphere Application Server you are now running your apps on.
+Finally, it is recommended to consider upgrading the Java Technologies your applications make use of to the newest implementation levels and drivers the newer WebSphere Application Server defaults to not only to get the best support for them both from IBM and the community in general but also to get the best performance out of the newer WebSphere Application Server you are now running your applications on.
 
 ## Config Migration
 
