@@ -401,6 +401,8 @@ You will now switch over to deploying a migrated version of the EAR to a managed
 
 ### Step 3: Create DB2 service instance for ORDERDB
 
+NOTE:  Your Bluemix account may not be able to provision the desired `Db2 on Cloud SQL DB (formerly dashDB TX)` service instances as requested below.  If that is the case, your lab proctor has been provided with shared credentials for you to use for this lab.
+
 1. Go to your [Bluemix console](https://new-console.ng.bluemix.net/) and create an instance of [`Db2 on Cloud SQL DB (formerly dashDB TX)`](https://console.bluemix.net/catalog/services/db2-on-cloud-sql-db-formerly-dashdb-tx) and name it `DB2 on Cloud - ORDERDB`
 2. When you are redirected back to your Services dashboard, click on the new database service instance.
 2. Click on `Service Credentials` and then click on `New credential`.
@@ -420,6 +422,8 @@ You will now switch over to deploying a migrated version of the EAR to a managed
 - Password _(previous password from the `View credentials` tab)_
 
 ### Step 4: Create DB2 service instance for INVENTORYDB
+
+NOTE:  Your Bluemix account may not be able to provision the desired `Db2 on Cloud SQL DB (formerly dashDB TX)` service instances as requested below.  If that is the case, your lab proctor has been provided with shared credentials for you to use for this lab.
 
 1. Go to your [Bluemix console](https://new-console.ng.bluemix.net/) and create an instance of [`Db2 on Cloud SQL DB (formerly dashDB TX)`](https://console.bluemix.net/catalog/services/db2-on-cloud-sql-db-formerly-dashdb-tx) and name it `DB2 on Cloud - INVENTORYDB`
 2. When you are redirected back to your Services dashboard, click on the new database service instance.
