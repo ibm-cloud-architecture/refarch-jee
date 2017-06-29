@@ -450,50 +450,50 @@ You will now switch over to deploying a migrated version of the EAR to a managed
 
 3. Once the service instance is created, provision a **WebSphere Version 9.0.0.0** server of size **Medium**.  This should be a server deployment taking up 2 of your 2 trial credits.  This step can take up to 30 minutes to complete.
 
-4. Once done, you can access the Admin console using the **Open the Admin Console** option. In order to access the Admin console, install the [VPN](https://console.bluemix.net/docs/services/ApplicationServeronCloud/systemAccess.html#setup_openvpn) as instructed.
+4. Now you will access the WASaaS Admin Console to reconfigure your WAS cloud server. But first, you need to install and configure a VPN connection (if you have not already done so as a prerequisite):
 
-   - [Windows 64-Bit (OpenVPN)](https://swupdate.openvpn.org/community/releases/openvpn-install-2.3.11-I001-x86_64.exe)
-   - [Windows 32-Bit (OpenVPN)](https://swupdate.openvpn.org/community/releases/openvpn-install-2.3.11-I001-i686.exe)
-   - [Linux (OpenVPN)](https://openvpn.net/index.php/access-server/download-openvpn-as-sw.html)
-   - [Mac (Tunnelblick)](https://tunnelblick.net/)  
+A. Install the VPN Client
 
-   Download, extract, and install the VPN configuration files by clicking the **Download** button.
+For Windows users, use the links provided on your WASaaS dashboard to download the installation executables for the latest versions of OpenVPN. Once downloaded, these files can be opened in that location. Follow the installation instructions. Install the VPN client using the following directory:
 
-   **VPN - Windows Configuration**
+C:\Program Files\OpenVPN
 
-   1. From the [openVPN Windows download](http://swupdate.openvpn.org/community/releases/) link, download
-      [openvpn-install-2.3.4-I001-x86_64.exe](https://swupdate.openvpn.org/community/releases/openvpn-install-2.3.4-I001-x86_64.exe) for 64-bit, or
-      [openvpn-install-2.3.4-I001-i686.exe](https://swupdate.openvpn.org/community/releases/openvpn-install-2.3.4-I001-i686.exe) for 32-bit.
+For Linux users, use the link provided on your WASaaS dashboard and download the application binary for your version of Linux to install OpenVPN.
 
-   2. Ensure you [Run as a Windows Administrator](https://technet.microsoft.com/en-us/magazine/ff431742.aspx) and openVPN is installed.
+For Mac users, use the link provided on your WASaaS dashboard and follow the instructions to download and install OpenVPN.
 
-   3. Download the VPN configuration files from the OpenVPN download link of the WebSphere Application Server in Bluemix instance in the service dashboard. Extract all four files in the compressed file to the {OpenVPN home}\config directory.
+Note: Please use the links provided in your Bluemix WASaaS dashboard.
 
-   `C:\Program Files\OpenVPN\Config`
+B. Download and Extract the VPN Config Files
 
-   4. Start the openVPN client program "OpenVPN GUI". Ensure that you select [Run as a Windows Administrator](https://technet.microsoft.com/en-us/magazine/ff431742.aspx) to start the program. If you do not, you might not be able to connect.
+For Windows users, download the VPN configuration archive file using the **Download VPN Configuration** button on your WASaaS dashboard. From the download location, extract the files to the following required location:
 
-   **VPN - Linux Configuration**
+`C:\Program Files\OpenVPN\Config`
 
-   1. To install openVPN, follow the [instructions](https://openvpn.net/index.php/access-server/docs/admin-guides/182-how-to-connect-to-access-server-with-linux-clients.html).
+For Linux and Mac users, download the VPN configuration archive file using the **Download VPN Configuration** button on your WASaaS dashboard. From the download location, extract the files to the following location:
 
-      If you need to manually download and install the RPM Package Manager, go to [openVPN unix/linux download](https://openvpn.net/index.php/access-server/download-openvpn-as-sw.html). You might need assistance from your Linux administrator.
+`{OpenVPN home}\config`
 
-   2. Download the VPN configuration files from the OpenVPN download link of the WebSphere Application Server in Bluemix instance in the service dashboard. Extract the files into the directory from which you plan to start the openVPN client. You need all four files in the same directory.
+C. Establish Your VPN Connection
 
-   3. Start the openVPN client program. Open a terminal window and go to the directory that contains the config files. Run the following command as root:
+For Windows users:
 
-   `openvpn --config vt-wasaas-wasaas.ovpn`
+1. Right-click on the OpenVPN GUI icon on your desktop, select **Run as administrator**
+2. Right-click on the OpenVPN GUI icon in your Windows system tray, select **Connect**
 
-   **VPN - MAC configuration**
+For Linux Users:
 
-   1. One method is to install [Tunnelblick](https://tunnelblick.net/), an open source software product.
+1. Go to **Network Manager** tray.
+2. From the pop up menu, click on **VPN connections** and select the **Open VPN** connection.
 
-   2. Extract the VPN configuration files from the WebSphere service. Tunnelblick prompts for your admin password for Mac and adds the config to the set of VPNs you can use to connect.
+For Mac users:
 
-   3. Connect to the VPN network and then you can access your virtual machine. After your first access, Tunnelblick caches the configuration and you can connect from [Tunnelblick](https://tunnelblick.net/). You can put an icon on the top menu bar for easy access.
+1. Click on the OpenVPN GUI icon in the Menu bar.
+2. Click on the **connect wasaas-uss** to connect to OpenVPN.
 
-Once the VPN is configured, you can access the Admin console. Please add the exception for insecure connection when it prompts to access the admin console.
+Your VPN connection should now be established.
+
+D. You should now be able to access the WASaaS Admin Console by selecting "Open the Admin Console" on your WASaaS dashboard.
 
 5. Get a public IP address. This can be done using the [**Manage Public IP Access**](https://console.bluemix.net/docs/services/ApplicationServeronCloud/networkEnvironment.html#networkEnvironment) option.
 
