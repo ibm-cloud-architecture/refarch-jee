@@ -588,15 +588,15 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 **Password:** `websphereUser!` 
 
 17.  You will now need to add an SSL Certificate into the WebSphere SSL Key Store for cross-server communication
-  1. Log back into the administrative console.  
-  2. Expand **Global Security** and click **SSL certificate and key management**. Under _Configuration settings_, click **Manage endpoint security configurations**. 
-  3. Select the appropriate outbound configuration to get to the **(cell):CloudBurstCell_123XYZ:(node):CloudBurstNode_123XYZ** management scope. 
-  4. Under _Related Items_, click **Key stores and certificates** and click the **NodeDefaultTrustStore** key store. 
-  5. Under _Additional Properties_, click **Signer certificates** and  **Retrieve From Port**.  
-  6. In the _Host_ field, enter **hooks.slack.com** in the host name field, enter **443** in the _Port_ field, and **hooks.slack.com_cert** in the _Alias_ field. 
-  7. Click **Retrieve Signer Information**.  
-  8. Verify that the certificate information is for a certificate that you can trust. 
-  9. Click **Apply** and **Save**.
+   -  Log back into the administrative console:
+   -  Expand **Global Security** and click **SSL certificate and key management**. Under _Configuration settings_, click **Manage endpoint security configurations**. 
+   -  Select the appropriate outbound configuration to get to the **(cell):CloudBurstCell_123XYZ:(node):CloudBurstNode_123XYZ** management scope. 
+   -  Under _Related Items_, click **Key stores and certificates** and click the **NodeDefaultTrustStore** key store. 
+   -  Under _Additional Properties_, click **Signer certificates** and  **Retrieve From Port**.  
+   -  In the _Host_ field, enter **hooks.slack.com** in the host name field, enter **443** in the _Port_ field, and **hooks.slack.com_cert** in the _Alias_ field. 
+   -  Click **Retrieve Signer Information**.  
+   -  Verify that the certificate information is for a certificate that you can trust. 
+   -  Click **Apply** and **Save**.
 
 ##### Configuring JDBC Resources
 
