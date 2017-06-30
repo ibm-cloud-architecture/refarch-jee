@@ -51,7 +51,7 @@ You can clone the repository from its main GitHub repository page and checkout t
 
 ### Step 2: Perform assessment walkthrough
 
-#### Step 2.1 Assess the application's readiness for migration
+#### Step 2.1 Assess CustomerOrderServicesApp's readiness for migration
 
 In this section you will use the Migration Toolkit for Application Binaries to generate evaluation reports for the EAR file **[CustomerOrderServicesApp-0.1.0-WAS7.ear](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS7/CustomerOrderServicesApp-0.1.0-WAS7.ear)**. It is the original app that runs on WAS V7.
 
@@ -84,11 +84,11 @@ The Application Evaluation Report will be displayed in the browser.
 
 This report gives a quick evaluation of the Java EE technologies that an application uses and whether each of the WebSphere runtimes support the given technologies. **This report can be used to determine whether a WebSphere Application Server runtime supports the technologies required by the application.** For example, this CustomerOrderServicesApp **is a perfect match for any of the WAS runtimes.**
 
-5. **Review** the report and then **close** the browser.
+5. **Review** the report and then **close** the tab.
 
 *Customer Decision: At this point the customer has decided to move the application to tWAS V9.  It is important to remember that CustomerOrderServicesApp would have been completely supported not only by tWAS V9, but also Liberty for Java, Liberty Core, Liberty, and so forth.*
 
-##### 2.1.2: Use the Migration Toolkit for Application Binaries to inventory the applications
+##### 2.1.2: Use the Migration Toolkit for Application Binaries to inventory CustomerOrderServicesApp
 
 In this section, you will generate and review the Application Inventory Report for CustomerOrderServicesApp which will document the application structure as well as list any possible deployment problems that may be encountered.
 
@@ -118,7 +118,7 @@ In this section, you will generate and review the Application Inventory Report f
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/MigToolKit/MissDependencies.png">
 </p>
 
-5. **Close** the browser
+5. **Close** the tab.
 
 #### Step 2.2: Use Eclipse IDE Tools to analyze the application code
 
@@ -126,23 +126,25 @@ In this section you will use the WebSphere Application Migration Toolkit (WAMT) 
 
 First, you will need an Eclipse IDE client application on your workstation.
 
-If you already have Eclipse installed, please ensure it is version Neon.3 or later. If so, ensure that you have the following plugins installed:
+If you have already installed Eclipse Neon.3, ensure that you have the following plugins installed:
 
 [WebSphere Developer Tools for Eclipse Neon](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Developer_Tools_for_Eclipse_Neon)
 
 Note: Select WebSphere Application Server Migration Toolkit as part of the download.
 
-If you do NOT have an Eclipse IDE installed in your workstation, or have a version prior to Neon.3, you can download the Eclipse image containing all the necessary packages already installed at the following links. (You may have previously downloaded these in the prerequisites section.)
+If you have already installed Eclipse Oxygen, ensure that you have the Websphere Developer Tools for Eclipse Oxygen by going to the Help menu, selecting Eclipse Marketplace, searching for **Websphere Developer Tools**, and clicking the Install button.
 
-[Eclipse for Windows](http://ibm.biz/BdiTNM)
+Note: Select WebSphere Application Server Migration Toolkit as part of the download.
 
-[Eclipse for Mac](http://ibm.biz/BdiTNv)
+If you do NOT have an Eclipse IDE installed on your workstation, or have a version prior to Neon.3, you can download the Eclipse Neon.3 image containing all the necessary tools already installed at the following links. (You may have previously downloaded these in the prerequisites section.)
 
-[Eclipse Workspace - Cross-platform](http://ibm.biz/BdiTNy)
+[Eclipse Neon.3 for Windows w/ WAMT](http://ibm.biz/BdiTNM)
 
-Alternatively, you can click here to install Eclipse Neon 3 [Eclipse IDE for Java EE Developers Neon.3](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon3)
+[Eclipse Neon.3 for Mac w/ WAMT](http://ibm.biz/BdiTNv)
 
-You will then have to install the Developer Tools and Migration Toolkit plugins as described above.
+Alternatively, you can click here to install Eclipse Neon 3 [Eclipse IDE for Java EE Developers Neon.3](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon3). You will then have to install the Developer Tools and Migration Toolkit plugins as described above.
+
+Secondly, all users should download the required [Eclipse Workspace - Cross-platform](http://ibm.biz/BdiTNy) containing the CustomerOrderServicesApp Application Source Code.
 
 ##### 2.2.1: Analyze the CustomerOrderServicesApp application code
 
@@ -160,7 +162,6 @@ eclipse {-clean}
 5. Ensure all four of the CustomerOrderServices projects are selected and click Finish to complete the import.
 
 - If you want to use your own Eclipse environment, make sure you install all the necessary packages referenced at the beginning of [Step 2.2](#step-22-analyze-the-customerorderservicesapp-application-code).
-
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ApplicationAnalysis/EclipseWorkspace.png">
