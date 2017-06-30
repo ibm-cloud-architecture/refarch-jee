@@ -51,7 +51,7 @@ You can clone the repository from its main GitHub repository page and checkout t
 
 ### Step 2: Perform assessment walkthrough
 
-#### Step 2.1 Use the Migration Toolkit for Application Binaries to evaluate the applications
+#### Step 2.1 Assess the application's readiness for migration
 
 In this section you will use the Migration Toolkit for Application Binaries to generate evaluation reports for the EAR file **[CustomerOrderServicesApp-0.1.0-WAS7.ear](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS7/CustomerOrderServicesApp-0.1.0-WAS7.ear)**. It is the original app that runs on WAS V7.
 
@@ -88,7 +88,7 @@ This report gives a quick evaluation of the Java EE technologies that an applica
 
 *Customer Decision: At this point the customer has decided to move the application to tWAS V9.  It is important to remember that CustomerOrderServicesApp would have been completely supported not only by tWAS V9, but also Liberty for Java, Liberty Core, Liberty, and so forth.*
 
-##### 2.1.2: Generate the Application Inventory Report for CustomerOrderServicesApp
+##### 2.1.2: Use the Migration Toolkit for Application Binaries to inventory the applications
 
 In this section, you will generate and review the Application Inventory Report for CustomerOrderServicesApp which will document the application structure as well as list any possible deployment problems that may be encountered.
 
@@ -120,39 +120,44 @@ In this section, you will generate and review the Application Inventory Report f
 
 5. **Close** the browser
 
-#### Step 2.2: Analyze the CustomerOrderServicesApp Application code
+#### Step 2.2: Use Eclipse IDE Tools to analyze the application code
 
-In this section you will use the WebSphere Application Migration Toolkit (WAMT) to analyze the CustomerOrderServicesApp application code for readiness to run on traditional WebSphere Application ServerV9 (tWAS V9). An Eclipse Workspace has been provided with the CustomerOrderServicesApp Application Source Code already imported. The following features have been installed in to [Eclipse IDE for Java EE Developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon3):
+In this section you will use the WebSphere Application Migration Toolkit (WAMT) to analyze the CustomerOrderServicesApp application code for readiness to run on traditional WebSphere Application ServerV9 (tWAS V9). An Eclipse Workspace has been provided with the CustomerOrderServicesApp Application Source Code already imported.
 
-- [WebSphere Developer Tools for Eclipse Neon](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Developer_Tools_for_Eclipse_Neon)
-- [WebSphere Application Server Migration Toolkit](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit)
+First, you will need an Eclipse IDE client application on your workstation.
 
-##### 2.2.1: Review the CustomerOrderServicesAppApplication Code
+If you already have Eclipse installed, please ensure it is version Neon.3 or later. If so, ensure that you have the following plugins installed:
 
-In this section you will open a provided Eclipse workspace containing the CustomerOrderServicesApp source code in Eclipse Neon
+[WebSphere Developer Tools for Eclipse Neon](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Developer_Tools_for_Eclipse_Neon)
 
-1. You can download the **Eclipse** image containing all the necessary packages already installed at the following links.  (You may have previously downloaded these in the prerequisites section.)
+Note: Select WebSphere Application Server Migration Toolkit as part of the download.
 
-- [Eclipse for Windows](http://ibm.biz/BdiTNM)  
+If you do NOT have an Eclipse IDE installed in your workstation, or have a version prior to Neon.3, you can download the Eclipse image containing all the necessary packages already installed at the following links. (You may have previously downloaded these in the prerequisites section.)
 
-- [Eclipse for Mac](ibm.biz/BdiTNv)  
+[Eclipse for Windows](http://ibm.biz/BdiTNM)
 
-- [Eclipse Workspace - Cross-platform](http://ibm.biz/BdiTNy)
+[Eclipse for Mac](http://ibm.biz/BdiTNv)
 
-2. Once this is done, open Eclipse with a clean workspace.
+[Eclipse Workspace - Cross-platform](http://ibm.biz/BdiTNy)
 
-Navigate to the Eclipse directory and run Eclipse:
+Alternatively, you can click here to install Eclipse Neon 3 [Eclipse IDE for Java EE Developers Neon.3](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon3)
 
-`cd {ECLIPSE_NEON_HOME}`  
-`eclipse {-clean}`  
+You will then have to install the Developer Tools and Migration Toolkit plugins as described above.
 
-- In Eclipse, go to the **File** menu and choose **Import...**.
+##### 2.2.1: Analyze the CustomerOrderServicesApp application code
 
-- Expand **General** option and select **Existing Projects into Workspace**.
+1. Open Eclipse with a clean workspace, from your application menu or using the command line:
 
-- Choose the option **Select Archive File** and then browse the workspace [**refarch-jee-customerorder-was70-dev (Export-Archive-File).zip**](https://ibm.box.com/s/rxb286n0uwqadvffcokvy1xnd18ochu7).
+cd {ECLIPSE_NEON_HOME}
+eclipse {-clean}
 
-- Ensure all four of the **CustomerOrderServices** projects are selected and click **Finish** to complete the import.
+2. In Eclipse, go to the File menu and choose Import....
+
+3. Expand General option and select Existing Projects into Workspace.
+
+4. Choose the option Select Archive File and then browse the workspace refarch-jee-customerorder-was70-dev (Export-Archive-File).zip.
+
+5. Ensure all four of the CustomerOrderServices projects are selected and click Finish to complete the import.
 
 - If you want to use your own Eclipse environment, make sure you install all the necessary packages referenced at the beginning of [Step 2.2](#step-22-analyze-the-customerorderservicesapp-application-code).
 
