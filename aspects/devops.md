@@ -129,6 +129,7 @@ The high level flow looks like this
 1. Upon successful validation in QA environment, the code can be deployed to production environment using UCD
 
 An illustration of the flow might look like this
+
 ![CD Flow](/static/imgs/CICD-repo-update.png)
 
 This is done by a Jenkins job that goes through the following steps:
