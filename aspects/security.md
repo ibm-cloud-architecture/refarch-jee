@@ -8,12 +8,12 @@ The diagram below depics a common WASaaS deployment:
 
 where we see the following potential security concerns:
  
-1. [Administration access to your WASaaS deployment](#1.-wasaas-administration).
-2. [Application access for the users](#2.-application-access).
-3. [Authentication and Authorisation of the users](#3.-authentication-and-authorisation).
-4. [Database connections for your applications](#4.-database-connections).
-5. [WASaaS internal communications between WAS ND dmgr and WAS nodes](#5.-wasaas-internal-communication).
-6. [Http Web Server](#6.-http-web-server).
+1. [Administration access to your WASaaS deployment](#1-wasaas-administration).
+2. [Application access for the users](#2-application-access).
+3. [Authentication and Authorisation of the users](#3-authentication-and-authorisation).
+4. [Database connections for your applications](#4-database-connections).
+5. [WASaaS internal communications between WAS ND dmgr and WAS nodes](#5-wasaas-internal-communication).
+6. [Http Web Server](#6-http-web-server).
 
 ---------------------------------------------------
 
