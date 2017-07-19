@@ -104,7 +104,7 @@ If we scroll down, we get to the **Potential Deployment Problems** section which
 
 ![New inventory report 2](/phases/phase1_images/inventory_report/new/NewInventory2.png?raw=true)
 
-We strongly recommend to click on the _Show details_ button on the _Problem Details_ subsection so that we can inspect each of the potential problems and determine whether this will be a problem or not.
+We strongly recommend to click on the _Show details_ button on the _Problem Details_ subsection so that you could inspect each of the potential problems and determine whether this will be a problem or not. We will show you how to make the changes using the WebSphere Application Miration Toolkit in later sections of this README.
 
 ### Analysis
 
@@ -266,15 +266,13 @@ and its detailed information says the following:
 
 ![Source report 36](/phases/phase1_images/source_report/Source36.png?raw=true)
 
-As we can read in the detailed info above, the change in the JPA cascade strategy is not expected to affect most applications. Also, this new cascade strategy can be mitigated by simply reverting to the previous behaviour by setting the _openjpa.Compatibility_ peroperty in the _persistence.xml_ file. Hence, we just need to bear this potential issue in mind during the testing phase of our applications on the new WAS version and take the appropriate actions if they happen to be affected.
+As we can read in the detailed info above, the change in the JPA cascade strategy is not expected to affect most applications. Also, this new cascade strategy can be mitigated by simply reverting to the previous behaviour by setting the _openjpa.Compatibility_ peroperty in the _persistence.xml_ file. Anyway, newer WebSphere Application Server versions can be configured to run on previous or older version for some JEE technologies. JPA is one of them so you will see in later WAS configuration migration section how your new WebSphere Application Server version can be configured to still use JPA version 2.0 so that the warning above does not affect you at all. This is the recommended action since, once again, we are just 'lifting & shifting'.
 
 #### Summary
 
 In this section, we have seen **how to configure and run the Software Analyzer** the WebSphere Application Migration Toolkit comes with which **helps you out identifying potential issues when migrating your applications** to a newer WebSphere Application Server version. It is then down to developers to review all the potential issues found by the Software Analyzer and make the appropriate changes in advance. In our case, we have seen that **no code changes are needed**. Instead, a simply set up of the targeted runtime for our applications in eclipse and an appropriate version configuration for the Java Technologies our applications use (such as JAX-RS and JPA) in the WebSphere Application Server administrative console should suffice to get our applications to run on WebSphere Application Server 9.0.
 
 Nonetheless, our migrated **applications must go through a thorough test phase** in order to make sure their behaviour has not changed at all and, if so, developers must work on appropriate code fixes.
-
-Finally, it is recommended to consider upgrading the Java Technologies your applications make use of to the newest implementation levels and drivers the newer WebSphere Application Server defaults to not only to get the best support for them both from IBM and the community in general but also to get the best performance out of the newer WebSphere Application Server you are now running your applications on.
 
 ## Config Migration
 
