@@ -552,8 +552,8 @@ In order to manually set WebSphere up to use a standalone LDAP registry for Auth
 6. Set the Host and Port to **cap-sg-prd-4.integration.ibmcloud.com** and **17830** respectively.
 
 7. Set the LDAP admin credentials using the Bind distinguished name and password below:
-   * Bind distinguished name (DN)     : **cn=root**
-   * Bind password                    : **purpleTDS!**
+   * Bind distinguished name (DN)     : **uid=casebind,ou=caseinc,o=sample**
+   * Bind password                    : **caseBindUser!**
 
 <p align="center">
   <img src="https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LDAP_Images/LDAP_TestConn.png">
