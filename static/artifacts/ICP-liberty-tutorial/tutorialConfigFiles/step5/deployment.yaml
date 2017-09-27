@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: customerorderservices
+  labels:
+    app: customerorderservices
+spec:
+  ports:
+    - port: 80
+      targetPort: 9080
+  selector:
+    app: customerorderservices
+  type: ClusterIP
+  
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: customerorderservices
+  name: customerorderservices
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: customerorderservices
+    spec:
+      containers:
+      - image: mycluster:8500/websphere/customer-order-services:liberty
+        name: customerorderservices
+        ports:
+        - containerPort: 9080
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: orderdb
+        - configMapRef:
+            name: inventorydb
+        - configMapRef:
+            name: ldap 
+      imagePullSecrets:
+      - name: user1.registrykey
