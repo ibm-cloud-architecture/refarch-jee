@@ -31,7 +31,7 @@ The second one includes the application source code. You can clone this reposito
 
 1. `git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git`
 2. `cd refarch-jee-customerorder`
-3. `git checkout liberty`
+3. `git checkout icp-bootcamp-v1`
 
 #### Build the ear file using Maven
 
