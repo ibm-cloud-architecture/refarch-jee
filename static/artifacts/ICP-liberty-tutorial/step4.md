@@ -54,7 +54,7 @@ When completed, **sign out of the ICP dashboard**.
 
 ### Generate deployment yaml file
 
-Our [deployment yaml file](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/blob/liberty/tutorial/tutorialConfigFiles/step5/deployment.yaml), which specifies how we want our application (i.e. the container) to be deployed, looks like this:
+Our [deployment yaml file](https://github.com/ibm-cloud-architecture/refarch-jee/tree/master/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step5/deployment.yaml), which specifies how we want our application (i.e. the container) to be deployed, looks like this:
 
 ```
 apiVersion: v1

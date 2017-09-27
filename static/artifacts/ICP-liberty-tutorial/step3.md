@@ -55,8 +55,8 @@ Using this docker file, we build a docker image and using this image we will lau
 
 Because the Dockerfile is set to use the files in the `Common` directory from the source code github repo, we must then replace those files with our tutorial specific configuration files before building the Docker image. That is, we need to copy server.xml and server.env.docker files into the `Common` folder.
 
-1. `cp /home/skytap/PurpleCompute/git/refarch-jee-customerorder/tutorial/tutorialConfigFiles/step3/server.xml /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
-2. `cp /home/skytap/PurpleCompute/git/refarch-jee-customerorder/tutorial/tutorialConfigFiles/step3/server.env.docker /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
+1. `cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step3/server.xml /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
+2. `cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step3/server.env.docker /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
 
 Finally, we are now ready to build the container:
 
@@ -74,16 +74,16 @@ websphere-liberty                                   webProfile7         5fd996d3
 #### Run the containerised app
 When starting the container, we feed in environment specific variables to direct the application to the db2 and ldap servers for the lab environment.
 There are three specific files configured: `orderdb.env`, `inventordydb.env` and `ldap.env`.
-These files are located in `/home/skytap/PurpleCompute/git/refarch-jee-customerorder/tutorial/tutorialConfigFiles`
+These files are located in `/home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles`
 
 
 Run the docker image: 
 
 ```
 docker run \
-  --env-file tutorial/tutorialConfigFiles/ldap.env \
-  --env-file tutorial/tutorialConfigFiles/orderdb.env \
-  --env-file tutorial/tutorialConfigFiles/inventorydb.env \
+  --env-file /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/ldap.env \
+  --env-file /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/orderdb.env \
+  --env-file /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/inventorydb.env \
   -p 9080:9080 customer-order-services:liberty
 ```
 

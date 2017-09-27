@@ -4,7 +4,7 @@ In this step, we are going to build and run the Liberty app locally and connect 
 
 1. [Get Started](#get-started)
 2. [Build the Liberty app](#build-the-liberty-app)
-    * [Get the project repository](#get-the-project-repository)
+    * [Get the project repositories](#get-the-project-repositories)
     * [Build the ear file using Maven](#build-the-ear-file-using-maven)
 3. [Configure the Liberty server](#configure-the-liberty-server)
 4. [Deploy and run the app](#deploy-and-run-the-app)
@@ -20,14 +20,18 @@ Before building the application, on your skytap machine, go to **/home/skytap/Pu
 
 ### Build the Liberty app
 
-#### Get the project repository
+#### Get the project repositories
 
-You can clone the repository from its main GitHub repository page and checkout the appropriate branch for this version of the application. If you completed Step1.md in this tutorial, then skip the git clone command as this is already completed on the image.
+In this step we need to clone two GitHub repositories. The first one includes the instructions for this very same tutorial and all needed files to complete it.
 
 1. `cd git`
-2. `git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git`
-3. `cd refarch-jee-customerorder`
-4. `git checkout liberty`
+2. `git clone https://github.com/ibm-cloud-architecture/refarch-jee.git`
+
+The second one includes the application source code. You can clone this repository from its main GitHub repository page and checkout the appropriate branch for this version of the application. If you completed Step1.md in this tutorial, then skip the `git clone` command as this is already completed on the image.
+
+1. `git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git`
+2. `cd refarch-jee-customerorder`
+3. `git checkout liberty`
 
 #### Build the ear file using Maven
 
@@ -64,12 +68,12 @@ For this tutorial, we provide you with these configuration files ready to be use
 
 1. Copy server.xml into the Liberty server directory
 ```
-cp /home/skytap/PurpleCompute/git/refarch-jee-customerorder/tutorial/tutorialConfigFiles/step2/server.xml \
+cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step2/server.xml \
    /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer
 ```
 2. Copy server.env into the Liberty server directory 
 ```
-cp /home/skytap/PurpleCompute/git/refarch-jee-customerorder/tutorial/tutorialConfigFiles/step2/server.env \
+cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step2/server.env \
    /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer
 ```
 

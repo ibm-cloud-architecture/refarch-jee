@@ -171,7 +171,7 @@ The environment specific runtime variables for the application will be held in C
 To create the ConfigMaps execute the following:
     
 ```
-cd /home/skytap/PurpleCompute/git/refarch-jee-customerorder/tutorial/tutorialConfigFiles/
+cd /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/
 kubectl create configmap ldap --from-env-file=ldap.env
 kubectl create configmap inventorydb --from-env-file=inventorydb.env
 kubectl create configmap orderdb --from-env-file=orderdb.env
