@@ -1,3 +1,6 @@
+**IMPORTANT:** This tutorial shows how to 'lift & shift' a traditional on-premise WebSphere Application Server workload to run on the WebSphere Application Server as a Service offering in IBM Bluemix.
+This tutorial is part of a series of tutorials which were created for the Cloud & Cognitive Activation workshops in 2017 to educate technical sellers on the Cloud & Cognitive patterns. Tutorials are also publicly available [here](https://www.ibm.com/devops/method/content/engagement/sellers).
+
 # Customer Order Services - JavaEE Enterprise Application
 
 ## Application Overview
