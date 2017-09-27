@@ -53,11 +53,11 @@ You can clone the repository from its main GitHub repository page and checkout t
 
 #### Step 2.1 Assess CustomerOrderServicesApp's readiness for migration
 
-In this section you will use the Migration Toolkit for Application Binaries to generate evaluation reports for the EAR file **[CustomerOrderServicesApp-0.1.0-WAS7.ear](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS7/CustomerOrderServicesApp-0.1.0-WAS7.ear)**. It is the original app that runs on WAS V7.
+In this section you will use the Migration Toolkit for Application Binaries to generate evaluation reports for the EAR file **[CustomerOrderServicesApp-0.1.0-WAS7.ear](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/WASaaS-tWAS-tutorial/WAS7/CustomerOrderServicesApp-0.1.0-WAS7.ear)**. It is the original app that runs on WAS V7.
 
 ##### 2.1.1: Use the Migration Toolkit for Application Binaries to evaluate the applications
 
-In this section you will generate and review the Application Evaluation Report for [**CustomerOrderServicesApp-0.1.0-WAS7.ear**](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS7/CustomerOrderServicesApp-0.1.0-WAS7.ear)
+In this section you will generate and review the Application Evaluation Report for [**CustomerOrderServicesApp-0.1.0-WAS7.ear**](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/WASaaS-tWAS-tutorial/WAS7/CustomerOrderServicesApp-0.1.0-WAS7.ear)
 
 1. In a browser, download the [WebSphere Application Server Migration Toolkit for Application Binaries](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries) by clicking the **Download** button on the opened page.
 
@@ -758,7 +758,7 @@ On the same page, create another new user named **DBUsuer-INVENTORYDB** using yo
 
 ### Step 7: Install Customer Order Services application
 
-1.  We have provided a built EAR that has had the previously discussed changes for installation on WAS V9.0.  It is available at [https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.2.0-WAS9.ear](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/end-to-end-tutorial1/WAS9/CustomerOrderServicesApp-0.2.0-WAS9.ear) for download.
+1.  We have provided a built EAR that has had the previously discussed changes for installation on WAS V9.0.  It is available at [https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/WASaaS-tWAS-tutorial/WAS9/CustomerOrderServicesApp-0.2.0-WAS9.ear](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/artifacts/WASaaS-tWAS-tutorial/WAS9/CustomerOrderServicesApp-0.2.0-WAS9.ear) for download.
 
 2.  Install the EAR to the Admin console.
    -  Login to the Administrative Console.
