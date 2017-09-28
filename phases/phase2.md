@@ -95,31 +95,37 @@ In summary, migrating your WebSphere Application Server applications from your o
 
 We are moving our compute-based traditional WAS resources to the cloud but we still need them to securely connect to our on-premise resources so that they can access application data and security registries for authentication and authorization purposes.
 
-To securely connect cloud applications to on-premises or cloud-based remote locations, you can use a VPN tunnel such as the Bluemix Secure Gateway or SoftLayer Gateway as a Service.
+To securely connect cloud applications to on-premises or cloud-based remote locations, you could use a VPN tunnel such as the [IBM Bluemix Secure Gateway](https://console.ng.bluemix.net/docs/services/SecureGateway/secure_gateway.html) or the [SoftLayer Gateway as a Service](https://gateway-as-a-service.com/gaas/ui/help).
 
-For more information about the Bluemix Secure Gateway, see
 
-* [Getting started with the Secure Gateway](https://console.ng.bluemix.net/docs/services/SecureGateway/secure_gateway.html)
 * [Bluemix Secure Gateway: Yes, you CAN get there from here!](https://www.ibm.com/blogs/bluemix/2015/03/bluemix-secure-gateway-yes-can-get/)
 
-For more information about configuring the SoftLayer Gateway as a Service, see
+In our case, we have configured our WebSphere Application Server as a Service instances to use the IBM Bluemix Secure Gateway service to connect the application server, and so its applications, to our on-premise DB2 database instance and LDAP server.
 
-* [Help for Gateway as a Service](https://gateway-as-a-service.com/gaas/ui/help).
+The [Secure Gateway Service](https://console.bluemix.net/docs/services/SecureGateway/secure_gateway.html?pos=2) provides a quick, easy, and secure solution for connecting anything to anything. By deploying the light-weight and natively installed Secure Gateway Client, you can establish a secure, persistent connection between your environment and the cloud. Once this is complete, you can safely connect all of your applications and resources regardless of their location. Rather than bridging your environments at the network level like a traditional VPN that begins with full access and must be limited from the top down, Secure Gateway provides granular access only to the resources that you have defined.
 
-In our case, we have configured our WebSphere Application Server as a Service instances to use the IBM Bluemix Secure Gateway service to connect the application server, and so its applications, to our on-premise DB2 database instance
+As displayed in the following diagram, the service works by using a client to connect to your Bluemix organization. Next, you add the service to your Bluemix organization. Then, by using the Secure Gateway UI or REST API you can begin creating your gateway by connecting to your client and creating a destination point to your on-premises or cloud data. To increase security, you can add application-side Transport Layer Security (TLS), which encrypts the data that travels from your app to the client. You can extend this security with client-side TLS, which encrypts the data from the client to the on-premises or cloud data. When you complete your gateway configuration, you can monitor the behavior of your gateways and destinations in the Secure Gateway Dashboard.
 
-![Hybrid 1](/phases/phase2_images/analyze_report/Analyze4.png?raw=true)
+![Hybrid 1](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Hybrid/Hybrid1.png)
+
+Once your Secure Gateway client is linked to the Secure Gateway Service in Bluemix, you get an endpoint from the latter to connect all your cloud resources to in order to access your on premise resources. Next is an example of how you would configure your WebSphere Application Server as a Service instances to your on premise resources by using the Secure Gateway endpoint.
+
+For the DB2 database
+
+![Hybrid 2](/phases/phase2_images/analyze_report/Analyze4.png?raw=true)
 
 and LDAP server
 
-![Hybrid 2](/phases/phase2_images/Hybrid1.png?raw=true)
+![Hybrid 3](/phases/phase2_images/Hybrid1.png?raw=true)
+
+For more info on hybrid cloud architectures see 
 
 ## Security
 
-Security will remain as it is. That is, WebSphere Application Server as a Service instances will
+Customer Order Services application security details can be found [here](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/blob/master/Security.md) in its GitHub repository. Security main points include:
 
 * Authenticate users using an LDAP server, which is located on premises and accessed through the Secure Gateway service explained in the previous section.
 * Authorize users based on their role.
 * Use LTPA tokens to encrypt athentication information exchanged by servers.
 
-For more info on the security mechanisms and considerations for both the application and the web server, read the [Customer Order Services security readme](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/blob/master/Security.md)
+For more info on the security mechanisms and considerations for both the application and the web server, read the [Secuity aspect readme](/aspects/security.md)
