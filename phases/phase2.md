@@ -118,7 +118,7 @@ and LDAP server
 
 ![Hybrid 3](/phases/phase2_images/Hybrid1.png?raw=true)
 
-For more info on hybrid cloud architectures see 
+For more info on hybrid cloud architectures read the [Hybrid Connectivity](/aspects/hybrid-connectivity.md) section. 
 
 ## Security
 
