@@ -12,8 +12,9 @@ where we have identified the following potential security concerns:
 2. [Application access for the users](#2-application-access).
 3. [Authentication and Authorisation of the users](#3-authentication-and-authorisation).
 4. [Database connections for your applications](#4-database-connections).
-5. [WASaaS internal communications between WAS ND dmgr and WAS nodes](#5-wasaas-internal-communication).
+5. [WASaaS internal communication](#5-wasaas-internal-communication).
 6. [Http Web Server](#6-http-web-server).
+7. [Others](#7-others).
 
 ---------------------------------------------------
 
@@ -46,6 +47,12 @@ The JEE server’s authentication service includes and interacts with the follow
 
 These can be defined in several ways, being the easiest a federated repository in an internal file repository where users and groups are directly managed from the _Users and Groups_ section within the WAS admin console while the most common an standalone LDAP registry.
 
+#### SSL from WAS to LDAP
+
+When using an LDAP registry, WebSphere Application Server verifies a user's password using the standard _ldap_bind_. This requires that WebSphere Application Server send the user's password to the LDAP server. If that request is not encrypted, a hacker could use a network sniffer to steal the passwords of users authenticating (including administrative passwords!). Most LDAP directories support LDAP over SSL, and WebSphere Application Server can be configured to use this. On the LDAP user registry panel, check the use SSL enabled option and then configure an SSL configuration appropriate to your LDAP directory. You’ll most likely need to place the signing key for the LDAP server’s certificate into the trust store. It’s best to create a new SSL configuration just for LDAP to avoid causing problems with the existing SSL usage.
+
+#### SSO and LTPA
+
 WebSphere Application Server encrypts authentication information so that the application server can send the data from one server to another in a secure manner. The encryption of authentication information that is exchanged between servers involves the Lightweight Third-Party Authentication (LTPA) mechanism. When accessing web servers that use the LTPA technology it is possible for a web user to re-use their login across physical servers. An IBM WebSphere server that is configured to use the LTPA authentication will challenge the web user for a name and password. When the user has been authenticated, their browser will have received a session cookie - a cookie that is only available for one browsing session. This cookie contains the LTPA token. If the user – after having received the LTPA token – accesses a server that is a member of the same authentication realm as the first server, and if the browsing session has not been terminated (the browser was not closed down), then the user is automatically authenticated and will not be challenged for a name and password. Such an environment is also called a Single-Sign-On (SSO) environment.
 
 ![Security 9](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Security/Security9.png)
@@ -55,10 +62,6 @@ However, if an intruder were to capture one of your cookies, they could potentia
 In the case of WebSphere Application Server, the most important cookie is the LTPA cookie, and therefore it should be configured to be sent only over SSL.
 
 ![Security 11](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Security/Security11.png)
-
-Now, on a **production environment, the Authentication of users and the Authorisation for granting access to secure resources is usually done at the IBM HTTP Server level** so that we provide our WebSphere Application Server of an even better isolation. That is, no interaction with any of our WebSphere Application Server Network Deployment components will happen unless the user is authenticated and authorised by the IBM HTTP Server.
-
-For more info on authenticating users and authorising their actions in the IBM HTTP Server, click [here](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_8.5.5/com.ibm.websphere.ihs.doc/ihs/tihs_ldapconfig.html). We strongly recommend to secure all your communications happening both [from the IBM HTTP Server to the LDAP Server](https://www.ibm.com/support/knowledgecenter/SSEQTP_8.5.5/com.ibm.websphere.ihs.doc/ihs/cihs_sslandldap.html) and [from the IBM HTTP Server to the WAS Deployment Manager](https://www.ibm.com/support/knowledgecenter/SSEQTP_8.5.5/com.ibm.websphere.ihs.doc/ihs/tihs_setupsslwithwas.html) by using Secure Socket Layer (SSL). In fact, the use of SSL for authenticating users is required by the application itself by defining _CONFIDENTIAL_ the user data transport (see Customer Order Services application security documentation [here](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/blob/master/Security.md) for more information).
 
 ### 4. Database connections
 
@@ -76,7 +79,14 @@ WebSphere Application Server can provide access to data stored in Enterprise Inf
 
 ### 5. WASaaS internal communication
 
-WebSphere Application Server internal communication among its different components, which may reside in different VMs like in this case, is carried out using the private network. However, any stronger security measure is always recommended. Hence, have a look at [security considerations when when in a multi-node WebSphere Application Server WebSphere Application Server Network Deployment environment](https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5/com.ibm.websphere.nd.doc/ae/tsec_esecarun.html)
+WebSphere Application Server internal communication among its different components, which may reside in different VMs like in this case, is carried out using the private network. However, any stronger security measure is always recommended such as [authenticating Web server to WebSphere Application Server HTTP link](https://www.ibm.com/developerworks/websphere/techjournal/1210_lansche/1210_lansche.html#step14).
+
+Even if you have chosen not to authenticate the link from the Web server to the Web container, you might want to consider encrypting it. The Web server plug-in transmits information from the Web server to the Web container over HTTP. If the request arrived at the Web server using HTTPS, the plug-in will forward the request on using HTTPS by default. If the request arrived over HTTP, HTTP will be used by the plug-in. These defaults are appropriate for most environments. There is, however, one possible exception.
+
+In some environments, sensitive information is added to the request after it has arrived on your network. For example, some authenticating proxy servers (such as WebSEAL) augment requests with password information. Custom code in the Web server might do something similar. If that’s the case, you should take extra steps to protect the traffic from the Web server to the Web container. To force the use of HTTPS for all traffic from the plug-in, simply disable the HTTP transport from the Web container on every application server and then regenerate and deploy the plug-in. You must disable both the WCInboundDefault and the HttpQueueInboundDefault transport chains. Now, the plug-in can only use HTTPS and so it will use it for all traffic regardless of how the traffic arrived at the Web container.
+
+![Security 12](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Security/Security12.png)
+
 
 ### 6. Http web server
 
@@ -86,22 +96,8 @@ The [WebSphere Application Server in Bluemix Network Deployment Plan](https://co
 
 For configuring the IBM HTTP Server that comes out of the box with your WASaaS deployment, see this [link](https://console.bluemix.net/docs/services/ApplicationServeronCloud/systemAccess.html#configure_webserver).
 
-**Again, having the WAS Deployment Manager and the IBM HTTP Server on the same box is not suitable for production environment. For security, they should be in separate boxes.** The reason for this is that if you need to allow public traffic to the IBM HTTP Server so that your applications can be used by users from the public internet, you are allowing public traffic to the entire box where your WAS dmgr also resides. This is not acceptable on a production environment.
+**Again, having the WAS Deployment Manager and the IBM HTTP Server on the same box is not a suitable environment for production.** The reason for this is that you need to allow public traffic to the IBM HTTP Server so that your applications can be used by users from the public internet but if you do so, you are allowing public traffic to the entire box where your WAS dmgr also resides. It is then recommended that the IBM HTTP Server is not only on a different box but also in the DMZ without WebSphere Application Server (more info [here](https://www.ibm.com/developerworks/websphere/techjournal/1210_lansche/1210_lansche.html#step1)).
 
-`TDB: How to configure/install an external IHS Server?`
+As in with any other component in your environment, we need to secure the acces to the IBM HTTP Server and its communication from it to the rest of the components in the environment and viceversa. The access to the IBM HTTP Server can be secured by authenticating requests agains an LDAP server. The communication from and to the IBM HTTP Server should be done over SSL. For these and other security mechanisms for securing the IBM HTTP Server click [here](https://www.ibm.com/support/knowledgecenter/SSEQTJ_9.0.0/com.ibm.websphere.ihs.doc/ihs/tihs_sectaskov.html).
 
-As we said previously in the [Authentication and Authorisation](#3-authentication-and-authorisation) section, the IBM HTTP Server will be responsible for authenticate users and authorise their request based on an external LDAP Server.
 
-`TBD: How to configure your external IBM HTTP Server to authenticate and authorise using an external LDAP?`
-
-Best security practices recommend authenticating the IBM HTTP Server to WebSphere Application Server HTTP link to create a trusted network (see [link](https://www.ibm.com/developerworks/websphere/techjournal/1210_lansche/1210_lansche.html#step14)). 
-
-Even if you have chosen not to authenticate the link from the Web server to the Web container, you might want to consider encrypting it. The Web server plug-in transmits information from the Web server to the Web container over HTTP. If the request arrived at the Web server using HTTPS, the plug-in will forward the request on using HTTPS by default. If the request arrived over HTTP, HTTP will be used by the plug-in. These defaults are appropriate for most environments. There is, however, one possible exception.
-
-In some environments, sensitive information is added to the request after it has arrived on your network. For example, some authenticating proxy servers (such as WebSEAL) augment requests with password information. Custom code in the Web server might do something similar. If that’s the case, you should take extra steps to protect the traffic from the Web server to the Web container. To force the use of HTTPS for all traffic from the plug-in, simply disable the HTTP transport from the Web container on every application server and then regenerate and deploy the plug-in. You must disable both the WCInboundDefault and the HttpQueueInboundDefault transport chains. Now, the plug-in can only use HTTPS and so it will use it for all traffic regardless of how the traffic arrived at the Web container.
-
-![Security 12](https://github.com/ibm-cloud-architecture/refarch-jee/raw/master/static/imgs/Security/Security12.png)
-
-`TBD: Explain how LTPA for SSO with SSL works when doing the authentication and authorisation at the IHS Server level.`
-
-`TBD: Explain how traffic get redirected/rejected in the IHS Server.`
