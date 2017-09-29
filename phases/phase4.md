@@ -17,7 +17,7 @@ See the challenges and steps to break and create front end micro service <Link t
 4. Microservices for legacy backend. Sometimes, it may be impossible to modernize the application completely. Hence we may need to create some  microservices that represents the business capability of the backend legacy application. For this application we have created two microservices representing the “CustomerOrderService” and the “ProductSearchService”.  
 
 ## Existing Architecture
-![J2EE Monolithic Application Architecture](https://github.com/ibm-cloud-architecture/refarch-jee/tree/master/static/imgs/apparch-pc-phase0-customerorderservices.png?raw=true)
+![J2EE Monolithic Application Architecture](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/apparch-pc-phase0-customerorderservices.png?raw=true)
 
 Please refer to [customer order](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was90-dev/README.md) application for getting an overview of the existing application that has been modernized into a microservice based architecture.
 
