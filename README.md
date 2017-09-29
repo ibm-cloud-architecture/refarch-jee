@@ -77,7 +77,7 @@ Application architecture details are detailed at length in the [Customer Order](
   - Branch [was90-prod](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was90-prod) - Production branch for WebSphere Application Server V9.0 application code. Does not contain any IDE specific file. Builds only using Maven.
 
 - [Customer Order](https://github.com/ibm-cloud-architecture/refarch-jee-monolith-to-microservices) - Main microservices based application GitHub repository
-  - [Legacy backend microservices repository](https://github.com/ibm-cloud-architecture/refarch-jee-monolith-to-microservices/tree/master/Legacy-Backend)
+  - [Legacy backend microservices](https://github.com/ibm-cloud-architecture/refarch-jee-monolith-to-microservices/tree/master/Legacy-Backend)
   - [Customer Order Service microservice repository](https://github.com/ibm-cloud-architecture/refarch-jee-micro-customer-service)
   - [Product Search Service microservice reopository](https://github.com/ibm-cloud-architecture/refarch-jee-micro-product-service)
   - [Shopping Service microservice repository](https://github.com/ibm-cloud-architecture/refarch-jee-micro-shopping-bff)
