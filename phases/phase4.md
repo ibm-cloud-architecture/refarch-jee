@@ -17,13 +17,13 @@ See the challenges and steps to break and create front end micro service <Link t
 4. Microservices for legacy backend. Sometimes, it may be impossible to modernize the application completely. Hence we may need to create some  microservices that represents the business capability of the backend legacy application. For this application we have created two microservices representing the “CustomerOrderService” and the “ProductSearchService”.  
 
 ## Existing Architecture
-![J2EE Application Architecture ](https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee/master/static/imgs/apparch-pc-phase0-customerorderservices.png)
+![J2EE Monolithic Application Architecture](https://github.com/ibm-cloud-architecture/refarch-jee/tree/master/static/imgs/apparch-pc-phase0-customerorderservices.png?raw=true)
 
 Please refer to [customer order](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was90-dev/README.md) application for getting an overview of the existing application that has been modernized into a microservice based architecture.
 
 
 ## Target Architecture
-![Purple Compute Architecture ](images/purplecompute-architecture.png?raw=true "Purple Compute Architecture")
+![Purple Compute Microservices based Architecture](https://github.com/ibm-cloud-architecture/refarch-jee-monolith-to-microservices/blob/master/images/purplecompute-architecture.png?raw=true)
 
 The above monolith application has been broken down into 3 micro services. The micro services are deployed into Kubernetes cluster on Bluemix. Part of the functionality will continue to be in the legacy backend, which may be modernized over a period of time. For the time being it continues to run on Websphere Application Server.
 
