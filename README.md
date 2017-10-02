@@ -88,7 +88,7 @@ These phases are iterative in nature and require the previous Phases to be compl
 
 - [Phase 1: Modernizing the Existing Application](phases/phase1.md)
 - [Phase 2: Mitigation Phase](phases/phase2.md)
-- [Phase 3: Production Lift & Shift](#phase-3-production-lift--shift) `TBD`
+- Phase 3: Production Lift & Shift (`TBD`)
 - [Phase 4: Evolve to Microservices](phases/phase4.md)
 
 ## Additional Resources
