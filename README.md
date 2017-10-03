@@ -86,10 +86,10 @@ Application architecture details are detailed at length in the [Customer Order](
 
 These phases are iterative in nature and require the previous Phases to be completed before moving on.  In the links below, you will be able to move through the Phases of modernizing the reference application leveraging your own cloud resources.
 
-- [Phase 1: Modernizing the Existing Application](phases/phase1.md)
-- [Phase 2: Mitigation Phase](phases/phase2.md)
-- Phase 3: Production Lift & Shift (`TBD`)
-- [Phase 4: Evolve to Microservices](phases/phase4.md)
+- **Phase 1: Modernizing the Existing Application** [README](phases/phase1.md) & [Blog post](https://www.ibm.com/blogs/bluemix/2017/08/websphere-on-the-cloud-application-modernization/)
+- **Phase 2: Mitigation Phase** [README](phases/phase2.md) & [Blog post](https://www.ibm.com/blogs/bluemix/2017/09/websphere-on-the-cloud-application-mitigation/)
+- **Phase 3: Production Lift & Shift** (`TBD`)
+- **Phase 4: Evolve to Microservices** [README](phases/phase4.md) & [Blog post](https://www.ibm.com/blogs/bluemix/2017/09/websphere-on-the-cloud-evolving-to-microservices/)
 
 ## Additional Resources
 
