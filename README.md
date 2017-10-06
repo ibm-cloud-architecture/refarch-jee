@@ -52,8 +52,7 @@ Adoption of newer cloud-based services, such as newer databases and messaging ca
 
 Through iterative assessment, teams move to microservices on a per-business capability basis, depending on prioritized pain-points the existing lifted monolith is still presenting.  This is done repeatedly until the application teams can move at the speed the business requires.
 
-The most practical pattern for this approach is the [Strangler Pattern](https://www.ibm.com/developerworks/cloud/library/cl-strangler-application-pattern-microservices-apps-trs/index.html), which sections off business capability to be reimplemented in a new microservice while the rest of the existing application functions as-is.  
-
+![Phase 4 Application Architecture](https://github.com/ibm-cloud-architecture/refarch-jee-monolith-to-microservices/blob/master/images/purplecompute-architecture.png?raw=true)
 
 ### Techniques and Design Decisions
 
@@ -71,23 +70,26 @@ Application architecture details are detailed at length in the [Customer Order](
 
 ## Repositories
 
-- [Customer Order](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder) - Main application
+- [Customer Order](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder) - Main Legacy monolithic application GitHub repository
   - Branch [was70-dev](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was70-dev) - Development branch for WebSphere Application Server V7.0 application code. Development Environment: RAD V9.6 + WAS V7.0. Builds either from RAD or using Maven.
   - Branch [was70-prod](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was70-prod) - Production branch for WebSphere Application Server V7.0 application code. Does not contain any IDE specific file. Builds only using Maven.
   - Branch [was90-dev](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was90-dev) - Development branch for WebSphere Application Server V9.0 application code. Development Environment: eclipse MARS 2 + WAS V9.0. Builds either from eclipse or using Maven.
   - Branch [was90-prod](https://github.com/ibm-cloud-architecture/refarch-jee-customerorder/tree/was90-prod) - Production branch for WebSphere Application Server V9.0 application code. Does not contain any IDE specific file. Builds only using Maven.
 
-  
-- [Inventory System](https://github.com/ibm-cloud-architecture/refarch-jee-inventorysystem)
+- [Customer Order](https://github.com/ibm-cloud-architecture/refarch-jee-monolith-to-microservices) - Main microservices based application GitHub repository
+  - [Legacy backend microservices](https://github.com/ibm-cloud-architecture/refarch-jee-monolith-to-microservices/tree/master/Legacy-Backend)
+  - [Customer Order Service microservice repository](https://github.com/ibm-cloud-architecture/refarch-jee-micro-customer-service)
+  - [Product Search Service microservice reopository](https://github.com/ibm-cloud-architecture/refarch-jee-micro-product-service)
+  - [Shopping Service microservice repository](https://github.com/ibm-cloud-architecture/refarch-jee-micro-shopping-bff)
 
 ## Getting Started
 
 These phases are iterative in nature and require the previous Phases to be completed before moving on.  In the links below, you will be able to move through the Phases of modernizing the reference application leveraging your own cloud resources.
 
-- [Phase 1: Modernizing the Existing Application](phases/phase1.md) _Currently underway_
-- [Phase 2: Mitigation Phase](phases/phase2.md) _Currently underway_
-- [Phase 3: Production Lift & Shift](#phase-3-production-lift--shift)
-- [Phase 4: Evolve to Microservices](#phase-4-evolve-to-microservices)
+- **Phase 1: Modernizing the Existing Application** [README](phases/phase1.md) & [Blog post](https://www.ibm.com/blogs/bluemix/2017/08/websphere-on-the-cloud-application-modernization/)
+- **Phase 2: Mitigation Phase** [README](phases/phase2.md) & [Blog post](https://www.ibm.com/blogs/bluemix/2017/09/websphere-on-the-cloud-application-mitigation/)
+- **Phase 3: Production Lift & Shift** (`TBD`)
+- **Phase 4: Evolve to Microservices** [README](phases/phase4.md) & [Blog post](https://www.ibm.com/blogs/bluemix/2017/09/websphere-on-the-cloud-evolving-to-microservices/)
 
 ## Additional Resources
 
