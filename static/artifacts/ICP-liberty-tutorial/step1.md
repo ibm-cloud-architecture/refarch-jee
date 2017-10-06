@@ -2,13 +2,52 @@
 
 In this step, we are going to make the modifications needed both at the application level and the server configuration level to migrate our WebSphere Application Server 7 application to run in WebSphere Liberty.
 
-1.  [Source Code Migration](#source-code-migration)
+1.  [Install WebSphere Liberty Server locally](#install-websphere-liberty-server-locally)
+2.  [Source Code Migration](#source-code-migration)
     - [Get the code](#get-the-code)
     - [Tidy your development environment](#tidy-your-development-environment)
     - [Software Analyzer Configuration](#software-analyzer-configuration)
     - [Run the Software Analyzer](#run-the-software-analyzer)
-2. [Configure the Liberty Server](#configure-the-liberty-server)
-3. [Run the application](#run-the-application)
+3. [Configure the Liberty Server](#configure-the-liberty-server)
+4. [Run the application](#run-the-application)
+
+
+## Install WebSphere Liberty Server locally
+
+The IBM WebSphere Liberty Server can be installed from eclipse. Since we will also need to configure eclipse to use IBM WebSphere Liberty Server as the targeted runtime, we will then do both from eclipse at once.
+
+1. Open eclipse
+
+```
+cd ~/eclipse
+./eclipse
+```
+
+select the default workspace by clicking OK
+
+![Source migration 48](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source48.png)
+
+2. Close the welcome page
+
+3. At the bottom, select the servers tab and click on the _"No servers available..."_ message.
+
+![Source migration 49](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source49.png)
+
+4. On the new server dialog that pops up, type in _liberty_ so that available servers get filtered. Then, select WebSphere Application Server Liberty and leave the rest as is. Click Next.
+
+![Source migration 50](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source50.png)
+
+5. Set the path for the existing installation to `/home/vagrant/wlp`. Click Next.
+
+![Source migration 51](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source51.png)
+
+6. On the next window, leave all the options as they are (see picture below) and click on Finish.
+
+![Source migration 52](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source52.png)
+
+7. You should now see your WebSphere Application Server Liberty at localhost created in the Servers tab at the bootom and a project that stores the configuration for your server on the left in the Enterprise Explorer tab.
+
+![Source migration 53](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source53.png)
 
 ## Source Code Migration
 
@@ -18,15 +57,17 @@ In order to migrate the code to get our WebSphere Application Server 7 applicati
 
 The migration toolkit is eclipse based. Therefore, these are the steps to be taken to get the code into eclipse to run the migration toolkit on it:
 
-1. Download Customer Order Services application's source code from GitHub
+1. Open a terminal window
+
+2. Download Customer Order Services application's source code from GitHub
 
 ```
-cd ~/PurpleCompute/git
+cd ~/git
 git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git
 ```
 ![Source migration 35](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source35.png)
 
-2. Switch to the WAS 7 development branch
+3. Switch to the WAS 7 development branch
 
 ```
 cd refarch-jee-customerorder
@@ -34,21 +75,16 @@ git checkout was70-dev
 ```
 ![Source migration 36](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source36.png)
 
-3. Open eclipse
+4. Go back to eclipse
 
-```
-cd ~/PurpleCompute/eclipse
-./eclipse
-```
-
-4. Import projects
+5. Import projects
 
 - Click on File --> Import...
 - On the dialog that pops up, select Existing Projects into Workspace in the General folder and click Next.
 
 ![Source migration 37](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source37.png)
 
-- In the next dialog, browse to ```/home/skytap/PurpleCompute/git/refarch-jee-customerorder``` for the root directory and click Browse. 
+- In the next dialog, browse to ```/home/vagrant/git/refarch-jee-customerorder``` for the root directory and click Browse. 
 
 ![Source migration 38](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source38.png)
 
