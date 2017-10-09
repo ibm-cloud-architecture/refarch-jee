@@ -2,19 +2,19 @@
 
 In this step, we are going to make the modifications needed both at the application level and the server configuration level to migrate our WebSphere Application Server 7 application to run in WebSphere Liberty.
 
-1.  [Install WebSphere Liberty Server locally](#install-websphere-liberty-server-locally)
-2.  [Source Code Migration](#source-code-migration)
-    - [Get the code](#get-the-code)
-    - [Tidy your development environment](#tidy-your-development-environment)
+1.  [Install WebSphere Application Server Liberty locally](#install-websphere-application-server-liberty-locally)
+2.  [Get the code](#get-the-code)
+3.  [Set up your development environment](#set-up-your-development-environment)
+4.  [Source Code Migration](#source-code-migration)
     - [Software Analyzer Configuration](#software-analyzer-configuration)
     - [Run the Software Analyzer](#run-the-software-analyzer)
-3. [Configure the Liberty Server](#configure-the-liberty-server)
-4. [Run the application](#run-the-application)
+5. [Configure WebSphere Liberty Server](#configure-websphere-liberty-server)
+6. [Run the application](#run-the-application)
 
 
-## Install WebSphere Liberty Server locally
+## Install WebSphere Application Server Liberty locally
 
-The IBM WebSphere Liberty Server can be installed from eclipse. Since we will also need to configure eclipse to use IBM WebSphere Liberty Server as the targeted runtime, we will then do both from eclipse at once.
+The IBM WebSphere Application Server Liberty can be installed from eclipse. Since we will also need to configure eclipse to use IBM WebSphere Liberty Server as the targeted runtime, we will then do both from eclipse at once.
 
 1. Open eclipse
 
@@ -49,11 +49,7 @@ select the default workspace by clicking OK
 
 ![Source migration 53](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source53.png)
 
-## Source Code Migration
-
-In order to migrate the code to get our WebSphere Application Server 7 application working on WebSphere Liberty, we are going to use the [WebSphere Application Server Migration Toolkit (WAMT)](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit). The migration toolkit provides a rich set of tools that help you migrate applications from third-party application servers, between versions of WebSphere Application Server, to Liberty, and to cloud platforms such as Liberty for Java on IBM Bluemix, IBM WebSphere on Cloud and Docker.
-
-### Get the code
+## Get the code
 
 The migration toolkit is eclipse based. Therefore, these are the steps to be taken to get the code into eclipse to run the migration toolkit on it:
 
@@ -96,17 +92,21 @@ A migration dialog will pop up after importing the projects into the eclipse wor
 
 Disregard this piece of advice by clicking on Cancel. In the migration cancel window, click OK. The runtime migration will be done in the following sections.
 
-### Tidy your development environment
+## Set up your development environment
 
-When we use/create a new development environment, it is most likely that we will need to tidy it up a bit since installation paths, development tools versions and things like that might very well be different from the original development environment.
+When we use/create a new development environment, it is most likely that we will need to tidy it up a bit since installation paths, development tools versions, libraries and things like that might very well be different from the original development environment.
 
 As you can see when you import the projects into eclipse, we get those projects with red error marks.
 
 ![Source migration 40](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source40.png)
 
-You can open the problems view (Window --> Show View --> Other... --> Problems) in order to see what the problems in your workspace are. If you do so, you should be able to find errors for each of the projects regarding the build path. That is, the references to the Java and WebSphere libraries we have in our projects need to be updated for our new development environment.
+You can open the problems view (Window --> Show View --> Other... --> Problems) in order to see what the problems in your workspace are.
 
-Hence, right click on each of the projects and go to Properties. Once the properties dialog opens up, go to Java Build Path on the left hand side sections panel and then click on the Libraries tab. You should now see something similar to the following:
+![Source migration 54](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source54.png)
+
+If you do so, you should be able to find errors for each of the projects regarding the build path among many other problems. That is, the references to the Java Runtime Environment and WebSphere libraries we have in our projects need to be updated for our new development environment. This should be the first step of all, since a project must have a correct build path to be built (and potentially uncover new issues).
+
+In order to update your JRE and WebSphere libraries references, right click on a project and click on Build Path --> Configure Build Path... Once the properties dialog opens up, click on the Libraries tab. You should now see something similar to the following:
 
 ![Source migration 41](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source41.png)
 
@@ -122,11 +122,37 @@ For the Server Library, repeat the steps but select the only WebSphere Applicati
 
 Click OK to close the properties window.
 
-**Repeat the above for all the projects!**
+**IMPORTANT: Make sure you have fixed the build path for CustomerOrderServices, CustomerOrderServicesWeb and CustomerOrderServicesTest projects**
 
-After updating the references to our actual Server and JRE System libraries, we should clean and rebuild the entire workspace. For doing so, click on Project --> Clean... Verify Clean all projects is selected and click OK.
+After updating the references to our actual WebSphere Server and JRE System libraries, we should clean and rebuild the entire workspace. For doing so, click on Project --> Clean... Verify Clean all projects is selected and click OK.
 
 ![Source migration 45](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source45.png)
+
+If we now check the Problems view out, we might very well see many more problems. The reason for this is that projects are now getting built as a result of a correct build path:
+
+![Source migration 55](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source55.png)
+
+However, if we dobule click on a couple of those different errors we see in the Problems view, we realise that these errors happen as a result of missing third party libraries:
+
+![Source migration 56](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source56.png)
+
+![Source migration 57](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source57.png)
+
+WebSphere Application Server Liberty is a composable lightweight server which you need to add features to in order to get the server to support certain funcionality and technologies.
+
+In our case, we are getting errors because the WebSphere Application Server Liberty is missing the Java EE 6 technology for rest services. This technology comes as a library called JAX-RS and the Java EE 6 version of it is 1.1. Thus, we need to add/install the JAX-RS 1.1 feature/liibrary to our WebSphere Application Server Liberty.
+
+More about what technologies WebSphere Application Server Liberty supports and comes with out of the box as well as how to get these installed/added to your WebSphere Application Server Liberty on the [Configure WebSphere Liberty Server](#configure-websphere-liberty-server) section below.
+
+For now, we will simply install the JAX-RS 1.1 functionality by executing the following:
+
+```
+~/wlp/bin/installUtility install jaxrs-1.1
+```
+
+![Source migration 58](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source58.png)
+
+After installing any new feature/JEE feature to our WebSphere Application Server Liberty, we must clean and build the workspace. For doing so, click on Project --> Clean... Verify Clean all projects is selected and click OK.
 
 If we look now to the Problems view, we should see many less problems:
 
@@ -136,7 +162,13 @@ However, we still see problems. In this case, we want to sort out the Xpath is i
 
 ![Source migration 46](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source46.png)
 
-Click Apply and OK. Finally, clean and build the workspace. You should now see only Target runtime errors which we will get fixed in the next section.
+Click Apply and OK. Finally, clean and build the workspace. You should now see Target runtime errors and one JPA related error (library provider) which we will get fixed in the next section.
+
+**Conclusion:** As we could see in the above walk through, when we move to a different/new development environment we will need to plan ahead and bear in mind that some time will be needed for setting up your new development environment. Even more if this new environment will be used for a WebSphere Application Server migration.
+
+## Source Code Migration
+
+In order to migrate the code to get our WebSphere Application Server 7 application working on WebSphere Liberty, we are going to use the [WebSphere Application Server Migration Toolkit (WAMT)](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Application_Server_Migration_Toolkit). The migration toolkit provides a rich set of tools that help you migrate applications from third-party application servers, between versions of WebSphere Application Server, to Liberty, and to cloud platforms such as Liberty for Java on IBM Bluemix, IBM WebSphere on Cloud and Docker.
 
 ### Software Analyzer Configuration
 
@@ -250,7 +282,7 @@ java:app/CustomerOrderServices/ProductSearchServiceImpl!org.pwte.example.service
 
 Save and close the file.
 
-## Configure the Liberty Server 
+## Configure WebSphere Liberty Server 
 
 The IBM WebSphere Application Server Liberty Profile is a composable, dynamic application server environment that supports development and testing of Java EE Full Platform web applications.
 
