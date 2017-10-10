@@ -35,7 +35,7 @@
     <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
 
     <!-- Automatically expand WAR files and EAR files -->
-    <applicationManager autoExpand="true" startTimeout="200s"/>
+    <applicationManager autoExpand="true"/>
     
     <!-- Define application and its classloaders -->
     <application id="customerOrderServicesApp" location="${shared.app.dir}/CustomerOrderServicesApp.ear" name="CustomerOrderServicesApp.ear" type="ear">
