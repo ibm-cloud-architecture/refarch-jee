@@ -411,7 +411,7 @@ Add the following lines to your server.xml file to configure your Liberty server
 
 ```
 <!-- Automatically expand WAR files and EAR files -->
-<applicationManager autoExpand="true" startTimeout="200s"/>
+<applicationManager autoExpand="true"/>
 ```
 
 **IMPORTANT:** At this point, you should already have the server.xml with the needed configuration to successfully run the Customer Order Services application. However, **you still need to install the Liberty server features** described earlier in this section. In order to install them, you need to execute:
