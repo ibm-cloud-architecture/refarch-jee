@@ -49,6 +49,10 @@ select the default workspace by clicking OK
 
 ![Source migration 53](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source53.png)
 
+8. Finally, double click on the newly created WebSphere Application Server Liberty at localhost in the Servers view and set the start timeout value for the Liberty server to something around 180 or over (if the timeout is too small you might see an error saying that the Server WebSphere Application Server Liberty at localhost was unable to start within XX seconds)
+
+![Source migration 61](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source61.png)
+
 ## Get the code
 
 The migration toolkit is eclipse based. Therefore, these are the steps to be taken to get the code into eclipse to run the migration toolkit on it:
