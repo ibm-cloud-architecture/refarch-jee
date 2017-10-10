@@ -138,19 +138,19 @@ However, if we dobule click on a couple of those different errors we see in the 
 
 ![Source migration 57](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source57.png)
 
-WebSphere Application Server Liberty is a composable lightweight server which you need to add features to in order to get the server to support certain funcionality and technologies.
+In our case, we are getting errors because we are missing the Java EE 6 rest services technology library needed for the compilation of our code. This technology comes as a library called JAX-RS and the Java EE 6 version of it is 1.1. Neither the JRE version we have installed on our system nor the WebSphere Application Server Liberty server come with the needed JAX-RS library out of the box.
 
-In our case, we are getting errors because the WebSphere Application Server Liberty is missing the Java EE 6 technology for rest services. This technology comes as a library called JAX-RS and the Java EE 6 version of it is 1.1. Thus, we need to add/install the JAX-RS 1.1 feature/liibrary to our WebSphere Application Server Liberty.
+However, WebSphere Application Server Liberty is a composable lightweight server which you need to add features to in order to get the Liberty server to support certain funcionality and technologies. Therefore, if we want to run an application that uses JAX-RS 1.1 technology we need to add/install the JAX-RS 1.1 feature/liibrary to our WebSphere Application Server Liberty server. This will also make the JAX-RS 1.1 library avaiable for compilation.
 
-More about what technologies WebSphere Application Server Liberty supports and comes with out of the box as well as how to get these installed/added to your WebSphere Application Server Liberty on the [Configure WebSphere Liberty Server](#configure-websphere-liberty-server) section below.
-
-For now, we will simply install the JAX-RS 1.1 functionality by executing the following:
+To install the JAX-RS 1.1 functionality to our WebSphere Application Server Liberty server execute:
 
 ```
 ~/wlp/bin/installUtility install jaxrs-1.1
 ```
 
 ![Source migration 58](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source58.png)
+
+More about what technologies WebSphere Application Server Liberty supports and comes with out of the box as well as how to get these installed/added to your WebSphere Application Server Liberty on the [Configure WebSphere Liberty Server - features](#1-features) section below.
 
 After installing any new feature/JEE feature to our WebSphere Application Server Liberty, we must clean and build the workspace. For doing so, click on Project --> Clean... Verify Clean all projects is selected and click OK.
 
@@ -293,9 +293,11 @@ The Liberty profile is a simplified, lightweight development and application run
 * Fast. The server starts in under 5 seconds with a basic web application.
 * Extensible. The Liberty profile provides support for user and product extensions, which can use System Programming Interfaces (SPIs) to extend the run time.
 
+[Here](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_feat.html) you can see the technologies that the WebSphere Application Server Liberty support on its different flavors. 
+
 The application server configuration is described in a series of elements in the server.xml configuration file. We are now going to see what we need to describe in that server.xml configuration file to get our Liberty server prepared to successfully run our Customer Order Services application.
 
-In this section, we are going to see the different configuration pieces for the Liberty server to run the Customer Order Services application. As said above, this is done by editing the server.xml file which lives in `/home/skytap/PurpleCompute/wlp/usr/servers/defaultServer`. 
+In this section, we are going to see the different configuration pieces for the Liberty server to run the Customer Order Services application. As said above, this is done by editing the server.xml file which lives in `/home/vagrant/wlp/usr/servers/defaultServer`. 
 
 You can manually edit this server.xml file yourself using your prefered editor or you can also do so in eclipse:
 
@@ -305,15 +307,18 @@ You can manually edit this server.xml file yourself using your prefered editor o
 
 #### 1. Features
 
-First of all, we need to identy the Java EE features we want our Liberty server to provide us with in order to run our application. In our Customer Order Services application, the main Java EE features we use are:
+First of all, we need to identify the Java EE features we want our Liberty server to provide us with in order to run our application. In our Customer Order Services application, the main Java EE features we use are:
 
 * JPA
 * JAX-RS
 * SERVLET
-* JDBC
 * EJB
+* JDBC
+* JSON
+* JAAS
 
-However, we also use other Java features such as JDBC, JSON and Java Application Security. As a result, we need to get these featues installed in our Liberty server. We do so by definiing these featues in the server.xml file by adding the following lines to it
+We need to define all these features in the _featureManager_ section within the server.xml configuration file so that the WebSphere Application Server Liberty server loads them during its startup and make them available to your application. As mentioned earlier, WebSphere Application Server Liberty is dynamic and flexible. That is, the run time loads only what your application needs and recomposes the run time in response to configuration changes.
+
 ```
 <!-- Enable features -->
 <featureManager>
@@ -327,6 +332,24 @@ However, we also use other Java features such as JDBC, JSON and Java Application
     <feature>localConnector-1.0</feature>
 </featureManager>
 ```
+
+However, we need to install such features in order for the Liberty server to load them and make them available to the app for it to run correctly. **We will explain how to install all the features above in the next section** [Run the application](#run-the-application).
+
+Extra info:
+
+If you want to check all the features your WebSphere Application Server Liberty server has installed at any point you can run
+
+`~/wlp/bin/featureManager featureList feature_report.xml`
+
+and a *feature_report.xml* file will be created with a list of all the features your Liberty server comprises of. For an quicker and easier first look you can then execute
+
+`cat ~/wlp/bin/feature_report.xml | grep "feature name="`
+
+and you will see an output similar to the following which lists the features WebSphere Application Server Liberty server comes with out of the box
+
+![Source migration 59](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source59.png)
+
+<sup>*</sup>*We can see in the list above that the jaxrs-1.1 feature does not come installed out of the box and that is the reason for the errors we saw in previous [Set up your development environment](#set-up-your-development-environment) section. If you need to manually install features to your WebSphere Application Server Liberty server check the [installUtility command](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_command_installutility.html)*
 
 #### 2. Application
 
@@ -369,13 +392,13 @@ Add the following lines to your server.xml file to define your application data 
 ```
 <!-- DB2 library definition -->
 <library apiTypeVisibility="spec, ibm-api, third-party" id="DB2JCC4Lib">
-    <fileset dir="/opt/ibm/db2/V11.1/java/" includes="db2jcc4.jar db2jcc_license_cu.jar"/>
+    <fileset dir="/home/vagrant/db2lib" includes="db2jcc4.jar db2jcc_license_cu.jar"/>
 </library>
     
 <!-- Data source definition -->
 <dataSource id="OrderDS" jndiName="jdbc/orderds" type="javax.sql.XADataSource">
     <jdbcDriver libraryRef="DB2JCC4Lib"/>
-    <properties.db2.jcc databaseName="ORDERDB" password="db2inst1-pwd" portNumber="50000" serverName="localhost" user="db2inst1"/>
+    <properties.db2.jcc databaseName="ORDERDB" password="db2user01" portNumber="50000" serverName="localhost" user="db2inst1"/>
 </dataSource>
 ```
 #### 6. Expand WAR and EAR files
@@ -384,10 +407,16 @@ Add the following lines to your server.xml file to configure your Liberty server
 
 ```
 <!-- Automatically expand WAR files and EAR files -->
-<applicationManager autoExpand="true"/>
+<applicationManager autoExpand="true" startTimeout="200s"/>
 ```
 
-At this point, you should already have the server.xml with the needed configuration to successfully run the Customer Order Services application.
+**IMPORTANT:** At this point, you should already have the server.xml with the needed configuration to successfully run the Customer Order Services application. However, **you still need to install the Liberty server features** described earlier in this section. In order to install them, you need to execute:
+
+`~/wlp/bin/installUtility install <server_name>`
+
+where *<server_name>* is the name you have given to your Liberty server when you created it at the beginning of this tutorial. If you have followed the instructions as they are, the Liberty server name should be *defaultServer*.
+
+![Source migration 60](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source60.png)
 
 ## Run the application
 
