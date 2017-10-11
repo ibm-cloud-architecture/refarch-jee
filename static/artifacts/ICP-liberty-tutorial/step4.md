@@ -10,11 +10,11 @@ In this step, we are going to write the needed configuration files, deployment f
 
 ### Push image to ICP Image Repository
 
-IBM Cloud Private (ICP) provides a docker compatible image repository out of the box, which is available on the server `mycluster` port `8500`. However, before we upload container/docker images and start deploying these, we will create a separate user and namespace in kubernetes for us, where the application will be hosted. Namespacing is a concept in Kubernetes that allows isolation of applications and other resources.
+IBM Cloud Private (ICP) provides a docker compatible image repository out of the box, which is available on the server `mycluster.icp` port `8500`. However, before we upload container/docker images and start deploying these, we will create a separate user and namespace in kubernetes for us, where the application will be hosted. Namespacing is a concept in Kubernetes that allows isolation of applications and other resources.
 
 #### Create user and namespace
 
-In your web broswer login to the the ICP Dashboard on `https://10.0.0.1:8443` as a system administrator, username `admin` and password `admin`.
+In your web broswer login to the the ICP Dashboard on `https://localhost:8443` as a system administrator, username `admin` and password `admin`.
 
 In order to create a namespace,
 
@@ -37,16 +37,16 @@ To be able to push the image we build in the previous step into the ICP Image Re
 
 From the command line, enter the following command
 ```
-docker tag customer-order-services:liberty mycluster:8500/websphere/customer-order-services:liberty
+docker tag customer-order-services:liberty mycluster.icp:8500/websphere/customer-order-services:liberty
 ```
-This extra information in the tag tells docker that this image belongs to the repository `websphere` on the `mycluster:8500` server, which maps to the namespace we created above.
+This extra information in the tag tells docker that this image belongs to the repository `websphere` on the `mycluster.icp:8500` server, which maps to the namespace we created above.
 
 #### Push image
 
 To make the image available to use in Kubernetes enter the following commands
 
-1. `docker login mycluster:8500` providing `user1` as the user and the password you created above
-2. `docker push mycluster:8500/websphere/customer-order-services:liberty`
+1. `docker login mycluster.icp:8500` providing `user1` as the user and the password you created above
+2. `docker push mycluster.icp:8500/websphere/customer-order-services:liberty`
 
 You will now be able to see the image in the ICP Dashboard under `Infrastructure -> Images`.
 
@@ -86,7 +86,7 @@ spec:
         app: customerorderservices
     spec:
       containers:
-      - image: mycluster:8500/websphere/customer-order-services:liberty
+      - image: mycluster.icp:8500/websphere/customer-order-services:liberty
         name: customerorderservices
         ports:
         - containerPort: 9080
