@@ -32,7 +32,7 @@ The environment specific runtime variables for the application will be held in C
 4. In the `data` JSON parameter, enter the following JSON snippet as its value.
 
     ```
-    "DB2_HOST_ORDER": "10.0.0.7",
+    "DB2_HOST_ORDER": "192.168.27.100",
     "DB2_PORT_ORDER": "50000",
     "DB2_DBNAME_ORDER": "ORDERDB",
     "DB2_USER_ORDER": "db2inst1",
@@ -42,6 +42,8 @@ The environment specific runtime variables for the application will be held in C
 
 5. Click `Create`.
 
+<sup>*</sup>_DB2_HOST_ORDER_ value might change based on the ICP VM ip address.
+
 **Inventory DB Configmap**
 
 1. Click Create Configmap.
@@ -50,7 +52,7 @@ The environment specific runtime variables for the application will be held in C
 4. in the `data` JSON parameter, enter the following JSON snippet as its value.
 
     ```
-    "DB2_HOST_INVENTORY": "10.0.0.7",
+    "DB2_HOST_INVENTORY": "192.168.27.100",
     "DB2_PORT_INVENTORY": "50000",
     "DB2_DBNAME_INVENTORY": "INDB",
     "DB2_USER_INVENTORY": "db2inst1",
@@ -60,6 +62,8 @@ The environment specific runtime variables for the application will be held in C
 ![indb ConfigMap Json](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/indbConfigMapJson.png)
 
 5. Click `Create`.
+
+<sup>*</sup>_DB2_HOST_ORDER_ value might change based on the ICP VM ip address.
 
 **LDAP Configmap**
 
@@ -93,7 +97,7 @@ You can compare the JSON that the GUI creates with the yaml you created in step 
 4. On the Container Settings tab, provide a container name, image name, and port:
     
     * Container name: customerorderservices
-    * Image name: mycluster:8500/websphere/customer-order-services:liberty
+    * Image name: mycluster.icp:8500/websphere/customer-order-services:liberty
     * Container Port: 9080
 
 5. To be able to expose the information we stored in the ConfigMaps we need to create some entries in the JSON files manually. Therefore, toggle the `JSON mode` button to enter into JSON mode.
@@ -110,7 +114,7 @@ You can compare the JSON that the GUI creates with the yaml you created in step 
         {
             "configMapRef": { "name": "ldap"}
         }
-    ],
+    ]
 
     ```
     
@@ -136,7 +140,7 @@ To be able to connect to the application from our workstation we need to expose 
 1. From the `Workloads --> Application` view, locate the application and click on the application name, customerorderservices. 
 2. In the Application Overview page, locate the `Expose Details` section.
 3. Grab the `Cluster IP` ip address.
-4. Open a new web browser tab and point it to the `Cluster IP` ip address from previous step appending `CustomerOrderServicesWeb` at the end of it. The complete address should look like:
+4. Open a new web browser tab and point it to the `Cluster IP` ip address from previous step appending the `CustomerOrderServicesWeb` context root at the end of it. The complete address should look like:
    ```
    http://10.0.1.127/CustomerOrderServicesWeb/
    ```
@@ -171,12 +175,12 @@ The environment specific runtime variables for the application will be held in C
 To create the ConfigMaps execute the following:
     
 ```
-cd /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/
+cd /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/
 kubectl create configmap ldap --from-env-file=ldap.env
 kubectl create configmap inventorydb --from-env-file=inventorydb.env
 kubectl create configmap orderdb --from-env-file=orderdb.env
 ```
-![CLI ConfigMaps](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LibertyToolKit/configmaps.png)
+![CLI ConfigMaps](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/configmaps.png)
 
 #### Deploy application (CLI)
 
