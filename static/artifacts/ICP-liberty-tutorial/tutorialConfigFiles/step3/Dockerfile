@@ -2,8 +2,8 @@ FROM websphere-liberty:webProfile7
 
 COPY Common/server.xml /config
 COPY Common/server.env.docker /config/server.env
-COPY /home/vagrant/db2lib/db2jcc4.jar /db2lib/db2jcc4.jar
-COPY /home/vagrant/db2lib/db2jcc_lisence_cu.jar /db2lib/db2jcc_lisence_cu.jar
+COPY Common/db2lib/db2jcc4.jar /db2lib/db2jcc4.jar
+COPY Common/db2lib/db2jcc_lisence_cu.jar /db2lib/db2jcc_lisence_cu.jar
 COPY CustomerOrderServicesApp/target/CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear /config/apps
 
 RUN /opt/ibm/wlp/bin/installUtility install  --acceptLicense \
