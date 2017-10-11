@@ -2,21 +2,11 @@
 
 In this step, we are going to build and run the Liberty app locally and connect it to the remote DB2 and LDAP servers simulating what would be a real production scenario.
 
-1. [Get Started](#get-started)
-2. [Build the Liberty app](#build-the-liberty-app)
+1. [Build the Liberty app](#build-the-liberty-app)
     * [Get the project repositories](#get-the-project-repositories)
     * [Build the ear file using Maven](#build-the-ear-file-using-maven)
-3. [Configure the Liberty server](#configure-the-liberty-server)
-4. [Deploy and run the app](#deploy-and-run-the-app)
-
-
-### Get started
-
-Before building the application, on your skytap machine, go to **/home/skytap/PurpleCompute**. This is the home directory from where we run the lab:
-
-1. Login to your skytap machine on the NFS/Jumpbox vm image.
-2. Open your terminal.
-3. Enter `cd ~/PurpleCompute`
+2. [Configure the Liberty server](#configure-the-liberty-server)
+3. [Deploy and run the app](#deploy-and-run-the-app)
 
 ### Build the Liberty app
 
@@ -24,14 +14,15 @@ Before building the application, on your skytap machine, go to **/home/skytap/Pu
 
 In this step we need to clone two GitHub repositories. The first one includes the instructions for this very same tutorial and all needed files to complete it.
 
-1. `cd git`
-2. `git clone https://github.com/ibm-cloud-architecture/refarch-jee.git`
+1. Open a new terminal
+2. `cd git`
+3. `git clone https://github.com/ibm-cloud-architecture/refarch-jee.git`
 
-The second one includes the application source code. You can clone this repository from its main GitHub repository page and checkout the appropriate branch for this version of the application. If you completed Step1.md in this tutorial, then skip the `git clone` command as this is already completed on the image.
+The second one includes the application source code. You can clone this repository from its main GitHub repository page and checkout the appropriate branch for this version of the application. If you completed **Step 1** in this tutorial, then execute `rm -rf ~/git/refarch-jee-customerorder/`.
 
 1. `git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git`
 2. `cd refarch-jee-customerorder`
-3. `git checkout icp-bootcamp-v1`
+3. `git checkout icp-bootcamp-v1` (disregard warning output)
 
 #### Build the ear file using Maven
 
@@ -68,31 +59,33 @@ For this tutorial, we provide you with these configuration files ready to be use
 
 1. Copy server.xml into the Liberty server directory
 ```
-cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step2/server.xml \
-   /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer
+cp /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step2/server.xml \
+   /home/vagrant/wlp/usr/servers/defaultServer
 ```
 2. Copy server.env into the Liberty server directory 
 ```
-cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step2/server.env \
-   /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer
+cp /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step2/server.env \
+   /home/vagrant/wlp/usr/servers/defaultServer
 ```
 
 ![Step 2 img 1](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LibertyToolKit/step2-1.png)
+
+For more information on the configuration specified in the server.xml please read [Configure WebSphere Liberty Server](step1.md#configure-websphere-liberty-server) section in step 1.
     
 ### Deploy and run the app
 
 Now, we want to deploy the ear file our Customer Order Services application got build into. In order to do so, we need to drop this ear file into an specific folder within the Liberty server installation directory.
 
-1. `cd /home/skytap/PurpleCompute/git/refarch-jee-customerorder/CustomerOrderServicesApp/target` <sup>\*</sup>_(You should see the build output ear file called **CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear**)_
-2. `cp CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer/apps`
+1. `cd /home/vagrant/git/refarch-jee-customerorder/CustomerOrderServicesApp/target` <sup>\*</sup>_(You should see the build output ear file called **CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear**)_
+2. `cp CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear /home/vagrant/wlp/usr/servers/defaultServer/apps`
   
   
 Now, you are done with the configuration and the app is ready for deployment. To run the app on Liberty,
 
-1. Go into the Liberty server binaries folder: `cd /home/skytap/PurpleCompute/wlp/bin`
+1. Go into the Liberty server binaries folder: `cd /home/vagrant/wlp/bin`
 2. Before starting the server, to make sure all the utilities are installed, run the following command: `./installUtility install defaultServer` <sup>\*</sup>_(If it prompts you to accept the license by pressing 1, please accept it)_
 3. Start the server: `./server start defaultServer`
-4. Open your browser and point it to http://localhost:9080/CustomerOrderServicesWeb/#shopPage
+4. Open your browser and point it to http://localhost:9082/CustomerOrderServicesWeb/#shopPage
 5. Login as the user `rbarcia` with the password of `bl0wfish`
 
 <p align="center">
@@ -100,6 +93,3 @@ Now, you are done with the configuration and the app is ready for deployment. To
 </p>
 
 6. Finally, stop the server: `./server stop defaultServer`
-
-
-
