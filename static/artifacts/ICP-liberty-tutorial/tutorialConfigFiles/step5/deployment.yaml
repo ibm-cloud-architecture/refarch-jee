@@ -27,7 +27,7 @@ spec:
         app: customerorderservices
     spec:
       containers:
-      - image: mycluster:8500/websphere/customer-order-services:liberty
+      - image: mycluster.icp:8500/websphere/customer-order-services:liberty
         name: customerorderservices
         ports:
         - containerPort: 9080
