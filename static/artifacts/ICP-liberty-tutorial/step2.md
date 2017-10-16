@@ -85,7 +85,7 @@ Now, you are done with the configuration and the app is ready for deployment. To
 1. Go into the Liberty server binaries folder: `cd /home/vagrant/wlp/bin`
 2. Before starting the server, to make sure all the utilities are installed, run the following command: `./installUtility install defaultServer` <sup>\*</sup>_(If it prompts you to accept the license by pressing 1, please accept it)_
 3. Start the server: `./server start defaultServer`
-4. Open your browser and point it to http://localhost:9082/CustomerOrderServicesWeb/#shopPage
+4. Open your browser and point it to http://localhost:9080/CustomerOrderServicesWeb/#shopPage
 5. Login as the user `rbarcia` with the password of `bl0wfish`
 
 <p align="center">
