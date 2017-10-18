@@ -49,9 +49,11 @@ select the default workspace by clicking OK
 
 ![Source migration 53](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source53.png)
 
-8. Finally, double click on the newly created WebSphere Application Server Liberty at localhost in the Servers view and set the start timeout value for the Liberty server to something around 180 or over (if the timeout is too small you might see an error saying that the Server WebSphere Application Server Liberty at localhost was unable to start within XX seconds)
+8. Double click on the newly created WebSphere Application Server Liberty at localhost in the Servers view and set the start timeout value for the Liberty server to something around 180 or over _(if the timeout is too small you might see an error saying that the Server WebSphere Application Server Liberty at localhost was unable to start within XX seconds)_
 
 ![Source migration 61](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/toLiberty/Source61.png)
+
+9. Click on Save (Ctrl+s)
 
 ## Get the code
 
@@ -156,7 +158,7 @@ To install the JAX-RS 1.1 functionality to our WebSphere Application Server Libe
 
 More about what technologies WebSphere Application Server Liberty supports and comes with out of the box as well as how to get these installed/added to your WebSphere Application Server Liberty on the [Configure WebSphere Liberty Server - features](#1-features) section below.
 
-After installing any new feature/JEE feature to our WebSphere Application Server Liberty, we must clean and build the workspace. For doing so, click on Project --> Clean... Verify Clean all projects is selected and click OK.
+After installing any new feature/JEE feature to our WebSphere Application Server Liberty, we must clean and build the workspace now that we have the appropriate third party JAX-RS libraries. First, click on File --> Refresh or press F5. Then, click on Project --> Clean... Verify Clean all projects is selected and click OK.
 
 If we look now to the Problems view, we should see many less problems:
 
