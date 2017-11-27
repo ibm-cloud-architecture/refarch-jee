@@ -29,24 +29,24 @@ The pipeline steps will be provided to Jenkins from a Jenkinsfile in github each
 
 ### Configure Credentials
 1. From the main Jenkins welcome screen, select `Credentials` from the left hand navigation bar
-<br />![Global Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-globalCredentialstore.png)<br />
+![Global Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-globalCredentialstore.png)
 1. Select the `_(global)` link to enter the global credentials scope
-<br />![Add Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-Add-credentialstore.png)<br />
+![Add Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-Add-credentials.png)
 1. Click `Add Credentials` in the left hand navigation menu
-<br />![Add Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-setup-user1-credentials.png)<br />
+![Add Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-setup-user1-credentials.png)
 1. Leave Kind as `Username with password`, and enter `user1` as username and the password you created for this user as password
     Enter `icp-credentials` as ID and Description
 1. Click OK
 
 ### Create a new pipeline
 1. From the main Jenkins welcome screen, select `New item` to create a new job
-<br />![Add Pipeline](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-NewPipelineJob.png)<br />
 1. Enter `CustomerOrderServices` as item name, select `Pipeline` type and click `OK` to continue
-<br />![Add Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-setup-user1-credentials.png)<br />
+![Add Pipeline](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-NewPipelineJob.png)
 1. In General section select *This project is parameterized* and add a `string parameter`
+![Add Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-CustomerOrderGeneral.png)
 1. Name the parameter `namespace` and enter a default value of `websphere`
-<br />![Add Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-setup-user1-credentials.png)<br />
 1. In the Build Triggers section select *Poll SCM* and give a schedule of `H/5 * * * *` to make Jenkins poll github for new commits every 5 minutes
+![Add Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-CustomerOrder-BuildTrigger.png)
 1. In the *Pipeline* section select *Pipeline script from SCM*, and provide the following input
     * SCM: `git`
     * Repository URL: `https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git`
