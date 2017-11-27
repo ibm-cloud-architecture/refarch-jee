@@ -29,9 +29,8 @@ The pipeline steps will be provided to Jenkins from a Jenkinsfile in github each
 
 ### Configure Credentials
 1. From the main Jenkins welcome screen, select `Credentials` from the left hand navigation bar
-![Global Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-globalCredentialstore.png)
 1. Select the `_(global)` link to enter the global credentials scope
-![Add Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-Add-credentials.png)
+![Global Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-globalCredentialstore.png)
 1. Click `Add Credentials` in the left hand navigation menu
 ![Add Credentials](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/Jenkins-setup-user1-credentials.png)
 1. Leave Kind as `Username with password`, and enter `user1` as username and the password you created for this user as password
