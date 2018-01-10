@@ -29,7 +29,7 @@ In this task, you will analyze an existing application that has had the Transfor
 
 2. Enter **purplecompute-tutorial** as the unique identifier here.  A workspace has already been created here, with existing data already uploaded for you to review.  Otherwise, you would have to spend a considerable amount of time setting up a WebSphere Application Server environment, which is most definitely not the goal of this tutorial.
 
-   ![Transformation Advisor 01](static/imgs/modernize-app-for-was/Source60.png)
+   ![Transformation Advisor 01](/static/imgs/modernize-app-for-was/Source60.png)
 
 3. You can create multiple tasks for different modernization and migration efforts under a given workspace.  For now, you will use the **LibertyTransform** task that has already been created.  Click **LibertyTransform** from the left menu.
 
