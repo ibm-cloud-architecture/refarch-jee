@@ -36,7 +36,7 @@ This command will build **CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear** in **tar
 ```
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary:
-[INFO] 
+[INFO]
 [INFO] project ............................................ SUCCESS [  0.157 s]
 [INFO] CustomerOrderServices .............................. SUCCESS [  1.514 s]
 [INFO] Customer Order Services Web Module ................. SUCCESS [  9.391 s]
@@ -59,33 +59,45 @@ For this tutorial, we provide you with these configuration files ready to be use
 
 1. Copy server.xml into the Liberty server directory
 ```
-cp /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step2/server.xml \
-   /home/vagrant/wlp/usr/servers/defaultServer
+cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/server.xml \
+   /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer
 ```
-2. Copy server.env into the Liberty server directory 
+2. Copy server.env into the Liberty server directory
 ```
-cp /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step2/server.env \
-   /home/vagrant/wlp/usr/servers/defaultServer
+cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/server.env.step2 \
+   /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer/server.env
 ```
 
 ![Step 2 img 1](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/LibertyToolKit/step2-1.png)
 
+3. The correct NodePort address will need to be specified in the copied *server.env* file, as this value changes for every Kubernetes deployment.  This value is acquired via the `kubectl get services` command:
+```
+skytap@icpboot:~/PurpleCompute$ kubectl get services
+NAME                      TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                           AGE
+db2-cos-ibm-db2oltp-dev   NodePort    10.1.0.231   <none>        50000:30943/TCP,55000:31124/TCP   32m
+kubernetes                ClusterIP   10.1.0.1     <none>        443/TCP                           14d
+```
+4. Update the new server.env file by replacing the string **REPLACE_WITH_NODEPORT** with the value to the right of 50000.  In the example above, this value would be **30943**.
+```
+vi /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer/server.env
+```
+
 For more information on the configuration specified in the server.xml please read [Configure WebSphere Liberty Server](step1.md#configure-websphere-liberty-server) section in step 1.
-    
+
 ### Deploy and run the app
 
 Now, we want to deploy the ear file our Customer Order Services application got build into. In order to do so, we need to drop this ear file into an specific folder within the Liberty server installation directory.
 
-1. `cd /home/vagrant/git/refarch-jee-customerorder/CustomerOrderServicesApp/target` <sup>\*</sup>_(You should see the build output ear file called **CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear**)_
-2. `cp CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear /home/vagrant/wlp/usr/servers/defaultServer/apps`
-  
-  
+1. `cd /home/skytap/PurpleCompute/git/refarch-jee-customerorder/CustomerOrderServicesApp/target` <sup>\*</sup>_(You should see the build output ear file called **CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear**)_
+2. `cp CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer/apps`
+
+
 Now, you are done with the configuration and the app is ready for deployment. To run the app on Liberty,
 
-1. Go into the Liberty server binaries folder: `cd /home/vagrant/wlp/bin`
+1. Go into the Liberty server binaries folder: `cd /home/skytap/PurpleCompute/wlp/bin`
 2. Before starting the server, to make sure all the utilities are installed, run the following command: `./installUtility install defaultServer` <sup>\*</sup>_(If it prompts you to accept the license by pressing 1, please accept it)_
 3. Start the server: `./server start defaultServer`
-4. Open your browser and point it to http://localhost:9080/CustomerOrderServicesWeb/#shopPage
+4. Open your browser and point it to http://10.0.0.1:9081/CustomerOrderServicesWeb/#shopPage
 5. Login as the user `rbarcia` with the password of `bl0wfish`
 
 <p align="center">

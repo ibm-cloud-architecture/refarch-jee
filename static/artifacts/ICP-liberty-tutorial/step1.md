@@ -134,7 +134,7 @@ select the default workspace by clicking OK
 
 ![Source migration 50](/static/imgs/toLiberty/Source50.png)
 
-5. Set the path for the existing installation to `/home/vagrant/wlp`. Click Next.
+5. Set the path for the existing installation to `/home/skytap/PurpleCompute/wlp`. Click Next.
 
 ![Source migration 51](/static/imgs/toLiberty/Source51.png)
 
@@ -183,7 +183,7 @@ git checkout was70-dev
 
 ![Source migration 37](/static/imgs/toLiberty/Source37.png)
 
-- In the next dialog, browse to ```/home/vagrant/git/refarch-jee-customerorder``` for the root directory and click Browse.
+- In the next dialog, browse to ```/home/skytap/PurpleCompute/git/refarch-jee-customerorder``` for the root directory and click Browse.
 
 ![Source migration 38](/static/imgs/toLiberty/Source38.png)
 
@@ -409,7 +409,7 @@ spec:
   hostPath:
     path: customerorder-data
 ```
-    This YAML block will create a *PersistentVolume* which the Db2 Helm Chart will create a *PersistentVolumeClaim* against.  In doing so, Db2 can now persist its data across individual container instances should one crash, fail, or otherwise be removed.
+  This YAML block will create a *PersistentVolume* which the Db2 Helm Chart will create a *PersistentVolumeClaim* against.  In doing so, Db2 can now persist its data across individual container instances should one crash, fail, or otherwise be removed.
 
     As this is an introductory tutorial, we are using the most simplistic form of shared storage in a Kubernetes-based environment, *hostPath*.  This allows Kubernetes to save data from containers running in Pods to the physical host.  But note that this is not shared across hosts automatically, so should the container fail and be rescheduled on a different host, this data would be unavailable.  For this tutorial, this is acceptable.  There are other platform-level tutorials to explore the functionality of ICP-supported storage capabilities available here. [TBD-TODO](#)
 4. Click **Create**.
@@ -480,7 +480,7 @@ The Liberty profile is a simplified, lightweight development and application run
 
 The application server configuration is described in a series of elements in the server.xml configuration file. We are now going to see what we need to describe in that server.xml configuration file to get our Liberty server prepared to successfully run our Customer Order Services application.
 
-In this section, we are going to see the different configuration pieces for the Liberty server to run the Customer Order Services application. As said above, this is done by editing the server.xml file which lives in `/home/vagrant/wlp/usr/servers/defaultServer`.
+In this section, we are going to see the different configuration pieces for the Liberty server to run the Customer Order Services application. As said above, this is done by editing the server.xml file which lives in `/home/skytap/PurpleCompute/wlp/usr/servers/defaultServer`.
 
 You can manually edit this server.xml file yourself using your prefered editor or you can also do so in eclipse:
 
@@ -570,18 +570,18 @@ Add the following lines to your server.xml file to set you application security 
 
 #### 5. Data sources
 
-Add the following lines to your server.xml file to define your application data sources as well as what JDBC drivers and properties the Liberty server needs to use in order to access the application's data.  Remember to use the correct parameter values for the corresponding fields when Db2 was installed above:
+Add the following lines to your server.xml file to define your application data sources as well as what JDBC drivers and properties the Liberty server needs to use in order to access the application's data.  The correct *KUBERNETES_NODEPORT_VALUE* can be acquired via the `kubectl get services` command, using the value to the immediate right of the default 50000 port (somewhere in the range of 30000).
 
 ```
 <!-- DB2 library definition -->
 <library apiTypeVisibility="spec, ibm-api, third-party" id="DB2JCC4Lib">
-    <fileset dir="/home/vagrant/db2lib" includes="db2jcc4.jar db2jcc_license_cu.jar"/>
+    <fileset dir="/home/skytap/PurpleCompute/db2lib" includes="db2jcc4.jar db2jcc_license_cu.jar"/>
 </library>
 
 <!-- Data source definition -->
 <dataSource id="OrderDS" jndiName="jdbc/orderds" type="javax.sql.XADataSource">
     <jdbcDriver libraryRef="DB2JCC4Lib"/>
-    <properties.db2.jcc databaseName="ORDERDB" password="{YOUR_PASSWORD}" portNumber="50000" serverName="{YOUR_DB2_SERVICE_NAME}" user="{YOUR_USERNAME}"/>
+    <properties.db2.jcc databaseName="ORDERDB" password="passw0rd" portNumber="{KUBERNETES_NODEPORT_VALUE}" serverName="10.0.0.1" user="admin"/>
 </dataSource>
 ```
 #### 6. Expand WAR and EAR files

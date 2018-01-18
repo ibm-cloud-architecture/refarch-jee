@@ -19,12 +19,7 @@
     <properties.db2.jcc  user="${env.DB2_USER_ORDER}" password="${env.DB2_PASSWORD_ORDER}" databaseName="${env.DB2_DBNAME_ORDER}" serverName="${env.DB2_HOST_ORDER}" portNumber="${env.DB2_PORT_ORDER}"/>
     <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
   </dataSource>
-  <dataSource id="INDS" type="javax.sql.XADataSource" jndiName="jdbc/inds">
-    <jdbcDriver libraryRef="DB2Lib"/>
-    <properties.db2.jcc  user="${env.DB2_USER_INVENTORY}" password="${env.DB2_PASSWORD_INVENTORY}" databaseName="${env.DB2_DBNAME_INVENTORY}" serverName="${env.DB2_HOST_INVENTORY}" portNumber="${env.DB2_PORT_INVENTORY}"/>
-    <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
-  </dataSource>
-  <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint">
+  <httpEndpoint host="*" httpPort="${env.HTTP_PORT}" httpsPort="${env.HTTPS_PORT}" id="defaultHttpEndpoint">
     <tcpOptions soReuseAddr="true"/>
   </httpEndpoint>
   <keyStore id="defaultKeyStore" password="${env.KEYSTORE_PASSWORD}"/>

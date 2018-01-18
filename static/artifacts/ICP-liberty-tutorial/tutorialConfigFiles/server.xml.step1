@@ -28,7 +28,7 @@
     <!-- Data source definition -->
     <dataSource id="OrderDS" jndiName="jdbc/orderds" type="javax.sql.XADataSource">
     	<jdbcDriver libraryRef="DB2JCC4Lib"/>
-    	<properties.db2.jcc databaseName="ORDERDB" password="passw0rd" portNumber="50000" serverName="db2-cos" user="admin"/>
+    	<properties.db2.jcc databaseName="ORDERDB" password="passw0rd" portNumber="30000" serverName="10.0.0.1" user="admin"/>
 	</dataSource>
 
     <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
