@@ -118,7 +118,7 @@ To be able to connect to the application from our workstation we need to expose 
 3. Grab the `Cluster IP` ip address.
 4. Open a new web browser tab and point it to the `Cluster IP` ip address from previous step appending the `CustomerOrderServicesWeb` context root at the end of it. The complete address should look like:
    ```
-   http://10.0.1.127/CustomerOrderServicesWeb/
+   http://10.0.0.1/CustomerOrderServicesWeb/
    ```
 5. Validate that the shop loads with product listings.
 
@@ -180,7 +180,7 @@ kubectl get service customerorderservices
 
 Using a web broswer, navigate to the IP address for the Cluster with the path of `CustomerOrderServicesWeb`, so the full URL should look something this:
 ```
-http://10.0.1.9/CustomerOrderServicesWeb/
+http://10.0.0.1/CustomerOrderServicesWeb/
 ```
 
 Verify that the page loads properly.

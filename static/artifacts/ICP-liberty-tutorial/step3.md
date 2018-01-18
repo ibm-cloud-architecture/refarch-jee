@@ -13,7 +13,7 @@ In this step, we are going to use Docker technology to containerise our Liberty 
 
 We are using Docker to containerize the app. Using Docker, we can pack, ship and easily run the apps on a portable lightweight container that can run anywhere virtually.
 
-Lets have a look at our [Docker file](tutorialConfigFiles/step3/Dockerfile)
+Lets have a look at our [Docker file](tutorialConfigFiles/Dockerfile)
 
 ```
 FROM websphere-liberty:webProfile7
@@ -87,10 +87,10 @@ These files are located in `/home/skytap/PurpleCompute/git/refarch-jee/static/ar
 Run the docker image:
 
 ```
-docker run \
+docker run --name customer-order-services \
   --env-file /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/ldap.env \
   --env-file /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/orderdb.env \
-  -p 9080:9080 customer-order-services:liberty
+  -p 9081:9080 customer-order-services:liberty
 ```
 
 When it is complete, you can see the below output.
@@ -104,7 +104,7 @@ When it is complete, you can see the below output.
 ```
 Now your application is running locally. To check it out, open your browser and point it out to
 
-http://localhost:9080/CustomerOrderServicesWeb/#shopPage
+http://10.0.0.1:9081/CustomerOrderServicesWeb/#shopPage
 
 
 As usual, login as the user `rbarcia` with the password of `bl0wfish`.

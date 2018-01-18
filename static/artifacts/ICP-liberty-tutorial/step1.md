@@ -411,7 +411,7 @@ spec:
 ```
   This YAML block will create a *PersistentVolume* which the Db2 Helm Chart will create a *PersistentVolumeClaim* against.  In doing so, Db2 can now persist its data across individual container instances should one crash, fail, or otherwise be removed.
 
-    As this is an introductory tutorial, we are using the most simplistic form of shared storage in a Kubernetes-based environment, *hostPath*.  This allows Kubernetes to save data from containers running in Pods to the physical host.  But note that this is not shared across hosts automatically, so should the container fail and be rescheduled on a different host, this data would be unavailable.  For this tutorial, this is acceptable.  There are other platform-level tutorials to explore the functionality of ICP-supported storage capabilities available here. [TBD-TODO](#)
+  As this is an introductory tutorial, we are using the most simplistic form of shared storage in a Kubernetes-based environment, *hostPath*.  This allows Kubernetes to save data from containers running in Pods to the physical host.  But note that this is not shared across hosts automatically, so should the container fail and be rescheduled on a different host, this data would be unavailable.  For this tutorial, this is acceptable.
 4. Click **Create**.
 
 #### Deploy the Db2 Helm Chart
@@ -551,7 +551,7 @@ Add the following lines to your server.xml file to tell the Liberty server what 
 
 ```
 <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
-<httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+<httpEndpoint host="*" httpPort="9081" httpsPort="9444" id="defaultHttpEndpoint"/>
 ```
 
 #### 4. Application security
@@ -570,7 +570,9 @@ Add the following lines to your server.xml file to set you application security 
 
 #### 5. Data sources
 
-Add the following lines to your server.xml file to define your application data sources as well as what JDBC drivers and properties the Liberty server needs to use in order to access the application's data.  The correct *KUBERNETES_NODEPORT_VALUE* can be acquired via the `kubectl get services` command, using the value to the immediate right of the default 50000 port (somewhere in the range of 30000).
+Add the following lines to your server.xml file to define your application data sources as well as what JDBC drivers and properties the Liberty server needs to use in order to access the application's data.
+
+The correct *KUBERNETES_NODEPORT_VALUE* can be acquired via the `kubectl get services` command, using the value to the immediate right of the default 50000 port (somewhere in the range of 30000).
 
 ```
 <!-- DB2 library definition -->
@@ -613,7 +615,7 @@ Once the EAR project has been exported as an EAR file into the shared applicatio
 
 ![Source migration 22](/static/imgs/toLiberty/Source22.png)
 
-where we can find the links for the two web applications deployed into WebSphere Liberty. One is a test project we will ignore for the time being. The other is the Customer Order Services Web Application and should be accessible at http://localhost:9080/CustomerOrderServicesWeb/. Go ahead and click on that link in the Console tab in eclipse or open a web browser yourself and point it to that url.
+where we can find the links for the two web applications deployed into WebSphere Liberty. One is a test project we will ignore for the time being. The other is the Customer Order Services Web Application and should be accessible at http://10.0.0.1:9081/CustomerOrderServicesWeb/. Go ahead and click on that link in the Console tab in eclipse or open a web browser yourself and point it to that url.
 
 You will first be presented with a log in dialog since we have security for our application enabled as you can find out in the server.xml file.
 
