@@ -13,7 +13,7 @@ In this step, we are going to use Docker technology to containerise our Liberty 
 
 We are using Docker to containerize the app. Using Docker, we can pack, ship and easily run the apps on a portable lightweight container that can run anywhere virtually.
 
-Lets have a look at our [Docker file](tutorialConfigFiles/step3/Dockerfile)
+Lets have a look at our [Docker file](tutorialConfigFiles/Dockerfile)
 
 ```
 FROM websphere-liberty:webProfile7
@@ -43,7 +43,7 @@ RUN /opt/ibm/wlp/bin/installUtility install  --acceptLicense \
    - We are replacing the contents of **server.env** in **config** folder with contents of **server.env.docker** in **Common** directory.
    - We are copying the **DB2 libraries** needed by the server to connect our Java app to our DB2 database.
    - We are also copying the **ear** file from **CustomerOrderServicesApp** and placing it in **apps** folder residing in **config**.
-3. **RUN** instruction helps us to execute the commands. 
+3. **RUN** instruction helps us to execute the commands.
    - Here we have a pre-condition to install all the utilities in server.xml. We can use RUN command to install them on top of the base image.
 
 Using this docker file, we build a docker image and using this image we will launch the docker container.
@@ -52,21 +52,21 @@ Using this docker file, we build a docker image and using this image we will lau
 
 Because the Dockerfile is set to use the files in the `Common` directory from the source code github repo, we must then replace those files with our tutorial specific configuration files before building the Docker image. That is, we need to copy server.xml and server.env.docker files into the `Common` folder.
 
-1. `cp /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step3/server.xml /home/vagrant/git/refarch-jee-customerorder/Common/`
-2. `cp /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step3/server.env.docker /home/vagrant/git/refarch-jee-customerorder/Common/`
+1. `cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/server.xml /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
+2. `cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/server.env.step3 /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/server.env.docker`
 
 Likewise, we need to do the same for the Dockerfile we will use for this tutorial which is specific for it.
 
-`cp /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step3/Dockerfile /home/vagrant/git/refarch-jee-customerorder/`
+`cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/Dockerfile /home/skytap/PurpleCompute/git/refarch-jee-customerorder/`
 
 Finally, we copy the DB2 libraries WebSphere Application Server Liberty server will need to make our application to connect to the DB2 database. We need to copy these DB2 libraries into the `Common` folder since any source must be inside the context of the build because the first step of a docker build is to send the context directory (and subdirectories) to the docker daemon.
 
-1. `cp /home/vagrant/db2lib/db2jcc4.jar /home/vagrant/git/refarch-jee-customerorder/Common/`
-2. `cp /home/vagrant/db2lib/db2jcc_license_cu.jar /home/vagrant/git/refarch-jee-customerorder/Common/`
+1. `cp /home/skytap/PurpleCompute/db2lib/db2jcc4.jar /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
+2. `cp /home/skytap/PurpleCompute/db2lib/db2jcc_license_cu.jar /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
 
 Finally, we are now ready to build the container:
 
-1. `cd /home/vagrant/git/refarch-jee-customerorder`
+1. `cd /home/skytap/PurpleCompute/git/refarch-jee-customerorder`
 2. `docker build -t "customer-order-services:liberty" .` (mind the dot at the end)
 
 You can verify your docker image using the command `docker images`. You will find the image.
@@ -79,19 +79,18 @@ websphere-liberty                                   webProfile7         5fd996d3
 
 #### Run the containerised app
 When starting the container, we feed in environment specific variables to direct the application to the db2 and ldap servers for the lab environment.
-There are three specific files configured: `orderdb.env`, `inventordydb.env` and `ldap.env`.
-These files are located in `/home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles`
+There are two specific files configured: `orderdb.env` and `ldap.env`.
+These files are located in `/home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles`
 
-<sup>*</sup>_DB2_HOST_ORDER_ and _DB2_HOST_INVENTORY_ variables within orderdb.env and inventorydb.env might need to get their values updated based on the ip address of the host ICP vm.
+<sup>*</sup>_DB2_HOST_ORDER_ variables within orderdb.env might need to get their values updated based on the ip address of the host ICP environment.
 
-Run the docker image: 
+Run the docker image:
 
 ```
-docker run \
-  --env-file /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/ldap.env \
-  --env-file /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/orderdb.env \
-  --env-file /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/inventorydb.env \
-  -p 9080:9080 customer-order-services:liberty
+docker run --name customer-order-services \
+  --env-file /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/ldap.env \
+  --env-file /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/orderdb.env \
+  -p 9081:9080 customer-order-services:liberty
 ```
 
 When it is complete, you can see the below output.
@@ -105,9 +104,9 @@ When it is complete, you can see the below output.
 ```
 Now your application is running locally. To check it out, open your browser and point it out to
 
-http://localhost:9080/CustomerOrderServicesWeb/#shopPage
- 
- 
+http://10.0.0.1:9081/CustomerOrderServicesWeb/#shopPage
+
+
 As usual, login as the user `rbarcia` with the password of `bl0wfish`.
 
 <p align="center">

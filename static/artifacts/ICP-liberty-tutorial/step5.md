@@ -32,34 +32,13 @@ The environment specific runtime variables for the application will be held in C
 4. In the `data` JSON parameter, enter the following JSON snippet as its value.
 
     ```
-    "DB2_HOST_ORDER": "192.168.27.100",
+    "DB2_HOST_ORDER": "db2-cos-ibm-db2oltp-dev",
     "DB2_PORT_ORDER": "50000",
     "DB2_DBNAME_ORDER": "ORDERDB",
-    "DB2_USER_ORDER": "db2inst1",
-    "DB2_PASSWORD_ORDER": "db2user01"
+    "DB2_USER_ORDER": "admin",
+    "DB2_PASSWORD_ORDER": "passw0rd"
     ```
 ![orderdb ConfigMap Json](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/orderdbConfigMapJson.png)
-
-5. Click `Create`.
-
-<sup>*</sup>_DB2_HOST_ORDER_ value might change based on the ICP VM ip address.
-
-**Inventory DB Configmap**
-
-1. Click Create Configmap.
-2. In the dialog box, provide the name `inventorydb`.
-3. Toggle the `JSON mode` button to enter into JSON mode.
-4. in the `data` JSON parameter, enter the following JSON snippet as its value.
-
-    ```
-    "DB2_HOST_INVENTORY": "192.168.27.100",
-    "DB2_PORT_INVENTORY": "50000",
-    "DB2_DBNAME_INVENTORY": "INDB",
-    "DB2_USER_INVENTORY": "db2inst1",
-    "DB2_PASSWORD_INVENTORY": "db2user01"
-    ```
-
-![indb ConfigMap Json](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/indbConfigMapJson.png)
 
 5. Click `Create`.
 
@@ -95,21 +74,18 @@ You can compare the JSON that the GUI creates with the yaml you created in step 
 2. Select Deploy Application.
 3. On the General tab, provide `customerorderservices` as the application name.
 4. On the Container Settings tab, provide a container name, image name, and port:
-    
+
     * Container name: customerorderservices
     * Image name: mycluster.icp:8500/websphere/customer-order-services:liberty
     * Container Port: 9080
 
 5. To be able to expose the information we stored in the ConfigMaps we need to create some entries in the JSON files manually. Therefore, toggle the `JSON mode` button to enter into JSON mode.
 6. Within the `containers` attribute, where the deployment definition lists all the containers to be deployed, we should find only one conatiner. This container should be named `customerorderservices`. In order to get this container to read the config maps we created before, we need to add the following attribute below the `port` attribute to the container definition:
-    
+
     ```
     "envFrom": [
         {
             "configMapRef": { "name": "orderdb" }
-        },
-        {
-            "configMapRef": { "name": "inventorydb" }
         },
         {
             "configMapRef": { "name": "ldap"}
@@ -117,7 +93,7 @@ You can compare the JSON that the GUI creates with the yaml you created in step 
     ]
 
     ```
-    
+
 ![Deploy Json](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/DeployJSON.png)
 
 7. Select Deploy.
@@ -132,17 +108,17 @@ To be able to connect to the application from our workstation we need to expose 
     * Expose method: ClusterIP
     * Port: 80
     * Target Port: 9080
-    
- 3. Click `Expose`.   
+
+ 3. Click `Expose`.
 
 #### Validate application (GUI)
 
-1. From the `Workloads --> Application` view, locate the application and click on the application name, customerorderservices. 
+1. From the `Workloads --> Application` view, locate the application and click on the application name, customerorderservices.
 2. In the Application Overview page, locate the `Expose Details` section.
 3. Grab the `Cluster IP` ip address.
 4. Open a new web browser tab and point it to the `Cluster IP` ip address from previous step appending the `CustomerOrderServicesWeb` context root at the end of it. The complete address should look like:
    ```
-   http://10.0.1.127/CustomerOrderServicesWeb/
+   http://10.0.0.1/CustomerOrderServicesWeb/
    ```
 5. Validate that the shop loads with product listings.
 
@@ -173,11 +149,10 @@ kubectl delete configmaps --all
 The environment specific runtime variables for the application will be held in ConfigMaps. We use ConfigMaps to hold deployment specific variables, such that images and deployment manifests can be independent of individual deployments, making it easy to reuse the majority of assets across different environments such as pre-prod and prod. This information will include connectivity details for the Order database, the Inventory database and the LDAP server. We will load the variables from properties files located in the tutorial/tutorialConfigFiles/step5 directory.
 
 To create the ConfigMaps execute the following:
-    
+
 ```
 cd /home/vagrant/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/
 kubectl create configmap ldap --from-env-file=ldap.env
-kubectl create configmap inventorydb --from-env-file=inventorydb.env
 kubectl create configmap orderdb --from-env-file=orderdb.env
 ```
 ![CLI ConfigMaps](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/configmaps.png)
@@ -205,7 +180,7 @@ kubectl get service customerorderservices
 
 Using a web broswer, navigate to the IP address for the Cluster with the path of `CustomerOrderServicesWeb`, so the full URL should look something this:
 ```
-http://10.0.1.9/CustomerOrderServicesWeb/
+http://10.0.0.1/CustomerOrderServicesWeb/
 ```
 
 Verify that the page loads properly.
@@ -219,7 +194,7 @@ NAME                                        READY     STATUS    RESTARTS   AGE
 customerorderservices-3052797159-wgv0c      1/1       Running   0          24s
 ```
 2. To see the container log of a pod
-   `$ kubectl logs customerorderservices<pod-id>` 
+   `$ kubectl logs customerorderservices<pod-id>`
 ```
 Launching defaultServer (WebSphere Application Server 17.0.0.2/wlp-1.0.17.cl170220170523-1818) on IBM J9 VM, version pxa6480sr4fp10-20170727_01 (SR4 FP10) (en_US)
 [AUDIT   ] CWWKE0001I: The server defaultServer has been launched.
@@ -231,7 +206,7 @@ Launching defaultServer (WebSphere Application Server 17.0.0.2/wlp-1.0.17.cl1702
     Secure value is set in file:/opt/ibm/wlp/usr/servers/defaultServer/server.xml.
   Property password will be set to the value defined in file:/opt/ibm/wlp/usr/servers/defaultServer/server.xml.
 
-[AUDIT   ] CWWKZ0058I: Monitoring dropins for applications. 
+[AUDIT   ] CWWKZ0058I: Monitoring dropins for applications.
 [AUDIT   ] CWWKS4104A: LTPA keys created in 1.723 seconds. LTPA key file: /opt/ibm/wlp/output/defaultServer/resources/security/ltpa.keys
 [AUDIT   ] CWPKI0803A: SSL certificate created in 2.228 seconds. SSL key file: /opt/ibm/wlp/output/defaultServer/resources/security/key.jks
 com.ibm.net.SocketKeepAliveParameters
@@ -240,6 +215,6 @@ com.ibm.net.SocketKeepAliveParameters
 [AUDIT   ] CWWKZ0001I: Application CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear started in 3.772 seconds.
 [AUDIT   ] CWWKF0012I: The server installed the following features: [jsp-2.3, ejbLite-3.1, servlet-3.1, ssl-1.0, jndi-1.0, localConnector-1.0, federatedRegistry-1.0, appSecurity-2.0, jdbc-4.1, jaxrs-1.1, el-3.0, ldapRegistry-3.0, json-1.0, distributedMap-1.0, beanValidation-1.0, jpa-2.0].
 [AUDIT   ] CWWKF0011I: The server defaultServer is ready to run a smarter planet.
-```   
+```
 3. To see some information about a given pod
    `$ kubectl describe pod customerorderservices<pod-id>`

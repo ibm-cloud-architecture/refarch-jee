@@ -14,7 +14,7 @@ IBM Cloud Private (ICP) provides a docker compatible image repository out of the
 
 #### Create user and namespace
 
-In your web broswer login to the the ICP Dashboard on `https://localhost:8443` as a system administrator, username `admin` and password `admin`.
+In your web broswer login to the the ICP Dashboard on `https://10.0.0.1:8443` as a system administrator, username `admin` and password `admin`.
 
 In order to create a namespace,
 
@@ -70,7 +70,7 @@ spec:
   selector:
     app: customerorderservices
   type: ClusterIP
-  
+
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -95,9 +95,7 @@ spec:
         - configMapRef:
             name: orderdb
         - configMapRef:
-            name: inventorydb
-        - configMapRef:
-            name: ldap 
+            name: ldap
       imagePullSecrets:
       - name: user1.registrykey
 ```
