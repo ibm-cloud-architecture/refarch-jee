@@ -15,7 +15,7 @@ In this step, we are going to build and run the Liberty app locally and connect 
 In this step we need to clone two GitHub repositories. The first one includes the instructions for this very same tutorial and all needed files to complete it.
 
 1. Open a new terminal
-2. `cd git`
+2. `cd ~/PurpleCompute/git`
 3. `git clone https://github.com/ibm-cloud-architecture/refarch-jee.git`
 
 The second one includes the application source code. You can clone this repository from its main GitHub repository page and checkout the appropriate branch for this version of the application. If you completed **Step 1** in this tutorial, then execute `rm -rf ~/git/refarch-jee-customerorder/`.

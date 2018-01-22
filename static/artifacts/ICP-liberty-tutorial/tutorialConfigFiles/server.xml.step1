@@ -22,7 +22,7 @@
 
      <!-- DB2 library definition -->
     <library apiTypeVisibility="spec, ibm-api, third-party" id="DB2JCC4Lib">
-    	<fileset dir="/home/vagrant/db2lib" includes="db2jcc4.jar db2jcc_license_cu.jar"/>
+    	<fileset dir="/home/skytap/PurpleCompute/db2lib" includes="db2jcc4.jar db2jcc_license_cu.jar"/>
     </library>
 
     <!-- Data source definition -->

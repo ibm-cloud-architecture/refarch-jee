@@ -10,26 +10,7 @@ In this step, we are going to write the needed configuration files, deployment f
 
 ### Push image to ICP Image Repository
 
-IBM Cloud Private (ICP) provides a docker compatible image repository out of the box, which is available on the server `mycluster.icp` port `8500`. However, before we upload container/docker images and start deploying these, we will create a separate user and namespace in kubernetes for us, where the application will be hosted. Namespacing is a concept in Kubernetes that allows isolation of applications and other resources.
-
-#### Create user and namespace
-
-In your web broswer login to the the ICP Dashboard on `https://10.0.0.1:8443` as a system administrator, username `admin` and password `admin`.
-
-In order to create a namespace,
-
-1. From the navigation menu, select System > Namespaces.
-2. Click New Namespace.
-3. Enter a namespace name: `websphere`
-4. Click Add Namespace.
-
-In order to add a user to a namespace,
-
-1. Navigate to the `Users` tab.
-2. Click New User.
-3. Enter `user1` as the name, and provide a password and email address.
-4. Select Namespace `websphere`.
-5. Click Add User.
+IBM Cloud Private (ICP) provides a docker compatible image repository out of the box, which is available on the server `mycluster.icp` port `8500`.
 
 #### Re-Tag image
 
@@ -37,24 +18,24 @@ To be able to push the image we build in the previous step into the ICP Image Re
 
 From the command line, enter the following command
 ```
-docker tag customer-order-services:liberty mycluster.icp:8500/websphere/customer-order-services:liberty
+docker tag customer-order-services:liberty bluedemocluster.icp:8500/default/customer-order-services:liberty
 ```
-This extra information in the tag tells docker that this image belongs to the repository `websphere` on the `mycluster.icp:8500` server, which maps to the namespace we created above.
+This extra information in the tag tells docker that this image belongs to the repository `default` on the `bluedemocluster.icp:8500` server which is the repository for the `default` namespace. Namespacing is a concept in Kubernetes that allows isolation of applications and other resources.
 
 #### Push image
 
 To make the image available to use in Kubernetes enter the following commands
 
-1. `docker login mycluster.icp:8500` providing `user1` as the user and the password you created above
-2. `docker push mycluster.icp:8500/websphere/customer-order-services:liberty`
+1. `docker login bluedemocluster.icp:8500` providing `admin` as the user and `admin` as the password.
+2. `docker push bluedemocluster.icp:8500/websphere/customer-order-services:liberty`
 
-You will now be able to see the image in the ICP Dashboard under `Infrastructure -> Images`.
+You will now be able to see the image in the ICP Dashboard under `Catalog -> Images`.
 
 When completed, **sign out of the ICP dashboard**.
 
 ### Generate deployment yaml file
 
-Our [deployment yaml file](https://github.com/ibm-cloud-architecture/refarch-jee/tree/master/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/step5/deployment.yaml), which specifies how we want our application (i.e. the container) to be deployed, looks like this:
+Our [deployment yaml file](https://github.com/ibm-cloud-architecture/refarch-jee/tree/master/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/deployment.yaml), which specifies how we want our application (i.e. the container) to be deployed, looks like this:
 
 ```
 apiVersion: v1
@@ -86,7 +67,7 @@ spec:
         app: customerorderservices
     spec:
       containers:
-      - image: mycluster.icp:8500/websphere/customer-order-services:liberty
+      - image: bluedemocluster.icp:8500/default/customer-order-services:liberty
         name: customerorderservices
         ports:
         - containerPort: 9080

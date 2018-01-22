@@ -6,12 +6,12 @@ In this step, we are going to make the modifications needed both at the applicat
 2.  [Install WebSphere Application Server Liberty locally](#install-websphere-application-server-liberty-locally)
 3.  [Get the code](#get-the-code)
 4.  [Set up your development environment](#set-up-your-development-environment)
+    - [Recreate Db2 Datastore on ICP](#recreate-db2-datastore-on-icp)
 5.  [Source Code Migration](#source-code-migration)
     - [Software Analyzer Configuration](#software-analyzer-configuration)
     - [Run the Software Analyzer](#run-the-software-analyzer)
-6.  [Recreate Db2 Datastore on ICP](#recreate-db2-datastore-on-icp)
-7.  [Configure WebSphere Liberty Server](#configure-websphere-liberty-server)
-8.  [Run the application](#run-the-application)
+6.  [Configure WebSphere Liberty Server](#configure-websphere-liberty-server)
+7.  [Run the application](#run-the-application)
 
 
 ## Analyze the application by using Transformation Advisor
@@ -130,7 +130,7 @@ select the default workspace by clicking OK
 
 ![Source migration 49](/static/imgs/toLiberty/Source49.png)
 
-4. On the new server dialog that pops up, type in _liberty_ so that available servers get filtered. Then, select WebSphere Application Server Liberty and leave the rest as is. Click Next.
+4. On the new server dialog that pops up, type in _liberty_ so that available servers get filtered. Then, select Liberty Server and leave the rest as is. Click Next.
 
 ![Source migration 50](/static/imgs/toLiberty/Source50.png)
 
@@ -142,11 +142,11 @@ select the default workspace by clicking OK
 
 ![Source migration 52](/static/imgs/toLiberty/Source52.png)
 
-7. You should now see your WebSphere Application Server Liberty at localhost created in the Servers tab at the bootom and a project that stores the configuration for your server on the left in the Enterprise Explorer tab.
+7. You should now see your Liberty Server at localhost created in the Servers tab at the bottom and a project that stores the configuration for your server on the left in the Enterprise Explorer tab.
 
 ![Source migration 53](/static/imgs/toLiberty/Source53.png)
 
-8. Double click on the newly created WebSphere Application Server Liberty at localhost in the Servers view and set the start timeout value for the Liberty server to something around 180 or over _(if the timeout is too small you might see an error saying that the Server WebSphere Application Server Liberty at localhost was unable to start within XX seconds)_
+8. Double click on the newly created Liberty Server at localhost in the Servers view and set the start timeout value for the Liberty server to something around 180 or over _(if the timeout is too small you might see an error saying that the Server Liberty Server at localhost was unable to start within XX seconds)_
 
 ![Source migration 61](/static/imgs/toLiberty/Source61.png)
 
@@ -161,7 +161,7 @@ The migration toolkit is eclipse based. Therefore, these are the steps to be tak
 2. Download Customer Order Services application's source code from GitHub
 
 ```
-cd ~/git
+cd ~/PurpleCompute/git
 git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git
 ```
 ![Source migration 35](/static/imgs/toLiberty/Source35.png)
@@ -187,7 +187,7 @@ git checkout was70-dev
 
 ![Source migration 38](/static/imgs/toLiberty/Source38.png)
 
-- Eclipse will directly detect all the projects within that fodler and select them all. Click Finish.
+- Eclipse will directly detect all the projects within that folder and select them all. Click Finish.
 
 A migration dialog will pop up after importing the projects into the eclipse workspace since eclipse will detect such projects are configured to run on a runtime that it is not aware of. As a result, it pops up with a workspace migration dialog.
 
@@ -219,7 +219,7 @@ For the JRE System Library, select the last option which says Workspace default 
 
 ![Source migration 42](/static/imgs/toLiberty/Source42.png)
 
-For the Server Library, repeat the steps but select the only WebSphere Application Server Liberty option and click Finish.
+For the Server Library, repeat the steps but select the only Server Runtime option and click Finish.
 
 ![Source migration 43](/static/imgs/toLiberty/Source43.png)
 
@@ -248,7 +248,7 @@ However, WebSphere Application Server Liberty is a composable lightweight server
 To install the JAX-RS 1.1 functionality to our WebSphere Application Server Liberty server execute:
 
 ```
-~/wlp/bin/installUtility install jaxrs-1.1
+~/PurpleCompute/wlp/bin/installUtility install jaxrs-1.1
 ```
 
 ![Source migration 58](/static/imgs/toLiberty/Source58.png)
@@ -268,6 +268,87 @@ However, we still see problems. In this case, we want to sort out the Xpath is i
 Click Apply and OK. Finally, clean and build the workspace. You should now see Target runtime errors and one JPA related error (library provider) which we will get fixed in the next section.
 
 **Conclusion:** As we could see in the above walk through, when we move to a different/new development environment we will need to plan ahead and bear in mind that some time will be needed for setting up your new development environment. Even more if this new environment will be used for a WebSphere Application Server migration.
+
+### Recreate Db2 Datastore on ICP
+
+As the original application database resides on-premise, it will need to be recreated inside the IBM Cloud Private (ICP) environment for intial testing.  For production-level use cases, external integration of existing databases into any given IBM Cloud Private environment is possible, with the help of the services such as the IBM Cloud Platform Secure Gateway service.  However, for this tutorial, the application database will be run from inside the ICP environment for ease of interaction.
+
+#### Create a storage volume for Db2 Helm Chart
+
+To utilize the Db2 database provided for IBM Cloud Private, a persistent volume needs to first be created.  Depending upon multiple platform configuration options, this can be done automatically, but in the effort of learning, this tutorial covers the manual creation of this artifact.  This helps to reinforce the mapping of the service to its requirements.
+
+1. Log into the IBM Cloud Private console via https://10.0.0.1:8443/console
+2. Click **Create resource**
+3. Delete the pre-filled content in the dialog box and replace it with the following snippet:
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: customerorder-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/customerorder-data
+    type: DirectoryOrCreate
+```
+  This YAML block will create a *PersistentVolume* which the Db2 Helm Chart will create a *PersistentVolumeClaim* against.  In doing so, Db2 can now persist its data across individual container instances should one crash, fail, or otherwise be removed.
+
+  As this is an introductory tutorial, we are using the most simplistic form of shared storage in a Kubernetes-based environment, *hostPath*.  This allows Kubernetes to save data from containers running in Pods to the physical host.  But note that this is not shared across hosts automatically, so should the container fail and be rescheduled on a different host, this data would be unavailable.  For this tutorial, this is acceptable.
+4. Click **Create**.
+
+#### Deploy the Db2 Helm Chart
+
+1. Click the hamburger menu icon and select **Catalog** > **Helm Charts**.
+2. Select **ibm-db2oltp-dev** from the list of available Helm charts.
+3. Review the presented documentation for the IBM Db2 Developer-C Helm Chart and click **Configure**.
+4. In the *Configuration* section, enter a **Release name** (preferably with only lower-case letters and hyphens - this tutorial will use `db2-cos`) and select the **Target namespace** of *default*.
+    ![Db2 setup 01](/static/imgs/db2-on-icp/db2Setup01.png)
+5. In the *Docker image configuration* section, follow the [link](http://ibm.biz/db2-dsm-license) in the **secret** field to retrieve a validated image secret.  Copy and paste this value from the other browser window into this entry field.
+    ![Db2 setup 02](/static/imgs/db2-on-icp/db2Setup02.png)
+    ![Db2 setup 02b](/static/imgs/db2-on-icp/db2Setup02b.png)
+6. In the *Db2 instance configuration* section, enter a username (defaults to `admin`) and a password (this tutorial will use `passw0rd`).  Note that the password defaults are randomly generated, so you will need to provide a known password here.
+    ![Db2 setup 03](/static/imgs/db2-on-icp/db2Setup03.png)
+7. In the *Database configuration options* section, enter **orderdb** in the *Database Name* field.
+8. In the *Data volume configuration* section, update the *Size of the volume claim* field to be **2Gi**.  Kubernetes will automatically map the creation of a new PersistentVolumeClaim to the PersistentVolume created in the previous section.
+    ![Db2 setup 04](/static/imgs/db2-on-icp/db2Setup04.png)
+9. In the *Resource configuration* section, update the *Memory limit* field to be **8Gi**.
+    ![Db2 setup 05](/static/imgs/db2-on-icp/db2Setup05.png)
+10. Click **Install**.
+11. Once the Helm installation is underway, click **View Helm Release** on the dialog.
+
+#### Validate Db2 Helm Chart deployment
+
+It will take a few minutes to deploy the Db2 Helm chart, especially if this is the first time in the ICP instance that Db2 is being installed, as the image needs to be downloaded to the ICP registry first.  After about 5-10 minutes, the following commands can be use to validate the successful deployment of the Db2 Helm chart.
+
+1.  In the ICP console, select `admin` in the upper right and then select *Configure client*.
+2.  Copy and paste the contents the dialog box into a terminal window and press **Enter**.  This will configure the CLI to talk to the ICP instance via the Kubernetes CLI tool, *kubectl*.
+    ![Db2 setup 06](/static/imgs/db2-on-icp/db2Setup06.png)
+3. To view the list of all deployed Helm charts on the current ICP installation, run `helm list`.
+4. To view a consolidated set of Kubernetes resources that a given Helm chart deployment is utilizing, run `helm status {release_name}`.
+5. To monitor the underlying Kubernetes Deployment artifact, run `kubectl get deployment -w`.  The `-w` parameter is important, as the CLI will actively monitor the status of Kuubernetes (and specifically the Deployments) and report back any changes to the CLI.
+6. Once the *Available* field turns to **1**, the Db2 instance is available and ready to be used.
+
+#### Bootstrap initial data into database
+
+Once Db2 is up and running inside ICP, there are many ways to now get data into that database.  For simplicity, this tutorial will walk through a scripted approach to bootstrapping data into the database.  Alternative approaches are available, such as visual-based JDBC-supported tools, as well as DB2 CLIs.
+
+The preferred Kubernetes approach would be to create a [Job](#tbd) that would run once and bootstrap the data automatically.  This will be created and performed in a future tutorial update.
+
+1.  Take note of the Db2 service name by running the command `kubectl get service`.  This name will be used later to route to your Db2 database from the WebSphere application.
+2.  Get the pod name of the Db2 pod using the command `kubectl get pods | grep db2`.
+3.  Start a bash shell inside the running Db2 pod via `kubectl exec -it {pod_name} bash`.
+4.  Alternatively, to perform the same task in a single command, run `kubectl exec -it $(kubectl get pods | grep db2 | awk '{print $1}') bash` instead.
+    ![Db2 setup 07](/static/imgs/db2-on-icp/db2Setup07.png)
+5.  From inside the Db2 pod, run the following command to bootstrap the required application data:
+      `su - ${DB2INSTANCE} -c "bash <(curl -s https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee-customerorder/liberty/Common/bootstrapCurlDb2.sh)"`
+    ![Db2 setup 08](/static/imgs/db2-on-icp/db2Setup08.png)
+6.  Once the script completes, you can exit the bash prompt via `exit` from the CLI.
+    ![Db2 setup 08](/static/imgs/db2-on-icp/db2Setup09.png)
+
+The application's data store is now available to be used by the updated Liberty-based application running on ICP.
 
 ## Source Code Migration
 
@@ -321,7 +402,7 @@ Once you have deselected all active WebSphere specific facets installed for the 
 
 ![Source migration 11](/static/imgs/toLiberty/Source11.png)
 
-If we ran the Software Analyzer again, we should see the File Review tab empty.
+If we ran the Software Analyzer again, we should see the File Review tab empty. Also, if we clean and build the projects again (project --> clean...) we should see no errors anymore in the problems tab at the bottom.
 
 Moving on to the **Java Code Review** category tab, these are the aspects the WebSphere Application Migration Toolkit warns us about:
 
@@ -385,86 +466,6 @@ java:app/CustomerOrderServices/ProductSearchServiceImpl!org.pwte.example.service
 
 Save and close the file.
 
-## Recreate Db2 Datastore on ICP
-
-As the original application database resides on-premise, it will need to be recreated inside the IBM Cloud Private (ICP) environment for intial testing.  For production-level use cases, external integration of existing databases into any given IBM Cloud Private environment is possible, with the help of the services such as the IBM Cloud Platform Secure Gateway service.  However, for this tutorial, the application database will be run from inside the ICP environment for ease of interaction.
-
-#### Create a storage volume for Db2 Helm Chart
-
-To utilize the Db2 database provided for IBM Cloud Private, a persistent volume needs to first be created.  Depending upon multiple platform configuration options, this can be done automatically, but in the effort of learning, this tutorial covers the manual creation of this artifact.  This helps to reinforce the mapping of the service to its requirements.
-
-1. Log into the IBM Cloud Private console via https://10.0.0.1:8443/console
-2. Click **Create resource**
-3. Delete the pre-filled content in the dialog box and replace it with the following snippet:
-```
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: customerorder-pv
-spec:
-  capacity:
-    storage: 2Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: customerorder-data
-```
-  This YAML block will create a *PersistentVolume* which the Db2 Helm Chart will create a *PersistentVolumeClaim* against.  In doing so, Db2 can now persist its data across individual container instances should one crash, fail, or otherwise be removed.
-
-  As this is an introductory tutorial, we are using the most simplistic form of shared storage in a Kubernetes-based environment, *hostPath*.  This allows Kubernetes to save data from containers running in Pods to the physical host.  But note that this is not shared across hosts automatically, so should the container fail and be rescheduled on a different host, this data would be unavailable.  For this tutorial, this is acceptable.
-4. Click **Create**.
-
-#### Deploy the Db2 Helm Chart
-
-1. Click the hamburger menu icon and select **Catalog** > **Helm Charts**.
-2. Select **ibm-db2oltp-dev** from the list of available Helm charts.
-3. Review the presented documentation for the IBM Db2 Developer-C Helm Chart and click **Configure**.
-4. In the *Configuration* section, enter a **Release name** (preferably with only lower-case letters and hyphens - this tutorial will use `db2-cos`) and select the **Target namespace** of *default*.
-    ![Db2 setup 01](/static/imgs/db2-on-icp/db2Setup01.png)
-5. In the *Docker image configuration* section, follow the [link](http://ibm.biz/db2-dsm-license) in the **secret** field to retrieve a validated image secret.  Copy and paste this value from the other browser window into this entry field.
-    ![Db2 setup 02](/static/imgs/db2-on-icp/db2Setup02.png)
-    ![Db2 setup 02b](/static/imgs/db2-on-icp/db2Setup02b.png)
-6. In the *Db2 instance configuration* section, enter a username (defaults to `admin`) and a password (this tutorial will use `passw0rd`).  Note that the password defaults are randomly generated, so you will need to provide a known password here.
-    ![Db2 setup 03](/static/imgs/db2-on-icp/db2Setup03.png)
-7. In the *Database configuration options* section, enter **orderdb** in the *Database Name* field.
-8. In the *Data volume configuration* section, update the *Size of the volume claim* field to be **2Gi**.  Kubernetes will automatically map the creation of a new PersistentVolumeClaim to the PersistentVolume created in the previous section.
-    ![Db2 setup 04](/static/imgs/db2-on-icp/db2Setup04.png)
-9. In the *Resource configuration* section, update the *Memory limit* field to be **8Gi**.
-    ![Db2 setup 05](/static/imgs/db2-on-icp/db2Setup05.png)
-10. Click **Install**.
-11. Once the Helm installation is underway, click **View Helm Release** on the dialog.
-
-#### Validate Db2 Helm Chart deployment
-
-It will take a few minutes to deploy the Db2 Helm chart, especially if this is the first time in the ICP instance that Db2 is being installed, as the image needs to be downloaded to the ICP registry first.  After about 5-10 minutes, the following commands can be use to validate the successful deployment of the Db2 Helm chart.
-
-1.  In the ICP console, select `admin` in the upper right and then select *Configure client*.
-2.  Copy and paste the contents the dialog box into a terminal window and press **Enter**.  This will configure the CLI to talk to the ICP instance via the Kubernetes CLI tool, *kubectl*.
-    ![Db2 setup 06](/static/imgs/db2-on-icp/db2Setup06.png)
-3. To view the list of all deployed Helm charts on the current ICP installation, run `helm list`.
-4. To view a consolidated set of Kubernetes resources that a given Helm chart deployment is utilizing, run `helm status {release_name}`.
-5. To monitor the underlying Kubernetes Deployment artifact, run `kubectl get deployment -w`.  The `-w` parameter is important, as the CLI will actively monitor the status of Kuubernetes (and specifically the Deployments) and report back any changes to the CLI.
-6. Once the *Available* field turns to **1**, the Db2 instance is available and ready to be used.
-
-#### Bootstrap initial data into database
-
-Once Db2 is up and running inside ICP, there are many ways to now get data into that database.  For simplicity, this tutorial will walk through a scripted approach to bootstrapping data into the database.  Alternative approaches are available, such as visual-based JDBC-supported tools, as well as DB2 CLIs.
-
-The preferred Kubernetes approach would be to create a [Job](#tbd) that would run once and bootstrap the data automatically.  This will be created and performed in a future tutorial update.
-
-1.  Take note of the Db2 service name by running the command `kubectl get service`.  This name will be used later to route to your Db2 database from the WebSphere application.
-2.  Get the pod name of the Db2 pod using the command `kubectl get pods | grep db2`.
-3.  Start a bash shell inside the running Db2 pod via `kubectl exec -it {pod_name} bash`.
-4.  Alternatively, to perform the same task in a single command, run `kubectl exec -it $(kubectl get pods | grep db2 | awk '{print $1}') bash` instead.
-    ![Db2 setup 07](/static/imgs/db2-on-icp/db2Setup07.png)
-5.  From inside the Db2 pod, run the following command to bootstrap the required application data:
-      `su - ${DB2INSTANCE} -c "bash <(curl -s https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee-customerorder/liberty/Common/bootstrapCurlDb2.sh)"`
-    ![Db2 setup 08](/static/imgs/db2-on-icp/db2Setup08.png)
-6.  Once the script completes, you can exit the bash prompt via `exit` from the CLI.
-    ![Db2 setup 08](/static/imgs/db2-on-icp/db2Setup09.png)
-
-The application's data store is now available to be used by the updated Liberty-based application running on ICP.
-
 ## Configure WebSphere Liberty Server
 
 The IBM WebSphere Application Server Liberty Profile is a composable, dynamic application server environment that supports development and testing of Java EE Full Platform web applications.
@@ -482,11 +483,11 @@ The application server configuration is described in a series of elements in the
 
 In this section, we are going to see the different configuration pieces for the Liberty server to run the Customer Order Services application. As said above, this is done by editing the server.xml file which lives in `/home/skytap/PurpleCompute/wlp/usr/servers/defaultServer`.
 
-You can manually edit this server.xml file yourself using your prefered editor or you can also do so in eclipse:
+You can manually edit this server.xml file yourself using your preferred editor or you can also do so in eclipse:
 
 ![Source migration 47](/static/imgs/toLiberty/Source47.png)
 
-<sup>*</sup>Also, you can directly replace your existing server.xml file with an already configured server.xml version that can be found [here](tutorialConfigFiles/step1/server.xml) and just read through the below explanation of it for your information.
+<sup>*</sup>Also, you can directly replace your existing server.xml file with an already configured server.xml version that can be found [here](tutorialConfigFiles/server.xml.step1) and just read through the below explanation of it for your information.
 
 #### 1. Features
 
@@ -522,11 +523,11 @@ Extra info:
 
 If you want to check all the features your WebSphere Application Server Liberty server has installed at any point you can run
 
-`~/wlp/bin/featureManager featureList feature_report.xml`
+`~/PurpleCompute/wlp/bin/featureManager featureList feature_report.xml`
 
 and a *feature_report.xml* file will be created with a list of all the features your Liberty server comprises of. For an quicker and easier first look you can then execute
 
-`cat ~/wlp/bin/feature_report.xml | grep "feature name="`
+`cat ~/PurpleCompute/wlp/bin/feature_report.xml | grep "feature name="`
 
 and you will see an output similar to the following which lists the features WebSphere Application Server Liberty server comes with out of the box
 
@@ -597,7 +598,7 @@ Add the following lines to your server.xml file to configure your Liberty server
 
 **IMPORTANT:** At this point, you should already have the server.xml with the needed configuration to successfully run the Customer Order Services application. However, **you still need to install the Liberty server features** described earlier in this section. In order to install them, you need to execute:
 
-`~/wlp/bin/installUtility install <server_name>`
+`~/PurpleCompute/wlp/bin/installUtility install <server_name>`
 
 where *<server_name>* is the name you have given to your Liberty server when you created it at the beginning of this tutorial. If you have followed the instructions as they are, the Liberty server name should be *defaultServer*.
 
