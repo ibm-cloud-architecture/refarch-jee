@@ -3,8 +3,7 @@
 In this final step, we are going to deploy our containerized Liberty app to our IBM Cloud Private (ICP) through the Kubernetes command line interface and the ICP Dashboard.
 
 1. [Deploy Liberty app from GUI](#deploy-liberty-app-from-gui)
-    * [Create ConfigMaps (GUI)](#create-configmaps-gui)
-    * [Deploy application (GUI)](#deploy-application-gui)
+    * [Create Deployment (GUI)](#create-deployment-gui)
     * [Expose the application (GUI)](#expose-the-application-gui)
     * [Validate application (GUI)](#validate-application-gui)
 2. [Deploy Liberty app from CLI using kubectl](#deploy-liberty-app-from-cli-using-kubectl)
@@ -38,21 +37,21 @@ In order to deploy our Liberty app to ICP we need to:
 ![gui_deployment3](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/gui_deployment3.png)
 7. In order for our application to work, we need to provide it with the DB2 and LDAP configuration. Previously, we used to do so by declaring such configuration on the server.env file of the Liberty Server. When we containerised our Customer Order Services application in [Containerise the app](#step3.md#containerise-the-app), we made the application independent from its configuration by packaging the application into a container which will get application's configuration injected based on the environment where it will end up running. We already saw this in [Run the Containerised app](#step3.md#run-the-containerised-app) where we would inject the configuration using environment files. In kubernetes, we do so using ConfigMaps which we will see in [Deploy Liberty app from CLI using kubectl](#deploy-liberty-app-from-cli-using-kubectl). ICP GUI does not let us load environment configuration from ConfigMaps for a deployment. As a result, we will have to declare this configuration straight into the deployment. For doing so, click on the `Environment variables` tab and declare the DB2 and LDAP variables:
 
-    ```
-    | NAME                | VALUE                                 |
-    | ------------------- | ------------------------------------- |
-    | DB2_HOST_ORDER      | db2-cos-ibm-db2oltp-dev               |
-    | DB2_PORT_ORDER      | 50000                                 |
-    | DB2_DBNAME_ORDER    | ORDERDB                               |
-    | DB2_USER_ORDER      | admin                                 |
-    | DB2_PASSWORD_ORDER  | passw0rd                              |
-    | LDAP_HOST           | cap-sg-prd-4.integration.ibmcloud.com |
-    | LDAP_PORT           | 17830                                 |
-    | LDAP_BASE_DN        |                                       |
-    | LDAP_BIND_DN        | uid=casebind,ou=caseinc,o=sample      |
-    | LDAP_BIND_PASSWORD  | caseBindUser!                         |
-    | LDAP_REALM          | SampleLdapIDSRealm                    |
-    ```
+
+| NAME                | VALUE                                 |
+| ------------------- | ------------------------------------- |
+| DB2_HOST_ORDER      | db2-cos-ibm-db2oltp-dev               |
+| DB2_PORT_ORDER      | 50000                                 |
+| DB2_DBNAME_ORDER    | ORDERDB                               |
+| DB2_USER_ORDER      | admin                                 |
+| DB2_PASSWORD_ORDER  | passw0rd                              |
+| LDAP_HOST           | cap-sg-prd-4.integration.ibmcloud.com |
+| LDAP_PORT           | 17830                                 |
+| LDAP_BASE_DN        |                                       |
+| LDAP_BIND_DN        | uid=casebind,ou=caseinc,o=sample      |
+| LDAP_BIND_PASSWORD  | caseBindUser!                         |
+| LDAP_REALM          | SampleLdapIDSRealm                    |
+
 
 ![gui_deployment4](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/gui_deployment4.png)
 
