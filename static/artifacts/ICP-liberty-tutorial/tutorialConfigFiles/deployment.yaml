@@ -10,7 +10,7 @@ spec:
       targetPort: 9080
   selector:
     app: customerorderservices
-  type: ClusterIP
+  type: NodePort
 
 ---
 apiVersion: extensions/v1beta1
@@ -37,5 +37,3 @@ spec:
             name: orderdb
         - configMapRef:
             name: ldap
-      imagePullSecrets:
-      - name: user1.registrykey

@@ -82,7 +82,7 @@ When starting the container, we feed in environment specific variables to direct
 There are two specific files configured: `orderdb.env` and `ldap.env`.
 These files are located in `/home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles`
 
-<sup>*</sup>_DB2_HOST_ORDER_ variables within orderdb.env might need to get their values updated based on the ip address of the host ICP environment. In our case DB2_DB2_HOST_ORDER should be 10.0.0.1 and DB2_PORT_ORDER the value right beside the 50000 when you list the kubernetes services (it should be a number in the 30000 range).
+<sup>*</sup>_DB2_HOST_ORDER_ variables within orderdb.env might need to get their values updated based on the ip address of the host ICP environment. In our case DB2_HOST_ORDER should be 10.0.0.1 and DB2_PORT_ORDER the value right beside the 50000 when you list the kubernetes services (it should be a number in the 30000 range).
 
 Run the docker image:
 

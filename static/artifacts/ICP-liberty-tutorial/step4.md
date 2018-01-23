@@ -50,7 +50,7 @@ spec:
       targetPort: 9080
   selector:
     app: customerorderservices
-  type: ClusterIP
+  type: NodePort
 
 ---
 apiVersion: extensions/v1beta1
@@ -77,13 +77,11 @@ spec:
             name: orderdb
         - configMapRef:
             name: ldap
-      imagePullSecrets:
-      - name: user1.registrykey
 ```
 
 You can see there are two parts in this file, separated by `---`. The three dashes is a yaml construct that allows us to put the content of multiple files in a single file.
 
-Above the dashes is the **Service**, indicated by `kind: Service`. Here we describe how we like the application to be exposed. In our case, we choose to use ClusterIP, which means the application will receive an IP address from the 10.1.0.0/16 IP address range.
+Above the dashes is the **Service**, indicated by `kind: Service`. Here we describe how we like the application to be exposed. In our case, we choose to use NodePort, which will expose this service to external traffic. This isn't a secure or recommended way to access your application hosted in a kubernetes-based environment like ICP but for the goal of this tutorial it is acceptable.
 
 The next part is the **deployment** part, indicated by `kind: Deployment`. Here we describe what we want the target state of the application to be. In our example, we instruct a single container to be named `customerorderservices` and created from the image we pushed to our image repository previously.
 
