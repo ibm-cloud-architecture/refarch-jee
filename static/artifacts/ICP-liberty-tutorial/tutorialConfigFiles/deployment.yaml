@@ -11,7 +11,7 @@ spec:
   selector:
     app: customerorderservices
   type: ClusterIP
-  
+
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -27,7 +27,7 @@ spec:
         app: customerorderservices
     spec:
       containers:
-      - image: mycluster.icp:8500/websphere/customer-order-services:liberty
+      - image: bluedemocluster.icp:8500/default/customer-order-services:liberty
         name: customerorderservices
         ports:
         - containerPort: 9080
@@ -36,8 +36,6 @@ spec:
         - configMapRef:
             name: orderdb
         - configMapRef:
-            name: inventorydb
-        - configMapRef:
-            name: ldap 
+            name: ldap
       imagePullSecrets:
       - name: user1.registrykey
