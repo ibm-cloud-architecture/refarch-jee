@@ -10,7 +10,7 @@ In this step, we are going to write the needed configuration files, deployment f
 
 ### Push image to ICP Image Repository
 
-IBM Cloud Private (ICP) provides a docker compatible image repository out of the box, which is available on the server `mycluster.icp` port `8500`.
+IBM Cloud Private (ICP) provides a docker compatible image repository out of the box, which is available on the server `bluedemocluster.icp` port `8500`.
 
 #### Re-Tag image
 
