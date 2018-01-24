@@ -27,7 +27,7 @@ This extra information in the tag tells docker that this image belongs to the re
 To make the image available to use in Kubernetes enter the following commands
 
 1. `docker login bluedemocluster.icp:8500` providing `admin` as the user and `admin` as the password.
-2. `docker push bluedemocluster.icp:8500/websphere/customer-order-services:liberty`
+2. `docker push bluedemocluster.icp:8500/default/customer-order-services:liberty`
 
 You will now be able to see the image in the ICP Dashboard under `Catalog -> Images`.
 
