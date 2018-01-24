@@ -62,7 +62,7 @@ kubectl get service customerorderservices
 
 ![CLI service](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/serviceCLI.png)
 
-In our case it is `37845`.
+In our case it is `31845`.
 
 Using a web browser, navigate to the IP address for the Cluster with the path of `CustomerOrderServicesWeb`, so the full URL should look something this:
 ```
