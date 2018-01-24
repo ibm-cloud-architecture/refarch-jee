@@ -2,109 +2,11 @@
 
 In this final step, we are going to deploy our containerized Liberty app to our IBM Cloud Private (ICP) through the Kubernetes command line interface and the ICP Dashboard.
 
-1. [Deploy Liberty app from GUI](#deploy-liberty-app-from-gui)
-    * [Create Deployment (GUI)](#create-deployment-gui)
-    * [Expose the application (GUI)](#expose-the-application-gui)
-    * [Validate application (GUI)](#validate-application-gui)
-2. [Deploy Liberty app from CLI using kubectl](#deploy-liberty-app-from-cli-using-kubectl)
+* [Deploy Liberty app from CLI using kubectl](#deploy-liberty-app-from-cli-using-kubectl)
     * [Clean Environment (CLI)](#clean-environment-cli)
     * [Create ConfigMaps (CLI)](#create-configmaps-cli)
     * [Deploy application (CLI)](#deploy-application-cli)
     * [Validate application (CLI)](#validate-application-cli)
-
-### Deploy Liberty app from GUI
-
-In order to deploy our Liberty app to ICP we need to:
-
-1. Create a deployment, where we will tell ICP what docker image to deploy and how to do so.
-2. Create a service to access our application.
-
-####  Create Deployment (GUI)
-
-1. Log in to the ICP Dashboard as user `admin` and password `admin`.
-2. From the navigation menu, select `Workloads --> Deployments`.
-3. Click on `Create Deployment` button on the top right corner.
-4. On the General tab, provide `customerorderservices` as the name.
-![gui_deployment](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/gui_deployment1.png)
-5. On the Container Settings tab, provide a container name, image name, and port:
-
-    * Container name: `customerorderservices`
-    * Image name: `bluedemocluster.icp:8500/default/customer-order-services:liberty`
-    * Container Port: `9080`
-
-![gui_deployment2](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/gui_deployment2.png)
-6. On the Labels tab, create a label `app` with value `customerorderservices`. This will label the deployment so that when we later create a service to access our application, the service will know what deployments (and containers) to redirect the traffic to.
-![gui_deployment3](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/gui_deployment3.png)
-7. In order for our application to work, we need to provide it with the DB2 and LDAP configuration. Previously, we used to do so by declaring such configuration on the server.env file of the Liberty Server. When we containerised our Customer Order Services application in [Containerise the app](#step3.md#containerise-the-app), we made the application independent from its configuration by packaging the application into a container which will get application's configuration injected based on the environment where it will end up running. We already saw this in [Run the Containerised app](#step3.md#run-the-containerised-app) where we would inject the configuration using environment files. In kubernetes, we do so using ConfigMaps which we will see in [Deploy Liberty app from CLI using kubectl](#deploy-liberty-app-from-cli-using-kubectl). ICP GUI does not let us load environment configuration from ConfigMaps for a deployment. As a result, we will have to declare this configuration straight into the deployment. For doing so, click on the `Environment variables` tab and declare the DB2 and LDAP variables:
-
-
-| NAME                | VALUE                                 |
-| ------------------- | ------------------------------------- |
-| DB2_HOST_ORDER      | db2-cos-ibm-db2oltp-dev               |
-| DB2_PORT_ORDER      | 50000                                 |
-| DB2_DBNAME_ORDER    | ORDERDB                               |
-| DB2_USER_ORDER      | admin                                 |
-| DB2_PASSWORD_ORDER  | passw0rd                              |
-| LDAP_HOST           | cap-sg-prd-4.integration.ibmcloud.com |
-| LDAP_PORT           | 17830                                 |
-| LDAP_BASE_DN        |                                       |
-| LDAP_BIND_DN        | uid=casebind,ou=caseinc,o=sample      |
-| LDAP_BIND_PASSWORD  | caseBindUser!                         |
-| LDAP_REALM          | SampleLdapIDSRealm                    |
-
-
-![gui_deployment4](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/gui_deployment4.png)
-
-As you can see, _DB2_HOST_ORDER_ and _DB2_PORT_ORDER_ values have now changed. We are now using the kubernetes internal naming since we are going to deploy our application within the same namespace as where our DB2 instance is. Therefore, **kubernetes resources within the same namespace can use kubernetes internal names**.
-
-![services](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/services.png)
-
-8. Click on `Create`
-
-#### Expose the application (GUI)
-
-To be able to connect to the application, we need to create a service for it so that traffic gets redirected to the appropriate deployment and containers.
-
-1. From the navigation menu, select `Network Access --> Services`.
-2. Click on `Create Service` button on the top right corner.
-3. On the General tab, fill in:
-
-    * Name: `customerorderservices`
-    * Type: `NodePort`
-
-![gui_deployment5](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/gui_deployment5.png)
-
-4. On the Ports tab, fill in:
-
-    * Name: `http`
-    * Port: `80`
-    * Target Port: `9080`
-
-![gui_deployment6](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/gui_deployment6.png)
-
-5. On the Selectors tab, fill in:
-
-    * Selector: `app`
-    * Value: `customerorderservices`
-
-![gui_deployment7](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/gui_deployment7.png)
-
-The above must match the label in the deployment from the previous section so that the service recognises what deployments and containers to send traffic to.
-
-6. Click `Create`.
-7. Click on the newly created service and locate the port number for the `Node port` attribute. This port will be used to access the application below.
-
-![gui_deployment8](https://github.com/ibm-cloud-architecture/refarch-jee/blob/master/static/imgs/ICp/gui_deployment8.png)
-
-#### Validate application (GUI)
-
-1. Open a new web browser tab and point it to the ICP ip address `10.0.0.1` appending the node port for the customerorderservices kubernetes services and the context root `CustomerOrderServicesWeb` at the end of it. The complete address should look like:
-   ```
-   http://10.0.0.1:<Node_port>/CustomerOrderServicesWeb/
-   ```
-where `<Node_port>` is the port number obtained in the last step from the previous section where you created the customerorderservices kubernetes service.
-
-2. Validate that the shop loads with product listings.
 
 ### Deploy Liberty app from CLI using kubectl
 
