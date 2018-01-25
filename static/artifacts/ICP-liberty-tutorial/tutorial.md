@@ -22,7 +22,7 @@ In our case, a skytap development environment will be provided with the tools af
 
 ### SkyTap images ###
 
-1. Use the PurpleCompute series of SkyTap images for this tutorial.
+1. Use the [PurpleCompute series of SkyTap images](https://ibm-dte.mybluemix.net/ibm-cloud-private#deep-dive) for this tutorial.
 2. Login to your skytap machine on the Desktop vm image.
 3. Use the password: A1rb0rn3
 
@@ -72,9 +72,8 @@ Now that you've got a traditional Liberty application up and running on the plat
 
 Check [this](extra.md) out!
 
-### DevOps - Build and deploy using Jenkins 
+### DevOps - Build and deploy using Jenkins
 --------------------------------------------
 
 There is always time to be lazy. All steps above to compile, build and deploy the application can be automated.
 Read [these](DevOps/DevOps.md) instructions to setup Jenkins on IBM Cloud Private to do the job for you.
-
