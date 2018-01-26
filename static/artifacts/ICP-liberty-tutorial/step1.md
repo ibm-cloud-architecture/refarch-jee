@@ -116,7 +116,7 @@ The IBM WebSphere Application Server Liberty can be installed from eclipse. Sinc
 1. Open eclipse
 
 ```
-cd ~/eclipse
+cd ~/PurpleCompute/eclipse
 ./eclipse
 ```
 
