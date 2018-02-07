@@ -306,7 +306,9 @@ spec:
 3. Review the presented documentation for the IBM Db2 Developer-C Helm Chart and click **Configure**.
 4. In the *Configuration* section, enter a **Release name** (preferably with only lower-case letters and hyphens - this tutorial will use `db2-cos`) and select the **Target namespace** of *default*.
     ![Db2 setup 01](/static/imgs/db2-on-icp/db2Setup01.png)
-5. In the *Docker image configuration* section, follow the [link](http://ibm.biz/db2-dsm-license) in the **secret** field to retrieve a validated image secret.  Copy and paste this value from the other browser window into this entry field.
+5. In the *Docker image configuration* section,
+    * Make sure **Docker Repository** and **tag** fields get values `na.cumulusrepo.com/hcicp_dev/db2server_dec` and `11.1.2.2b` respectively. The reason for this is that the Skytap image you are working on comes with that DB2 Docker image pre-pulled so that you don't need to go off to the internet to pull it down.
+    * Follow the [link](http://ibm.biz/db2-dsm-license) in the **secret** field to retrieve a validated image secret.  Copy and paste this value from the other browser window into this entry field.
     ![Db2 setup 02](/static/imgs/db2-on-icp/db2Setup02.png)
     ![Db2 setup 02b](/static/imgs/db2-on-icp/db2Setup02b.png)
 6. In the *Db2 instance configuration* section, enter a username (defaults to `admin`) and a password (this tutorial will use `passw0rd`).  Note that the password defaults are randomly generated, so you will need to provide a known password here.
