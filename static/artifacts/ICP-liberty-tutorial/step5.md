@@ -7,6 +7,7 @@ In this final step, we are going to deploy our containerized Liberty app to our 
     * [Create ConfigMaps (CLI)](#create-configmaps-cli)
     * [Deploy application (CLI)](#deploy-application-cli)
     * [Validate application (CLI)](#validate-application-cli)
+* [Deploy Liberty app using Helm](#deploy-liberty-app-from-cli-using-kubectl)
 
 ### Deploy Liberty app from CLI using kubectl
 
@@ -104,3 +105,95 @@ com.ibm.net.SocketKeepAliveParameters
 ```
 3. To see some information about a given pod
    `$ kubectl describe pod customerorderservices<pod-id>`
+
+### Deploy Liberty app using Helm
+
+We have seen above how we can manually deploy the different pieces our Customer Order Services application deployment needs using the *kubectl* CLI. However, wouldn't it be great to deploy all pieces an application might need at once? We can do so using [Kubernetes Charts](https://github.com/kubernetes/charts) and [Helm](https://github.com/kubernetes/helm).
+
+Helm is a tool that streamlines installing and managing Kubernetes applications. Think of it like apt/yum/homebrew for Kubernetes.
+
+  * Helm has two parts: a client (helm) and a server (tiller)
+  * Tiller runs inside of your Kubernetes cluster, and manages releases (installations) of your charts.
+  * Helm runs on your laptop, CI/CD, or wherever you want it to run.
+
+Charts are curated application definitions for Kubernetes Helm. A chart is a collection of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on. Charts contain at least two things:
+
+  * A description of the package (Chart.yaml)
+  * One or more templates, which contain Kubernetes manifest files
+
+Charts can be stored on disk, or fetched from remote chart repositories (like Debian or RedHat packages).
+
+In our case, the Customer Order Services Kubernetes chart structure looks like the following:
+
+```bash
+├── refarch-jee-customerorder
+    ├── chart
+        ├── customerorderservices
+            ├── templates
+            │   ├── configmap.yaml
+            │   ├── db2_job.yaml
+            │   ├── deployment.yaml
+            │   └── service.yaml
+            ├── Chart.yaml
+            └── values.yaml
+```
+
+* `Chart.yaml` defines the chart attributes with regards to name, version, etc.
+* `configmap.yaml` defines a configmap where we store the LDAP and DB2 credentials and attributes.
+* `db2_job.yaml` defines a job to populate the Customer Order Services database.
+* `deployment.yaml` defines the what docker image will get deployed, where it comes from and some other attributes to it.
+* `service.yaml` defines the service which will provide access to the several Customer Order Services pods the deployment created.
+* `values.yaml` defines the values for the variables the other yaml files within the chart rely on. This is a configuration abstraction that makes the application deployable to different environments by just providing a different set of values.
+
+### Install Helm Chart
+
+In order to deploy the Customer Order Services application using helm,
+
+1. Make sure Helm is installed and working by executing `helm version`
+
+```
+skytap@icpboot:~$ helm version
+Client: &version.Version{SemVer:"v2.6.0", GitCommit:"5bc7c619f85d74702e810a8325e0a24f729aa11a", GitTreeState:"dirty"}
+Server: &version.Version{SemVer:"v2.6.0", GitCommit:"5bc7c619f85d74702e810a8325e0a24f729aa11a", GitTreeState:"clean"}
+```
+
+2. Install the Customer Order Services application char by executing
+
+```
+helm install --name <release_name> -f <values.yaml> <path_to_chart_directory>
+```
+
+where
+
+* `<release_name>` is a unique identifier used in our chart to uniquely identify each of the pieces deployed.
+* `<values.yaml>` is the values.yaml file with the appropriate values to be used in our deployment. In our case, it should be `~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/values.yaml`
+* `<path_to_chart_directory>` is the path to the Customer Order Services application chart directory. In our case, it should be `~/PurpleCompute/git/refarch-jee-customerorder/chart/customerorderservices/`
+
+The output of this command should be the list of the different kubernetes pieces involved in the deployment of the Customer Order Services application:
+
+```
+skytap@icpboot:~$ helm install --name test -f ~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/values.yaml ~/PurpleCompute/git/refarch-jee-customerorder/chart/customerorderservices/
+NAME:   test
+LAST DEPLOYED: Thu Feb  8 07:46:10 2018
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==> v1/ConfigMap
+NAME                        DATA  AGE
+test-customerorderservices  14    1s
+
+==> v1/Service
+NAME                        CLUSTER-IP  EXTERNAL-IP  PORT(S)         AGE
+test-customerorderservices  10.1.0.86   <nodes>      9080:31987/TCP  1s
+
+==> v1beta1/Deployment
+NAME                        DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+test-customerorderservices  1        1        1           0          1s
+
+==> v1/Job
+NAME                 DESIRED  SUCCESSFUL  AGE
+populate-cos-db-job  1        0           1s
+```
+
+Validate the application is running properly by following again the [Validate application (CLI)](#validate-application-cli) section above. Bear in mind that names and values used in that section might have now changed. For example, all kubernetes pieces will start with the unique `<release_name>` you specify during the helm install command.
