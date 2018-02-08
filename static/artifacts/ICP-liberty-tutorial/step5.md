@@ -7,7 +7,7 @@ In this final step, we are going to deploy our containerized Liberty app to our 
     * [Create ConfigMaps (CLI)](#create-configmaps-cli)
     * [Deploy application (CLI)](#deploy-application-cli)
     * [Validate application (CLI)](#validate-application-cli)
-* [Deploy Liberty app using Helm](#deploy-liberty-app-from-cli-using-kubectl)
+* [Deploy Liberty app using Helm](#deploy-liberty-app-using-helm)
 
 ### Deploy Liberty app from CLI using kubectl
 
