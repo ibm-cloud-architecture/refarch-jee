@@ -90,3 +90,5 @@ The envFrom section tells kubernetes to populate the containers environment vari
 # Next step
 
 Click [here](step5.md) to go to the next step, step 5.
+
+Click [here](tutorial.md) to go to the tutorial initial page.

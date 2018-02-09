@@ -118,3 +118,5 @@ After doing all the desired verifications, stop the running container by pressin
 # Next step
 
 Click [here](step4.md) to go to the next step, step 4.
+
+Click [here](tutorial.md) to go to the tutorial initial page.

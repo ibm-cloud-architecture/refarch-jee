@@ -200,3 +200,9 @@ populate-cos-db-job  1        0           1s
 ```
 
 Validate the application is running properly by following again the [Validate application (CLI)](#validate-application-cli) section above. Bear in mind that names and values used in that section might have now changed. For example, all kubernetes pieces will start with the unique `<release_name>` you specify during the helm install command.
+
+# Next step
+
+**CONGRATULATIONS!!** you have completed the tutorial.
+
+Click [here](tutorial.md) to go to the tutorial initial page.

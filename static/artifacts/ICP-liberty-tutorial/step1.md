@@ -680,3 +680,5 @@ When completed, stop the Liberty server.
 # Next step
 
 Click [here](step2.md) to go to the next step, step 2.
+
+Click [here](tutorial.md) to go to the tutorial initial page.
