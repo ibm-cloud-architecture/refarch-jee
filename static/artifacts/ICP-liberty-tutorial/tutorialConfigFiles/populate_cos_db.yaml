@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: populate-cos-db
+spec:
+  template:
+    spec:
+      containers:
+      - name: db2-express
+        image: ibmcom/db2express-c:latest
+        imagePullPolicy: IfNotPresent
+        command: ["bash", "-c" ]
+        args:
+          - >
+              echo "Configuring DB2 driver to talk to Customer Order Services Application's DB" &&
+              /home/db2inst1/sqllib/bin/db2cli writecfg add -dsn order -database ORDERDB -host db2-cos-ibm-db2oltp-dev -port 50000 &&
+
+              echo "Validating previous configuration" &&
+              /home/db2inst1/sqllib/bin/db2cli validate -dsn order &&
+
+              echo "Grabbing SQL files to populate ORDERDB" &&
+              cd /tmp &&
+              wget https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee-customerorder/liberty/Common/createOrderDB_job.sql &&
+              wget https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee-customerorder/liberty/Common/initialDataSet_job.sql &&
+
+              echo "Executing SQL files against ORDERDB" &&
+              /home/db2inst1/sqllib/bin/db2cli execsql -dsn order -user admin -passwd passw0rd -inputsql createOrderDB_job.sql &&
+              /home/db2inst1/sqllib/bin/db2cli execsql -dsn order -user admin -passwd passw0rd -inputsql initialDataSet_job.sql &&
+              echo
+              echo "[SUCCESS]: Cusomer Order Services application's DB has been successfully populated."
+        ports:
+        - name: http
+          containerPort: 50000
+        env:
+        - name: LICENSE
+          value: "accept"
+        - name: DB2INST1_PASSWORD
+          value: "justApass"
+      restartPolicy: Never
