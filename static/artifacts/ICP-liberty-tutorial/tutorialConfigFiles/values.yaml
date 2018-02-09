@@ -3,7 +3,7 @@
 replicaCount: 1
 revisionHistoryLimit: 1
 image:
-  repository: ibmcase
+  repository: bluedemocluster.icp:8500/default
   name: customer-order-services
   tag: liberty
   pullPolicy: IfNotPresent
