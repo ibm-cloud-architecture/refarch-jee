@@ -338,22 +338,26 @@ It will take a few minutes to deploy the Db2 Helm chart, especially if this is t
 Once Db2 is up and running inside ICP, there are many ways to now get data into that database. The preferred Kubernetes approach would be to create a [Job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) that would run once and bootstrap the data automatically. We provide you with this job definition for this tutorial. Then, you only need to create it using the Kubernetes CLI:
 
 1. Download the job definition that populates your newly created database
-  `pushd /tmp && wget https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee/master/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/populate_cos_db.yaml`
-2. Create the Kubernetes job out of the definition you just pulled down
-  `kubectl create -f populate_cos_db.yaml`
 
-**IMPORTANT:** the populate_cos_db.yaml job definition uses the db2 default values for this tutorial on the above sections. If you decided to change these, please also update the populate_cos_db.yaml job definition accordingly.
+    `pushd /tmp && wget https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee/master/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/populate_cos_db.yaml`
+
+2. Create the Kubernetes job out of the definition you just pulled down
+
+    `kubectl create -f populate_cos_db.yaml`
+
+    **IMPORTANT:** the populate_cos_db.yaml job definition uses the db2 default values for this tutorial on the above sections. If you decided to change these, please also update the populate_cos_db.yaml job definition accordingly.
 
 3. Watch for the job to succeed
-  `kubectl get jobs -w`
 
-  Once `SUCCESSFUL` turns to 1, the DB should be populated.
+    `kubectl get jobs -w`
 
-  ```
-  skytap@icpboot:/tmp$ kubectl get jobs -w
-  NAME                  DESIRED   SUCCESSFUL   AGE
-  populate-cos-db       1         1            2m
-  ```
+    Once `SUCCESSFUL` turns to 1, the DB should be populated.
+
+    ```
+    skytap@icpboot:/tmp$ kubectl get jobs -w
+    NAME                  DESIRED   SUCCESSFUL   AGE
+    populate-cos-db       1         1            2m
+    ```
 The application's data store is now available to be used by the updated Liberty-based application running on ICP.
 
 ## Source Code Migration
