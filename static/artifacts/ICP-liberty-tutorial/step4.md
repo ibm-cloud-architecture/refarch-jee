@@ -86,3 +86,7 @@ Above the dashes is the **Service**, indicated by `kind: Service`. Here we descr
 The next part is the **deployment** part, indicated by `kind: Deployment`. Here we describe what we want the target state of the application to be. In our example, we instruct a single container to be named `customerorderservices` and created from the image we pushed to our image repository previously.
 
 The envFrom section tells kubernetes to populate the containers environment variables from a ConfigMap, which we will create in Step 5. These variables holds deployment specific information such as database host, port, user and password. This enables us to reuse the same image and deployment manifests in multiple deployment environments such as pre-prod and prod at the same time having their specifics set aside in separate ConfigMap files.
+
+# Next step
+
+Click [here](#step5.md) to go to the next step, step 5.

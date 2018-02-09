@@ -291,7 +291,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /tmp/customerorder-data
+    path: /home/skytap/PurpleCompute/persistent_volumes/customerorder-data
     type: DirectoryOrCreate
 ```
   This YAML block will create a *PersistentVolume* which the Db2 Helm Chart will create a *PersistentVolumeClaim* against.  In doing so, Db2 can now persist its data across individual container instances should one crash, fail, or otherwise be removed.
@@ -335,21 +335,25 @@ It will take a few minutes to deploy the Db2 Helm chart, especially if this is t
 
 #### Bootstrap initial data into database
 
-Once Db2 is up and running inside ICP, there are many ways to now get data into that database.  For simplicity, this tutorial will walk through a scripted approach to bootstrapping data into the database.  Alternative approaches are available, such as visual-based JDBC-supported tools, as well as DB2 CLIs.
+Once Db2 is up and running inside ICP, there are many ways to now get data into that database. The preferred Kubernetes approach would be to create a [Job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) that would run once and bootstrap the data automatically. We provide you with this job definition for this tutorial. Then, you only need to create it using the Kubernetes CLI:
 
-The preferred Kubernetes approach would be to create a [Job](#tbd) that would run once and bootstrap the data automatically.  This will be created and performed in a future tutorial update.
+1. Download the job definition that populates your newly created database
+  `pushd /tmp && wget https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee/master/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/populate_cos_db.yaml`
+2. Create the Kubernetes job out of the definition you just pulled down
+  `kubectl create -f populate_cos_db.yaml`
 
-1.  Take note of the Db2 service name by running the command `kubectl get service`.  This name will be used later to route to your Db2 database from the WebSphere application.
-2.  Get the pod name of the Db2 pod using the command `kubectl get pods | grep db2`.
-3.  Start a bash shell inside the running Db2 pod via `kubectl exec -it {pod_name} bash`.
-4.  Alternatively, to perform the same task in a single command, run `kubectl exec -it $(kubectl get pods | grep db2 | awk '{print $1}') bash` instead.
-    ![Db2 setup 07](/static/imgs/db2-on-icp/db2Setup07.png)
-5.  From inside the Db2 pod, run the following command to bootstrap the required application data:
-      `su - ${DB2INSTANCE} -c "bash <(curl -s https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee-customerorder/liberty/Common/bootstrapCurlDb2.sh)"`
-    ![Db2 setup 08](/static/imgs/db2-on-icp/db2Setup08.png)
-6.  Once the script completes, you can exit the bash prompt via `exit` from the CLI.
-    ![Db2 setup 08](/static/imgs/db2-on-icp/db2Setup09.png)
+**IMPORTANT:** the populate_cos_db.yaml job definition uses the db2 default values for this tutorial on the above sections. If you decided to change these, please also update the populate_cos_db.yaml job definition accordingly.
 
+3. Watch for the job to succeed
+  `kubectl get jobs -w`
+
+  Once `SUCCESSFUL` turns to 1, the DB should be populated.
+
+  ```
+  skytap@icpboot:/tmp$ kubectl get jobs -w
+  NAME                  DESIRED   SUCCESSFUL   AGE
+  populate-cos-db       1         1            2m
+  ```
 The application's data store is now available to be used by the updated Liberty-based application running on ICP.
 
 ## Source Code Migration
@@ -672,3 +676,7 @@ Again, save all the changes, export the EAR project to the WebSphere Liberty fol
 ![Source migration 33](/static/imgs/toLiberty/Source33.png)
 
 When completed, stop the Liberty server.
+
+# Next step
+
+Click [here](#step2.md) to go to the next step, step 2.

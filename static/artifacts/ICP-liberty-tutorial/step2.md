@@ -105,3 +105,7 @@ Now, you are done with the configuration and the app is ready for deployment. To
 </p>
 
 6. Finally, stop the server: `./server stop defaultServer`
+
+# Next step
+
+Click [here](#step3.md) to go to the next step, step 3.

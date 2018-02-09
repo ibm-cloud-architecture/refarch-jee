@@ -114,3 +114,7 @@ As usual, login as the user `rbarcia` with the password of `bl0wfish`.
 </p>
 
 After doing all the desired verifications, stop the running container by pressing `ctrl+c`
+
+# Next step
+
+Click [here](#step4.md) to go to the next step, step 4.

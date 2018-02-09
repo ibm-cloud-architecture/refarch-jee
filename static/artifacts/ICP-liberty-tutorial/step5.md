@@ -165,14 +165,17 @@ helm install --name <release_name> -f <values.yaml> <path_to_chart_directory>
 
 where
 
-* `<release_name>` is a unique identifier used in our chart to uniquely identify each of the pieces deployed.
-* `<values.yaml>` is the values.yaml file with the appropriate values to be used in our deployment. In our case, it should be `~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/values.yaml`
-* `<path_to_chart_directory>` is the path to the Customer Order Services application chart directory. In our case, it should be `~/PurpleCompute/git/refarch-jee-customerorder/chart/customerorderservices/`
+* `<release_name>` is a unique identifier used to uniquely identify each of the pieces deployed by a chart.
+* `<values.yaml>` should be `~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/values.yaml` in our case. **IMPORTANT:** the values.yaml file provided is tailored for the default values used throughout this tutorial. If you decided to used others, you need to modify this values.yaml file accordingly.
+* `<path_to_chart_directory>` should be `~/PurpleCompute/git/refarch-jee-customerorder/chart/customerorderservices/` in our case.
 
 The output of this command should be the list of the different kubernetes pieces involved in the deployment of the Customer Order Services application:
 
 ```
-skytap@icpboot:~$ helm install --name test -f ~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/values.yaml ~/PurpleCompute/git/refarch-jee-customerorder/chart/customerorderservices/
+skytap@icpboot:~$ helm install --name test \
+-f ~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/values.yaml \
+~/PurpleCompute/git/refarch-jee-customerorder/chart/customerorderservices/
+
 NAME:   test
 LAST DEPLOYED: Thu Feb  8 07:46:10 2018
 NAMESPACE: default
