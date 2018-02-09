@@ -679,4 +679,4 @@ When completed, stop the Liberty server.
 
 # Next step
 
-Click [here](#step2.md) to go to the next step, step 2.
+Click [here](step2.md) to go to the next step, step 2.

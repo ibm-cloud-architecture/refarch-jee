@@ -108,4 +108,4 @@ Now, you are done with the configuration and the app is ready for deployment. To
 
 # Next step
 
-Click [here](#step3.md) to go to the next step, step 3.
+Click [here](step3.md) to go to the next step, step 3.
