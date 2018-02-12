@@ -17,6 +17,7 @@ To authenticate kubectl you need to grab token and associated information from t
 2. In the top right corner in the dropdown by the username select `Configure Client`.
 3. Copy the text in the textbox.
 4. Paste the text into a terminal window.
+5. The above set of commands sets the kubernetes CLI to work on the default namespace. However, we want to work on our **purplecompute namespace** as a best practices when working on a shared environment such as ICP. In order to get the Kubernetes CLI to work with the purplecompute namespace, run `kubectl config set-context bluedemocluster.icp-context --user=admin --namespace=purplecompute`
 
 You are now authenticated and can use kubectl.
 

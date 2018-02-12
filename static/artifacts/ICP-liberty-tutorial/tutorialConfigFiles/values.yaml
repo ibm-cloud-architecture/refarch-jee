@@ -3,7 +3,7 @@
 replicaCount: 1
 revisionHistoryLimit: 1
 image:
-  repository: bluedemocluster.icp:8500/default
+  repository: bluedemocluster.icp:8500/purplecompute
   name: customer-order-services
   tag: liberty
   pullPolicy: IfNotPresent

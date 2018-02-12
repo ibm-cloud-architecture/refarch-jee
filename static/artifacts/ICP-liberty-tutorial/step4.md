@@ -18,16 +18,16 @@ To be able to push the image we build in the previous step into the ICP Image Re
 
 From the command line, enter the following command
 ```
-docker tag customer-order-services:liberty bluedemocluster.icp:8500/default/customer-order-services:liberty
+docker tag customer-order-services:liberty bluedemocluster.icp:8500/purplecompute/customer-order-services:liberty
 ```
-This extra information in the tag tells docker that this image belongs to the repository `default` on the `bluedemocluster.icp:8500` server which is the repository for the `default` namespace. Namespacing is a concept in Kubernetes that allows isolation of applications and other resources.
+This extra information in the tag tells docker that this image belongs to the repository `purplecompute` on the `bluedemocluster.icp:8500` server. Namespacing is a concept in Kubernetes that allows isolation of applications and other resources.
 
 #### Push image
 
 To make the image available to use in Kubernetes enter the following commands
 
 1. `docker login bluedemocluster.icp:8500` providing `admin` as the user and `admin` as the password.
-2. `docker push bluedemocluster.icp:8500/default/customer-order-services:liberty`
+2. `docker push bluedemocluster.icp:8500/purplecompute/customer-order-services:liberty`
 
 You will now be able to see the image in the ICP Dashboard under `Catalog -> Images`.
 
@@ -67,7 +67,7 @@ spec:
         app: customerorderservices
     spec:
       containers:
-      - image: bluedemocluster.icp:8500/default/customer-order-services:liberty
+      - image: bluedemocluster.icp:8500/purplecompute/customer-order-services:liberty
         name: customerorderservices
         ports:
         - containerPort: 9080

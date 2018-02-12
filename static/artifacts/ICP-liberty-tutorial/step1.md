@@ -304,7 +304,7 @@ spec:
 1. Click the hamburger menu icon and select **Catalog** > **Helm Charts**.
 2. Select **ibm-db2oltp-dev** from the list of available Helm charts.
 3. Review the presented documentation for the IBM Db2 Developer-C Helm Chart and click **Configure**.
-4. In the *Configuration* section, enter a **Release name** (preferably with only lower-case letters and hyphens - this tutorial will use `db2-cos`) and select the **Target namespace** of *default*.
+4. In the *Configuration* section, enter a **Release name** (preferably with only lower-case letters and hyphens - this tutorial will use `db2-cos`) and select the **Target namespace** of *purplecompute*.
     ![Db2 setup 01](/static/imgs/db2-on-icp/db2Setup01.png)
 5. In the *Docker image configuration* section,
     * Make sure **Docker Repository** and **tag** fields get values `na.cumulusrepo.com/hcicp_dev/db2server_dec` and `11.1.2.2b` respectively. The reason for this is that the Skytap image you are working on comes with that DB2 Docker image pre-pulled so that you don't need to go off to the internet to pull it down.
@@ -313,7 +313,7 @@ spec:
     ![Db2 setup 02b](/static/imgs/db2-on-icp/db2Setup02b.png)
 6. In the *Db2 instance configuration* section, enter a username (defaults to `admin`) and a password (this tutorial will use `passw0rd`).  Note that the password defaults are randomly generated, so you will need to provide a known password here.
     ![Db2 setup 03](/static/imgs/db2-on-icp/db2Setup03.png)
-7. In the *Database configuration options* section, enter **orderdb** in the *Database Name* field.
+7. In the *Database configuration options* section, enter **ORDERDB** in the *Database Name* field.
 8. In the *Data volume configuration* section, update the *Size of the volume claim* field to be **2Gi**.  Kubernetes will automatically map the creation of a new PersistentVolumeClaim to the PersistentVolume created in the previous section.
     ![Db2 setup 04](/static/imgs/db2-on-icp/db2Setup04.png)
 9. In the *Resource configuration* section, update the *Memory limit* field to be **8Gi**.
@@ -328,10 +328,11 @@ It will take a few minutes to deploy the Db2 Helm chart, especially if this is t
 1.  In the ICP console, select `admin` in the upper right and then select *Configure client*.
 2.  Copy and paste the contents the dialog box into a terminal window and press **Enter**.  This will configure the CLI to talk to the ICP instance via the Kubernetes CLI tool, *kubectl*.
     ![Db2 setup 06](/static/imgs/db2-on-icp/db2Setup06.png)
-3. To view the list of all deployed Helm charts on the current ICP installation, run `helm list`.
-4. To view a consolidated set of Kubernetes resources that a given Helm chart deployment is utilizing, run `helm status {release_name}`.
-5. To monitor the underlying Kubernetes Deployment artifact, run `kubectl get deployment -w`.  The `-w` parameter is important, as the CLI will actively monitor the status of Kuubernetes (and specifically the Deployments) and report back any changes to the CLI.
-6. Once the *Available* field turns to **1**, the Db2 instance is available and ready to be used.
+3. The above set of commands sets the kubernetes CLI to work on the default namespace. However, we want to work on our **purplecompute namespace** as a best practices when working on a shared environment such as ICP. In order to get the Kubernetes CLI to work with the purplecompute namespace, run `kubectl config set-context bluedemocluster.icp-context --user=admin --namespace=purplecompute`
+4. To view the list of all deployed Helm charts on the current ICP installation, run `helm list`.
+5. To view a consolidated set of Kubernetes resources that a given Helm chart deployment is utilizing, run `helm status {release_name}`.
+6. To monitor the underlying Kubernetes Deployment artifact, run `kubectl get deployment -w`.  The `-w` parameter is important, as the CLI will actively monitor the status of Kuubernetes (and specifically the Deployments) and report back any changes to the CLI.
+7. Once the *Available* field turns to **1**, the Db2 instance is available and ready to be used.
 
 #### Bootstrap initial data into database
 
