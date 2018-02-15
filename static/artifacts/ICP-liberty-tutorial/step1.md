@@ -854,7 +854,7 @@ Add the following lines to your server.xml file to configure your Liberty server
 
 `~/PurpleCompute/wlp/bin/installUtility install <server_name>`
 
-where *<server_name>* is the name you have given to your Liberty server when you created it at the beginning of this tutorial. If you have followed the instructions as they are, the Liberty server name should be *defaultServer*.
+where *<server_name>* is the name you have given to your Liberty server [when you created it](#install-websphere-application-server-liberty-locally) at the beginning of this tutorial. If you have followed the instructions as they are, the Liberty server name should be *defaultServer*.
 
 ![Source migration 60](/static/imgs/toLiberty/Source60.png)
 
