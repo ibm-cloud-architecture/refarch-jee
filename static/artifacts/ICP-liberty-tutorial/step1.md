@@ -324,12 +324,20 @@ As the original application database resides on-premise, it will need to be recr
 
 To utilize the Db2 database provided for IBM Cloud Private, a persistent volume needs to first be created.  Depending upon multiple platform configuration options, this can be done automatically, but in the effort of learning, this tutorial covers the manual creation of this artifact.  This helps to reinforce the mapping of the service to its requirements.
 
-1. Open Mozilla Firefox and log into the IBM Cloud Private console via https://10.0.0.1:8443/console
+1. Open Mozilla Firefox and point it to the IBM Cloud Private console: https://10.0.0.1:8443/console
+
+2. If you are still not logged in, you will get redirected to the login page:
+
+   ![Source migration 92](/static/imgs/toLiberty/Source92.png)
+
+   Credentials should be already typed in but, just in case, they are `Username: admin and Password: admin`
+
+3. Once you are authenticated you should finally get to the IBM Cloud Private console:
 
    ![Source migration 74](/static/imgs/toLiberty/Source74.png)
 
-2. Click **Create resource** button on the top right corner.
-3. A window to define your new resource will pop up. Delete the pre-filled content in the dialog box and replace it with the following snippet:
+4. Click **Create resource** button on the top right corner.
+5. A window to define your new resource will pop up. Delete the pre-filled content in the dialog box and replace it with the following snippet:
    ```
    apiVersion: v1
    kind: PersistentVolume
@@ -348,7 +356,7 @@ To utilize the Db2 database provided for IBM Cloud Private, a persistent volume 
 
    As this is an introductory tutorial, we are using the most simplistic form of shared storage in a Kubernetes-based environment, *hostPath*.  This allows Kubernetes to save data from containers running in Pods to the physical host.  But note that this is not shared across hosts automatically, so should the container fail and be rescheduled on a different host, this data would be unavailable.  For this tutorial, this is acceptable.
 
-4. Click **Create**.
+6. Click **Create**.
 
 #### Deploy the Db2 Helm Chart
 
@@ -561,6 +569,14 @@ We will start off with the **File Review** analysis tab. As you can see in the i
 > The Detailed help link should open a web-based information centre with a longer and more detailed explanation of the error/warning and show you additional ideas on how to resolve that problem.
 
    ![Source migration 7](/static/imgs/toLiberty/Source7.png)
+
+> If the Detailed help does not open on your web browser and instead displays in the eclipse Help widget but you prefer to see this information on your web browser for a better reading, you need to configure eclipse to do so. Open eclipse preferences by clicking on Window --> Preferences at the eclipse top bar menu
+
+   ![Source migration 90](/static/imgs/toLiberty/Source90.png)
+
+> Then click on Help on the left hand side options list and set the Open help view documents to **in a browser** as the following image depics
+
+  ![Source migration 91](/static/imgs/toLiberty/Source91.png)
 
 As we could read above on the detailed information displayed for this error/warning the WAMT has found:
 
