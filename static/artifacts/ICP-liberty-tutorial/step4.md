@@ -16,26 +16,52 @@ IBM Cloud Private (ICP) provides a docker compatible image repository out of the
 
 To be able to push the image we build in the previous step into the ICP Image Repository, we'll need to add an additional tag to the image we built.
 
-From the command line, enter the following command
-```
-docker tag customer-order-services:liberty bluedemocluster.icp:8500/purplecompute/customer-order-services:liberty
-```
-This extra information in the tag tells docker that this image belongs to the repository `purplecompute` on the `bluedemocluster.icp:8500` server. Namespacing is a concept in Kubernetes that allows isolation of applications and other resources.
+On a terminal window, enter the following command
+
+`docker tag customer-order-services:liberty bluedemocluster.icp:8500/purplecompute/customer-order-services:liberty`
+
+This extra information in the tag tells docker that this image belongs to the repository called `purplecompute` on the `bluedemocluster.icp:8500` server. Namespacing is a concept in Kubernetes that allows isolation of applications and other resources.
 
 #### Push image
 
-To make the image available to use in Kubernetes enter the following commands
+To make the image available in ICP we need to push the image to ICP's docker images repository. To do so, enter the following command on a terminal window:
 
-1. `docker login bluedemocluster.icp:8500` providing `admin` as the user and `admin` as the password.
+1. `docker login bluedemocluster.icp:8500` (providing `admin` as the user and `admin` as the password).
 2. `docker push bluedemocluster.icp:8500/purplecompute/customer-order-services:liberty`
 
-You will now be able to see the image in the ICP Dashboard under `Catalog -> Images`.
+   ![Docker 1](/static/imgs/ICp/docker1.png)
 
-When completed, **sign out of the ICP dashboard**.
+   As you can see above, the Docker image did not finish to get pushed into ICP's docker registry. This may happen due to some VM resource contention. Thus, if you didn't succeed at first, just try it again (or few times) until you see that all the layers already exist or haven been pushed:
+
+   ![Docker 2](/static/imgs/ICp/docker2.png)
+
+You will now be able to see the image in the ICP Dashboard:
+
+1. Open Mozilla Firefox and point it to the IBM Cloud Private console: https://10.0.0.1:8443/console
+
+2. If you are still not logged in, you will get redirected to the login page:
+
+   ![Source migration 92](/static/imgs/toLiberty/Source92.png)
+
+   Credentials should be already typed in but, just in case, they are `Username: admin and Password: admin`
+
+3. Once you are authenticated you should finally get to the IBM Cloud Private console:
+
+   ![Source migration 74](/static/imgs/toLiberty/Source74.png)
+
+4. On the ICP web based console, click the hamburger menu icon and select Catalog > Images.
+
+   ![Docker 4](/static/imgs/ICp/docker3.png)
+
+5. Check your Customer Order Services Docker image has been pushed:
+
+   ![Docker 4](/static/imgs/ICp/docker4.png)
+
+   If you see errors when opening the ICP catalog images section, refresh the web browser few times until you see it like in the image above.
 
 ### Generate deployment yaml file
 
-Our [deployment yaml file](https://github.com/ibm-cloud-architecture/refarch-jee/tree/master/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/deployment.yaml), which specifies how we want our application (i.e. the container) to be deployed, looks like this:
+Our [deployment yaml file](/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/deployment.yaml), which specifies how we want our application (i.e. the container) to be deployed, looks like this:
 
 ```
 apiVersion: v1
