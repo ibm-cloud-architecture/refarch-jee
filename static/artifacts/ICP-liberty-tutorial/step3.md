@@ -59,7 +59,7 @@ Likewise, we need to do the same with the **Dockerfile** we will use for this tu
 
 1. `cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/Dockerfile /home/skytap/PurpleCompute/git/refarch-jee-customerorder/`
 
-Finally, we have to copy the DB2 libraries WebSphere Application Server Liberty server needs to enable our application to connect to the DB2 database. We have to copy these DB2 libraries into the `Common` folder too since that is where we have defined these libraries to be in our Dockerfile. Again, execute on a terminal:
+Also, we have to copy the DB2 libraries WebSphere Application Server Liberty server needs to enable our application to connect to the DB2 database. We have to copy these DB2 libraries into the `Common` folder too since that is where we have defined these libraries to be in our Dockerfile. Again, execute on a terminal:
 
 1. `cp /home/skytap/PurpleCompute/db2lib/db2jcc4.jar /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
 2. `cp /home/skytap/PurpleCompute/db2lib/db2jcc_license_cu.jar /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
@@ -67,7 +67,7 @@ Finally, we have to copy the DB2 libraries WebSphere Application Server Liberty 
 Finally, we are now ready to build the container:
 
 1. `cd /home/skytap/PurpleCompute/git/refarch-jee-customerorder`
-2. `docker build -t "customer-order-services:liberty" .` (mind the dot at the end)
+2. `docker build -t "customer-order-services:liberty" .`   (mind the dot at the end)
 
    ![Docker 1](/static/imgs/localDocker/docker1.png)
 
@@ -83,9 +83,9 @@ That environment specific configuration to get the containerised Customer Order 
 
 These files are located in our machine at `/home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles`
 
-However, the port ICP exposes for our DB2 deployment is dynamic, meaning that it changes from one deployment to another. As a result, we need to specify the appropriate NodePort for our DB2 deployment in the `remote_orderdb.env` file same way we have already done in this tutorial for the WebSphere Liberty server configuration in its `server.env` file.
+However, the port ICP exposes for our DB2 deployment changes from one deployment to another. As a result, we can't set it beforehand for this tutorial and we need to specify the appropriate NodePort for our DB2 deployment in the `remote_orderdb.env` file manually (same way we have already done in this tutorial when we ran the application locally outside of any container where we had to set appropriate NodePort straight into the `server.env`).
 
-This value is acquired via the `kubectl get services` command:
+The DB2 NodePort value that ICP exposes can be acquired via the `kubectl get services` command:
 
    ![Orderdb](/static/imgs/toLiberty/Source85.png)
 
@@ -119,7 +119,7 @@ http://10.0.0.1:9081/CustomerOrderServicesWeb/#shopPage
 
 As usual, login as the user `rbarcia` with the password of `bl0wfish`.
 
-   ![App running](static/imgs/LibertyToolKit/AppRunningLocally.png)
+   ![App running](/static/imgs/LibertyToolKit/AppRunningLocally.png)
 
 After doing all the desired verifications, stop the running container by pressing `ctrl+c` on your terminal window where you ran the Docker container from.
 
