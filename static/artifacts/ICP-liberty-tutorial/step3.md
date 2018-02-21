@@ -4,14 +4,14 @@ In this step, we are going to use Docker technology to containerise our Liberty 
 
 1. [Containerise the app](#containerise-the-app)
     * [Dockerfile](#dockerfile)
-    * [Build the container image from Dockerfile](#build-container-image-from-dockerfile)
+    * [Build the container image from Dockerfile](#build-the-container-image-from-dockerfile)
     * [Run the containerised app](#run-the-containerised-app)
 
 ### Containerise the app
 
 #### Dockerfile
 
-We are using Docker to containerize the app. Using Docker, we can pack, ship and easily run the apps on a portable lightweight container that can run anywhere virtually.
+We are using Docker to containerise the app. Using Docker, we can pack, ship and easily run the apps on a portable lightweight container that can run anywhere virtually.
 
 Lets have a look at our [Dockerfile](tutorialConfigFiles/Dockerfile) file
 
@@ -50,7 +50,7 @@ Using this docker file, we build a docker image and using this image we will lau
 
 #### Build the container image from Dockerfile
 
-Because the Dockerfile is set to use the files in the `Common` directory from the source code github repo, we must then replace those files with our tutorial specific configuration files before building the Docker image. That is, we need to copy **server.xml** and **server.env.docker** files into the `Common` folder. For doing it, execute on a terminal window:
+Because the Dockerfile is set to use the files in the **Common** directory from the source code github repository, we must then replace those files with our tutorial specific configuration files before building the Docker image. That is, we need to copy **server.xml** and **server.env.docker** files into the **Common** folder. For doing so, execute on [a terminal window](troubleshooting.md#open-the-terminal):
 
 1. `cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/server.xml /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
 2. `cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/server.env.step3 /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/server.env.docker`
@@ -59,7 +59,7 @@ Likewise, we need to do the same with the **Dockerfile** we will use for this tu
 
 1. `cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/Dockerfile /home/skytap/PurpleCompute/git/refarch-jee-customerorder/`
 
-Also, we have to copy the DB2 libraries WebSphere Application Server Liberty server needs to enable our application to connect to the DB2 database. We have to copy these DB2 libraries into the `Common` folder too since that is where we have defined these libraries to be in our Dockerfile. Again, execute on a terminal:
+Also, we have to copy the DB2 libraries WebSphere Application Server Liberty server needs to enable our application to connect to the DB2 database. We have to copy these DB2 libraries into the **Common** folder too since that is where we have defined these libraries to be in our Dockerfile. Again, execute on [a terminal window](troubleshooting.md#open-the-terminal):
 
 1. `cp /home/skytap/PurpleCompute/db2lib/db2jcc4.jar /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
 2. `cp /home/skytap/PurpleCompute/db2lib/db2jcc_license_cu.jar /home/skytap/PurpleCompute/git/refarch-jee-customerorder/Common/`
@@ -71,7 +71,7 @@ Finally, we are now ready to build the container:
 
    ![Docker 1](/static/imgs/localDocker/docker1.png)
 
-You can verify your docker image has been successfully built by using the command `docker images` on your terminal:
+You can verify your docker image has been successfully built by using the command `docker images` on your [terminal window](troubleshooting.md#open-the-terminal):
 
    ![Docker 2](/static/imgs/localDocker/docker2.png)
 
@@ -81,26 +81,25 @@ When starting the container, we feed in environment specific configuration to di
 
 That environment specific configuration to get the containerised Customer Order Services application to work on our ICP environment for this tutorial and to connect out to an on-premise LDAP server is now stored in these two files: [remote_orderdb.env](tutorialConfigFiles/orderdb.env) and [ldap.env](tutorialConfigFiles/ldap.env).
 
-These files are located in our machine at `/home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles`
+These files are located in our machine at _/home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles_
 
-However, the port ICP exposes for our DB2 deployment changes from one deployment to another. As a result, we can't set it beforehand for this tutorial and we need to specify the appropriate NodePort for our DB2 deployment in the `remote_orderdb.env` file manually (same way we have already done in this tutorial when we ran the application locally outside of any container where we had to set appropriate NodePort straight into the `server.env`).
+However, the port ICP exposes for our DB2 deployment changes from one deployment to another. As a result, we can't set it beforehand for this tutorial and we need to specify the appropriate NodePort for our DB2 deployment in the **remote_orderdb.env** file manually (same way we have already done in this tutorial when we ran the application locally outside of any container where we had to set appropriate NodePort straight into the **server.env**).
 
-The DB2 NodePort value that ICP exposes can be acquired via the `kubectl get services` command:
+The DB2 NodePort value that ICP exposes can be acquired via executing the `kubectl get services` command on [a terminal window](troubleshooting.md#open-the-terminal):
 
    ![Orderdb](/static/imgs/toLiberty/Source85.png)
 
-Update the `remote_orderdb.env` file by replacing the string **REPLACE_WITH_NODEPORT** with the NodePort value from above (30494 in our example):
+Update the **remote_orderdb.env** file by replacing the string **REPLACE_WITH_NODEPORT** with the NodePort value from above (30494 in our example). On [a terminal window](troubleshooting.md#open-the-terminal), execute:
 
-   1. On a terminal window: `gedit /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/remote_orderdb.env`
+   1. `gedit /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/remote_orderdb.env`
 
    2. Change `REPLACE_WITH_NODEPORT` with the correct NodePort above explained.
 
    3. Save & close.
 
-
 **IMPORTANT:** The above files are configured to work with this tutorial default values. If you decided to use any different value than the default ones throughout this tutorial, please update the aforementioned files accordingly.
 
-Finally, to run the docker image, execute the following on a terminal window:
+Finally, to run the docker image, execute the following on [a terminal window](troubleshooting.md#open-the-terminal):
 
 ```
 docker run --name customer-order-services \
@@ -121,7 +120,7 @@ As usual, login as the user `rbarcia` with the password of `bl0wfish`.
 
    ![App running](/static/imgs/LibertyToolKit/AppRunningLocally.png)
 
-After doing all the desired verifications, stop the running container by pressing `ctrl+c` on your terminal window where you ran the Docker container from.
+After doing all the desired verifications, stop the running container by pressing `ctrl+c` on the same terminal window you ran the Docker container from.
 
    ![Docker 4](/static/imgs/localDocker/docker4.png)
 
