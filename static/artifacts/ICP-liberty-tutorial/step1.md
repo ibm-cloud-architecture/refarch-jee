@@ -320,7 +320,7 @@ As the original application database resides on-premise, it will need to be recr
 
 To utilize the Db2 database provided for IBM Cloud Private, a persistent volume needs to first be created.  Depending upon multiple platform configuration options, this can be done automatically, but in the effort of learning, this tutorial covers the manual creation of this artifact.  This helps to reinforce the mapping of the service to its requirements.
 
-1. [Log into the ICP](troubleshooting.md#log-into-icp).
+1. [Log into ICP](troubleshooting.md#log-into-icp).
 
 2. Click **Create resource** button on the top right corner.
 
@@ -440,7 +440,7 @@ On a [terminal window](troubleshooting.md#open-the-terminal) where the [Kubernet
 
 Once Db2 is up and running inside ICP, there are many ways to now get data into that database. The preferred Kubernetes approach would be to create a [Job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) that would run once and bootstrap the data automatically. We provide you with this job definition for this tutorial.
 
-On a terminal window where the [Kubernetes CLI has been configured on](troubleshooting.md#configure-the-kubernetes-cli):
+On a [terminal window](troubleshooting.md#open-the-terminal) where the [Kubernetes CLI has been configured on](troubleshooting.md#configure-the-kubernetes-cli):
 
 1. Download the job definition that populates your newly created database. On a terminal window, execute:
 
