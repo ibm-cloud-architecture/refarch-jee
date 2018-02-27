@@ -1,0 +1,31 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+revisionHistoryLimit: 1
+image:
+  repository: bluedemocluster.icp:8500/purplecompute
+  name: customer-order-services
+  tag: liberty
+  pullPolicy: IfNotPresent
+  containerPort: 9080
+  resources:
+    requests:
+      cpu: 200m
+      memory: 300Mi
+service:
+  type: NodePort
+  servicePort: 9080
+db2:
+  host: db2-cos-ibm-db2oltp-dev
+  port: 50000
+  user: admin
+  password: passw0rd
+  populate: true
+  populate_sql_scripts_location: "https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee-customerorder/liberty/Common"
+ldap:
+  host: cap-sg-prd-4.integration.ibmcloud.com
+  port: 17830
+  base_dn:
+  bind_dn: uid=casebind,ou=caseinc,o=sample
+  bind_password: caseBindUser!
+  realm: SampleLdapIDSRealm

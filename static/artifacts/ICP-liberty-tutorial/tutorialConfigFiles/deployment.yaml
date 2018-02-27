@@ -26,7 +26,7 @@ spec:
         app: customerorderservices
     spec:
       containers:
-      - image: bluedemocluster.icp:8500/default/customer-order-services:liberty
+      - image: bluedemocluster.icp:8500/purplecompute/customer-order-services:liberty
         name: customerorderservices
         ports:
         - containerPort: 9080

@@ -1,0 +1,83 @@
+- tienes que poner los nuevos tars en `docs/charts`
+- `helm repo index --url...`
+- subirlos a github
+- luego hacer `helm repo update` que el repo se sincronize con github
+- `helm dependency update` en `wfd-app`
+- comprimir y poner el nuevo tar en `docs/charts`
+- `helm repo index --url...`
+- subirlo a github
+- instalar (edited)
+
+
+
+
+helm delete jesus-spring --purge
+helm install --name jesus-spring refarch-cloudnative-wfd/wfd-app
+helm repo index . --url=https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-cloudnative-wfd/spring/docs/charts
+helm package .
+
+
+helm install --name jesus-config ibmcase-spring/ibmcase-spring/spring-config-server \
+--set spring.cloud.config.server.git.uri=https://github.com/jesusmah/refarch-cloudnative-wfd \
+--set spring.cloud.config.server.git.searchPaths=config \
+--set service.type=NodePort
+
+
+helm install --name manual-config . --set spring.cloud.config.server.git.uri=https://github.com/ibm-cloud-architecture/refarch-cloudnative-wfd.git --set spring.cloud.config.server.git.searchPaths=config --set spring.cloud.config.label=spring-cloud
+
+
+
+
+helm install --name spring-stack ibmcase-spring/spring-stack --set global.rabbitmq.host=rabbitmq --set global.rabbitmq.username=guest --set global.rabbitmq.password=guest --set spring-config-server.spring.cloud.config.server.git.uri=https://github.com/ibm-cloud-architecture/refarch-cloudnative-wfd/ --set spring-config-server.spring.cloud.config.server.git.searchPaths=config --set spring-eureka-server.service.type=NodePort
+
+
+helm install --name spring-stack ibmcase-spring/spring-stack --set global.rabbitmq.host=rabbitmq --set global.rabbitmq.username=guest --set global.rabbitmq.password=guest --set spring-config-server.spring.cloud.config.server.git.uri=https://github.com/jesusmah/refarch-cloudnative-wfd --set spring-config-server.spring.cloud.config.server.git.searchPaths=config --set spring-eureka-server.service.type=NodePort
+
+config.service=manual-config-spring-config-server
+
+----------------------------------------------------
+
+A change in the helm chart yaml file happens (wfd-ui microservice)
+
+cd refarch-cloudnative-wfd-ui
+cd chart
+cd wfd-ui
+
+Create the pfd-ui helm package again
+helm package .
+
+Move the new package to our helm repository (git repository which is the main wfd repo)
+mv wfd-ui-1.0.0.tgz ../../../refarch-cloudnative-wfd/docs/charts
+
+Update helm repo index to reflect new helm package for wfd-ui
+cd ../../../refarch-cloudnative-wfd/docs/charts
+helm repo index . --url=https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-cloudnative-wfd/spring/docs/charts
+
+Commit and deliver new wfd-ui helm package and index to helm repository (github repo)
+git status
+git add --all
+git commit -m “blah blah“
+git push origin spring
+
+Create new wfd-app main helm package 
+cd refarch-cloudnative-wfd-ui
+cd wfd-app
+helm repo update
+helm dependency update
+helm package .
+
+Move the new package to our helm repository (git repository which is the main wfd repo)
+mv wfd-app-0.1.0.tgz ../docs/charts
+
+Update helm repo index to reflect new helm package for the main wfd-app
+cd ../docs/charts
+helm repo index . --url=https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-cloudnative-wfd/spring/docs/charts
+
+Commit and deliver new wfd-app helm package and index to helm repository (github repo)
+git status
+git add --all
+git commit -m “blah blah“
+git push origin spring
+
+Update/Sync local helm repos
+helm repo update

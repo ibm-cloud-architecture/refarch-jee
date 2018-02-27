@@ -113,87 +113,103 @@ You have now walked through the Transformation Advisor analysis of **Customer Or
 
 The IBM WebSphere Application Server Liberty can be installed from eclipse. Since we will also need to configure eclipse to use IBM WebSphere Liberty Server as the targeted runtime, we will then do both from eclipse at once.
 
-1. Open eclipse
+1. [Open a terminal window](troubleshooting.md#open-the-terminal).
 
-```
-cd ~/PurpleCompute/eclipse
-./eclipse
-```
 
-select the default workspace by clicking OK
+2. Open Eclipse by typing the following on the terminal
 
-![Source migration 48](/static/imgs/toLiberty/Source48.png)
+   ```
+   cd ~/PurpleCompute/eclipse
+   ./eclipse
+   ```
 
-2. Close the welcome page
+   and select the default workspace by clicking OK
 
-3. At the bottom, select the servers tab and click on the _"No servers available..."_ message.
+   ![Source migration 48](/static/imgs/toLiberty/Source48.png)
 
-![Source migration 49](/static/imgs/toLiberty/Source49.png)
+3. If a Welcome page is displayed, close it.
 
-4. On the new server dialog that pops up, type in _liberty_ so that available servers get filtered. Then, select Liberty Server and leave the rest as is. Click Next.
+4. At the bottom, select the servers tab and click on the _"No servers available..."_ message.
 
-![Source migration 50](/static/imgs/toLiberty/Source50.png)
+   ![Source migration 49](/static/imgs/toLiberty/Source49.png)
 
-5. Set the path for the existing installation to `/home/skytap/PurpleCompute/wlp`. Click Next.
+5. On the new server dialog that pops up, type in _liberty_ so that available servers get filtered. Then, select Liberty Server and leave the rest as is. Click Next.
 
-![Source migration 51](/static/imgs/toLiberty/Source51.png)
+   ![Source migration 50](/static/imgs/toLiberty/Source50.png)
 
-6. On the next window, leave all the options as they are (see picture below) and click on Finish.
+6. Set the path for the existing installation to `/home/skytap/PurpleCompute/wlp`. Click Next.
 
-![Source migration 52](/static/imgs/toLiberty/Source52.png)
+   ![Source migration 51](/static/imgs/toLiberty/Source51.png)
 
-7. You should now see your Liberty Server at localhost created in the Servers tab at the bottom and a project that stores the configuration for your server on the left in the Enterprise Explorer tab.
+7. On the next window, leave all the options as they are (see picture below) and click on Finish.
 
-![Source migration 53](/static/imgs/toLiberty/Source53.png)
+   ![Source migration 52](/static/imgs/toLiberty/Source52.png)
 
-8. Double click on the newly created Liberty Server at localhost in the Servers view and set the start timeout value for the Liberty server to something around 180 or over _(if the timeout is too small you might see an error saying that the Server Liberty Server at localhost was unable to start within XX seconds)_
+8. You should now see your Liberty Server at localhost created in the Servers tab at the bottom and a project that stores the configuration for your server on the left in the Enterprise Explorer tab.
 
-![Source migration 61](/static/imgs/toLiberty/Source61.png)
+   ![Source migration 53](/static/imgs/toLiberty/Source53.png)
 
-9. Click on Save (Ctrl+s)
+9. Double click on the newly created Liberty Server at localhost in the Servers view and set the start timeout value for the Liberty server to something around 180 or over _(if the timeout is too small you might see an error saying that the Server Liberty Server at localhost was unable to start within XX seconds)_
+
+   ![Source migration 61](/static/imgs/toLiberty/Source61.png)
+
+10. Click on Save (Ctrl+s)
+
+   ![Source migration 63](/static/imgs/toLiberty/Source63.png)
 
 ## Get the code
 
 The migration toolkit is eclipse based. Therefore, these are the steps to be taken to get the code into eclipse to run the migration toolkit on it:
 
-1. Open a terminal window
+1. [Open a terminal window](troubleshooting.md#open-the-terminal).
 
 2. Download Customer Order Services application's source code from GitHub
 
-```
-cd ~/PurpleCompute/git
-git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git
-```
-![Source migration 35](/static/imgs/toLiberty/Source35.png)
+   ```
+   cd ~/PurpleCompute/git
+   git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git
+   ```
+   ![Source migration 35](/static/imgs/toLiberty/Source35.png)
 
 3. Switch to the WAS 7 development branch
 
-```
-cd refarch-jee-customerorder
-git checkout was70-dev
-```
-![Source migration 36](/static/imgs/toLiberty/Source36.png)
+   ```
+   cd refarch-jee-customerorder
+   git checkout was70-dev
+   ```
+   ![Source migration 36](/static/imgs/toLiberty/Source36.png)
 
-4. Go back to eclipse
+4. Go back to eclipse (should still be open since last section)
 
 5. Import projects
 
-- Click on File --> Import...
-- On the dialog that pops up, select Existing Projects into Workspace in the General folder and click Next.
+   1. Hover the black header of eclipse at the top to get the eclipse menu bar to show up and click on File --> Import...
 
-![Source migration 37](/static/imgs/toLiberty/Source37.png)
+   ![Source migration 64](/static/imgs/toLiberty/Source64.png)
 
-- In the next dialog, browse to ```/home/skytap/PurpleCompute/git/refarch-jee-customerorder``` for the root directory and click Browse.
+   2. On the dialog that pops up, select _General_ folder, then _Existing Projects into Workspace_ and click Next.
 
-![Source migration 38](/static/imgs/toLiberty/Source38.png)
+   ![Source migration 37](/static/imgs/toLiberty/Source37.png)
 
-- Eclipse will directly detect all the projects within that folder and select them all. Click Finish.
+   3. In the next dialog, click on _Browse..._ and navigate to `/home/skytap/PurpleCompute/git/refarch-jee-customerorder` for the root directory containing all projects and click OK.
+
+   ![Source migration 38](/static/imgs/toLiberty/Source38.png)
+
+   4. Eclipse will directly detect all the projects within that folder and select them all. Click Finish.
 
 A migration dialog will pop up after importing the projects into the eclipse workspace since eclipse will detect such projects are configured to run on a runtime that it is not aware of. As a result, it pops up with a workspace migration dialog.
 
 ![Source migration 39](/static/imgs/toLiberty/Source39.png)
 
-Disregard this piece of advice by clicking on Cancel. In the migration cancel window, click OK. The runtime migration will be done in the following sections.
+Disregard this piece of advice by clicking on Cancel.
+
+In the migration cancel window, click OK. The runtime migration will be done in the following sections.
+
+![Source migration 65](/static/imgs/toLiberty/Source65.png)
+
+Finally, prevent eclipse from automatically building your projects any time a change is made (this will improve eclipse performance). Click on Project at the eclipse top bar menu and deselect the Build Automatically option.
+
+![Source migration 66](/static/imgs/toLiberty/Source66.png)
 
 ## Set up your development environment
 
@@ -203,23 +219,35 @@ As you can see when you import the projects into eclipse, we get those projects 
 
 ![Source migration 40](/static/imgs/toLiberty/Source40.png)
 
-You can open the problems view (Window --> Show View --> Other... --> Problems) in order to see what the problems in your workspace are.
+In order to see what the problems in your workspace are, you can open the problems view by clicking on Window --> Show View --> Other... at the eclipse top bar menu.
+
+![Source migration 67](/static/imgs/toLiberty/Source67.png)
+
+Then, type into the text bar Problems to filter out all views, select Problems view and click OK.
+
+![Source migration 68](/static/imgs/toLiberty/Source68.png)
+
+You should now see the Problems view at the bottom where you can browse in order to find more detail about the current problems in your eclipse workspace.
 
 ![Source migration 54](/static/imgs/toLiberty/Source54.png)
 
 If you do so, you should be able to find errors for each of the projects regarding the build path among many other problems. That is, the references to the Java Runtime Environment and WebSphere libraries we have in our projects need to be updated for our new development environment. This should be the first step of all, since a project must have a correct build path to be built (and potentially uncover new issues).
 
-In order to update your JRE and WebSphere libraries references, right click on a project and click on Build Path --> Configure Build Path... Once the properties dialog opens up, click on the Libraries tab. You should now see something similar to the following:
+In order to update your JRE and WebSphere libraries references, right click on a project and click on Build Path --> Configure Build Path...
+
+![Source migration 69](/static/imgs/toLiberty/Source69.png)
+
+Once the properties dialog opens up, click on the Libraries tab. You should now see something similar to the following:
 
 ![Source migration 41](/static/imgs/toLiberty/Source41.png)
 
-We then need to fix the paths for the two **unbound** libaries which are the JRE System Library and the Server Library. As you can see, both are yet pointing to the WebSphere Application Server traditional V7.0 libraries from the old/original development environment. To update those libraries to point to the appropriate path in your environment, you need to select each of the libraries and click on the edit button on the right hand side of the properties dialog.
+We then need to fix the paths for the two **unbound** libraries which are the JRE System Library and the Server Library. As you can see, both are yet pointing to the WebSphere Application Server traditional V7.0 libraries from the old/original development environment. To update those libraries to point to the appropriate path in your new development environment, you need to select each of the libraries and click on the Edit... button on the right hand side of this dialog.
 
 For the JRE System Library, select the last option which says Workspace default JRE and click Finish.
 
 ![Source migration 42](/static/imgs/toLiberty/Source42.png)
 
-For the Server Library, repeat the steps but select the only Server Runtime option and click Finish.
+For the Server Library, repeat the steps but select the Liberty Runtime option and click Finish.
 
 ![Source migration 43](/static/imgs/toLiberty/Source43.png)
 
@@ -227,11 +255,15 @@ Click OK to close the properties window.
 
 **IMPORTANT: Make sure you have fixed the build path for CustomerOrderServices, CustomerOrderServicesWeb and CustomerOrderServicesTest projects**
 
-After updating the references to our actual WebSphere Server and JRE System libraries, we should clean and rebuild the entire workspace. For doing so, click on Project --> Clean... Verify Clean all projects is selected and click OK.
+After updating the references to our actual WebSphere Server and JRE System libraries, we should clean and rebuild the entire workspace. For doing so, click on Project --> Clean... at the eclipse top bar menu
+
+![Source migration 70](/static/imgs/toLiberty/Source70.png)
+
+On the Clean dialog that opens up, verify that the Clean all projects and build the entire workspace options are selected and click OK.
 
 ![Source migration 45](/static/imgs/toLiberty/Source45.png)
 
-If we now check the Problems view out, we might very well see many more problems. The reason for this is that projects are now getting built as a result of a correct build path:
+If we now check the Problems view out again, we might very well see many more problems. The reason for this is that projects are now getting built as a result of a correct build path:
 
 ![Source migration 55](/static/imgs/toLiberty/Source55.png)
 
@@ -241,31 +273,43 @@ However, if we dobule click on a couple of those different errors we see in the 
 
 ![Source migration 57](/static/imgs/toLiberty/Source57.png)
 
-In our case, we are getting errors because we are missing the Java EE 6 rest services technology library needed for the compilation of our code. This technology comes as a library called JAX-RS and the Java EE 6 version of it is 1.1. Neither the JRE version we have installed on our system nor the WebSphere Application Server Liberty server come with the needed JAX-RS library out of the box.
+In our case, we are getting errors because we are missing the Java EE 6 rest services technology library needed for the compilation of our code. This technology comes as a library called JAX-RS and the Java EE 6 version of it is 1.1. Neither the JRE version we have installed on our system nor the WebSphere Application Server Liberty server, which we have just set our projects to get built with few steps above, come with the needed JAX-RS library out of the box.
 
-However, WebSphere Application Server Liberty is a composable lightweight server which you need to add features to in order to get the Liberty server to support certain funcionality and technologies. Therefore, if we want to run an application that uses JAX-RS 1.1 technology we need to add/install the JAX-RS 1.1 feature/liibrary to our WebSphere Application Server Liberty server. This will also make the JAX-RS 1.1 library avaiable for compilation.
+However, WebSphere Application Server Liberty is a composable lightweight server which you need to add features to in order to get the Liberty server to support certain functionality and technologies. Therefore, if we want to run an application that uses JAX-RS 1.1 technology we need to add/install the JAX-RS 1.1 feature/library to our WebSphere Application Server Liberty server. This will also make the JAX-RS 1.1 library available for compilation.
 
-To install the JAX-RS 1.1 functionality to our WebSphere Application Server Liberty server execute:
+To install the JAX-RS 1.1 functionality to our WebSphere Application Server Liberty server execute on any available terminal window (or open a new one):
 
 ```
 ~/PurpleCompute/wlp/bin/installUtility install jaxrs-1.1
 ```
 
+If the installation is successful, you should see the following on your terminal window.
+
 ![Source migration 58](/static/imgs/toLiberty/Source58.png)
 
 More about what technologies WebSphere Application Server Liberty supports and comes with out of the box as well as how to get these installed/added to your WebSphere Application Server Liberty on the [Configure WebSphere Liberty Server - features](#1-features) section below.
 
-After installing any new feature/JEE feature to our WebSphere Application Server Liberty, we must clean and build the workspace now that we have the appropriate third party JAX-RS libraries. First, click on File --> Refresh or press F5. Then, click on Project --> Clean... Verify Clean all projects is selected and click OK.
+After installing any new feature/JEE feature to our WebSphere Application Server Liberty, we must clean and build the workspace now that we have the appropriate third party JAX-RS libraries. First, click on File --> Refresh at the eclipse top bar menu.
+
+![Source migration 71](/static/imgs/toLiberty/Source71.png)
+
+ Then, clean and rebuild your projects again by clicking on Project --> Clean... at the eclipse top bar menu, verifying that Clean all projects and Build the entire workspace are both selected and clicking OK.
 
 If we look now to the Problems view, we should see many less problems:
 
 ![Source migration 44](/static/imgs/toLiberty/Source44.png)
 
-However, we still see problems. In this case, we want to sort out the Xpath is invalid error. To sort it out, click on CustomerOrderServicesWeb project, which is the one the errors are found on, and select Properties. On the properties dialog, select Validation on the left hand side, scroll down to the last validator which is XSL Validator and right click on it. Deselect both Manual and Build options.
+However, we still see problems. In this case, we want to sort out the Xpath is invalid error. To sort it out, right click on CustomerOrderServicesWeb project (which is where these errors are found) on the left hand side Enterprise Explorer widget, and select Properties at the bottom.
+
+![Source migration 72](/static/imgs/toLiberty/Source72.png)
+
+On the properties dialog, select Validation on the left hand side, scroll down to the last validator, which is XSL Validator, and right click on it. Deselect both Manual and Build options.
 
 ![Source migration 46](/static/imgs/toLiberty/Source46.png)
 
-Click Apply and OK. Finally, clean and build the workspace. You should now see Target runtime errors and one JPA related error (library provider) which we will get fixed in the next section.
+Click Apply and OK. Finally, clean and build the workspace as already done in previous steps. You should now see only Target runtime and one JPA related (library provider) errors which we will get fixed in the next section.
+
+![Source migration 73](/static/imgs/toLiberty/Source73.png)
 
 **Conclusion:** As we could see in the above walk through, when we move to a different/new development environment we will need to plan ahead and bear in mind that some time will be needed for setting up your new development environment. Even more if this new environment will be used for a WebSphere Application Server migration.
 
@@ -277,41 +321,54 @@ As the original application database resides on-premise, it will need to be recr
 
 To utilize the Db2 database provided for IBM Cloud Private, a persistent volume needs to first be created.  Depending upon multiple platform configuration options, this can be done automatically, but in the effort of learning, this tutorial covers the manual creation of this artifact.  This helps to reinforce the mapping of the service to its requirements.
 
-1. Log into the IBM Cloud Private console via https://10.0.0.1:8443/console
-2. Click **Create resource**
-3. Delete the pre-filled content in the dialog box and replace it with the following snippet:
-```
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: customerorder-pv
-spec:
-  capacity:
-    storage: 2Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: /tmp/customerorder-data
-    type: DirectoryOrCreate
-```
-  This YAML block will create a *PersistentVolume* which the Db2 Helm Chart will create a *PersistentVolumeClaim* against.  In doing so, Db2 can now persist its data across individual container instances should one crash, fail, or otherwise be removed.
+1. [Log into ICP](troubleshooting.md#log-into-icp).
 
-  As this is an introductory tutorial, we are using the most simplistic form of shared storage in a Kubernetes-based environment, *hostPath*.  This allows Kubernetes to save data from containers running in Pods to the physical host.  But note that this is not shared across hosts automatically, so should the container fail and be rescheduled on a different host, this data would be unavailable.  For this tutorial, this is acceptable.
+2. Click **Create resource** button on the top right corner.
+
+   ![Source migration 93](/static/imgs/toLiberty/Source93.png)
+
+3. A window to define your new resource will pop up. Delete the pre-filled content in the dialog box and replace it with the following snippet:
+   ```
+   apiVersion: v1
+   kind: PersistentVolume
+   metadata:
+    name: customerorder-pv
+   spec:
+    capacity:
+      storage: 2Gi
+    accessModes:
+      - ReadWriteOnce
+    hostPath:
+      path: /home/skytap/PurpleCompute/persistent_volumes/customerorder-data
+      type: DirectoryOrCreate
+   ```
+   This YAML block will create a *PersistentVolume* which the Db2 Helm Chart will create a *PersistentVolumeClaim* against.  In doing so, Db2 can now persist its data across individual container instances should one crash, fail, or otherwise be removed.
+
+   As this is an introductory tutorial, we are using the most simplistic form of shared storage in a Kubernetes-based environment, *hostPath*.  This allows Kubernetes to save data from containers running in Pods to the physical host.  But note that this is not shared across hosts automatically, so should the container fail and be rescheduled on a different host, this data would be unavailable.  For this tutorial, this is acceptable.
+
 4. Click **Create**.
 
 #### Deploy the Db2 Helm Chart
 
-1. Click the hamburger menu icon and select **Catalog** > **Helm Charts**.
+1. On the ICP web based console, click the hamburger menu icon and select **Catalog** > **Helm Charts**.
+
+   ![Source migration 75](/static/imgs/toLiberty/Source75.png)
+
 2. Select **ibm-db2oltp-dev** from the list of available Helm charts.
-3. Review the presented documentation for the IBM Db2 Developer-C Helm Chart and click **Configure**.
-4. In the *Configuration* section, enter a **Release name** (preferably with only lower-case letters and hyphens - this tutorial will use `db2-cos`) and select the **Target namespace** of *default*.
+
+   ![Source migration 76](/static/imgs/toLiberty/Source76.png)
+
+3. Review the presented documentation for the IBM Db2 Developer-C Helm Chart and click **Configure** at the very bottom.
+4. In the *Configuration* section, enter a **Release name** (preferably with only lower-case letters and hyphens - this tutorial will use **db2-cos**) and select the **Target namespace** of *purplecompute*.
     ![Db2 setup 01](/static/imgs/db2-on-icp/db2Setup01.png)
-5. In the *Docker image configuration* section, follow the [link](http://ibm.biz/db2-dsm-license) in the **secret** field to retrieve a validated image secret.  Copy and paste this value from the other browser window into this entry field.
+5. In the *Docker image configuration* section,
+    * Make sure **Docker Repository** and **tag** fields get values **na.cumulusrepo.com/hcicp_dev/db2server_dec** and **11.1.2.2b** respectively. The reason for this is that the Skytap image you are working on comes with that DB2 Docker image pre-pulled so that you don't need to go off to the internet to pull it down.
+    * Follow the [link](http://ibm.biz/db2-dsm-license) in the **secret** field to retrieve a validated image secret.  Copy and paste this value from the other browser window into this entry field.
     ![Db2 setup 02](/static/imgs/db2-on-icp/db2Setup02.png)
     ![Db2 setup 02b](/static/imgs/db2-on-icp/db2Setup02b.png)
-6. In the *Db2 instance configuration* section, enter a username (defaults to `admin`) and a password (this tutorial will use `passw0rd`).  Note that the password defaults are randomly generated, so you will need to provide a known password here.
+6. In the *Db2 instance configuration* section, enter a username (defaults to **admin**) and a password (this tutorial will use **passw0rd**).  Note that the password defaults are randomly generated, so you will need to provide a known password here.
     ![Db2 setup 03](/static/imgs/db2-on-icp/db2Setup03.png)
-7. In the *Database configuration options* section, enter **orderdb** in the *Database Name* field.
+7. In the *Database configuration options* section, enter **ORDERDB** in the *Database Name* field.
 8. In the *Data volume configuration* section, update the *Size of the volume claim* field to be **2Gi**.  Kubernetes will automatically map the creation of a new PersistentVolumeClaim to the PersistentVolume created in the previous section.
     ![Db2 setup 04](/static/imgs/db2-on-icp/db2Setup04.png)
 9. In the *Resource configuration* section, update the *Memory limit* field to be **8Gi**.
@@ -321,33 +378,92 @@ spec:
 
 #### Validate Db2 Helm Chart deployment
 
-It will take a few minutes to deploy the Db2 Helm chart, especially if this is the first time in the ICP instance that Db2 is being installed, as the image needs to be downloaded to the ICP registry first.  After about 5-10 minutes, the following commands can be use to validate the successful deployment of the Db2 Helm chart.
+It will take a few minutes to deploy the Db2 Helm chart, especially if this is the first time in the ICP instance that Db2 is being installed, as the image needs to be downloaded to the ICP registry first. After about 5-10 minutes, the following commands can be use to validate the successful deployment of the Db2 Helm chart.
 
-1.  In the ICP console, select `admin` in the upper right and then select *Configure client*.
-2.  Copy and paste the contents the dialog box into a terminal window and press **Enter**.  This will configure the CLI to talk to the ICP instance via the Kubernetes CLI tool, *kubectl*.
-    ![Db2 setup 06](/static/imgs/db2-on-icp/db2Setup06.png)
-3. To view the list of all deployed Helm charts on the current ICP installation, run `helm list`.
-4. To view a consolidated set of Kubernetes resources that a given Helm chart deployment is utilizing, run `helm status {release_name}`.
-5. To monitor the underlying Kubernetes Deployment artifact, run `kubectl get deployment -w`.  The `-w` parameter is important, as the CLI will actively monitor the status of Kuubernetes (and specifically the Deployments) and report back any changes to the CLI.
-6. Once the *Available* field turns to **1**, the Db2 instance is available and ready to be used.
+On a [terminal window](troubleshooting.md#open-the-terminal) where the [Kubernetes CLI has been configured on](troubleshooting.md#configure-the-kubernetes-cli),
+
+1. To view the list of all deployed Helm charts on the current ICP installation, run `helm list`:
+
+   ```
+   skytap@icpboot:~$ helm list
+   NAME   	REVISION	UPDATED                 	STATUS  	CHART                 	NAMESPACE    
+   db2-cos	1       	Tue Feb 13 07:43:39 2018	DEPLOYED	ibm-db2oltp-dev-1.1.1 	purplecompute
+   ta-cos 	1       	Tue Feb 13 02:08:05 2018	DEPLOYED	ibm-transadv-dev-1.3.0	purplecompute
+   ```
+2. To view a consolidated set of Kubernetes resources that a given Helm chart deployment is utilizing, run `helm status {release_name}`.
+
+   ```
+   skytap@icpboot:~$ helm status db2-cos
+   LAST DEPLOYED: Tue Feb 13 07:43:39 2018
+   NAMESPACE: purplecompute
+   STATUS: DEPLOYED
+
+   RESOURCES:
+   ==> v1/Secret
+   NAME                                TYPE                     DATA  AGE
+   db2-cos-ibm-db2oltp-dev-db2-secret  kubernetes.io/dockercfg  1     10m
+   db2-cos-ibm-db2oltp-dev             Opaque                   1     10m
+
+   ==> v1/PersistentVolumeClaim
+   NAME                               STATUS  VOLUME            CAPACITY  ACCESSMODES  STORAGECLASS  AGE
+   db2-cos-ibm-db2oltp-dev-data-stor  Bound   customerorder-pv  2Gi       RWO          10m
+
+   ==> v1/Service
+   NAME                     CLUSTER-IP  EXTERNAL-IP  PORT(S)                          AGE
+   db2-cos-ibm-db2oltp-dev  10.1.0.218  <nodes>      50000:30494/TCP,55000:30428/TCP  10m
+
+   ==> v1beta1/Deployment
+   NAME                     DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+   db2-cos-ibm-db2oltp-dev  1        1        1           0          10m
+
+
+   NOTES:
+   1. Get the database URL by running these commands:
+    export NODE_PORT=$(kubectl get --namespace purplecompute -o jsonpath="{.spec.ports[0].nodePort}" services db2-cos-ibm-db2oltp-dev)
+    export NODE_IP=$(kubectl get nodes --namespace purplecompute -o jsonpath="{.items[0].status.addresses[0].address}")
+    echo jdbc:db2://$NODE_IP:$NODE_PORT/sample
+   ```
+
+3. To monitor the underlying Kubernetes Deployment artifact, run `kubectl get deployment -w`.  The `-w` parameter is important, as the CLI will actively monitor the status of Kuubernetes (and specifically the Deployments) and report back any changes to the CLI.
+
+   ```
+   skytap@icpboot:~$ kubectl get deployment -w
+   NAME                              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+   db2-cos-ibm-db2oltp-dev           1         1         1            0           10m
+   ta-cos-ibm-transadv-dev-couchdb   1         1         1            1           5h
+   ta-cos-ibm-transadv-dev-server    1         1         1            1           5h
+   ta-cos-ibm-transadv-dev-ui        1         1         1            1           5h
+   ```
+
+4. Once the *AVAILABLE* field turns to **1**, the Db2 instance is available and ready to be used.
 
 #### Bootstrap initial data into database
 
-Once Db2 is up and running inside ICP, there are many ways to now get data into that database.  For simplicity, this tutorial will walk through a scripted approach to bootstrapping data into the database.  Alternative approaches are available, such as visual-based JDBC-supported tools, as well as DB2 CLIs.
+Once Db2 is up and running inside ICP, there are many ways to now get data into that database. The preferred Kubernetes approach would be to create a [Job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) that would run once and bootstrap the data automatically. We provide you with this job definition for this tutorial.
 
-The preferred Kubernetes approach would be to create a [Job](#tbd) that would run once and bootstrap the data automatically.  This will be created and performed in a future tutorial update.
+On a [terminal window](troubleshooting.md#open-the-terminal) where the [Kubernetes CLI has been configured on](troubleshooting.md#configure-the-kubernetes-cli):
 
-1.  Take note of the Db2 service name by running the command `kubectl get service`.  This name will be used later to route to your Db2 database from the WebSphere application.
-2.  Get the pod name of the Db2 pod using the command `kubectl get pods | grep db2`.
-3.  Start a bash shell inside the running Db2 pod via `kubectl exec -it {pod_name} bash`.
-4.  Alternatively, to perform the same task in a single command, run `kubectl exec -it $(kubectl get pods | grep db2 | awk '{print $1}') bash` instead.
-    ![Db2 setup 07](/static/imgs/db2-on-icp/db2Setup07.png)
-5.  From inside the Db2 pod, run the following command to bootstrap the required application data:
-      `su - ${DB2INSTANCE} -c "bash <(curl -s https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee-customerorder/liberty/Common/bootstrapCurlDb2.sh)"`
-    ![Db2 setup 08](/static/imgs/db2-on-icp/db2Setup08.png)
-6.  Once the script completes, you can exit the bash prompt via `exit` from the CLI.
-    ![Db2 setup 08](/static/imgs/db2-on-icp/db2Setup09.png)
+1. Download the job definition that populates your newly created database. On a terminal window, execute:
 
+    `pushd /tmp && wget https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-jee/master/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/populate_cos_db.yaml`
+
+2. Create the Kubernetes job out of the definition you just pulled down
+
+    `kubectl create -f populate_cos_db.yaml`
+
+    **IMPORTANT:** the populate_cos_db.yaml job definition uses the db2 default values for this tutorial from the above sections. If you decided to change these, please also update the populate_cos_db.yaml job definition accordingly.
+
+3. Watch for the job to succeed
+
+    `kubectl get jobs -w`
+
+    Once **SUCCESSFUL** turns to 1, the DB should be populated.
+
+    ```
+    skytap@icpboot:/tmp$ kubectl get jobs -w
+    NAME                  DESIRED   SUCCESSFUL   AGE
+    populate-cos-db       1         1            2m
+    ```
 The application's data store is now available to be used by the updated Liberty-based application running on ICP.
 
 ## Source Code Migration
@@ -356,81 +472,178 @@ In order to migrate the code to get our WebSphere Application Server 7 applicati
 
 ### Software Analyzer Configuration
 
-More precisely, we are going to use the Software Analyzer that the WAMT comes with. For doing so, we first need to have in our development environment eclipse opened with the WAMT installed on it and our WAS 7 application projects imported into the workspace. Once we have the above in place, click on **Run -> Analysis...** This will open the **Software Analyzer**.
+More precisely, we are going to use the Software Analyzer that the WAMT comes with. For doing so, we first need to have eclipse on our development environment with the WAMT installed on it and our WAS 7 application projects imported into the workspace. This should be the state we were at before we temporarily moved on to create our db2 datastore.
 
-![Source migration 1](/static/imgs/toLiberty/Source1.png)
+If you closed eclipse,
 
-Now, **right-click** on _Sofwtare Analyzer_ and select **New**. Give a relevant and appropriate name to the new configuration and click on the **Rules** tab for this configuration. Select the **WebSphere Application Server Version Migration** option for the _Rule Sets_ dropdown menu and click **Set...**  If this step is already completed for you, just select the Rule set and examine the details.
+1. [Open a terminal window](troubleshooting.md#open-the-terminal):
 
-![Source migration 2](/static/imgs/toLiberty/Source2.png)
+2. Open eclipse by typing the following on the terminal
 
-The Rule set configuration panel should be displayed. This panel must be configured so that the appropriate set of rules based on our migration requirements are applied during the software analysis of our applications. Click OK when done.
+   ```
+   cd ~/PurpleCompute/eclipse
+   ./eclipse
+   ```
 
-![Source migration 3](/static/imgs/toLiberty/Source3.png)
+   select the default workspace by clicking OK
+
+   ![Source migration 48](/static/imgs/toLiberty/Source48.png)
+
+3. If a Welcome page is displayed, close it.
+
+Now, to open the Software Analyzer and configure it,
+
+1. Click on **Run -> Analysis...** on the eclipse top bar menu.
+
+   ![Source migration 77](/static/imgs/toLiberty/Source77.png)
+
+   This will open the **Software Analyzer**.
+
+   ![Source migration 1](/static/imgs/toLiberty/Source1.png)
+
+2. Right click on _Sofwtare Analyzer_ and select **New**. Give a relevant and appropriate name to the new configuration and click on the **Rules** tab for this configuration. Select the **WebSphere Application Server Version Migration** option for the _Rule Sets_ dropdown menu and click **Set...**  If this step is already completed for you, just select the Rule set and examine the details.
+
+   ![Source migration 2](/static/imgs/toLiberty/Source2.png)
+
+3. The Rule set configuration panel should be displayed. This panel must be configured so that the appropriate set of rules based on our migration requirements are applied during the software analysis of our applications. Configure it as the image below shows and click OK when done.
+
+   ![Source migration 3](/static/imgs/toLiberty/Source3.png)
+
+4. Finally, click Analyze.
 
 ### Run the Software Analyzer
 
-Click Analyze. After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. The Software Analyzer rules are categorised, and so are the errors and warnings produced in its report, in four categories: **Java Code Review, XML File Review, JSP Code Review and File Review**. We must go through each of these tabs/categories and review the errors and warnings as code/configuration changes might be needed.
+After running the _Software Analyzer_ you should see a _Software Analyzer Results_ tab at the bottom. The Software Analyzer rules are categorised, and so are the errors and warnings produced in its report, in four categories: **Java Code Review, XML File Review, JSP Code Review and File Review**. We must go through each of these tabs/categories and review the errors and warnings as code/configuration changes might be needed.
 
 ![Source migration 4](/static/imgs/toLiberty/Source4.png)
+
+#### 1. File Review
 
 We will start off with the **File Review** analysis tab. As you can see in the image below, one warning that will always appear when you migrate your apps to a newer WebSphere Application Server version is the need to configure the appropriate target runtime for your applications. This is the first and foremost step:
 
 ![Source migration 5](/static/imgs/toLiberty/Source5.png)
 
-Along with the warning and errors reported, the WebSphere Application Migration Toolkit also comes with information about the rule that flagged the each error/warning and the possible solutions for them. In order to see this info and help, click on **Help -> Show Contextual Help**. This will open the help portlet in eclipse.
+> **FYI:** Along with the warning and errors reported, the WebSphere Application Migration Toolkit also comes with information about the rule that flagged each error/warning and the possible solutions for them. In order to see this info and help, click on Help -> Show Contextual Help at the eclipse top bar menu. This will open the help widget in eclipse on the right hand side.
 
-![Source migration 6](/static/imgs/toLiberty/Source6.png)
+   ![Source migration 78](/static/imgs/toLiberty/Source78.png)
 
-If you scroll down to the bottom and click Detailed help, it will show you additional ideas on how to resolve that problem.
+> Click again on the error/warning displayed at the bottom in eclipse in the Software Analyzer tab in order to load the information for such error/warning on the help widget we have just opened. If the information presented on this widget is still not enough or want more details on the error/warning, scroll down and click on Detailed help
 
-![Source migration 7](/static/imgs/toLiberty/Source7.png)
+   ![Source migration 6](/static/imgs/toLiberty/Source6.png)
 
-If we follow the instructions and go to Targeted Runtimes for any of the project we might find out that WebSphere Liberty does not seem to appear as an option.
+> The Detailed help link should open a web-based information centre with a longer and more detailed explanation of the error/warning and show you additional ideas on how to resolve that problem.
+
+   ![Source migration 7](/static/imgs/toLiberty/Source7.png)
+
+> If the Detailed help does not open on your web browser and instead displays in the eclipse Help widget but you prefer to see this information on your web browser for a better reading, you need to configure eclipse to do so. Open eclipse preferences by clicking on Window --> Preferences at the eclipse top bar menu
+
+   ![Source migration 90](/static/imgs/toLiberty/Source90.png)
+
+> Then click on Help on the left hand side options list and set the Open help view documents to **in a browser** as the following image depics
+
+  ![Source migration 91](/static/imgs/toLiberty/Source91.png)
+
+As we could read above on the detailed information displayed for this error/warning the WAMT has found:
+
+_"To resolve this issue, right-click the project in Project Explorer or Package Explorer and select Properties then Targeted Runtimes. Select the target application server and click Apply. If the target application server is not displayed in the list of available target runtimes, click New to add the server runtime environment to the workspace."_
 
 ![Source migration 8](/static/imgs/toLiberty/Source8.png)
 
-However, if we click on the Show all runtimes option, we see the other runtimes availabe in our environment. They now appear although they are greyed out. The reason is, as we can read at the bottom of the panel, that we might need to uninstall one or more of the currently installed project facets.
+If we follow the instructions above, we still don't see the Liberty Runtime displayed. However, if we click on the Show all runtimes checkbox we see it listed but greyed out (disabled) so we know the Liberty Runtime is, at least, installed on the system.
 
 ![Source migration 9](/static/imgs/toLiberty/Source9.png)
 
-In our case, the problem resides in the current WebSphere Application Server version 7 specific facets we have installed in our projects for them to properly run on that WebSphere version. As a result, we now need to uninstall them. For doing so, click the Uninstall Facets... hyperlink presented on this panel and then deselect all WebSphere specific facets you might find active.
+As you can read in the image above, the reason for the Liberty runtime to be disabled is that we might need to uninstall one or more of the currently installed project facets. This information also appeared on the web-based information centre the detailed help link in the help widget opened for this error/warning we selected down at the bottom in the Software Analyzer tab. It actually said:
+
+_"When you migrate from WebSphere traditional to Liberty, the Liberty server might be hidden from view because of WebSphere traditional project facets that are configured on the project. Select Project facets and remove any project facets that are related to WebSphere traditional. You can then select the Liberty server in the Targeted Runtimes panel."_
+
+To uninstall those WebSphere traditional project facets, we could either click on the Uninstall Facets... link displayed at the bottom of the Targeted Runtimes dialog or click on the Project Facets option on the option list displayed on the left hand side of the current window. We choose clicking on the Uninstall Facets... link. The following dialog/window should display:
 
 ![Source migration 10](/static/imgs/toLiberty/Source10.png)
 
-Once you have deselected all active WebSphere specific facets installed for the project, click on Finish. You will get back to the targeted runtimes panel but you will not see the WebSphere Application Server Liberty option available to select just yet until you click on Apply. Hence, click on Apply, deselect the existing WebSphere Application Server traditional V7.0 option, select the WebSphere Application Server Liberty option and click on Apply and OK. **Repeat the same process for all four projects**
+Once you have deselected all active WebSphere (Version 7.0) specific facets installed for the project (red square on the image above), click on Finish. You will get back to the targeted runtimes panel but you will not yet see the Liberty Runtime option available to select until you click on Apply. Hence, click on Apply, deselect the existing WebSphere Application Server traditional V7.0 option, select the Liberty Runtime option and click on Apply and OK.
 
 ![Source migration 11](/static/imgs/toLiberty/Source11.png)
 
-If we ran the Software Analyzer again, we should see the File Review tab empty. Also, if we clean and build the projects again (project --> clean...) we should see no errors anymore in the problems tab at the bottom.
+**IMPORTANT:** Repeat the process of uninstalling the old WebSphere Application Server V7.0 project facets and selecting the Liberty Runtime as targeted runtime for all four projects.
 
-Moving on to the **Java Code Review** category tab, these are the aspects the WebSphere Application Migration Toolkit warns us about:
+If we ran the Software Analyzer again, we should see the File Review tab empty.
+
+![Source migration 79](/static/imgs/toLiberty/Source79.png)
+
+Also, if we clean and build the projects again (click on project --> clean... at the eclipse top bar menu) we should see no errors anymore in the problems tab at the bottom.
+
+#### 2. Java Code Review
+
+Moving on to the **Java Code Review** category tab within the Software Analyzer widget down at the bottom, these are the aspects the WebSphere Application Migration Toolkit (WAMT) warns us about:
 
 ![Source migration 12](/static/imgs/toLiberty/Source12.png)
 
-The first warning we see in there is about using the default initalContext JNDI properties. In order to understand more about the problem, we click on it and read what the Help portlet says about it. If we still want or need more information, we can always click on the Detailed help link displayed within the portlet for a deeper and longer explanation:
+Let's go over each of them to see what needs to change.
+
+The first error has to do with a behavior change on the lookups for Enterprise JavaBeans in Liberty. If we click on it, we read the following on the help widget:
+
+![Source migration 80](/static/imgs/toLiberty/Source80.png)
+
+Again, we need to click on the Detailed help link in order to read a comprehensive explanation of the error flagged:
+
+![Source migration 17](/static/imgs/toLiberty/Source17.png)
+
+Then, it appears that we might have an issue on how we are doing the lookups for Enterprise JavaBeans with regards to the JNDI namespaces we are doing them into. To see exactly how we are doing these lookups we can double click on any of the files displayed under this error in the Software Analyzer widget down at the bottom so that it gets open:
+
+![Source migration 81](/static/imgs/toLiberty/Source81.png)
+
+We effectively see that we are using **ejblocal** for doing the JNDI lookups which is not valid anymore for the Liberty Server since they need to use the portable JNDI syntax as we could read in the Detailed help document above. As a result, we need to change these on the three java files flagged by the Software Analyzer. They all belong to the **CustomerOrderServicesWeb** project:
+
+![Source migration 27](/static/imgs/toLiberty/Source27.png)
+
+We need to change the context lookups on each of the files above with the following context lookups definitions **respectively**:
+
+```
+java:app/CustomerOrderServices/ProductSearchServiceImpl!org.pwte.example.service.ProductSearchService
+java:app/CustomerOrderServices/CustomerOrderServicesImpl!org.pwte.example.service.CustomerOrderServices
+java:app/CustomerOrderServices/ProductSearchServiceImpl!org.pwte.example.service.ProductSearchService
+```
+
+Once you have changed the context lookups for the Enterprise JavaBeans in each of the files, click on save for all.
+
+The second item the Software Analyzer flags for the Java Code Review category is a warning about the type the initialContext lookup method may return. We click on this item to see that the help widget on the right hand side says:
+
+![Source migration 82](/static/imgs/toLiberty/Source82.png)
+
+So we are being warned that on Liberty Server the type returned by the initialContext lookup method might be a primitive data type and not a String as it used to be in traditional WebSphere. Again, we double click on any of the files listed under this warning in the Software Analyzer widget to see how we are treating the returned object by the aforementioned method:
+
+![Source migration 83](/static/imgs/toLiberty/Source83.png)
+
+We see that we are doing a _(Context)_ type casting to whatever the initialContext lookup method returns so that we make sure we are treating that object appropriately. As a result, we do not need to take any action on this warning.
+
+Moving on to the third item the Software Analyzer flags, we see a warning about using the default initalContext JNDI properties. In order to understand more about the problem, we, again, click on it and read what the Help widget says about it:
+
+![Source migration 84](/static/imgs/toLiberty/Source84.png)
+
+Since there isn't much information on this Help widget, we click on the Detailed help link:
 
 ![Source migration 13](/static/imgs/toLiberty/Source13.png)
 
-Now that we have understood what the problem is, we can double click on the file pointed out by the Software Analyzer to inspect the actual code and determine whether this warning affects our application or not:
+Now that we have understood what the problem is, we double click on the file pointed out by the Software Analyzer to inspect its code:
 
 ![Source migration 14](/static/imgs/toLiberty/Source14.png)
 
 As you can see by looking at the code, we are not using any of the two default initialContext JNDI properties this warning is about so we do not need to care about their default values. As a result, we can ignore this warning and move on to the next one.
 
-Next aspect in this **Java Code Review** section is about the use of sytem-provided third-party APIs:
+Next aspect in this Java Code Review section is about the use of system-provided third-party APIs:
 
 ![Source migration 18](/static/imgs/toLiberty/Source18.png)
 
-If we click on the detailed help within the help portlet we are presented with the following information:
+If we click on the Detailed help within the Help widget on the right hand side, we are presented with the following information:
 
 ![Source migration 19](/static/imgs/toLiberty/Source19.png)
 
-However, that does not seem like enough information in order to figure out what the problem is. Therefore, we click on the link at the bottom which get us to the following IBM Knowledge Center page for WebSphere:
+However, that still does not seem like enough information in order to figure out what the problem is. Therefore, we click on the link at the bottom oh this Detailed help window which get us to the following IBM Knowledge Center page for WebSphere:
 
 ![Source migration 20](/static/imgs/toLiberty/Source20.png)
 
-With the information gathered along the links we have visited above, we now realise we need to configure the Liberty server to be able to allow the application access to third-party libraries. We do so by adding the following to the server.xml configuration file (this will be done in the next [Configure the Liberty Server](#configure-the-liberty-server) section):
+With the information gathered along the links we have visited above, we now realise we need to configure the Liberty server to be able to allow the application access to third-party libraries. We do so by adding the following to the **server.xml** configuration file (**this will be done in the next** [**Configure the Liberty Server**](#configure-the-liberty-server) **section**):
 
 ```
 <application id="customerOrderServicesApp" name="CustomerOrderServicesApp.ear" type="ear" location="${shared.app.dir}/CustomerOrderServicesApp.ear">
@@ -440,31 +653,35 @@ With the information gathered along the links we have visited above, we now real
 
 The above will allow the classloader to have access to the third-party libraries included with Liberty. Some of those third-party libraries we need the classloader to have access to so that our application work fine are Jackson and Apache Wink libraries.
 
-Last aspect in this **Java Code Review** section has to do with a change in the JPA cascade strategy and its detailed information says the following:
+Finally, the last aspect in this Java Code Review section has to do with a change in the JPA cascade strategy. Once again, we click on the Detailed help link within the Help widget on the right which displays the following information:
 
 ![Source migration 15](/static/imgs/toLiberty/Source15.png)
 
-As we can read in the detailed info above, the change in the JPA cascade strategy is not expected to affect most applications. Also, this new cascade strategy can be mitigated by simply reverting to the previous behaviour by setting the _openjpa.Compatibility_ peroperty in the _persistence.xml_ file. Anyway, newer WebSphere Application Server versions can always be configured to run on previous or older version for most of the JEE technologies. JPA is one of them and you can see in the server.xml file that we are using tje jpa-2.0 feature so that the warning above does not affect our app at all.
+As we can read above, the change in the JPA cascade strategy is not expected to affect most applications. Also, this new cascade strategy can be mitigated by simply reverting to the previous behaviour by setting the _openjpa.Compatibility_ property in the _persistence.xml_ file. Anyway, newer WebSphere Application Server versions can always be configured to run on previous or older version for most of the JEE technologies. JPA is one of them and you can see in the server.xml file that we are using tje jpa-2.0 feature so that the warning above does not affect our app at all.
 
-Finally, moving on to the last **XML File Review** section in the Software Analyzer results, we see a problem due to a behaviour change on lookups for Enterprise JavaBeans:
+#### 3. XML File Review
+
+This last section in the Software Analyzer results (JSP Code Review category is empty), we see a problem due to a behaviour change on lookups for Enterprise JavaBeans:
 
 ![Source migration 16](/static/imgs/toLiberty/Source16.png)
 
-And this is what the detailed help says about it:
+And this is what the Detailed help says about it (same as before in this Run Software Analyser section):
 
 ![Source migration 17](/static/imgs/toLiberty/Source17.png)
 
-If we click on the file that is being raised the error on, we realise we are using the WebSphere Application Server traditional namespaces for the EJB binding:
+This time, the Enterprise JavaBeans lookup is being done on a different file (an XML file rather than a java file). Hence the reason this same problem is displayed in different categories within the Software Analyzer. If we double click on the file that this error is being detected in, we realise we are using the WebSphere Application Server traditional namespaces for the EJB binding here too:
 
 ![Source migration 34](/static/imgs/toLiberty/Source34.png)
 
-Therefore, we need to change it to
+Therefore, the solution is again to change the lookup to:
 
 ```
 java:app/CustomerOrderServices/ProductSearchServiceImpl!org.pwte.example.service.ProductSearchService
 ```
 
 Save and close the file.
+
+At a first pass, we seem to **have completed the review** of all the issues the Software Analyser the WebSphere Application Migration Tool have been able to find. We can now move to see what we need to do in order to configure our WebSphere Liberty server to properly run our Customer Order Services application.
 
 ## Configure WebSphere Liberty Server
 
@@ -479,7 +696,7 @@ The Liberty profile is a simplified, lightweight development and application run
 
 [Here](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_feat.html) you can see the technologies that the WebSphere Application Server Liberty support on its different flavors.
 
-The application server configuration is described in a series of elements in the server.xml configuration file. We are now going to see what we need to describe in that server.xml configuration file to get our Liberty server prepared to successfully run our Customer Order Services application.
+The application server configuration is described in a series of elements in the **server.xml** configuration file. We are now going to see what we need to describe in that server.xml configuration file to get our Liberty server prepared to successfully run our Customer Order Services application.
 
 In this section, we are going to see the different configuration pieces for the Liberty server to run the Customer Order Services application. As said above, this is done by editing the server.xml file which lives in `/home/skytap/PurpleCompute/wlp/usr/servers/defaultServer`.
 
@@ -487,7 +704,7 @@ You can manually edit this server.xml file yourself using your preferred editor 
 
 ![Source migration 47](/static/imgs/toLiberty/Source47.png)
 
-<sup>*</sup>Also, you can directly replace your existing server.xml file with an already configured server.xml version that can be found [here](tutorialConfigFiles/server.xml.step1) and just read through the below explanation of it for your information.
+<sup>*</sup>Also, **you can directly replace your existing server.xml file with an already configured server.xml version** that can be found [here](tutorialConfigFiles/server.xml.step1) and just read through the below explanation of it for your information.
 
 #### 1. Features
 
@@ -517,11 +734,11 @@ We need to define all these features in the _featureManager_ section within the 
 </featureManager>
 ```
 
-However, we need to install such features in order for the Liberty server to load them and make them available to the app for it to run correctly. **We will explain how to install all the features above in the next section** [Run the application](#run-the-application).
+However, we need to install such features in order for the Liberty server to load them and make them available to the app for it to run correctly. **We will explain how to install all the features above at the end of this**
 
-Extra info:
+**Extra info:**
 
-If you want to check all the features your WebSphere Application Server Liberty server has installed at any point you can run
+If you want to check all the features your WebSphere Application Server Liberty server has installed at any point you can run on a [terminal window](troubleshooting.md#open-the-terminal):
 
 `~/PurpleCompute/wlp/bin/featureManager featureList feature_report.xml`
 
@@ -573,8 +790,6 @@ Add the following lines to your server.xml file to set you application security 
 
 Add the following lines to your server.xml file to define your application data sources as well as what JDBC drivers and properties the Liberty server needs to use in order to access the application's data.
 
-The correct *KUBERNETES_NODEPORT_VALUE* can be acquired via the `kubectl get services` command, using the value to the immediate right of the default 50000 port (somewhere in the range of 30000).
-
 ```
 <!-- DB2 library definition -->
 <library apiTypeVisibility="spec, ibm-api, third-party" id="DB2JCC4Lib">
@@ -587,66 +802,56 @@ The correct *KUBERNETES_NODEPORT_VALUE* can be acquired via the `kubectl get ser
     <properties.db2.jcc databaseName="ORDERDB" password="passw0rd" portNumber="{KUBERNETES_NODEPORT_VALUE}" serverName="10.0.0.1" user="admin"/>
 </dataSource>
 ```
+The correct **KUBERNETES_NODEPORT_VALUE** can be acquired via running `kubectl get services` command, using the value to the immediate right of the default 50000 port (somewhere in the range of 30000).
+
+On a [terminal window](troubleshooting.md#open-the-terminal) where the [Kubernetes CLI has been configured on](troubleshooting.md#configure-the-kubernetes-cli), execute the `kubectl get services` command:
+
+![Source migration 85](/static/imgs/toLiberty/Source85.png)
+
 #### 6. Expand WAR and EAR files
 
-Add the following lines to your server.xml file to configure your Liberty server to expand WAR and EAR files at startup so that you dont need to it manually:
+Add the following lines to your server.xml file to configure your Liberty server to expand WAR and EAR files at startup so that you don't need to it manually:
 
 ```
 <!-- Automatically expand WAR files and EAR files -->
 <applicationManager autoExpand="true"/>
 ```
 
-**IMPORTANT:** At this point, you should already have the server.xml with the needed configuration to successfully run the Customer Order Services application. However, **you still need to install the Liberty server features** described earlier in this section. In order to install them, you need to execute:
+**IMPORTANT:** At this point, you should already have the server.xml with the needed configuration to successfully run the Customer Order Services application. However, **you still need to install the Liberty server features** described earlier in this section. In order to install them, you need to execute on a [terminal window](troubleshooting.md#open-the-terminal):
 
 `~/PurpleCompute/wlp/bin/installUtility install <server_name>`
 
-where *<server_name>* is the name you have given to your Liberty server when you created it at the beginning of this tutorial. If you have followed the instructions as they are, the Liberty server name should be *defaultServer*.
+where **<server_name>** is the name you have given to your Liberty server [when you created it](#install-websphere-application-server-liberty-locally) at the beginning of this tutorial. If you have followed the instructions as they are, the Liberty server name should be **defaultServer**.
 
 ![Source migration 60](/static/imgs/toLiberty/Source60.png)
 
 ## Run the application
 
-In order to locally run our application now that we seem to have the appropriate source code of the application and the server configuration migrated to WebSphere Liberty, we right-click on the CustomerOrderServicesApp project and select Export --> EAR file.
+In order to locally run our application now that we seem to have the source code appropriately fixed/migrated to run on the WebSphere Liberty server and the proper WebSphere Liberty server configuration in place, we need to export the application as an EAR file. To do so, we right click on the CustomerOrderServicesApp project and select Export --> EAR file:
 
-We are presented with a dialog to export our project as an EAR file. In this dialog, we must give our EAR project the appropriate name **CustomerOrderServicesApp** and the proper destination **/home/skytap/PurpleCompute/wlp/usr/shared/apps/CustomerOrderServicesApp.ear**. Finally, we optimize the application to run on WebSphere Application Server Liberty and select the Overwrite existing file option in case there was an existing application with the same name already. Click Finish.
+![Source migration 86](/static/imgs/toLiberty/Source86.png)
+
+We are presented with a dialog to export our project as an EAR file. In this dialog, we must give our EAR project the appropriate name **CustomerOrderServicesApp** and the proper destination **/home/skytap/PurpleCompute/wlp/usr/shared/apps/CustomerOrderServicesApp.ear**. Finally, we optimize the application to run on WebSphere Application Server Liberty, select the Overwrite existing file option in case there was an existing application with the same name already and click Finish:
 
 ![Source migration 21](/static/imgs/toLiberty/Source21.png)
 
-Once the EAR project has been exported as an EAR file into the shared applications folder for WebSphere Liberty (and the application itself as a result), we go into the Servers tab in eclipse, right click on WebSphere Application Server Liberty at localhost and click on start. We should get moved to the Console tab in eclipse right away in order to see the WebSphere Liberty's output. We should then see something similar to:
+Once the EAR project has been exported as an EAR file into the shared applications folder for WebSphere Liberty (and the application itself as a result), go into the Servers tab at the bottom in eclipse, right click on WebSphere Application Server Liberty at localhost and click on start:
+
+![Source migration 87](/static/imgs/toLiberty/Source87.png)
+
+We should get moved to the Console tab in eclipse right away in order to see the WebSphere Liberty's output. We should then see something similar to:
 
 ![Source migration 22](/static/imgs/toLiberty/Source22.png)
 
-where we can find the links for the two web applications deployed into WebSphere Liberty. One is a test project we will ignore for the time being. The other is the Customer Order Services Web Application and should be accessible at http://10.0.0.1:9081/CustomerOrderServicesWeb/. Go ahead and click on that link in the Console tab in eclipse or open a web browser yourself and point it to that url.
+where we can find the links for the two web applications deployed into WebSphere Liberty. One is a test project we will ignore for the time being. The other is the **Customer Order Services Web Application** and should be accessible at http://<SOME_IP>:9081/CustomerOrderServicesWeb/.
 
-You will first be presented with a log in dialog since we have security for our application enabled as you can find out in the server.xml file.
+Use the IP the console in eclipse shows to access the application and open the application on firefox.
+
+You will first be presented with a login dialog since we have application security for our application enabled which was done when configuring the WebSphere Liberty server in [this previous section](#4-application-security).
 
 ![Source migration 23](/static/imgs/toLiberty/Source23.png)
 
-Introduce **rbarcia** as the username and **bl0wfish** as the password for the credentials. Once you have done that, you should be able to see the Customer Order Services Web Application displayed in your web browser. However you will most likely be presented with an error on screen:
-
-![Source migration 24](/static/imgs/toLiberty/Source24.png)
-
-If we go into the Console tab for WebSphere Liberty Server in eclipse we will see the following trace:
-
-![Source migration 25](/static/imgs/toLiberty/Source25.png)
-
-This means that _CustomerOrderResource.java_ couldn't find _ejblocal:org.pwte.example.service.CustomerOrderServices_ during the lookup of it. The reason for this is what we have already seen during the Software Anaylisis section above in regards to the EJB lookups in WebSphere Liberty. More precisely, you can find the explanation in the **XML File Review** section above. However, the Software Analyzer did not raised these lookups since they were not done through bindings or the @EJB annotation but through initial context lookups:
-
-![Source migration 26](/static/imgs/toLiberty/Source26.png)
-
-As a result, we need to change the three web resources within the Web project so that the inital context lookups succeed. Hence, change the initial context lookups located in the following files:
-
-![Source migration 27](/static/imgs/toLiberty/Source27.png)
-
-Those lookups should look like the following respectively:
-
-```
-java:app/CustomerOrderServices/ProductSearchServiceImpl!org.pwte.example.service.ProductSearchService
-java:app/CustomerOrderServices/CustomerOrderServicesImpl!org.pwte.example.service.CustomerOrderServices
-java:app/CustomerOrderServices/ProductSearchServiceImpl!org.pwte.example.service.ProductSearchService
-```
-
-Once we have corrected the way EJB lookups are specified in WebSphere Liberty, we export the EAR project again and run the application. After loging into the application we should now see the Customer Order Services Application:
+Introduce **rbarcia** as the username and **bl0wfish** as the password for the credentials. Once you have done that, we should see the Customer Order Services Application:
 
 ![Source migration 28](/static/imgs/toLiberty/Source28.png)
 
@@ -654,19 +859,33 @@ However, if we look into the Console tab for WebSphere Liberty in eclipse, we st
 
 ![Source migration 29](/static/imgs/toLiberty/Source29.png)
 
-Looking carefuly at them, we see there is a problem with the data type problem with the data that is returned from the database and that this happens in the loadCustomer method in CustomerOrderServicesImpl.java. So is we look into that method we soon realise this is only trying to return an AbstractCustomer from the database:
+Looking carefully at them, we see there is a problem with the data type that is returned from the database and that this happens in the loadCustomer method in CustomerOrderServicesImpl.java. So if we look into that method we soon realise this is only trying to return an AbstractCustomer from the database:
 
 ![Source migration 30](/static/imgs/toLiberty/Source30.png)
 
-Therefore, the problem must reside in the AbstractCustomer class. However, as the name suggests, this is an abstract class and thus it will not be instantiated. Instead, we need to look for the classes that extends such abstract class. These are BusinessCustomer and ResidentialCustomer. If we remember the SQL error we have in the WebSphere Liberty Console log, it is about a value 'Y' being returned as an integer. If we then look at the Java classes we realise that some boolean attributes, which will get values of 'Y' and 'N', are being returned as Integer causing the SQL exception.
+Therefore, the problem must reside in the AbstractCustomer class. However, as the name suggests, this is an abstract class and thus it will not be instantiated. Instead, we need to look for the classes that extends such abstract class. These are BusinessCustomer and ResidentialCustomer. If we remember the SQL error we have in the WebSphere Liberty Console log, it is about a value 'Y' being returned as an integer. We then look at the Java classes and realise that some boolean attributes, which will get values of 'Y' and 'N', are being returned as Integer causing the SQL exception.
 
 The reason for this is that the OpenJPA driver treats booleans differently based on its version. In this case, the OpenJPA driver version we are using in WebSphere Liberty does not convert 'Y' or 'N' database values into booleans automatically. As a result, we need to store them as Strings and check those Strings to return a boolean value:
+
+1. Open BusinessCustomer.java and ResidentialCustomer.java that can be found on the CustomerOrderServices project:
+
+![Source migration 88](/static/imgs/toLiberty/Source88.png)
+
+2. Change the code on those java files to look like the following so that Boolean are stored as Integer and Integer are returned as Boolean:
 
 ![Source migration 31](/static/imgs/toLiberty/Source31.png)
 ![Source migration 32](/static/imgs/toLiberty/Source32.png)
 
-Again, save all the changes, export the EAR project to the WebSphere Liberty folder and start the Server up. You should now see the Customer Order Services web application with no errors at all either on the browser or in the Console tab for WebSphere Liberty in eclipse:
+Finally, save all the changes, export the project as EAR file to the WebSphere Liberty folder and start the Server up as we've already done before. You should now see the Customer Order Services web application with no errors at all in the Console tab for WebSphere Liberty in eclipse:
 
 ![Source migration 33](/static/imgs/toLiberty/Source33.png)
 
-When completed, stop the Liberty server.
+When completed, stop the Liberty server:
+
+![Source migration 89](/static/imgs/toLiberty/Source89.png)
+
+# Next step
+
+Click [here](step2.md) to go to the next step, step 2.
+
+Click [here](tutorial.md) to go to the tutorial initial page.
