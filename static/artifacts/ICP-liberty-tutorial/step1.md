@@ -115,14 +115,15 @@ The IBM WebSphere Application Server Liberty can be installed from eclipse. Sinc
 
 1. [Open a terminal window](troubleshooting.md#open-the-terminal).
 
-2. Open eclipse by typing the following on the terminal
+
+2. Open Eclipse by typing the following on the terminal
 
    ```
    cd ~/PurpleCompute/eclipse
    ./eclipse
    ```
 
-   select the default workspace by clicking OK
+   and select the default workspace by clicking OK
 
    ![Source migration 48](/static/imgs/toLiberty/Source48.png)
 

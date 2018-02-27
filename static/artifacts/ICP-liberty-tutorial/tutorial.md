@@ -28,7 +28,13 @@ In order to carry out this tutorial, you will need a development environment wit
 
 In our case, a **Skytap development environment, with the tools aforementioned already installed on it, will be provided**. The user for this environment should be **skytap** and its password **A1rb0rn3**. Common issues and procedures within the Skytap environment can be found on the [troubleshooting section](troubleshooting.md).
 
-### Step 1. Modernise application to run on WebSphere Liberty profile
+### SkyTap images ###
+
+1. Use the [PurpleCompute series of SkyTap images](https://ibm-dte.mybluemix.net/ibm-cloud-private#deep-dive) for this tutorial.
+2. Login to your skytap machine on the Desktop vm image.
+3. Use the password: A1rb0rn3
+
+### Step 1. Modernise application to run on WebSphere Liberty profile (Optional)
 
 In this step, we are going to make the modifications needed both at the application level and the server configuration level to migrate our legacy WebSphere Application Server 7 application to run on the WebSphere Application Server Liberty profile.
 
