@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Specification-Version: 6.0.0
+Specification-Title: webui
+Implementation-Version: WASX.WSC [rr0823.55]
+Implementation-Title: webui
+Created-By: 2.3 (IBM Corporation)
+Implementation-Vendor: IBM Corp.
+Specification-Vendor: IBM Corp.
+Ant-Version: Apache Ant 1.6.5
+

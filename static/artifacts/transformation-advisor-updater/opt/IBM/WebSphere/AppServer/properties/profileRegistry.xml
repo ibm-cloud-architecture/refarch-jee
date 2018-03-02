@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><profiles>
+    <profile isAReservationTicket="false" isDefault="true" name="Dmgr01" path="/opt/IBM/WebSphere/AppServer/profiles/Dmgr01" template="/opt/IBM/WebSphere/AppServer/profileTemplates/management"/>
+    <profile isAReservationTicket="false" isDefault="false" name="AppSrv01" path="/opt/IBM/WebSphere/AppServer/profiles/AppSrv01" template="/opt/IBM/WebSphere/AppServer/profileTemplates/default">
+        <augmentor template="/opt/IBM/WebSphere/AppServer/profileTemplates/JPA/default.jpafep"/>
+    </profile>
+</profiles>

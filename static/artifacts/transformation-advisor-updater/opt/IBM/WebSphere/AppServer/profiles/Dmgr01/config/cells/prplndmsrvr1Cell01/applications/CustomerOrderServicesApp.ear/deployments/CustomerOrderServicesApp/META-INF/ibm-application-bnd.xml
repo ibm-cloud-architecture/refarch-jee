@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application-bnd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://websphere.ibm.com/xml/ns/javaee"
+    xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-application-bnd_1_0.xsd" version="1.0">
+  <security-role name="SecureShopper">
+    <group name="SecureShopper" access-id="group:defaultWIMFileBasedRealm/cn=SecureShopper,o=defaultWIMFileBasedRealm"/>
+    <run-as userid="" password="{xor}"/>
+  </security-role>
+
+</application-bnd>
+

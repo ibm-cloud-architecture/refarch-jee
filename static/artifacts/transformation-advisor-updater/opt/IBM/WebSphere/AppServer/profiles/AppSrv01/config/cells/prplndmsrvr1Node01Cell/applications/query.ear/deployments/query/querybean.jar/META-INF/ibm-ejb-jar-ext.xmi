@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejbext:EJBJarExtension xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ejbext="ejbext.xmi" xmlns:ejb="ejb.xmi" xmi:id="ejb-jar_ID_Ext">
+  <ejbExtensions xmi:type="ejbext:SessionExtension" xmi:id="SessionExtension_1" timeout="600">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#Session_1"/>
+    <structure xmi:id="BeanStructure_1" inheritenceRoot="false"/>
+    <beanCache xmi:id="BeanCache_1" activateAt="ONCE"/>
+    <localTran xmi:id="LocalTran_1" boundary="BEAN_METHOD" unresolvedAction="ROLLBACK"/>
+  </ejbExtensions>
+  <ejbJar href="META-INF/ejb-jar.xml#ejb-jar_ID"/>
+</ejbext:EJBJarExtension>

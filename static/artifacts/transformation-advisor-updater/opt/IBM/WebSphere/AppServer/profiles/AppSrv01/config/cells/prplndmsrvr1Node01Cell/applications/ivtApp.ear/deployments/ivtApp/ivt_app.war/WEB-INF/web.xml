@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+   <web-app id="WebApp_1">
+      <display-name>IVT Application</display-name>
+      <description>WebSphere Installation Verification</description>
+      <servlet id="ivt_servlet">
+         <servlet-name>ivtservlet</servlet-name>
+         <description>ivt servlet</description>
+         <servlet-class>ivtServlet</servlet-class>
+      </servlet>
+      <servlet id="ivt_ejb">
+         <servlet-name>ivtejb</servlet-name>
+         <description>ivt ejb</description>
+         <servlet-class>ivtEJBClient</servlet-class>
+      </servlet>
+      <servlet id="ivt_server">
+         <servlet-name>ivtserver</servlet-name>
+         <description>ivt server</description>
+         <servlet-class>ivtServer</servlet-class>
+      </servlet>
+      <servlet-mapping id="ServletMapping_1">
+         <servlet-name>ivtservlet</servlet-name>
+         <url-pattern>ivtservlet</url-pattern>
+      </servlet-mapping>
+      
+      <servlet-mapping id="ServletMapping_2">
+         <servlet-name>ivtejb</servlet-name>
+         <url-pattern>ivtejb</url-pattern>
+      </servlet-mapping>
+      
+      <servlet-mapping id="ServletMapping_3">
+         <servlet-name>ivtserver</servlet-name>
+         <url-pattern>ivtserver</url-pattern>
+      </servlet-mapping>       
+      
+      <ejb-ref id="EjbRef_1">
+         <ejb-ref-name>ivt/ivtEJBObject</ejb-ref-name>
+         <ejb-ref-type>Session</ejb-ref-type>
+         <home>com.ibm.websphere.ivt.ivtEJB.ivtEJBHome</home>
+         <remote>com.ibm.websphere.ivt.ivtEJB.ivtEJBObject</remote>
+         <ejb-link>ivtEJBObject</ejb-link>
+      </ejb-ref>
+   </web-app>

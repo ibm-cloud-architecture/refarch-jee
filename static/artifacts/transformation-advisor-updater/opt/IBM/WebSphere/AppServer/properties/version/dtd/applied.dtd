@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright IBM Corp. This is the DTD For the WebSphere product version data 
+files that contain product installation information. -->
+
+<!ELEMENT efix-driver (apar-info*, component-update+, platform-prereq*, product-prereq*, efix-prereq*, custom-property*)>
+
+<!ATTLIST efix-driver
+    id CDATA #REQUIRED
+    short-description CDATA #REQUIRED
+    long-description CDATA #REQUIRED
+    is-trial ( false | true | 0 | 1 ) "false"
+    expiration-date CDATA ""
+    build-version CDATA #REQUIRED
+    build-date CDATA #REQUIRED>
+
+<!ELEMENT apar-info (custom-property*)>
+<!ATTLIST apar-info
+    number CDATA #REQUIRED
+    date CDATA #REQUIRED
+    short-description CDATA #REQUIRED
+    long-description CDATA "">
+
+<!ELEMENT ptf-driver (component-update+,product-update*,platform-prereq*,product-prereq*,included-efix*,custom-property*)>
+<!ATTLIST ptf-driver
+    id CDATA #REQUIRED
+    short-description CDATA #REQUIRED
+    long-description CDATA ""
+    build-version CDATA ""
+    build-date CDATA #REQUIRED>
+
+<!ELEMENT component-update (component-prereq*,final-version?,custom-property*)>
+<!ATTLIST component-update
+    component-name CDATA #REQUIRED
+    update-type ( add | replace | remove | patch ) #REQUIRED
+    is-required ( false | true | 0 | 1 ) "true"
+    is-recommended ( false | true | 0 | 1 ) "true"
+    is-optional ( false | true | 0 | 1 ) "true"
+    is-external ( false | true | 0 | 1 ) "false"
+    root-property-file CDATA ""
+    root-property-name CDATA ""
+    root-property-value CDATA ""
+    is-custom ( false | true | 0 | 1 ) "false"
+    primary-content CDATA "">
+
+<!ELEMENT efix-prereq EMPTY>
+<!ATTLIST efix-prereq
+    efix-id CDATA #REQUIRED
+    is-negative ( false | true | 0 | 1 ) "false"
+    install-index CDATA "">
+
+<!ELEMENT product-update EMPTY>
+<!ATTLIST product-update
+    product-id CDATA ""
+    product-name CDATA ""
+    build-version CDATA ""
+    build-date CDATA ""
+    build-level CDATA "">
+
+<!ELEMENT platform-prereq EMPTY>
+<!ATTLIST platform-prereq
+    architecture CDATA #REQUIRED
+    os-platform CDATA ""
+    os-version CDATA "">
+
+<!ELEMENT product-prereq EMPTY>
+<!ATTLIST product-prereq
+    product-id CDATA ""
+    build-version CDATA ""
+    build-date CDATA ""
+    build-level CDATA "">
+
+<!ELEMENT component-prereq EMPTY>
+<!ATTLIST component-prereq
+    component-name CDATA #REQUIRED
+    spec-version CDATA ""
+    build-version CDATA ""
+    build-date CDATA "">
+
+<!ELEMENT included-efix EMPTY>
+<!ATTLIST included-efix
+    efix-id CDATA #REQUIRED>
+
+<!ELEMENT custom-property EMPTY>
+<!ATTLIST custom-property
+    property-name CDATA #REQUIRED
+    property-type CDATA ""
+    property-value CDATA "">
+    
+<!ELEMENT efix-applied (component-applied+)>
+<!ATTLIST efix-applied
+    efix-id CDATA #REQUIRED>
+
+<!ELEMENT ptf-applied (component-applied+)>
+<!ATTLIST ptf-applied
+    ptf-id CDATA #REQUIRED>
+
+<!ELEMENT component-applied (initial-version?,final-version?)>
+<!ATTLIST component-applied
+    component-name CDATA #REQUIRED
+    update-type ( add | replace | remove | patch ) #REQUIRED
+    is-required ( false | true | 0 | 1 ) "true"
+    is-optional ( false | true | 0 | 1 ) "false"
+    is-external ( false | true | 0 | 1 ) "false"
+    root-property-file CDATA ""
+    root-property-name CDATA ""
+    root-property-value CDATA ""
+    is-custom ( false | true | 0 | 1 ) "false"
+    log-name CDATA #REQUIRED
+    backup-name CDATA #REQUIRED
+    time-stamp CDATA #REQUIRED>
+
+<!ELEMENT initial-version EMPTY>
+<!ATTLIST initial-version
+    component-name CDATA #REQUIRED
+    spec-version CDATA #REQUIRED
+    build-version CDATA #REQUIRED
+    build-date CDATA #REQUIRED>
+
+<!ELEMENT final-version EMPTY>
+<!ATTLIST final-version
+    component-name CDATA #REQUIRED
+    spec-version CDATA #REQUIRED
+    build-version CDATA #REQUIRED
+    build-date CDATA #REQUIRED>

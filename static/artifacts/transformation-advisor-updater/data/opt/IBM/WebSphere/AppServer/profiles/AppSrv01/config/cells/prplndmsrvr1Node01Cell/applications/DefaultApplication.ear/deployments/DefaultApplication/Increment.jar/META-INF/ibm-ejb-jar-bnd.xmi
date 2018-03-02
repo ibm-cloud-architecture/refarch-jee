@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ibm.ejs.models.base.bindings.ejbbnd:EJBJarBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com.ibm.ejs.models.base.bindings.commonbnd="commonbnd.xmi" xmlns:com.ibm.ejs.models.base.bindings.ejbbnd="ejbbnd.xmi" xmlns:org.eclipse.jst.j2ee.ejb="ejb.xmi" xmi:id="ejb-jar_ID_Bnd" currentBackendId="DERBY_V100_1">
+  <defaultDatasource xmi:id="ResourceRefBinding_1183122148078">
+    <defaultAuth xmi:type="com.ibm.ejs.models.base.bindings.commonbnd:BasicAuthData" xmi:id="BasicAuthData_1183122148078"/>
+  </defaultDatasource>
+  <ejbJar href="META-INF/ejb-jar.xml#ejb-jar_ID"/>
+  <ejbBindings xmi:id="EnterpriseBeanBinding_1" jndiName="Increment">
+    <enterpriseBean xmi:type="org.eclipse.jst.j2ee.ejb:ContainerManagedEntity" href="META-INF/ejb-jar.xml#ContainerManagedEntity_1"/>
+    <cmpConnectionFactory xmi:id="CMPConnectionFactoryBinding_1" jndiName="DefaultDatasource" resAuth="Per_Connection_Factory"/>
+  </ejbBindings>
+  <defaultCMPConnectionFactory xmi:id="CMPConnectionFactoryBinding_2" jndiName="DefaultDatasource" resAuth="Per_Connection_Factory"/>
+</com.ibm.ejs.models.base.bindings.ejbbnd:EJBJarBinding>

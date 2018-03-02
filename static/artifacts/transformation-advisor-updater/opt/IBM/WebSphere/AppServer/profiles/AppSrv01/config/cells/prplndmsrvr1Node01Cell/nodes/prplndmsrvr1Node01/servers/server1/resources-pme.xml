@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:objectpoolmanager="http://www.ibm.com/websphere/appserver/schemas/5.0/objectpoolmanager.xmi" xmlns:properties="http://www.ibm.com/websphere/appserver/schemas/5.0/properties.xmi" xmlns:workmanager="http://www.ibm.com/websphere/appserver/schemas/5.0/workmanager.xmi" xmlns:scheduler="http://www.ibm.com/websphere/appserver/schemas/5.0/scheduler.xmi" xmlns:resources="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.xmi" >
+  <xmi:Documentation>
+    <contact>WebSphere Application Server Enterprise v5.0 Default Configuration Files</contact>
+  </xmi:Documentation>
+  <objectpoolmanager:ObjectPoolProvider xmi:id="ObjectPoolProvider_1" name="ObjectPoolProvider" description="Default Object Pool Provider">
+  </objectpoolmanager:ObjectPoolProvider>
+  <workmanager:WorkManagerProvider xmi:id="WorkManagerProvider_1" name="WorkManagerProvider" description="Default WorkManager Provider">
+    <factories xmi:type="workmanager:WorkManagerInfo" xmi:id="WorkManagerInfo_Default" name="DefaultWorkManager" jndiName="wm/default" description="WebSphere Default WorkManager" category="Default" numAlarmThreads="5" minThreads="1" maxThreads="10" threadPriority="5" isGrowable="false">
+      <serviceNames>AppProfileService</serviceNames>
+      <serviceNames>com.ibm.ws.i18n</serviceNames>
+      <serviceNames>security</serviceNames>
+      <serviceNames>UserWorkArea</serviceNames>
+      <serviceNames>zos.wlm</serviceNames>
+    </factories>
+  </workmanager:WorkManagerProvider>
+  <workmanager:TimerManagerProvider xmi:id="TimerManagerProvider_1" name="TimerManagerProvider" description="Default TimerManager Provider" >
+    <factories xmi:type="workmanager:TimerManagerInfo" xmi:id="TimerManagerInfo_Default" name="DefaultTimerManager" jndiName="tm/default" description="WebSphere Default TimerManager"/>
+  </workmanager:TimerManagerProvider>
+  <scheduler:SchedulerProvider xmi:id="SchedulerProvider_1" name="SchedulerProvider" description="Default Scheduler Provider">
+  </scheduler:SchedulerProvider>
+</xmi:XMI>

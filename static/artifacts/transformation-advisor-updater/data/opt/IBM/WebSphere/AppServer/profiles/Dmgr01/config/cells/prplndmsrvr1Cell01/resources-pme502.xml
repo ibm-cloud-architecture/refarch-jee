@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:dynacache="http://www.ibm.com/websphere/appserver/schemas/5.0.2/dynacache.xmi" >
+  <dynacache:CacheProvider xmi:id="CacheProvider_1055745612404" name="CacheProvider" description="Default Cache Provider"/>
+</xmi:XMI>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<target:STSTargetMap
+	xmlns:target="http://www.ibm.com/xmlns/prod/websphere/200608/securitytokenservice/targets"
+	DefaultTokenTypeURI="http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct">
+</target:STSTargetMap>
+

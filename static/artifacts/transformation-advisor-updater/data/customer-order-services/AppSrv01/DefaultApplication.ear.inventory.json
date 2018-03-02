@@ -1,0 +1,259 @@
+{
+   "report": "inventory",
+   "version": "2.2",
+   "options": [
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "applications": [
+      "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear"
+   ],
+   "sharedLibraries": [
+   ],
+   "archives": {
+      "ears": 1,
+      "wars": 1,
+      "rars": 0,
+      "ejbs": 1,
+      "webFragments": 0,
+      "utilityJars": 4,
+      "appClients": 0
+   },
+   "summary": {
+      "servlets": 3,
+      "jsps": 8,
+      "jpaEntities": 0,
+      "bmpEntityBeans": 0,
+      "cmpEntityBeans": 1,
+      "messageDrivenBeans": 0,
+      "singletonSessionBeans": 0,
+      "statefulSessionBeans": 0,
+      "statelessSessionBeans": 0,
+      "jaxrpcConsumers": 0,
+      "jaxrpcProviders": 0,
+      "jaxrsConsumers": 0,
+      "jaxrsProviders": 0,
+      "jaxwsConsumers": 0,
+      "jaxwsProviders": 0
+   },
+   "archiveInventory": [
+      {
+         "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear",
+         "moduleType": "Enterprise archive",
+         "moduleVersion": "1.3",
+         "metadataComplete": null,
+         "archives": {
+            "wars": 1,
+            "rars": 0,
+            "ejbs": 1,
+            "utilityJars": 4,
+            "appClients": 0
+         },
+         "summary": {
+            "servlets": 3,
+            "jsps": 8,
+            "jpaEntities": 0,
+            "bmpEntityBeans": 0,
+            "cmpEntityBeans": 1,
+            "messageDrivenBeans": 0,
+            "singletonSessionBeans": 0,
+            "statefulSessionBeans": 0,
+            "statelessSessionBeans": 0,
+            "jaxrpcConsumers": 0,
+            "jaxrpcProviders": 0,
+            "jaxrsConsumers": 0,
+            "jaxrsProviders": 0,
+            "jaxwsConsumers": 0,
+            "jaxwsProviders": 0
+         },
+         "potentialDeploymentProblemsSummary": {
+            "archivesContainingDuplicateClasses": 3,
+            "archivesContainingJavaEEorSEClasses": 3,
+            "archivesContainingConflictingOpenSourceSoftwareClasses": 0,
+            "archivesContainingWebSphereClasses": 1,
+            "archivesNotReferencedInTheApplication": 0,
+            "archivesWithMissingDependenciesInTheApplication": 2,
+            "classesWithSystemLevelJVMConfiguration": 0,
+            "sharedLibrariesReferencingApplicationClasses": 0
+         },
+         "potentialDeploymentProblemsDetails": [
+            {
+               "duplicateClassesWithinClassLoader": [
+               ]
+            },
+            {
+               "duplicateClassesAcrossApplication": [
+                  {
+                     "conflictingPackages": [
+                        "com.ibm.defaultapplication",
+                        "org.omg.stub.java.lang",
+                        "org.omg.stub.javax.ejb"
+                     ],
+                     "packageLocation": [
+                        "DefaultWebApplication.war/WEB-INF/lib/WsaEJBDeployUtility.jar",
+                        "Increment.jar",
+                        "WsaEJBDeployUtility.jar"
+                     ]
+                  }
+               ]
+            },
+            {
+               "javaEEandSEClasses": [
+                  {
+                     "conflictingPackages": [
+                        "org.omg.stub.java.lang",
+                        "org.omg.stub.javax.ejb"
+                     ],
+                     "packageLocation": [
+                        "DefaultWebApplication.war/WEB-INF/lib/WsaEJBDeployUtility.jar",
+                        "Increment.jar",
+                        "WsaEJBDeployUtility.jar"
+                     ]
+                  }
+               ]
+            },
+            {
+               "duplicateWebSphereClasses": [
+                  {
+                     "conflictingPackages": [
+                        "com.ibm.websphere.csi",
+                        "com.ibm.ws.ejbdeploy.JIncrement.DERBY_V100_1"
+                     ],
+                     "packageLocation": [
+                        "Increment.jar"
+                     ]
+                  }
+               ]
+            },
+            {
+               "openSourceSoftwareClasses": [
+               ]
+            },
+            {
+               "archivesNotReferenced": [
+               ]
+            },
+            {
+               "missingDependencies": [
+                  {
+                     "missingDependencies": [
+                        "com.ibm.ObjectQuery.metadata"
+                     ],
+                     "archive": [
+                        "Increment.jar"
+                     ]
+                  },
+                  {
+                     "missingDependencies": [
+                        "com.ibm.servlet"
+                     ],
+                     "archive": [
+                        "DefaultWebApplication.war"
+                     ]
+                  }
+               ]
+            },
+            {
+               "classesWithSystemLevelJVMConfiguration": [
+               ]
+            },
+            {
+               "sharedLibraryDependencies": [
+               ]
+            }
+         ],
+         "performanceConsiderations": {
+            "archivesThatAreCandidatesForMetadataCompleteTrueAttribute": [
+            ],
+            "webModulesWithExcessiveClassFiles": [
+            ],
+            "webModulesWithExcessiveStaticResources": [
+            ]
+         },
+         "containedArchiveInventory": [
+            {
+               "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear/DefaultWebApplication.war",
+               "moduleType": "Web module",
+               "moduleVersion": "2.3",
+               "metadataComplete": "true",
+               "archives": {
+                  "ejbs": 0,
+                  "webFragments": 0,
+                  "utilityJars": 1
+               },
+               "summary": {
+                  "servlets": 3,
+                  "jsps": 8,
+                  "jpaEntities": 0,
+                  "bmpEntityBeans": 0,
+                  "cmpEntityBeans": 0,
+                  "messageDrivenBeans": 0,
+                  "singletonSessionBeans": 0,
+                  "statefulSessionBeans": 0,
+                  "statelessSessionBeans": 0,
+                  "jaxrpcConsumers": 0,
+                  "jaxrpcProviders": 0,
+                  "jaxrsConsumers": 0,
+                  "jaxrsProviders": 0,
+                  "jaxwsConsumers": 0,
+                  "jaxwsProviders": 0
+               },
+               "containedArchiveInventory": [
+                  {
+                     "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/lib/WsaEJBDeployUtility.jar",
+                     "moduleType": "Utility JAR",
+                     "containedPackages": [
+                        "com.ibm.defaultapplication",
+                        "org.omg.stub"
+                     ]
+                  }
+               ]
+            },
+            {
+               "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear/DefaultWebApplication_src.jar",
+               "moduleType": "Utility JAR",
+               "containedPackages": [
+               ]
+            },
+            {
+               "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear/Increment.jar",
+               "moduleType": "EJB module",
+               "moduleVersion": "2.0",
+               "metadataComplete": "true",
+               "summary": {
+                  "servlets": 0,
+                  "jsps": 0,
+                  "jpaEntities": 0,
+                  "bmpEntityBeans": 0,
+                  "cmpEntityBeans": 1,
+                  "messageDrivenBeans": 0,
+                  "singletonSessionBeans": 0,
+                  "statefulSessionBeans": 0,
+                  "statelessSessionBeans": 0,
+                  "jaxrpcConsumers": 0,
+                  "jaxrpcProviders": 0,
+                  "jaxrsConsumers": 0,
+                  "jaxrsProviders": 0,
+                  "jaxwsConsumers": 0,
+                  "jaxwsProviders": 0
+               }
+            },
+            {
+               "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear/Increment_src.jar",
+               "moduleType": "Utility JAR",
+               "containedPackages": [
+               ]
+            },
+            {
+               "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear/WsaEJBDeployUtility.jar",
+               "moduleType": "Utility JAR",
+               "containedPackages": [
+                  "com.ibm.defaultapplication",
+                  "org.omg.stub"
+               ]
+            }
+         ]
+      }
+   ],
+   "sharedLibraryDetails": [
+   ]
+}

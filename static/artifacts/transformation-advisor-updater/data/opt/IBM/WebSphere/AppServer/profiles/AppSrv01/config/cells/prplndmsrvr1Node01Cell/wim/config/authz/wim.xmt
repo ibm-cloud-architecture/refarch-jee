@@ -1,0 +1,32 @@
+
+<!--
+ @(#) src/ws/code/argus/src/props/wim.xmt, argus.oracle, argus600, 051109a 1.2 05/11/08 10:26:19
+ Licensed Materials - Property of IBM
+
+ Common Authorization Component
+ TIVO-CAC / TIVETAM00 
+
+ (C) Copyright IBM Corp. 2005 All Rights Reserved.
+
+ US Government Users Restricted Rights - Use, duplication or
+ disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+-->
+
+<XMT>
+	<Handlers>
+		<Principal>
+			<Supported>
+				<ClassID>com.ibm.ws.wim.security.authz.jacc.UserPrincipal</ClassID>
+				<ClassID>com.ibm.ws.wim.security.authz.jacc.GroupPrincipal</ClassID>
+			</Supported>
+			<Constructors>
+				<Constructor>@Name@</Constructor>
+			</Constructors>
+			<Properties>
+				<ClassName>@CLASS_STRING</ClassName>
+				<Name>@STRING</Name>
+			</Properties>
+		</Principal>
+	</Handlers>
+</XMT>

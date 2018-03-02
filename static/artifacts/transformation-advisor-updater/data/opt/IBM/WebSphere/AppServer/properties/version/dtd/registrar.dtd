@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright IBM Corp. This is the DTD For the WebSphere product version data 
+files that contain product installation information. -->
+
+
+<!ELEMENT registrar (id, product-name, feature-name, product-id, smf89-type)>
+<!ATTLIST registrar name CDATA #REQUIRED>
+
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT product-name (#PCDATA)>
+<!ELEMENT feature-name (#PCDATA)>
+<!ELEMENT product-id (#PCDATA)>
+<!ELEMENT smf89-type (#PCDATA)>
+
+
+	

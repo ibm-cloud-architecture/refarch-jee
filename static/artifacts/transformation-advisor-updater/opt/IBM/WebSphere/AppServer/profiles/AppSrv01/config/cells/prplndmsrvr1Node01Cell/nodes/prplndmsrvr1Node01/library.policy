@@ -1,0 +1,12 @@
+//
+// Dynamic Policy - Reference Library Templates
+//
+// NOTE: Syntax errors in the policy files will cause the application server or
+//       enterprise application FAIL to start. Extreme care should be taken when
+//       editing these policy files. It is advised to use the policytool provided
+//       by the JDK for editing the policy files (WAS_HOME/java/jre/bin/policytool). 
+//
+
+grant {
+};
+

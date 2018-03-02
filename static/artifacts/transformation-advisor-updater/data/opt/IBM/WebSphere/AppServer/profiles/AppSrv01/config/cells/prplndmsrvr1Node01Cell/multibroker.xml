@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:multibroker="http://www.ibm.com/websphere/appserver/schemas/5.0/multibroker.xmi" xmlns:ipc="http://www.ibm.com/websphere/appserver/schemas/5.0/ipc.xmi">
+  <xmi:Documentation>
+    <contact>WebSphere Application Server v5.0 Default Configuration Files v1.6 7/18/02</contact>
+  </xmi:Documentation>
+</xmi:XMI>

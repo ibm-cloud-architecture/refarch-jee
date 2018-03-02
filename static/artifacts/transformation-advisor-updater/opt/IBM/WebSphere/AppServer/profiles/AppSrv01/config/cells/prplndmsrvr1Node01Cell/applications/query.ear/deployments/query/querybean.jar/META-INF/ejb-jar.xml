@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-jar PUBLIC "-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN" "http://java.sun.com/dtd/ejb-jar_2_0.dtd">
+<ejb-jar id="ejb-jar_ID">
+      <enterprise-beans>
+         <session id="Session_1">
+            <ejb-name>Query</ejb-name>
+            <home>com.ibm.websphere.ejbquery.QueryHome</home>
+            <remote>com.ibm.websphere.ejbquery.Query</remote>
+            <local-home>com.ibm.websphere.ejbquery.QueryLocalHome</local-home>
+            <local>com.ibm.websphere.ejbquery.QueryLocal</local>
+            <ejb-class>com.ibm.websphere.ejbquery.QueryBean</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+         </session>
+      </enterprise-beans>
+      <assembly-descriptor id="AssemblyDescriptor_1">
+         <method-permission id="MethodPermission_1">
+            <description>method.protection.unchecked.permission.description</description>
+            <unchecked/>
+            <method id="MethodElement_2">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>isIdentical</method-name>
+               <method-params>
+                  <method-param>javax.ejb.EJBLocalObject</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_3">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>executePlan</method-name>
+               <method-params>
+                  <method-param>java.lang.String</method-param>
+                  <method-param>java.lang.Object[]</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_4">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>executeQuery</method-name>
+               <method-params>
+                  <method-param>java.lang.String</method-param>
+                  <method-param>java.lang.Object[]</method-param>
+                  <method-param>java.util.Properties</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_5">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>getPrimaryKey</method-name>
+            </method>
+            <method id="MethodElement_6">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>prepareQuery</method-name>
+               <method-params>
+                  <method-param>java.lang.String</method-param>
+                  <method-param>java.lang.Object[]</method-param>
+                  <method-param>java.util.Properties</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_7">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>getEJBLocalHome</method-name>
+            </method>
+            <method id="MethodElement_8">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>remove</method-name>
+            </method>
+            <method id="MethodElement_9">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>create</method-name>
+            </method>
+            <method id="MethodElement_10">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>getEJBMetaData</method-name>
+            </method>
+            <method id="MethodElement_11">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>getHomeHandle</method-name>
+            </method>
+            <method id="MethodElement_12">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>remove</method-name>
+               <method-params>
+                  <method-param>java.lang.Object</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_13">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>remove</method-name>
+               <method-params>
+                  <method-param>javax.ejb.Handle</method-param>
+               </method-params>
+            </method>
+            <method id="MethodElement_14">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>create</method-name>
+            </method>
+            <method id="MethodElement_15">
+               <description>generatedAllMethodsDescription</description>
+               <ejb-name>Query</ejb-name>
+               <method-name>remove</method-name>
+               <method-params>
+                  <method-param>java.lang.Object</method-param>
+               </method-params>
+            </method>
+         </method-permission>
+<method-permission>
+<description>Generated unchecked method permission</description>
+<unchecked/>
+<method>
+<description>generatedAllMethodsDescription</description>
+<ejb-name>Query</ejb-name>
+<method-intf>Remote</method-intf>
+<method-name>getEJBHome</method-name>
+<method-params/>
+</method>
+<method>
+<description>generatedAllMethodsDescription</description>
+<ejb-name>Query</ejb-name>
+<method-intf>Remote</method-intf>
+<method-name>executePlan</method-name>
+<method-params>
+<method-param>java.lang.String</method-param>
+<method-param>java.lang.Object[]</method-param>
+<method-param>int</method-param>
+<method-param>int</method-param>
+</method-params>
+</method>
+<method>
+<description>generatedAllMethodsDescription</description>
+<ejb-name>Query</ejb-name>
+<method-intf>Remote</method-intf>
+<method-name>getHandle</method-name>
+<method-params/>
+</method>
+<method>
+<description>generatedAllMethodsDescription</description>
+<ejb-name>Query</ejb-name>
+<method-intf>Remote</method-intf>
+<method-name>executeQuery</method-name>
+<method-params>
+<method-param>java.lang.String</method-param>
+<method-param>java.lang.Object[]</method-param>
+<method-param>java.util.Properties</method-param>
+<method-param>int</method-param>
+<method-param>int</method-param>
+</method-params>
+</method>
+<method>
+<description>generatedAllMethodsDescription</description>
+<ejb-name>Query</ejb-name>
+<method-intf>Remote</method-intf>
+<method-name>isIdentical</method-name>
+<method-params>
+<method-param>javax.ejb.EJBObject</method-param>
+</method-params>
+</method>
+</method-permission>
+         <container-transaction id="MethodTransaction_1">
+            <description>querybeantransations:+:</description>
+            <method id="MethodElement_1">
+               <ejb-name>Query</ejb-name>
+               <method-name>*</method-name>
+            </method>
+            <trans-attribute>Required</trans-attribute>
+         </container-transaction>
+      </assembly-descriptor>
+   </ejb-jar>

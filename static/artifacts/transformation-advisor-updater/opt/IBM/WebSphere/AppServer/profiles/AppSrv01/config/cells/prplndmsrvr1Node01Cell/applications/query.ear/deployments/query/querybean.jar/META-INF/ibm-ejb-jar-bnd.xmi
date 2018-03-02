@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ibm.ejs.models.base.bindings.ejbbnd:EJBJarBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.ejs.models.base.bindings.commonbnd="commonbnd.xmi" xmlns:com.ibm.ejs.models.base.bindings.ejbbnd="ejbbnd.xmi" xmlns:org.eclipse.jst.j2ee.ejb="ejb.xmi" xmi:id="ejb-jar_ID_Bnd">
+  <defaultDatasource xmi:id="ResourceRefBinding_1">
+    <defaultAuth xmi:type="com.ibm.ejs.models.base.bindings.commonbnd:BasicAuthData" xmi:id="BasicAuthData_1">
+      <password xsi:nil="true"/>
+    </defaultAuth>
+  </defaultDatasource>
+  <ejbJar href="META-INF/ejb-jar.xml#ejb-jar_ID"/>
+  <ejbBindings xmi:id="EnterpriseBeanBinding_1" jndiName="com/ibm/websphere/ejbquery/Query">
+    <enterpriseBean xmi:type="org.eclipse.jst.j2ee.ejb:Session" href="META-INF/ejb-jar.xml#Session_1"/>
+  </ejbBindings>
+  <defaultCMPConnectionFactory xmi:id="CMPConnectionFactoryBinding_1183122157609"/>
+</com.ibm.ejs.models.base.bindings.ejbbnd:EJBJarBinding>

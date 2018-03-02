@@ -1,0 +1,67 @@
+{
+   "report": "technology",
+   "version": "2.1",
+   "options": [
+      "--baseEdition",
+      "--bluemixEdition",
+      "--coreEdition",
+      "--ndEdition",
+      "--zosEdition",
+      "--traditional",
+      "--liberty",
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "applications": [
+      {
+         "application": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear",
+         "summary": {
+            "bluemixLiberty": true,
+            "libertyCore": true,
+            "liberty": true,
+            "websphereTraditional": true,
+            "ndLiberty": true,
+            "ndTraditional": true,
+            "zosLiberty": true,
+            "zosTraditional": true
+         },
+         "technologies": [
+            {
+               "technology": "Java Servlet",
+               "bluemixLiberty": true,
+               "libertyCore": true,
+               "liberty": true,
+               "websphereTraditional": true,
+               "ndLiberty": true,
+               "ndTraditional": true,
+               "zosLiberty": true,
+               "zosTraditional": true
+            },
+            {
+               "technology": "Java API for XML Processing (JAXP)",
+               "bluemixLiberty": true,
+               "libertyCore": true,
+               "liberty": true,
+               "websphereTraditional": true,
+               "ndLiberty": true,
+               "ndTraditional": true,
+               "zosLiberty": true,
+               "zosTraditional": true
+            }
+         ],
+         "incompleteReportErrors": [
+         ],
+         "footnotes": [
+         ]
+      }
+   ],
+   "overallSummary": {
+      "bluemixLiberty": true,
+      "libertyCore": true,
+      "liberty": true,
+      "websphereTraditional": true,
+      "ndLiberty": true,
+      "ndTraditional": true,
+      "zosLiberty": true,
+      "zosTraditional": true
+   }
+}

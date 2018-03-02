@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--HTTP server plugin config file for the webserver prplndmsrvr1Cell01.prplhttpsrvr1.csplab.local-node.webserver1 generated on 2018.01.18 at 02:48:20 PM CST-->
+<Config ASDisableNagle="false" AcceptAllContent="false" AppServerPortPreference="HostHeader" ChunkedResponse="false" FIPSEnable="false" FailoverToNext="false" HTTPMaxHeaders="300" IISDisableFlushFlag="false" IISDisableNagle="false" IISPluginPriority="High" IgnoreDNSFailures="false" KillWebServerStartUpOnParseErr="false" MarkBusyDown="false" OS400ConvertQueryStringToJobCCSID="false" RefreshInterval="60" ResponseChunkSize="64" SSLConsolidate="true" TrustedProxyEnable="false" VHostMatchingCompat="false">
+   <Log LogLevel="Error" Name="/opt/IBM/HTTPServer/Plugins/logs/webserver1/http_plugin.log"/>
+   <Property Name="ESIEnable" Value="true"/>
+   <Property Name="ESIMaxCacheSize" Value="1024"/>
+   <Property Name="ESIInvalidationMonitor" Value="false"/>
+   <Property Name="ESIEnableToPassCookies" Value="false"/>
+   <Property Name="ESICacheidFull" Value="false"/>
+   <Property Name="PluginInstallRoot" Value="/opt/IBM/HTTPServer/Plugins/"/>
+   <VirtualHostGroup Name="default_host">
+      <VirtualHost Name="*:9080"/>
+      <VirtualHost Name="*:80"/>
+      <VirtualHost Name="*:9443"/>
+      <VirtualHost Name="*:5060"/>
+      <VirtualHost Name="*:5061"/>
+      <VirtualHost Name="*:443"/>
+      <VirtualHost Name="prplwas7srvr1.csplab.local:9080"/>
+      <VirtualHost Name="prplwas7srvr1.csplab.local:80"/>
+      <VirtualHost Name="prplwas7srvr1.csplab.local:9443"/>
+      <VirtualHost Name="prplwas7srvr1.csplab.local:5060"/>
+      <VirtualHost Name="prplwas7srvr1.csplab.local:5061"/>
+      <VirtualHost Name="prplwas7srvr1.csplab.local:443"/>
+      <VirtualHost Name="prplwas7srvr2.csplab.local:9080"/>
+      <VirtualHost Name="prplwas7srvr2.csplab.local:80"/>
+      <VirtualHost Name="prplwas7srvr2.csplab.local:9443"/>
+      <VirtualHost Name="prplwas7srvr2.csplab.local:5060"/>
+      <VirtualHost Name="prplwas7srvr2.csplab.local:5061"/>
+      <VirtualHost Name="prplwas7srvr2.csplab.local:443"/>
+      <VirtualHost Name="*:9081"/>
+   </VirtualHostGroup>
+   <ServerCluster CloneSeparatorChange="false" GetDWLMTable="false" IgnoreAffinityRequests="true" LoadBalance="Round Robin" Name="CustomerOrder" PostBufferSize="64" PostSizeLimit="-1" RemoveSpecialHeaders="true" RetryInterval="60" ServerIOTimeoutRetry="-1">
+      <Server CloneID="1bff3mdlk" ConnectTimeout="5" ExtendedHandshake="false" LoadBalanceWeight="2" MaxConnections="-1" Name="prplwas7srvr1Node01_CustomerOrder_member1" ServerIOTimeout="60" WaitForContinue="false">
+         <Transport Hostname="prplwas7srvr1.csplab.local" Port="9081" Protocol="http"/>
+         <Transport Hostname="prplwas7srvr1.csplab.local" Port="9444" Protocol="https">
+            <Property Name="keyring" Value="/opt/IBM/HTTPServer/Plugins/config/webserver1/plugin-key.kdb"/>
+            <Property Name="stashfile" Value="/opt/IBM/HTTPServer/Plugins/config/webserver1/plugin-key.sth"/>
+         </Transport>
+      </Server>
+      <Server CloneID="1bh2o9fp6" ConnectTimeout="5" ExtendedHandshake="false" LoadBalanceWeight="2" MaxConnections="-1" Name="prplwas7srvr2Node01_CustomerOrder_member2" ServerIOTimeout="60" WaitForContinue="false">
+         <Transport Hostname="prplwas7srvr2.csplab.local" Port="9081" Protocol="http"/>
+         <Transport Hostname="prplwas7srvr2.csplab.local" Port="9444" Protocol="https">
+            <Property Name="keyring" Value="/opt/IBM/HTTPServer/Plugins/config/webserver1/plugin-key.kdb"/>
+            <Property Name="stashfile" Value="/opt/IBM/HTTPServer/Plugins/config/webserver1/plugin-key.sth"/>
+         </Transport>
+      </Server>
+      <PrimaryServers>
+         <Server Name="prplwas7srvr1Node01_CustomerOrder_member1"/>
+         <Server Name="prplwas7srvr2Node01_CustomerOrder_member2"/>
+      </PrimaryServers>
+   </ServerCluster>
+   <UriGroup Name="default_host_CustomerOrder_URIs">
+      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/CustomerOrderServicesWeb/*"/>
+      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/CustomerOrderServicesTest/*"/>
+   </UriGroup>
+   <Route ServerCluster="CustomerOrder" UriGroup="default_host_CustomerOrder_URIs" VirtualHostGroup="default_host"/>
+   <RequestMetrics armEnabled="false" loggingEnabled="false" rmEnabled="false" traceLevel="HOPS">
+      <filters enable="false" type="URI">
+         <filterValues enable="false" value="/snoop"/>
+         <filterValues enable="false" value="/hitcount"/>
+      </filters>
+      <filters enable="false" type="SOURCE_IP">
+         <filterValues enable="false" value="255.255.255.255"/>
+         <filterValues enable="false" value="254.254.254.254"/>
+      </filters>
+      <filters enable="false" type="JMS">
+         <filterValues enable="false" value="destination=aaa"/>
+      </filters>
+      <filters enable="false" type="WEB_SERVICES">
+         <filterValues enable="false" value="wsdlPort=aaa:op=bbb:nameSpace=ccc"/>
+      </filters>
+   </RequestMetrics>
+</Config>

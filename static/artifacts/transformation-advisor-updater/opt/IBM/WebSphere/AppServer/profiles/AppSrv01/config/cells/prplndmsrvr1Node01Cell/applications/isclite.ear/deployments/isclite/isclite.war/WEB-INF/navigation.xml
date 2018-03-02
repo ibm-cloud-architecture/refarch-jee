@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigation:navigation-tree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:base="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd" xmlns:navigation="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-navigation.xsd" xsi:schemaLocation="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-navigation.xsd ibm-portal-navigation.xsd http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd ibm-portal-base.xsd">
+  <navigation:nav-element isWscNode="false" layout-element-ref="com.ibm.isclite.identityportlet.layoutElement.A" moduleID="com.ibm.isclite.ISCAdminPortlet" nodeType="page" uniqueName="com.ibm.isclite.ISCAdminPortlet-SPSVS-com.ibm.isclite.identityportlet.navigationElement.A" wscRole="iscadmins,administrator">
+    <navigation:title>
+      <base:nls-ref key="iscConsoleIdentityPtltTitle" locationName="classes/nls/PortletResources"/>
+    </navigation:title>
+    <navigation:parentTree ordinal="70" parentTreeRef="systemadmin"/>
+  </navigation:nav-element>
+  <navigation:nav-element moduleID="com.ibm.websphere.product" nodeType="label" uniqueName="com.ibm.websphere.product-SPSVS-com.ibm.wim.management.navigationElement.users"/>
+  <navigation:nav-element moduleID="com.ibm.websphere.product" nodeType="label" uniqueName="com.ibm.websphere.product-SPSVS-com.ibm.wim.management.navigationElement.groups"/>
+  <navigation:nav-element isWscNode="false" layout-element-ref="com.ibm.wim.management.layoutElement.users" moduleID="com.ibm.portlet.ear.wim" nodeType="page" uniqueName="com.ibm.portlet.ear.wim-SPSVS-com.ibm.wim.management.navigationElement.users" wscRole="administrator,iscadmins">
+    <navigation:title>
+      <base:nls-ref key="manageUsers" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+    </navigation:title>
+    <navigation:parentTree parentTreeRef="com.ibm.wim.management.navigationElement.WIM"/>
+  </navigation:nav-element>
+  <navigation:nav-element isWscNode="false" layout-element-ref="com.ibm.wim.management.layoutElement.groups" moduleID="com.ibm.portlet.ear.wim" nodeType="page" uniqueName="com.ibm.portlet.ear.wim-SPSVS-com.ibm.wim.management.navigationElement.groups" wscRole="administrator,iscadmins">
+    <navigation:title>
+      <base:nls-ref key="manageGroups" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+    </navigation:title>
+    <navigation:parentTree parentTreeRef="com.ibm.wim.management.navigationElement.WIM"/>
+  </navigation:nav-element>
+</navigation:navigation-tree>

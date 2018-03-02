@@ -1,0 +1,304 @@
+{
+   "report": "analysis",
+   "version": "1.1",
+   "totalRulesFlagged": 8,
+   "filesAffected": 18,
+   "totalResults": 22,
+   "options": [
+      "--sourceAppServer=was70",
+      "--sourceJava=ibm5",
+      "--targetAppServer=was90",
+      "--targetJava=ibm8",
+      "--targetJavaEE=ee7",
+      "--targetCloud=wasVM",
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "severitySummary": [
+      {
+         "severity": "Severe",
+         "totalRulesFlagged": 2,
+         "totalResults": 4
+      },
+      {
+         "severity": "Warning",
+         "totalRulesFlagged": 5,
+         "totalResults": 16
+      },
+      {
+         "severity": "Information",
+         "totalRulesFlagged": 1,
+         "totalResults": 2
+      }
+   ],
+   "applications": [
+      "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear"
+   ],
+   "rules": [
+      {
+         "ruleName": "Behavior change in rounding in NumberFormat and DecimalFormat format methods",
+         "severity": "Information",
+         "category": "Java SE version migration / Java SE 8 compatibility impacts",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/runner/BaseTestRunner.class",
+               "details": [
+                  {
+                     "reference": "Method elapsedTimeAsString",
+                     "match": "java.text.NumberFormat.format(double)",
+                     "lineNumber": 147
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/textui/ResultPrinter.class",
+               "details": [
+                  {
+                     "reference": "Method elapsedTimeAsString",
+                     "match": "java.text.NumberFormat.format(double)",
+                     "lineNumber": 102
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "CDI scans for implicit beans when there is no beans.xml file",
+         "severity": "Warning",
+         "category": "Java EE 7 / CDI",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/dbunit-2.2.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junitee.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war/dojo/util/shrinksafe/js.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war/dojo/util/shrinksafe/shrinksafe.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/lib/JSON4J.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Databases",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar/META-INF/persistence.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "jta-data-source=jdbc/orderds",
+                     "lineNumber": 5
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Disable the persistence unit second-level cache",
+         "severity": "Severe",
+         "category": "Java EE 7 / OpenJPA to EclipseLink JPA",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar/META-INF/persistence.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "persistence-unit",
+                     "lineNumber": 3
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Do not start unmanaged threads within the web or EJB container",
+         "severity": "Warning",
+         "category": "All application servers",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/awtui/TestRunner.class",
+               "details": [
+                  {
+                     "reference": "Method runSuite",
+                     "match": "java.lang.Thread.start(*)",
+                     "lineNumber": 512
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/extensions/ActiveTestSuite.class",
+               "details": [
+                  {
+                     "reference": "Method runTest",
+                     "match": "java.lang.Thread.start(*)",
+                     "lineNumber": 49
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/swingui/TestRunner.class",
+               "details": [
+                  {
+                     "reference": "Method doRunTest",
+                     "match": "java.lang.Thread.start(*)",
+                     "lineNumber": 719
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Java EE security",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/web.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "security-constraint",
+                     "lineNumber": 21
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war/WEB-INF/web.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "security-constraint",
+                     "lineNumber": 27
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Mapping files are not processed during OpenJPA to EclipseLink migration",
+         "severity": "Warning",
+         "category": "Java EE 7 / OpenJPA to EclipseLink JPA",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar/META-INF/orm.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "entity-mappings",
+                     "lineNumber": 2
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "OpenJPA and WebSphere JPA configuration properties must be migrated",
+         "severity": "Severe",
+         "category": "Java EE 7 / OpenJPA to EclipseLink JPA",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar/META-INF/persistence.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "property.name=openjpa.MaxFetchDepth",
+                     "lineNumber": 16
+                  },
+                  {
+                     "reference": null,
+                     "match": "property.name=openjpa.jdbc.DBDictionary",
+                     "lineNumber": 19
+                  },
+                  {
+                     "reference": null,
+                     "match": "property.name=openjpa.jdbc.MappingDefaults",
+                     "lineNumber": 17
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Begin Copyright
+
+  Licensed Materials - Property of IBM
+
+  Virtual Member Manager
+
+  (C) Copyright IBM Corp. 2005 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+  %Z% %W% %I% %E% %U%
+
+  End Copyright
+-->
+<xsd:schema xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns="http://www.ibm.com/websphere/wim" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ecore:nsPrefix="wim" ecore:package="com.ibm.websphere.wim.model" targetNamespace="http://www.ibm.com/websphere/wim" version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:element name="schema" type="SchemaType"/>
+
+	
+
+  <xsd:complexType name="SchemaType">
+    <xsd:sequence>
+      <xsd:element name="entitySchema" type="EntitySchemaType" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="propertySchema" type="PropertySchemaType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="extensionPropertySchema" type="PropertySchemaType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="propertyDataTypes" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ModelSchemaType">
+    <xsd:sequence>
+      <xsd:element name="repositoryIds" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="nsURI" type="xsd:anyURI" use="required"/>
+    <xsd:attribute name="nsPrefix" type="xsd:token"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="EntitySchemaType">
+    <xsd:complexContent>
+      <xsd:extension base="ModelSchemaType">
+        <xsd:sequence>
+          <xsd:element name="properties" minOccurs="0" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="metaData" type="MetaDataType" minOccurs="0" maxOccurs="unbounded"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:token"/>
+              <xsd:attribute name="multiValued" type="xsd:boolean" default="false"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="entityConfiguration" type="EntityConfigurationType" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute name="entityName" type="xsd:token" use="required"/>
+        <xsd:attribute name="parentEntityName" type="xsd:token" use="required" />
+      </xsd:extension>
+
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="PropertySchemaType">
+    <xsd:complexContent>
+      <xsd:extension base="ModelSchemaType">
+        <xsd:sequence>
+          <xsd:element name="applicableEntityTypeNames" type="xsd:token" minOccurs="1" maxOccurs="unbounded"/>
+          <xsd:element name="requiredEntityTypeNames" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="metaData" type="MetaDataType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="propertyName" type="xsd:token" use="required"/>
+        <xsd:attribute name="multiValued" type="xsd:boolean" use="required"/>
+        <xsd:attribute name="dataType" type="xsd:token" use="required"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="MetaDataType">
+    <xsd:sequence>
+      <xsd:element name="values" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:token" use="required"/>
+    <xsd:attribute name="repositoryId" type="xsd:token"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="EntityConfigurationType">
+    <xsd:sequence>
+      <xsd:element name="actionNotAllow" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:attribute name="actionName" type="xsd:token" use="required"/>
+          <xsd:attribute name="repositoryId" type="xsd:token"/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="metaData" type="MetaDataType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="defaultParent" type="xsd:string" use="required"/>
+    <xsd:attribute name="rdnProperty" type="xsd:string" use="required"/>
+  </xsd:complexType>
+	
+
+</xsd:schema>

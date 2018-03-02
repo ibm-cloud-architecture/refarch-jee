@@ -1,0 +1,200 @@
+{
+   "report": "analysis",
+   "version": "1.1",
+   "totalRulesFlagged": 6,
+   "filesAffected": 13,
+   "totalResults": 13,
+   "options": [
+      "--sourceAppServer=was70",
+      "--sourceJava=ibm5",
+      "--targetAppServer=was90",
+      "--targetJava=ibm8",
+      "--targetJavaEE=ee7",
+      "--targetCloud=wasVM",
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "severitySummary": [
+      {
+         "severity": "Warning",
+         "totalRulesFlagged": 6,
+         "totalResults": 13
+      }
+   ],
+   "applications": [
+      "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear"
+   ],
+   "rules": [
+      {
+         "ruleName": "CDI scans for implicit beans when there is no beans.xml file",
+         "severity": "Warning",
+         "category": "Java EE 7 / CDI",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/lib/WsaEJBDeployUtility.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication_src.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "DefaultApplication.ear/Increment_src.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "DefaultApplication.ear/WsaEJBDeployUtility.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Databases",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar/com/ibm/defaultapplication/websphere_deploy/DERBY_V100_1/IncrementBeanFunctionSet_501bb55e.class",
+               "details": [
+                  {
+                     "reference": "Method Create - Catch exception",
+                     "match": "java.sql",
+                     "lineNumber": 0
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Java EE security",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/classes/SnoopServlet.class",
+               "details": [
+                  {
+                     "reference": "Method doGet",
+                     "match": "javax.servlet.http.HttpServletRequest.getUserPrincipal(*)",
+                     "lineNumber": 137
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Remote EJB lookups",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud (not Liberty Core)",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/web.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "home",
+                     "lineNumber": 71
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Remote EJB providers",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud (not Liberty Core)",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/lib/WsaEJBDeployUtility.jar/com/ibm/defaultapplication/_IncrementHome_Stub.class",
+               "details": [
+                  {
+                     "reference": "Method getEJBMetaData",
+                     "match": "javax.ejb.EJBHome",
+                     "lineNumber": 158
+                  }
+               ]
+            },
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar/com/ibm/defaultapplication/EJSCMPIncrementHomeBean_501bb55e.class",
+               "details": [
+                  {
+                     "reference": "Method create",
+                     "match": "javax.ejb.EJBObject",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "DefaultApplication.ear/WsaEJBDeployUtility.jar/com/ibm/defaultapplication/_IncrementHome_Stub.class",
+               "details": [
+                  {
+                     "reference": "Method getEJBMetaData",
+                     "match": "javax.ejb.EJBHome",
+                     "lineNumber": 158
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "The optional Java EE 7 technology Enterprise JavaBeans (EJB) entity beans is deprecated",
+         "severity": "Warning",
+         "category": "WebSphere version migration / Deprecated in V9.0",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar/META-INF/ejb-jar.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "entity",
+                     "lineNumber": 7
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

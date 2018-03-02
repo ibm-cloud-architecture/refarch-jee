@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationext:ApplicationExtension xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:applicationext="applicationext.xmi" xmlns:application="application.xmi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="Application_ID_Ext" sharedSessionContext="false">
+  <moduleExtensions xmi:type="applicationext:EjbModuleExtension" xmi:id="EjbModule_1_Ext" altRoot="ALT-INF/Increment.jar">
+    <module xmi:type="application:EjbModule" href="META-INF/application.xml#EjbModule_1"/>
+  </moduleExtensions>
+  <moduleExtensions xmi:type="applicationext:WebModuleExtension" xmi:id="WebModule_1_Ext" altRoot="ALT-INF/DefaultWebApplication.war">
+    <module xmi:type="application:WebModule" href="META-INF/application.xml#WebModule_1"/>
+  </moduleExtensions>
+  <application href="META-INF/application.xml#Application_ID"/>
+</applicationext:ApplicationExtension>

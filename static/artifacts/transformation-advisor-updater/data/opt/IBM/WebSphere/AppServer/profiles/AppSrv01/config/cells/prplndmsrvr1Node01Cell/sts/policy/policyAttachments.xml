@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<psa:PolicySetAttachment xmlns:psa="http://www.ibm.com/xmlns/prod/websphere/200605/policysetattachment" xmlns:ps="http://www.ibm.com/xmlns/prod/websphere/200605/policyset">
+    <psa:PolicySetReference name="TrustServiceSymmetricDefault" id="1">
+        <psa:PolicySetBinding name="TrustServiceSymmetricDefault">
+        </psa:PolicySetBinding>
+        <psa:Resource pattern="Trust.cancel:/">
+        </psa:Resource>       
+    </psa:PolicySetReference>
+    <psa:PolicySetReference name="TrustServiceSecurityDefault" id="2">
+        <psa:PolicySetBinding name="TrustServiceSecurityDefault">
+        </psa:PolicySetBinding>
+        <psa:Resource pattern="Trust.issue:/">
+        </psa:Resource>
+    </psa:PolicySetReference>
+    <psa:PolicySetReference name="TrustServiceSecurityDefault" id="3">
+        <psa:PolicySetBinding name="TrustServiceSecurityDefault">
+        </psa:PolicySetBinding>
+        <psa:Resource pattern="Trust.renew:/">
+        </psa:Resource>
+    </psa:PolicySetReference>
+    <psa:PolicySetReference name="TrustServiceSymmetricDefault" id="4">
+        <psa:PolicySetBinding name="TrustServiceSymmetricDefault">
+        </psa:PolicySetBinding>
+        <psa:Resource pattern="Trust.validate:/">
+        </psa:Resource>
+    </psa:PolicySetReference>
+</psa:PolicySetAttachment>

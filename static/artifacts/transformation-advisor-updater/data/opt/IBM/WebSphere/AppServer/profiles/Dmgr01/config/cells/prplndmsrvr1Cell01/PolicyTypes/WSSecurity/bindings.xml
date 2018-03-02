@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<securityBindings xmlns="http://www.ibm.com/xmlns/prod/websphere/200608/ws-securitybinding">
+<securityBinding name="application">
+
+  <securityOutboundBindingConfig>
+    
+    <signingInfo order="1" name="asymmetric-signingInfoResponse">
+      <signingPartReference>
+        <transform  algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+      </signingPartReference>
+      <signingKeyInfo reference="gen_signkeyinfo" />
+    </signingInfo>
+    <keyInfo type="STRREF" name="gen_signkeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentGenerator">
+      <tokenReference reference="gen_signx509token" />
+    </keyInfo>
+    <!-- Default Binding for X509Token -->
+    <tokenGenerator name="gen_signx509token" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator">
+      <valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" uri="" />
+      <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.X509GenerateCallbackHandler">
+          <key alias="soapprovider" keypass="{xor}LDotKTot" name="CN=SOAPProvider, OU=TRL, O=IBM, ST=Kanagawa, C=JP"/>
+          <keyStore storepass="{xor}LDotKTot" path="${USER_INSTALL_ROOT}/etc/ws-security/samples/dsig-receiver.ks" type="JKS"/>
+      </callbackHandler>
+      <jAASConfig configName="system.wss.generate.x509"/>
+    </tokenGenerator>
+    <!-- Default Binding for UsernameToken -->
+    <tokenGenerator name="gen_signunametoken" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator">
+      <valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#UsernameToken" uri="" />
+      <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.UNTGenerateCallbackHandler">
+        <properties name="com.ibm.wsspi.wssecurity.token.username.addNonce" value="true"/>
+        <properties name="com.ibm.wsspi.wssecurity.token.username.addTimestamp" value="true"/>
+      </callbackHandler>
+      <jAASConfig configName="system.wss.generate.unt"/>
+    </tokenGenerator>
+    <!-- Default Binding for LTPAToken -->
+    <tokenGenerator name="gen_signltpatoken" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator">
+      <valueType localName="LTPA" uri="http://www.ibm.com/websphere/appserver/tokentype/5.0.2" />
+      <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.LTPAGenerateCallbackHandler">
+      </callbackHandler>
+      <jAASConfig configName="system.wss.generate.ltpa"/>
+    </tokenGenerator>
+    <!-- Default Binding for LTPA_PropogationToken -->
+    <tokenGenerator name="gen_signltpaproptoken" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator">
+      <valueType localName="LTPA_PROPAGATION" uri="http://www.ibm.com/websphere/appserver/tokentype" />
+      <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.LTPAGenerateCallbackHandler">
+      </callbackHandler>
+      <jAASConfig configName="system.wss.generate.ltpaProp"/>
+    </tokenGenerator>
+
+    <signingInfo order="2" name="symmetric-signingInfoResponse">
+      <signingPartReference>
+        <transform  algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+      </signingPartReference>
+      <signingKeyInfo reference="gen_signsctkeyinfo" />
+    </signingInfo>
+    <keyInfo type="STRREF" name="gen_signsctkeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentGenerator">
+      <tokenReference reference="gen_signscttoken" />
+    </keyInfo>
+    <tokenGenerator name="gen_signscttoken" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator">
+      <valueType localName="http://schemas.xmlsoap.org/ws/2005/02/sc/sct" uri="" />
+      <callbackHandler classname="com.ibm.ws.wssecurity.impl.auth.callback.WSTrustCallbackHandler"/>
+      <properties name="com.ibm.ws.wssecurity.sc.dkt.ServiceLabel" value="WS-SecureConversation"/>
+      <properties name="com.ibm.ws.wssecurity.sc.dkt.ClientLabel" value="WS-SecureConversation"/>
+      <jAASConfig configName="system.wss.generate.sct"/>
+    </tokenGenerator>
+
+
+    <encryptionInfo order="3" name="asymmetric-encryptionInfoResponse">
+      <keyEncryptionKeyInfo reference="gen_enckeyinfo" />
+      <encryptionPartReference/>
+    </encryptionInfo>
+    <keyInfo type="KEYID" name="gen_enckeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentGenerator">
+      <tokenReference reference="gen_encx509token" />
+    </keyInfo>
+    <tokenGenerator name="gen_encx509token" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator">
+       <valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" uri="" />
+       <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.X509GenerateCallbackHandler">
+        <key alias="alice" keypass="{xor}" name="CN=Alice, O=IBM, C=US"/>
+        <keyStore storepass="{xor}LCswLTovPiws" path="${USER_INSTALL_ROOT}/etc/ws-security/samples/enc-receiver.jceks" type="JCEKS"/>
+      </callbackHandler>
+      <jAASConfig configName="system.wss.generate.x509"/>
+    </tokenGenerator>
+
+    <encryptionInfo order="4" name="symmetric-encryptionInfoResponse">
+    <encryptionPartReference>
+      <dataEncryptionKeyInfo reference="gen_encsctkeyinfo" />
+    </encryptionPartReference>     
+    </encryptionInfo>
+    <keyInfo type="STRREF" name="gen_encsctkeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentGenerator">
+      <tokenReference reference="gen_encscttgen" />
+    </keyInfo>
+    <tokenGenerator name="gen_encscttgen" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator">
+      <valueType localName="http://schemas.xmlsoap.org/ws/2005/02/sc/sct" uri="" />
+      <callbackHandler classname="com.ibm.ws.wssecurity.impl.auth.callback.WSTrustCallbackHandler">
+      </callbackHandler>
+     <properties name="com.ibm.ws.wssecurity.sc.dkt.ServiceLabel" value="WS-SecureConversation"/>
+     <properties name="com.ibm.ws.wssecurity.sc.dkt.ClientLabel" value="WS-SecureConversation"/>
+     <jAASConfig configName="system.wss.generate.sct"/>
+    </tokenGenerator>
+
+
+  </securityOutboundBindingConfig>
+
+  <securityInboundBindingConfig> 
+    
+    <encryptionInfo name="asymmetric-encryptionInfoRequest">
+      <keyEncryptionKeyInfo reference="dec_keyinfo" />
+      <encryptionPartReference/>
+    </encryptionInfo>
+    <keyInfo name="dec_keyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentConsumer">
+      <tokenReference reference="con_encx509token" />
+    </keyInfo>
+    <tokenConsumer classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer" name="con_encx509token">
+      <valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" uri="" />
+      <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.X509ConsumeCallbackHandler">
+        <key alias="bob" keypass="{xor}NDomLz4sLA==" name="CN=Bob, O=IBM, C=US"/>
+        <keyStore storepass="{xor}LCswLTovPiws" path="${USER_INSTALL_ROOT}//etc/ws-security/samples/enc-receiver.jceks" type="JCEKS"/>
+        <certPathSettings>
+          <trustAnyCertificate/>
+        </certPathSettings>
+      </callbackHandler>
+      <jAASConfig configName="system.wss.consume.x509"/>
+    </tokenConsumer>
+    
+    <encryptionInfo name="symmetric-encryptionInfoRequest">
+    <encryptionPartReference>
+      <dataEncryptionKeyInfo reference="dec_sctkeyinfo" />
+    </encryptionPartReference>     
+    </encryptionInfo>
+    <keyInfo name="dec_sctkeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentConsumer">
+      <tokenReference reference="con_encscttgen" />
+    </keyInfo>
+    <tokenConsumer classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer" name="con_encscttgen">
+      <valueType localName="http://schemas.xmlsoap.org/ws/2005/02/sc/sct" uri="" />
+      <callbackHandler classname="com.ibm.ws.wssecurity.impl.auth.callback.SCTConsumeCallbackHandler">
+      </callbackHandler>
+     <properties name="com.ibm.ws.wssecurity.sc.dkt.ServiceLabel" value="WS-SecureConversation"/>
+     <properties name="com.ibm.ws.wssecurity.sc.dkt.ClientLabel" value="WS-SecureConversation"/>
+     <jAASConfig configName="system.wss.consume.sct"/>
+    </tokenConsumer>
+    
+    
+    <signingInfo name="asymmetric-signingInfoRequest">
+      <signingPartReference>
+        <transform  algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+      </signingPartReference>
+      <signingKeyInfo reference="con_signkeyinfo" />
+    </signingInfo>
+    <keyInfo name="con_signkeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentConsumer">
+      <tokenReference reference="con_signx509token" />
+    </keyInfo>
+    <tokenConsumer classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer" name="con_signx509token">
+       <valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" uri="" />
+        <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.X509ConsumeCallbackHandler">
+          <certPathSettings>
+            <trustAnchorRef reference="DigSigTrustAnchor"/>
+            <certStoreRef reference="DigSigCertStore"/>
+          </certPathSettings>
+        </callbackHandler>
+        <jAASConfig configName="system.wss.consume.x509"/>
+    </tokenConsumer>
+    <trustAnchor name="DigSigTrustAnchor">
+       <keyStore storepass="{xor}LDotKTot" path="${USER_INSTALL_ROOT}/etc/ws-security/samples/dsig-receiver.ks" type="JKS"/>
+    </trustAnchor>
+    <certStoreList>
+        <collectionCertStores provider="IBMCertPath" name="DigSigCertStore">
+          <x509Certificates path="${USER_INSTALL_ROOT}/etc/ws-security/samples/intca2.cer"/>
+        </collectionCertStores>
+    </certStoreList>
+
+    <signingInfo name="symmetric-signingInfoRequest">
+      <signingPartReference>
+        <transform  algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+      </signingPartReference>
+      <signingKeyInfo reference="con_sctsignkeyinfo" />
+    </signingInfo>
+    <keyInfo name="con_sctsignkeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentConsumer">
+      <tokenReference reference="con_signscttoken" />
+    </keyInfo>
+    <tokenConsumer classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer" name="con_signscttoken">
+      <valueType localName="http://schemas.xmlsoap.org/ws/2005/02/sc/sct" uri="" />
+      <callbackHandler classname="com.ibm.ws.wssecurity.impl.auth.callback.SCTConsumeCallbackHandler">
+      </callbackHandler>
+     <properties name="com.ibm.ws.wssecurity.sc.dkt.ServiceLabel" value="WS-SecureConversation"/>
+     <properties name="com.ibm.ws.wssecurity.sc.dkt.ClientLabel" value="WS-SecureConversation"/>
+     <jAASConfig configName="system.wss.consume.sct"/>
+    </tokenConsumer>
+    <!-- Default Binding for UsernameToken -->
+    <tokenConsumer name="con_unametoken" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer">
+      <valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#UsernameToken" uri="" />
+      <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.UNTConsumeCallbackHandler">
+      <properties name="com.ibm.wsspi.wssecurity.token.username.verifyTimestamp" value="true"/>
+      <properties name="com.ibm.wsspi.wssecurity.token.username.verifyNonce" value="true"/>
+      </callbackHandler>
+      <jAASConfig configName="system.wss.consume.unt"/>
+    </tokenConsumer>
+
+   <!-- Default Binding for LTPAToken -->
+    <tokenConsumer name="con_ltpatoken" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer">
+      <valueType localName="LTPA" uri="http://www.ibm.com/websphere/appserver/tokentype/5.0.2" />
+      <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.LTPAConsumeCallbackHandler"/>
+      <jAASConfig configName="system.wss.consume.ltpa"/>
+    </tokenConsumer>
+
+   <!-- Default Binding for LTPA_PropagationToken -->
+    <tokenConsumer name="con_ltpaproptoken" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer">
+      <valueType localName="LTPA_PROPAGATION" uri="http://www.ibm.com/websphere/appserver/tokentype" />
+      <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.LTPAConsumeCallbackHandler"/>
+      <jAASConfig configName="system.wss.consume.ltpaProp"/>
+    </tokenConsumer>
+
+
+    
+  </securityInboundBindingConfig>
+
+ </securityBinding>
+</securityBindings>

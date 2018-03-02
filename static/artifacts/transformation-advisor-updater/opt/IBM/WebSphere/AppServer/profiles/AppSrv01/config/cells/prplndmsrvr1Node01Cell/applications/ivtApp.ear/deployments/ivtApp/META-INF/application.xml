@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application PUBLIC "-//Sun Microsystems, Inc.//DTD J2EE Application 1.2//EN" "http://java.sun.com/j2ee/dtds/application_1_2.dtd">
+<application id="Application_ID">
+      <display-name>IVT Application</display-name>
+      <description>IVT EAR file containing one WAR for verification purposes</description>
+      <module id="WebModule_1">
+         <web>
+            <web-uri>ivt_app.war</web-uri>
+            <context-root>/ivt</context-root>
+         </web>
+      </module>
+      <module id="EjbModule_1">
+         <ejb>ivtEJB.jar</ejb>
+      </module>
+      <security-role id="SecurityRole_1183122155328">
+         <description>All Authenticated users in the enterprise.</description>
+         <role-name>All Role</role-name>
+      </security-role>
+      <security-role id="SecurityRole_1183122155329">
+         <description>Everyone in the enterprise.</description>
+         <role-name>Everyone Role</role-name>
+      </security-role>
+      <security-role id="SecurityRole_1183122155330">
+         <description>Deny all access role</description>
+         <role-name>DenyAllRole</role-name>
+      </security-role>
+   </application>

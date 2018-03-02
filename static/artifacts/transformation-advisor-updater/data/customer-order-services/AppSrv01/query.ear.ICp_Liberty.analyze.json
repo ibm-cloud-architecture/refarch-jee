@@ -1,0 +1,138 @@
+{
+   "report": "analysis",
+   "version": "1.1",
+   "totalRulesFlagged": 5,
+   "filesAffected": 4,
+   "totalResults": 8,
+   "options": [
+      "--sourceAppServer=was70",
+      "--sourceJava=ibm5",
+      "--targetAppServer=liberty",
+      "--targetJava=ibm8",
+      "--targetJavaEE=ee6",
+      "--targetCloud=docker",
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "severitySummary": [
+      {
+         "severity": "Severe",
+         "totalRulesFlagged": 2,
+         "totalResults": 5
+      },
+      {
+         "severity": "Warning",
+         "totalRulesFlagged": 3,
+         "totalResults": 3
+      }
+   ],
+   "applications": [
+      "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/query.ear/query.ear"
+   ],
+   "rules": [
+      {
+         "ruleName": "Java EE security",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud",
+         "results": [
+            {
+               "fileName": "query.ear/querybean.jar/META-INF/ejb-jar.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "method-permission",
+                     "lineNumber": 17
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Remote EJB providers",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud (not Liberty Core)",
+         "results": [
+            {
+               "fileName": "query.ear/querybean.jar/com/ibm/ejs/container/_EJSWrapper_Stub.class",
+               "details": [
+                  {
+                     "reference": "Class implements",
+                     "match": "javax.ejb.EJBObject",
+                     "lineNumber": 0
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "The WebSphere EJB Query API is unavailable",
+         "severity": "Severe",
+         "category": "WebSphere traditional to Liberty",
+         "results": [
+            {
+               "fileName": "query.ear/querybean.jar/META-INF/ejb-jar.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "home=com.ibm.websphere.ejbquery.QueryHome",
+                     "lineNumber": 7
+                  },
+                  {
+                     "reference": null,
+                     "match": "remote=com.ibm.websphere.ejbquery.Query",
+                     "lineNumber": 8
+                  }
+               ]
+            },
+            {
+               "fileName": "query.ear/querybean.jar/com/ibm/ObjectQuery/QueryTuple.class",
+               "details": [
+                  {
+                     "reference": "Constructor",
+                     "match": "com.ibm.websphere.ejbquery",
+                     "lineNumber": 90
+                  },
+                  {
+                     "reference": "Constructor",
+                     "match": "com.ibm.websphere.ejbquery",
+                     "lineNumber": 104
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Transaction propagation is not supported for Enterprise JavaBeans (EJB) remote interfaces",
+         "severity": "Severe",
+         "category": "Java Technology Support for Liberty",
+         "results": [
+            {
+               "fileName": "query.ear/querybean.jar/META-INF/ejb-jar.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "remote",
+                     "lineNumber": 8
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "User-defined EJB binding locations are ignored in Liberty",
+         "severity": "Warning",
+         "category": "WebSphere traditional to Liberty",
+         "results": [
+            {
+               "fileName": "query.ear/querybean.jar/META-INF/ibm-ejb-jar-bnd.xmi",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "ejbBindings.jndiName=com/ibm/websphere/ejbquery/Query",
+                     "lineNumber": 9
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

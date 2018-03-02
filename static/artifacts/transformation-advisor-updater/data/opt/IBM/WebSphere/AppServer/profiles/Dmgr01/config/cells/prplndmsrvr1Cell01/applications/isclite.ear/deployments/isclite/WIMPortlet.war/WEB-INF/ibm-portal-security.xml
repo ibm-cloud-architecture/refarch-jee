@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ibm-portal-security xmlns="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-security.xsd"
+  xmlns:base="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-topology.xsd ibm-portal-topology.xsd http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd ibm-portal-base.xsd http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-security.xsd">
+  
+    <application-role uniqueName="administrator">
+        <portal-role object-ref="com.ibm.wim.management.navigationElement.users" role-type="Privileged User"/>
+        <portal-role object-ref="com.ibm.wim.management.navigationElement.groups" role-type="Privileged User"/>
+        <portal-role object-ref="com.ibm.wim.management.appElement.users" role-type="Privileged User"/>
+        <portal-role object-ref="com.ibm.wim.management.appElement.groups" role-type="Privileged User"/>
+
+    </application-role>
+    
+    <application-role uniqueName="iscadmins">
+        <portal-role object-ref="com.ibm.wim.management.navigationElement.users" role-type="Privileged User"/>
+        <portal-role object-ref="com.ibm.wim.management.navigationElement.groups" role-type="Privileged User"/>
+        <portal-role object-ref="com.ibm.wim.management.appElement.users" role-type="Privileged User"/>
+        <portal-role object-ref="com.ibm.wim.management.appElement.groups" role-type="Privileged User"/>
+
+    </application-role>
+
+</ibm-portal-security>
+  
+

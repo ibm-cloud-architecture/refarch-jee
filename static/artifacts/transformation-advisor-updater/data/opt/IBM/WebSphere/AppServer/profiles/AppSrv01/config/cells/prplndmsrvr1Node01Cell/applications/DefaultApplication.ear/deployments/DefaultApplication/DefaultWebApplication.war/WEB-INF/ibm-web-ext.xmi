@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ibm.ejs.models.base.extensions.webappext:WebAppExtension xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com.ibm.ejs.models.base.extensions.webappext="webappext.xmi" xmi:id="WebApp_ID_Ext" reloadInterval="3" reloadingEnabled="true" fileServingEnabled="false" directoryBrowsingEnabled="false" serveServletsByClassnameEnabled="true" preCompileJSPs="false" autoRequestEncoding="false" autoResponseEncoding="false">
+  <webApp href="WEB-INF/web.xml#WebApp_ID"/>
+  <extendedServlets xmi:id="ServletExtension_1">
+    <extendedServlet href="WEB-INF/web.xml#Servlet_1"/>
+  </extendedServlets>
+  <extendedServlets xmi:id="ServletExtension_2">
+    <markupLanguages xmi:id="MarkupLanguage_1" name="HTML" mimeType="text/html" errorPage="Page_1" defaultPage="Page_2">
+      <pages xmi:id="Page_2" name="Hello.page" uri="/HelloHTML.jsp"/>
+      <pages xmi:id="Page_1" name="Error.page" uri="/HelloHTMLError.jsp"/>
+    </markupLanguages>
+    <markupLanguages xmi:id="MarkupLanguage_2" name="VXML" mimeType="text/x-vxml" errorPage="Page_3" defaultPage="Page_4">
+      <pages xmi:id="Page_4" name="Hello.page" uri="/HelloVXML.jsp"/>
+      <pages xmi:id="Page_3" name="Error.page" uri="/HelloVXMLError.jsp"/>
+    </markupLanguages>
+    <markupLanguages xmi:id="MarkupLanguage_3" name="WML" mimeType="vnd.wap.wml" errorPage="Page_5" defaultPage="Page_6">
+      <pages xmi:id="Page_6" name="Hello.page" uri="/HelloWML.jsp"/>
+      <pages xmi:id="Page_5" name="Error.page" uri="/HelloWMLError.jsp"/>
+    </markupLanguages>
+    <extendedServlet href="WEB-INF/web.xml#Servlet_2"/>
+  </extendedServlets>
+  <extendedServlets xmi:id="ServletExtension_3">
+    <extendedServlet href="WEB-INF/web.xml#Servlet_3"/>
+    <localTransaction xmi:id="LocalTransaction_1" unresolvedAction="Rollback"/>
+  </extendedServlets>
+  <jspAttributes xmi:id="JSPAttribute_1183122148015" name="reloadEnabled" value="true"/>
+  <jspAttributes xmi:id="JSPAttribute_1183122148016" name="reloadInterval" value="10"/>
+</com.ibm.ejs.models.base.extensions.webappext:WebAppExtension>

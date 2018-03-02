@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Application Evaluation Report</title>
+<meta name="description" content="Application Evaluation Report">
+<meta name="author" content="IBM WebSphere Application Server Migration Toolkit for Application Binaries">
+<style type="text/css">
+	html, body, div, iframe, h1, h2, h3, h4, p, a, em, sup,
+			b, center, table, tbody, tfoot, thead, tr, th, ul, td {
+			margin:0;
+			padding:0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		html {
+			font-size: 100%;
+		}
+
+		.rec-featureList {
+			list-style: disc inside;
+			margin-left: 20px;
+		}
+		
+
+		div.evaluate {
+			margin-bottom: 20px;
+		}
+
+		/* Table */
+		.inventory table, .analyze table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		
+		.inventory .utility-jar-contents table {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			border-collapse: separate;
+			border-spacing: 0;
+			table-layout: fixed;
+			page-break-inside: avoid;
+			width: 80%;
+		}
+        .inventory .utility-jar-contents th,
+        .inventory .utility-jar-contents td {
+            text-align: left;
+            width: 30%;
+        }
+        .inventory .utility-jar-contents th:first-child,
+        .inventory .utility-jar-contents td:first-child {
+            text-align: left;
+            vertical-align: top;
+            word-wrap: break-word;
+            width: 40%;
+        }
+    .inventory .duplicate-jar-contents table {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			border-collapse: separate;
+			border-spacing: 0;
+			table-layout: fixed;
+			page-break-inside: avoid;
+			width: 90%;
+	}
+
+	.inventory .duplicate-jar-contents td,
+	.inventory .duplicate-jar-contents th {
+		text-align: left;
+		vertical-align: top;
+		width: 35%;
+	}
+
+	.inventory .duplicate-jar-contents td:first-child,
+	.inventory .duplicate-jar-contents th:first-child {
+		text-align: left;
+		vertical-align: top;
+		width: 35%;
+	}
+
+        .inventory .conflicting-jar-contents table {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			border-collapse: separate;
+			border-spacing: 0;
+			table-layout: fixed;
+			page-break-inside: avoid;
+			width: 90%;
+	}
+
+	.inventory .conflicting-jar-contents td,
+	.inventory .conflicting-jar-contents th {
+		text-align: left;
+		vertical-align: top;
+		width: 35%;
+	}
+	
+	.inventory .shared-library-contents td,
+	.inventory .shared-library-contents th {
+		text-align: left;
+		vertical-align: top;
+		width: 20%;
+	}
+
+	.inventory .conflicting-jar-contents td:first-child,
+	.inventory .conflicting-jar-contents th:first-child {
+		text-align: left;
+		vertical-align: top;
+		width: 50%;
+	}
+	
+	.inventory .shared-library-contents td:last-child,
+	.inventory .shared-library-contents th:last-child {
+		text-align: left;
+		vertical-align: top;
+		width: 60%;
+	}
+	
+	.treeKey p {
+		text-align: center;
+		font-size: 12px;
+	}
+
+		 .rectangle {
+		  position: relative;
+		  display: inline-block;
+		  width: 20px;
+		  height: 10px;
+		  background: green;
+		  margin-left: 5px;
+		  margin-right: 3px;
+		}
+
+		.unused { background-color: #FF00FF; }
+		.missing { background-color: #008000; }
+		.websphere { background-color: #9855D4; }
+		.thirdparty { background-color: #FFA500; }
+		.javaee { background-color: #478DE4; }
+		.dup { background-color: #FF0000; }
+		
+		.evaluate table, .inventory table {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			border-collapse: separate;
+			border-spacing: 0;
+			table-layout: fixed;
+			page-break-inside: avoid;
+			width: 100%;
+		}
+		.evaluate table th, .evaluate table td,
+		.inventory table th, .inventory table td {
+			font-size: 1.1em;
+			line-height: 1.3em;
+			padding: 10px 10px;
+			width: 8%;
+		}
+		.evaluate table thead, .inventory table thead {
+			margin-top: 26px;
+		}
+		.evaluate table .highlight {
+			background: #d4f0ff;
+		}
+		.evaluate table .banner td {
+			font-size: 1em;
+			letter-spacing: 0.4px;
+			padding: 6px 6px 6px 10px;
+		}
+		.evaluate table th:first-child, .evaluate table td:first-child{
+			width: 18%;
+		}
+		
+		.inventory table th:first-child, .inventory table td:first-child{
+			width: 20%;
+			word-wrap: break-word;
+		}
+		
+		/* Table: thead */
+		.inventory table tr th {
+			font-weight: bold;
+			text-align: center;
+			vertical-align: bottom;
+		}
+		.evaluate table tr th {
+			font-weight: bold;
+			text-align: left;
+			vertical-align: bottom;
+		}
+		/* Table: tbody */
+		.inventory table tr,
+		.evaluate table tr {
+			text-align: center;
+		}
+		.inventory tr.alternate-row > td,
+		.inventory tr.alternate-row > th,
+		.evaluate tr.alternate-row > td {
+			background: #F6F6F6;
+		}
+		.evaluate table th {
+			border-right: 1px solid #D6D6D6;
+			border-top: 1px solid #D6D6D6;
+		}
+		.inventory table td,
+		.inventory table th,
+		.evaluate table td {
+			background: #fff;
+			border-right: 1px solid #D6D6D6;
+			border-top: 1px solid #D6D6D6;
+			vertical-align: middle;
+		}
+		.evaluate table td[colspan="9"] {
+	        background: #D6D6D6;
+	        color: #5A5A5A;
+	        font-weight: bold;
+	        text-transform: uppercase;
+    	}
+    	.inventory table td:first-child,
+		.inventory table th:first-child,
+		.evaluate table td:first-child {
+			text-align: left;
+			word-wrap: break-word;
+		}
+		.inventory table td:last-child,
+		.inventory table th:last-child,
+		.evaluate table td:last-child {
+			border-right: 0 none;
+		}
+
+		.evaluate table .checkmark {
+			font-size: large;
+			color: #00B4A0;
+	        font-weight: bold;
+		}
+		.disclaimer {
+			font-size: 0.8em;
+			margin: 10px 0;
+			text-align: center;
+		}
+
+		.footnotetech { padding-left: .25em;} 
+		.footnote { padding-right: .25em;} 
+
+		details,
+		nav {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ul {
+			list-style: none;
+		}
+		/*set initial value*/
+
+		body {
+			background: #ededed;
+			color: #333333;
+			font-size: 1em;
+			/** 16px **/
+			
+			font-family: "HelvRegularIBM", "Helvetica Neue", Arial, sans-serif;
+			padding-bottom: 22px;
+			position: relative;
+		}
+		/***
+					**
+					** Fonts
+					**
+					***/
+
+		h1 {
+			/* 28px % 16 */
+			
+			font-size: 1.75em;
+			font-weight: bold;
+		}
+		h1:first-of-type {
+			margin-top: 20px;
+		}
+		h2 {
+			color: #008571;
+			font-size: 1.3em;
+			font-weight: bold;
+		}
+		h3 {
+			font-size: 1.125em;
+			font-weight: bold;
+		}
+		h1,
+		h2,
+		h3,
+		h4,
+		p {
+			margin: 10px 0;
+		}
+		p,
+		a {
+			/* 14 (pixels) % 16 (pixels) */
+			
+			font-size: 0.875rem;
+		}
+		p > a {
+			font-size: 1em;
+		}
+		a {
+			color: #333;
+			text-decoration: none;
+		}
+		p b,
+		caption b {
+			font-weight: bold;
+		}
+		a:hover {
+			color: #4178BE;
+			text-decoration: underline;
+		}
+		
+		ul ul .feature-list {
+			padding-left: 20px;
+		}
+  		ul ul .feature {
+			padding-left: 40px;
+		}
+		
+		pre {
+            background: #dfe9e9;
+            font-family: "Courier New", Courier, monospace, sans-serif;
+            font-size: 0.8em;
+            line-height: 20px;
+            padding: 0 20px;
+            text-align: left;
+            overflow: auto;
+            width: 100%;
+        }
+		
+		.blueAnchor {
+			color: #4178BE;
+			text-decoration: underline;
+		}
+		
+		code {
+            color: #333;
+            font-family: "Courier New", Courier, monospace, sans-serif;
+            font-size: 0.875em;
+            text-align: left;
+        }
+		
+		.courier {
+			font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+		}
+		.bolden {
+			font-weight: bold;
+			font-family: "HelvNeueBold";
+		}
+		.bulletList {
+			font-size: 0.75em;
+			list-style: disc;
+			margin-left: 20px;
+			line-height: 1.75em;
+		}
+		.analyze .flash__numbers,
+		.inventory .flash__numbers {
+			font-family: "HelvBoldIBM", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, Roboto, sans-serif;
+			font-size: 2.75em;
+		}
+		
+		.analyze .shared ul,
+        .analyze .shared ol {
+            list-style: disc inside;
+            margin-left: 20px;
+        }
+
+        .analyze .shared li,
+        .analyze .shared li {
+            line-height: 1.8em;
+            margin: 5px 0;
+        }
+		/***
+					**
+					** Wrapper
+					**
+					***/
+		.archivePath {
+			word-wrap: break-word;
+		}
+		.wrapper {
+			position: relative;
+			margin-right: auto;
+			margin-left: auto;
+			width: 96%;
+			/* Holding outermost DIV */
+		}
+		.wrapper:nth-child(2) {
+			padding-bottom: 22px;
+		}
+		.clear {
+			clear: both;
+		}
+		.show {
+			display: block;
+		}
+		.hide {
+			display: none;
+		}
+		.inventory .wrapSummary {
+			position: relative;
+		}
+		.inventory .wrapSummary table {
+			width: 85%;
+		}
+		.wrapSummary canvas {
+			right: 0;
+			top: 0;
+		}
+		.fixedCanvas {
+			max-height: 400px;
+		}
+		.floating-box-narrow {
+			display: inline-block;
+			min-height: 400px;
+			width: 30%;
+		}
+		.floating-box-wide {
+			width: 69%;
+			display: inline-block;
+			min-height: 50px;
+    		overflow: auto;
+		}
+		.evaluate .floating-box-wider {
+			width: 100%;
+			display: inline-block;
+		}
+		.evaluate .floating-box {
+			width: 100%;
+			display: inline-block;
+		}
+		.inventory .floating-box-medium {
+			display: inline-block;
+			min-height: 200px;
+			width: 50%;
+		}
+		.performance-considerations {
+			width: 50%;
+		}
+		.performance-considerations-list-of-jars {
+			margin-top: 15px;
+		}
+		/***
+					**
+					** "Jump To" Navigation
+					**
+					***/
+
+		.nav-wrapper {
+			background-color: #fff;
+			position: absolute;
+			right: 0;
+			top: 0;
+			z-index: 5;
+		}
+		.fixed nav {
+			position: fixed;
+			right: 2%;
+			top: 0;
+		}
+		.fixed-in-bluemix nav {
+			position: fixed;
+			top: 52px;
+		}
+		.na-fixed nav {
+			position: relative;
+		}
+		.na-fixed #backToTopNav {
+			display: none;
+		}
+		.fixed-in-bluemix #backToTopNav,
+		.fixed #backToTopNav {
+			display: block;
+		}
+		/* Removing padding, margin and "list-style" from the "ul",
+					* and adding "position:relative" */
+
+		nav ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			position: relative;
+		}
+		/* Positioning the navigation items inline */
+
+		nav li {
+			background-color: #4178be;
+			color: #fff;
+			display: inline-block;
+		}
+		/* Styling the links */
+
+		nav a {
+			color: #fff;
+			display: block;
+			font-size: 0.9em;
+			min-width: 88px;
+			padding: 15px 60px 15px 10px;
+			position: relative;
+			text-align: right;
+			text-decoration: none;
+		}
+		nav a .scroll-bottom-caret {
+			position: absolute;
+			left: 80%;
+			top: 18px;
+		}
+		nav a .scroll-bottom-caret:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			border-top: 10px solid #fff;
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+		}
+		nav a .scroll-bottom-caret:after {
+			content: '';
+			position: absolute;
+			left: 4px;
+			top: 0;
+			border-top: 6px solid #4178be;
+			border-left: 6px solid transparent;
+			border-right: 6px solid transparent;
+		}
+		/* Background color change on Hover */
+
+		nav a:hover {
+			background-color: #4178be;
+			color: #fff;
+			text-decoration: none;
+		}
+		/* Hide Dropdowns by Default
+					* and giving it a position of absolute */
+
+		nav ul ul {
+			border: 1px solid #d6d6d6;
+			display: none;
+			max-height: 85vh;
+			overflow: auto;
+			position: absolute;
+			right: 0;
+			top: 100%;
+		}
+		/* Display Dropdowns on Hover */
+
+		nav ul li:hover > ul {
+			display: block;
+		}
+		/* Fisrt Tier Dropdown */
+
+		nav ul ul li {
+			background-color: #fff;
+			display: list-item;
+			float: none;
+			min-width: 400px;
+			position: relative;
+		}
+		nav ul ul a {
+			color: #000;
+			line-height: 18px;
+			padding: 9px 20px 9px 40px;
+			text-align: left;
+		}
+		nav ul ul .na-title {
+			font-weight: bold;
+			padding-left: 20px;
+		}
+		.consolidated nav ul ul .na-sub-title {
+            padding-left: 30px;
+        }
+		nav ul ul .na-sub-title {
+            font-weight: bold;
+            padding-left: 25px;
+        }
+        
+        nav ul ul .na-sub-sub-title {
+            padding-left: 50px;
+        }
+        
+		/***
+					**
+					** Fake Header
+					**
+					***/
+
+		.date-time {
+			margin-bottom: 5px;
+		}
+		.date-time + .courier {
+			margin-top: 5px;
+		}
+		.date-time .date {
+			margin-right: 10px;
+		}
+		.recap {
+			margin-top: 30px;
+		}
+		.recap ul {
+			overflow: hidden;
+		}
+		.inventory .recap li {
+			background: #fff;
+			display: block;
+			float: left;
+			margin: 10px;
+			padding: 10px 3px;
+			width: 11.5%;
+			min-height: 100px;
+			text-align: center;
+			word-wrap: break-word;
+		}
+		.analyze .recap li {
+            background: #fff;
+            display: block;
+			float: left;
+			margin: 10px;
+			padding: 10px 3px;
+			width: 14.5%;
+			min-height: 125px;
+			text-align: center;
+        }
+        .consolidated .recap-alternate li,
+		.inventory .recap-alternate li {
+			background: #ededed;
+			display: block;
+			float: left;
+			margin: 10px;
+			padding: 10px 3px;
+			width: 14.5%;
+			min-height: 125px;
+			max-height: 125px;
+			text-align: center;
+		}
+		.recap li:first-child {
+			margin-left: 0;
+		}
+		
+		.analyze > .wrapper > .recap li:last-child {
+            background: transparent;
+            margin-right: 0;
+            padding: 0;
+            text-align: left;
+            min-width: 49.5%;
+            max-width: 49.5%;
+        }
+        
+        .analyze > .wrapper > .recap li:last-child p {
+            font-size: 0.8em;
+            margin: 5px 0 20px;
+            line-height: 1.3em;
+        }
+
+		/***
+		**
+		** Header Sections and Expand/Collapse All
+		**
+		***/
+		.header-sections {
+			margin-top: 30px;
+			overflow: hidden;
+		}
+		.consolidated-header-sections {
+			overflow: hidden;
+		}
+		.consolidated-header-sections h2 {
+			margin-top: 0px;
+		}
+		.header-sections h2,
+		.consolidated-header-sections h2,
+		.expand-collapse-holder,
+		.expand-collapse-holder a {
+			display: inline-block;
+		}
+		.analyze .header-sections h2,
+		.inventory .header-sections h2,
+		.analyze .expand-collapse-holder,
+		.inventory .expand-collapse-holder {
+			line-height: 42px;
+		}
+		.analyze .header-sections h2,
+		.inventory .header-sections h2,
+		.analyze .expand-collapse-holder a,
+		.inventory .expand-collapse-holder a {
+			float: left;
+		}
+		.analyze .header-sections h2,
+		.inventory .header-sections h2 {
+			margin-top: 0;
+		}
+
+		/***
+		**
+		** Expand/Collapse All
+		**
+		***/
+		.expand-collapse-holder {
+			float: right;
+			margin-top: 4px;
+			margin-bottom: 4px;
+		}
+		.expand-collapse-holder a {
+			border-right: 1px solid #000;
+			color: #4178BE;
+			line-height: 12px;
+			margin-right: 0;
+			padding: 5px 15px 10px;
+		}
+		.expand-collapse-holder a:last-child {
+			border-right: 0 none;
+		}
+		.expand-collapse-holder .disabled {
+			color: #333;
+			cursor: default;
+			opacity: 0.5;
+			pointer-events: none;
+		}
+		
+		/***
+        **
+        ** Detailed Results by Rule: List of Rules
+        **
+        ***/
+        .detailed-results-title {
+			color: #008571;
+		}
+		
+		.consolidated .detailed-results-by-severity { 
+			padding: 0px;
+		}
+		
+		.detailed-results-by-severity { 
+			padding: 20px;
+			background: #fff;
+		}
+        
+        .consolidated .detailed-results-by-rule {
+        	margin-left: 0px;
+        }
+        
+        .detailed-results-by-rule { 
+			padding-bottom: 0;
+			margin-left: 5px;
+			padding-top: 10px;
+			background: #ededed;
+		}
+
+        .rule {
+            background: #fff;
+            margin-bottom: 40px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .rules {
+            margin: 10px;
+            padding: 15px;
+            width: 95%;
+        }
+
+        .rule:last-child { margin-bottom: 0; }
+
+        .rule-title h3, { display: inline-block; }
+
+        .rule-title h3 {
+            margin: 0;
+            line-height: 22px;
+            width: 70%;
+        }
+
+		.rule-title h3 em {
+            font-size: 0.8em;
+        	font-weight: normal;
+        }
+		
+		/* Tree charts
+		*/
+		.trees {
+		    border-bottom: 3px solid #D6D6D6;
+		    border-top: 3px solid #D6D6D6;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            padding-bottom: 5px;
+
+            overflow: auto;
+		}
+		
+		.horizontal-breaks {
+		    border-top: 3px solid #D6D6D6;
+            		margin-bottom: 15px;
+            		margin-top: 15px;
+            		padding-top: 10px;
+		}
+		
+		/***
+		**
+		** Inventory Details by Application: List of Application/Archives
+		**
+		***/
+
+		.inventory .inventory-details-by-app {
+			padding-bottom: 22px;
+		}
+		.archive {
+			background: #fff;
+			margin-bottom: 40px;
+			padding: 20px;
+			position: relative;
+		}
+		.problemSummary {
+			background: #fff;
+			margin-bottom: 40px;
+			padding: 20px;
+			position: relative;
+		}
+		.archive:last-child {
+			margin-bottom: 0;
+		}
+		.archive-title h3 {
+			display: inline-block;
+		}
+		.archive-title h3 {
+			margin: 0;
+			line-height: 22px;
+			width: 70%;
+		}
+		.archive-title h3 span {
+			font-size: 0.8em;
+			font-weight: normal;
+		}
+		.js-toggle-actions {
+			display: inline-block;
+			position: absolute;
+			text-align: center;
+			top: 19px;
+			right: 20px;
+		}
+		.js-toggle-actions a {
+			color: #4178BE;
+			display: inline-block;
+			float: left;
+			padding: 5px 10px;
+		}
+		.js-toggle-actions a:last-child {
+			/*border-left: 1px solid #333;*/
+		}
+		
+		/***
+        **
+        ** Rule Fix
+        **
+        ***/
+        .rule-fix,            
+        .rule-result { margin-top: 20px; }
+
+        .rule-fix h3,
+        .rule-additional-help h3,        
+        .rule-result h3 { margin-bottom: 20px; }
+
+        .rule-fix p,
+        .rule-additional-help p,        
+        .rule-result p { line-height: 1.5em; }
+
+        .rule-fix a,
+        .rule-additional-help a        
+        {
+            color: #4178BE;
+            text-decoration: underline;
+        }
+
+        .rule-fix        
+        {
+            border-bottom: 3px solid #D6D6D6;
+            margin-bottom: 30px;
+            margin-top: 30px;
+            padding-bottom: 20px;
+
+            max-height: 400px;
+            overflow: auto;
+        }
+        
+        .rule-additional-help {
+        	background-color: #fff;
+        	padding-left: 20px;
+        	padding-bottom: 10px;
+        }    
+        
+        .rule-additional-help h3:first-child {
+        	padding-top: 10px;
+        }    
+        
+
+        .analyze .table-code { width: 100%; }
+
+        .rule-fix pre,
+        .rule-additional-help pre {
+            padding: 10px 0 10px 20px;
+            width: auto;
+            white-space: pre;
+            white-space: -moz-pre;
+            white-space: -pre;
+            white-space: -o-pre;
+            word-wrap: break-word;
+        }
+		
+		/***
+        **
+        ** Connectivity Summary
+        **
+        ***/
+        .consolidated .connectivity-summary {
+        	padding-top: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        
+        .connectivity-summary {
+            background: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .connectivity-summary table {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.8em;
+
+            border-collapse: separate;
+            border-spacing: 0;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .connectivity-summary table caption {
+            line-height: 1.4em;
+            padding-bottom: 20px;
+            text-align: left;
+        }
+
+        .connectivity-summary tr.summary {
+            background: #d4f0ff;
+        }
+
+        .connectivity-summary tr.hiddenRow {
+            display: none;
+            vertical-align: middle;
+            visibility: hidden;
+        }
+
+        .connectivity-summary tr.visibleRow {
+            vertical-align: middle;
+            visibility: visible;
+        }
+
+        .connectivity-summary tr.summary .col1summarymodule { 
+        	font-weight: bold; 
+        	word-break: break-all;
+        }
+
+       	.connectivity-summary tr.visibleRow .col1main { 
+       		padding-left: .2em;
+        	word-wrap: break-word;
+        }
+
+      	.connectivity-summary tr.visibleRow .col1child { 
+       		padding-left: .7em;
+        	word-wrap: break-word;
+        }
+
+       	.connectivity-summary tr.visibleRow .col1grandchild { 
+       		padding-left: 1.2em;
+        	word-wrap: break-word;
+        }
+
+		.connectivity-summary th,
+        .connectivity-summary td {
+            border-bottom: 1px solid #D6D6D6;
+            border-right: 1px solid #D6D6D6;
+            line-height: 1.2em;
+            text-align: center;
+            width: 8%;
+        }
+
+        .connectivity-summary th:first-child,
+        .connectivity-summary td:first-child,
+        .connectivity-summary .visibleRow td:first-child {
+            text-align: left;
+            width: 15%;
+        }
+
+        .connectivity-summary .summary td:first-child:hover { cursor: pointer; }
+
+        .connectivity-summary th:last-child,
+        .connectivity-summary td:last-child { border-right: 0 none; }
+
+        .connectivity-summary th {
+            color: #5A5A5A;
+            font-weight: bold;
+            padding: .5em;
+            vertical-align: bottom;
+        }
+
+        .connectivity-summary td { padding: .5em; }
+		
+		/***
+        **
+        ** Tables:
+        ** Rule Result Tables
+        **
+        ***/
+        .rule-result table {
+            font-family: Arial, Helvetica, sans-serif;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .rule-result tbody tr {
+            border-top: 1px solid #D6D6D6;
+        }
+
+        .rule-result tbody tr.results {
+            border-top: 0 none;
+        }
+
+        .rule-result th,
+        .rule-result td {
+            font-size: 0.875em;
+            line-height: 1.2em;
+            padding-bottom: 10px;
+            padding-left: 0;
+            padding-right: 10px;
+            padding-top: 10px;
+            text-align: left;
+            width: 23%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .rule-result tr.header-archive td[colspan="4"] {
+            padding-left: 5px;
+        	background-color: #ededed;
+        	font-weight: bold;
+        }
+        
+        .custom-colspan {
+        	background-color: #ededed;
+        	font-weight: bold;
+        }
+        
+        .custom-colspan td{
+        	padding-left: 5px;
+        }
+
+        .rule-result td.indentFileName {
+            padding-left: 15px;
+        }
+
+        .rule-result th:first-child,
+        .rule-result td:first-child {
+            width: 40%;
+        }
+
+ 		.rule-result th:last-child,
+		.rule-result td:last-child {
+			width: 10%;
+			text-align: right;
+		}
+		
+		.rule-result td[colspan="4"]{
+            text-align: left;
+		}
+		
+        .rule-result th {
+            color: #5A5A5A;
+            font-weight: bold;
+            padding-top: 0;
+            text-transform: uppercase;
+            vertical-align: bottom;
+        }
+
+        .rule-result td:first-child { padding-right: 30px; }
+        .rule-result td { vertical-align: top; }
+        
+        /***
+        **
+        ** Tables:
+        ** Rule Severity Summary Table
+        **
+        ***/
+        .rule-severity table {
+            font-family: Arial, Helvetica, sans-serif;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .rule-severity tbody tr {
+            border-top: 1px solid #D6D6D6;
+        }
+
+        .rule-severity th,
+        .rule-severity td {
+            font-size: 0.875em;
+            line-height: 1.2em;
+            padding-bottom: 10px;
+            padding-left: 0;
+            padding-right: 10px;
+            padding-top: 10px;
+            text-align: left;
+            width: 15%;
+            white-space: pre-wrap;
+            word-wrap: normal;
+        }
+        
+        .rule-severity th:first-child,
+        .rule-severity td:first-child {
+            text-align: center;
+			width: 10%;
+        }
+
+ 		.rule-severity th:last-child,
+		.rule-severity td:last-child {
+			width: 50%;
+			text-align: left;
+		}
+		
+		.rule-severity td.center,
+		.rule-severity th.center {
+            text-align: center;
+		}
+				
+		.rule-severity td.severity-label,
+		.rule-severity th.severity-label {
+			width: 10%;
+		}
+				
+        .rule-severity th {
+            color: #5A5A5A;
+            font-weight: bold;
+            padding-top: 0;
+            text-transform: uppercase;
+            vertical-align: bottom;
+        }
+
+        .rule-severity td { vertical-align: top; }
+
+        .rule-severity-summary {
+            background: #fff;
+            padding: 20px 20px 20px 20px;
+            position: relative;
+        }
+        
+        /***
+        **
+        ** Analyzed Rule Header
+        **
+        ***/
+        #jsRulesAnalyzedTitle {
+            margin-top: 22px;
+            position: relative;
+        }
+
+        .detailed-analysis-by-rule {
+            background: #fff;
+            padding: 20px 20px 50px 20px;
+            position: relative;
+        }
+
+        .detailed-analysis-by-rule.read-more {
+            height: auto;
+        }
+
+        .detailed-analysis-by-rule.read-less {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .detailed-read-more-button {
+            background-color: #F6F6F6;
+            /* IE10+ */
+            background-image: -ms-linear-gradient(top, #ffffff 0%, #F6F6F6 27%, #ededed 100%);
+            /* Mozilla Firefox */
+            background-image: -moz-linear-gradient(top, #ffffff 0%, #F6F6F6 27%, #ededed 100%);
+            /* Opera */
+            background-image: -o-linear-gradient(top, #ffffff 0%, #F6F6F6 27%, #ededed 100%);
+            /* Webkit (Safari/Chrome 10) */
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(27, #F6F6F6), color-stop(100, #ededed));
+            /* Webkit (Chrome 11+) */
+            background-image: -webkit-linear-gradient(top, #ffffff 0%, #F6F6F6 27%, #ededed 100%);
+            /* W3C Markup */
+            background-image: linear-gradient(to bottom, #ffffff 0%, #F6F6F6 27%, #ededed 100%);
+
+            bottom: 0;
+            color: #4178BE;
+            display: block;
+            height: 20px;
+            left: 0;
+            padding: 20px 0;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+        }
+
+        .detailed-analysis-by-rule h4,
+        .detailed-analysis-by-rule h5 { font-weight: bold; }
+
+        /***
+        **
+        ** Individual Analyzed Rule
+        **
+        ***/
+        .analyzed-rule h3,
+        .analyzed-rule h4,
+        .analyzed-rule h5 { margin-bottom: 15px; }
+
+        .analyzed-rule ul {
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+		
+		/***
+		**
+		** Archive Details
+		**
+		***/
+
+		.archive-details {
+			margin-bottom: 20px;
+			margin-top: 20px;
+			padding-bottom: 10px;
+		}
+		.inventory .archive-details h3 {
+			margin-bottom: 20px;
+		}
+		.cons-li-p,
+		.inventory .archive-details p {
+			line-height: 1.5em;
+		}
+		.inventory .archive-details a {
+			color: #4178BE;
+			text-decoration: underline;
+		}	
+		
+		/*
+					**
+					** Added Shake on 04/12/14
+					**
+					*/
+
+		@keyframes shake {
+			10%, 90% {
+				transform: translate3d(-1px, 0, 0);
+			}
+			20%,
+			80% {
+				transform: translate3d(2px, 0, 0);
+			}
+			30%,
+			50%,
+			70% {
+				transform: translate3d(-4px, 0, 0);
+			}
+			40%,
+			60% {
+				transform: translate3d(4px, 0, 0);
+			}
+		}
+		.shake {
+			-webkit-animation-name: animation;
+			-webkit-animation-duration: 2s;
+			-webkit-animation-timing-function: ease-in-out;
+			-webkit-animation-iteration-count: 1;
+			-webkit-animation-play-state: running;
+			animation-name: animation;
+			animation-duration: 2s;
+			animation-timing-function: ease-in-out;
+			animation-iteration-count: 1;
+			animation-play-state: running;
+			background-color: #fff;
+		}
+		@-webkit-keyframes animation {
+			100.0% {
+				background-color: #d4f0ff;
+			}
+			50.0% {
+				background-color: #e9f7ff;
+			}
+			0% {
+				background-color: #fff;
+			}
+		}
+		@keyframes animation {
+			100.0% {
+				background-color: #d4f0ff;
+			}
+			50.0% {
+				background-color: #e9f7ff;
+			}
+			0% {
+				background-color: #fff;
+			}
+		}
+		/*
+					.shake {
+					animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+					transform: translate3d(0, 0, 0);
+					backface-visibility: hidden;
+					perspective: 1000px;
+					}
+					*/
+
+		.is-paused {
+			animation-play-state: paused;
+		}
+		/*
+        **
+        ** End - Added Shake on 04/12/14
+        **
+        */
+        
+        .rule-fix table.borders,
+ 		.rule-additional-help table.borders {table-layout: auto;
+                width: auto;
+				border-collapse: collapse;
+				border: solid 2px gray;
+				border-spacing: 0;}
+ 		.rule-fix .borders td, 
+ 		.rule-additional-help .borders td, 
+ 		.rule-fix .borders th, 
+ 		.rule-additional-help .borders th, 
+ 		.rule-fix .borders tr, 
+ 		.rule-additional-help .borders tr, 
+ 		.rule-fix .borders thead,
+ 		.rule-additional-help .borders thead {table-layout: auto;
+                width: auto;
+				border-collapse: collapse;
+				border: solid 1px gray;
+				padding: 5px;
+  				vertical-align: text-top;}				
+ 		.rule-fix .borders thead.highlight,
+ 		.rule-additional-help .borders thead.highlight { background: #d4f0ff }
+ 		
+ 		.rule-fix ul {
+            list-style: disc outside;
+            margin-left: 20px;
+        }
+ 		
+ 		.rule-fix ol {
+            list-style: decimal outside;
+            margin-left: 20px;
+        }
+		 .circle {
+		  position: relative;
+		  display: inline-block;
+		  width: 28px;
+		  height: 0;
+		  padding: 14px 0;
+		  line-height: 0;
+		  border-radius: 50%;
+		  background: green;
+		  color: white;
+		  font-family: Times New Roman, Helvetica, Arial Black, sans;
+		  font-weight: bolder;
+		  font-size: 22px;
+		  text-align: center;
+		  margin-right: 5px;
+		}
+		
+		 .circle-small {
+		  position: relative;
+		  display: inline-block;
+		  width: 20px;
+		  height: 0;
+		  padding: 10px 0;
+		  line-height: 0;
+		  border-radius: 50%;
+		  background: green;
+		  color: white;
+		  font-family: Times New Roman, Helvetica, Arial Black, sans;
+		  font-weight: bolder;
+		  font-size: 14px;
+		  text-align: center;
+		  margin-right: 3px;
+		}
+
+		.rule-category { background-color: #4187be;
+						border-radius: 5px;
+						color: white;
+						font-size: 1em; 
+						padding: 3px 6px;
+						margin-left: 20px;
+		}
+		
+		.sev-info { background-color: #4187be; }
+		.sev-error { background-color: #FF5050; }
+		.sev-warn { background: #EFC100; color: #323232; }
+		
+		.sev-info:before { content: 'i'; }
+		.sev-warn:before { content: '!'; }
+		.sev-error:before { content: '\00D7'; }	
+		
+		.analyze table.code {table-layout: auto;
+                width: auto;
+				border-collapse: collapse;
+				border: solid 2px gray;
+				border-spacing: 0;
+				background-color: #F7F8F9;}
+		.analyze table.code td{table-layout: auto;
+                width: auto;
+				border-right: 1px;
+  				border-bottom: 1px;
+				border: solid 1px gray;
+				padding: 5px;}				
+
+		.analyze .Text 			{ } 
+		.analyze .Italic			{font-family: tahoma; font-size: 80%; font-style: italic}
+		.analyze .Strong			{font-family: tahoma; font-size: 80%; font-weight: bold}
+		.analyze .Header			{font-family: tahoma; font-size: 16px; color: black; font-weight: bold; }
+		.analyze .SubHeader		{font-size: 100%; color: black; font-weight: bold; }
+		.analyze .Code		    {font-family: monospace; color: black;  } 
+		.analyze .JavaType 		{font-family: tahoma; font-size: 80%; color: black; } 		
+		.analyze .JavaKeyword	{font-family: tahoma; font-size: 80%; color: #7F0055; font-weight: bold; } 		
+		.analyze .JavaConst 		{font-family: tahoma; font-size: 80%; color: #2A00FF; } 		
+		.analyze .JavaComment	{font-family: tahoma; font-size: 80%; color: #3F7F5F  } 		
+		.analyze .Javadoc		{font-family: tahoma; font-size: 80%; color: blue  } 		
+		.analyze .XmlDefinition	{font-family: tahoma; font-size: 80%; color: black; font-style: italic }
+		.analyze .XmlElement 	{font-family: tahoma; font-size: 80%; color: #3F7F7F; } 		
+		.analyze .XmlElementVal 	{font-family: tahoma; font-size: 80%; color: black }
+		.analyze .XmlAttr 		{font-family: tahoma; font-size: 80%; color: #7F007F } 		
+		.analyze .XmlAttrVal		{font-family: tahoma; font-size: 80%; color: #2A00FF; font-style: italic } 		
+
+
+		.analyze .indent 		{padding-left: 10px;}
+		.analyze .indent2 		{padding-left: 20px;}
+		.analyze .indent3 		{padding-left: 30px;}
+		.analyze .indent4 		{padding-left: 40px;}
+		.analyze .tableIndent1	{margin-left: 20px;}
+		.analyze .FilePath		{ font-style: italic; }
+		
+		
+		/*IBM Rave Tree styling*/
+		.node circle {
+			cursor: pointer;
+			fill: #fff;
+			stroke: steelblue;
+			stroke-width: 1.5px;
+		}
+		
+		.node text {
+			font-size: 14px;
+		}
+		
+		path.link {
+			fill: none;
+			stroke: #ccc;
+			stroke-width: 1.5px;
+		}
+		
+		.alternate {
+			background: #ededed;
+		}
+		
+		/***
+					**
+					** Print Styles
+					**
+					***/
+
+		@media print {
+			@page { margin-left: 0.5cm ;
+				margin-right: 0.5cm;
+				margin-top: 1.5cm;
+				margin-bottom: 1.5cm;
+			}
+			body, .evaluate table {
+				font-size: 0.8em;
+			}
+			.analyze a:link,
+			.inventory a:link,
+			.analyze a:visited,
+			.inventory a:visited {
+				color: #781351
+			}
+			.inventory h2, .inventory h3 {
+				page-break-after: avoid;
+			}
+			.evaluate table th, .evaluate table td {
+				padding: 5px;
+			}
+			.evaluate .highlight {
+				color: #008571;
+			}
+			.evaluate body {
+				-webkit-print-color-adjust: exact;
+				/** 16px **/
+			}
+			.evaluate .archive-title h3 {
+				page-break-before: always;
+				margin-bottom: 0;
+			}
+			.noprint,
+			.rule-title .js-toggle-actions,
+			.archive-title .js-toggle-actions {
+				display: none;
+			}
+			
+			.rule-fix.hide,
+            .rule-result.hide,
+            .detailed-analysis-by-rule.hide {
+                display: block;
+            }
+			
+			.archive-details.hide {
+				display: block;
+			}
+			.flash__numbers {
+				font-size: 2.75rem;
+			}
+			
+			.circle {
+            	border: 1px solid #000;
+		  		font-size: 14px;
+		  		width: 20px;
+		  		padding: 10px 0;
+            }
+
+            .rule-category {
+            	border: 1px solid #000;
+            }
+			
+			.inventory .wrapSummary {
+				page-break-inside: avoid;
+			}
+			.inventory .recap {
+				page-break-before: avoid;
+				page-break-inside: avoid;
+			}
+			.analyze .recap li, .inventory .recap li {
+				border: 1px solid #000;
+				margin: 5px;
+			}
+			.analyze > .wrapper > .recap li:last-child {
+                border: 0 none;
+            }
+			
+			.header-sections {
+				margin-top: 0;
+			}
+			.inventory .header-sections, .evaluate .header-sections {
+                page-break-after: avoid;
+            }
+            
+            .consolidated > .wrapper > ul > li > div.archive-title {
+            	border-top: 4px solid #000;
+            }
+            
+			.archive {
+				padding: 0;
+			}
+			.problemSummary {
+				padding: 0;
+			}
+			#inventoryDetailsByApp {
+				border-top: 4px solid #000;
+				padding-top: 22px;
+			}
+			.archive-details {
+				padding-left: 15px;
+				page-break-before: avoid;
+				margin-bottom: 10px;
+				margin-top: 10px;
+				padding-bottom: 10px;
+				height: auto;
+				max-height: none;
+			}
+			.archive-title {
+				page-break-after: avoid;
+			}
+			.evaluate .archive-title {
+				page-break-before: always;
+			}
+			.utility-jar-contents {
+				page-break-before: avoid;
+			}
+			
+			.connectivity-summary,
+            .rule {
+                padding: 0;
+            }
+
+            .connectivity-summary {
+                padding-bottom: 22px;
+            }
+
+            .connectivity-summary table tr.hiddenRow {
+                display: table-row;
+                vertical-align: middle;
+                visibility: visible;
+            }
+
+            .connectivity-summary table tr.summary td {
+                border-bottom: 4px solid #000;
+                border-top: 4px solid #000;
+            }
+
+            .connectivity-summary th,
+            .connectivity-summary td {
+                font-size: 10px;
+            }
+
+            .connectivity-summary th {
+                word-break: break-all;
+            }
+
+            .connectivity-summary td {
+                padding: 5px;
+            }
+
+            #detailResultsByRule {
+                border-top: 4px solid #000;
+                padding-top: 22px;
+            }
+
+         	#AdditionalHelpTitle {
+                border-top: 4px solid #000;
+                padding-top: 22px;
+            }
+
+            #jsRulesAnalyzedTitle {
+                border-top: 4px solid #000;
+                padding-top: 22px;
+            }
+
+            .rules li {
+                list-style: inside disc;
+                list-style: none;
+            }
+
+            .rule-fix,
+            .rule-additional-help,
+            .rule-result {
+                padding-left: 15px;
+            }
+
+            .rule-fix,
+            .rule-additional-help {
+                margin-bottom: 10px;
+                margin-top: 10px;
+                padding-bottom: 10px;
+                height: auto;
+                max-height: none;
+            }
+
+            .detailed-analysis-by-rule.read-less {
+                height: auto;
+                overflow: auto;
+                padding: 0;
+            }
+
+            .detailed-analysis-by-rule.read-less .detailed-read-more-button {
+                display: none;
+            }
+
+            /* Improve colour contrast of links */
+            .code-comparison-table td {
+                border-bottom: 1px solid #000;
+                border-right: 1px solid #000;
+                border-top: 1px solid #000;
+                width: auto;
+            }
+
+            .code-comparison-table td pre {
+                display: block;
+                margin: 0 auto;
+            }
+
+            .rule-fix pre {
+                border: 1px solid #000;
+                margin: 0 0 0 20px;
+                padding: 0 0 0 10px;
+                width: 95%;
+            }
+			
+			.inventory .wrapper:nth-child(2),
+			.evaluate .wrapper:nth-child(2) {
+				padding-bottom: 0;
+			}
+			.trees {
+            	height: auto;
+				width: auto;
+				max-height: none;
+				overflow: visible;
+			}
+			.floating-box-wide {
+				height: auto;
+				width: auto;
+				max-height: none;
+				overflow: visible;
+			}
+			.floating-box-wider {
+				height: auto;
+				width: auto;
+				max-height: none;
+				overflow: visible;
+			}
+			.evaluate .inventory-details-by-app {
+				page-break-before: always;
+			}
+			.evaluate table {
+				page-break-before: avoid;
+				margin-top: 1px;
+				border-left: 1px solid #D6D6D6;
+				border-right: 1px solid #D6D6D6;
+				border-bottom: 1px solid #D6D6D6;
+			}
+			.evaluate table th {
+				border-top: 1px solid #D6D6D6;
+			}
+			.evaluate table td[colspan="9"] {
+            	padding-left: 5px;
+        	}
+		}
+</style>
+</head>
+<body id="top" class="evaluate">
+<div id="wrapper" class="wrapper" role="main">
+<h1>Application Evaluation Report</h1>
+<p class="date-time"><span class="date">2/2/18 10:13 AM</span></p>
+<p class="courier archivePath">/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear</p>
+<p>Scan options: <span class="courier">&#8209;&#8209;baseEdition &#8209;&#8209;bluemixEdition &#8209;&#8209;coreEdition &#8209;&#8209;ndEdition &#8209;&#8209;zosEdition &#8209;&#8209;traditional &#8209;&#8209;liberty &#8209;&#8209;excludePackages=com.ibm.websphere, com.ibm.ws, com.ibm.db2, com.informix, com.microsoft, com.sybase, com.sun, java, javax, net, oracle, org, sqlj, _ibmjsp</span></p>
+<div id="summary" class="header-sections">
+<h2>WebSphere Application Server V9.0</h2>
+<p>The highlighted columns indicate which IBM platforms fully support the technologies used by the included application.</p>
+<p>Recommendation: Detailed migration analysis should be used to determine if there are migration issues that must be addressed before deploying your application.</p>
+</div><table summary="The rows in this table show which technologies are used by the application. Check marks indicate which IBM platforms support each technology. The technologies are grouped into categories by the rows that span all columns.">
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>Liberty for Java on IBM Bluemix</th><th>Liberty Core</th><th>Liberty</th><th class="highlight">WebSphere traditional</th><th>Network Deployment Liberty</th><th class="highlight">Network Deployment traditional</th><th>Liberty for z/OS</th><th class="highlight">WebSphere traditional for z/OS</th></tr>
+</thead>
+<tbody>
+<tr class="banner"><td colspan="9">Web application technologies</td></tr>
+<tr><td>Java Servlet</td><td><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td></tr>
+<tr><td>JavaServer Pages / Expression Language (JSP/EL)</td><td><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td></tr>
+<tr class="banner"><td colspan="9">Enterprise application technologies</td></tr>
+<tr><td>Enterprise JavaBeans (EJB) 2.x and 1.x</td><td><div class="checkmark">&#10003;</div></td><td></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td></tr>
+<tr><td>Entity Enterprise JavaBeans (EJB)</td><td></td><td></td><td></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td></td><td class="highlight"><div class="checkmark">&#10003;</div></td></tr>
+<tr><td>Enterprise JavaBeans (EJB) Lite subset</td><td><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td></tr>
+<tr><td>Remote Enterprise JavaBeans (EJB)</td><td></td><td></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td></tr>
+<tr><td>Java Connector Architecture (JCA)</td><td><div class="checkmark">&#10003;</div></td><td></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td></tr>
+<tr><td>Java Transaction API (JTA)</td><td><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td></tr>
+<tr class="banner"><td colspan="9">Java EE-related specifications in Java SE</td></tr>
+<tr><td>Java Database Connectivity (JDBC)</td><td><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td><td><div class="checkmark">&#10003;</div></td><td class="highlight"><div class="checkmark">&#10003;</div></td></tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

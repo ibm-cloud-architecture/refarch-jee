@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+   <web-app id="WebApp_ID">
+      <display-name>Default Web Application</display-name>
+      <description>This is the IBM WebSphere Application Server Default Web Application.</description>
+      <servlet id="Servlet_1">
+         <servlet-name>Snoop Servlet</servlet-name>
+         <display-name>Snoop Servlet</display-name>
+         <description>This servlet returns information about the request which includes information about  existing sessions, application attributes, and request attributes.</description>
+         <servlet-class>SnoopServlet</servlet-class>
+         <load-on-startup></load-on-startup>
+      </servlet>
+      <servlet id="Servlet_2">
+         <servlet-name>Hello Pervasive Servlet</servlet-name>
+         <display-name>Hello Pervasive Servlet</display-name>
+         <description>This servlet utilizes the IBM WebSphere Application Server PageList and Client Detection Support.</description>
+         <servlet-class>HelloPervasiveServlet</servlet-class>
+         <load-on-startup></load-on-startup>
+      </servlet>
+      <servlet id="Servlet_3">
+         <servlet-name>Hit Count Servlet</servlet-name>
+         <display-name>Hit Count Servlet</display-name>
+         <description>This servlet demonstrates the various ways to increment a counter. The methods used are: Servlet instance variable, Session object, and EJB CMP.</description>
+         <servlet-class>HitCount</servlet-class>
+         <load-on-startup></load-on-startup>
+      </servlet>
+      <servlet-mapping id="ServletMapping_1">
+         <servlet-name>Snoop Servlet</servlet-name>
+         <url-pattern>/snoop/*</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping id="ServletMapping_2">
+         <servlet-name>Hello Pervasive Servlet</servlet-name>
+         <url-pattern>/hello</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping id="ServletMapping_3">
+         <servlet-name>Hit Count Servlet</servlet-name>
+         <url-pattern>/hitcount</url-pattern>
+      </servlet-mapping>
+      <welcome-file-list id="WelcomeFileList_1">
+         <welcome-file>index.html</welcome-file>
+      </welcome-file-list>
+      <error-page id="ErrorPage_1">
+        <error-code>401</error-code>
+        <location>auth_error.jsp</location>
+      </error-page>
+      <security-constraint id="SecurityConstraint_1">
+         <web-resource-collection id="WebResourceCollection_1">
+            <web-resource-name>Snoop Servlet</web-resource-name>
+            <description>Protection area for Snoop Servlet.</description>
+            <url-pattern>/snoop/*</url-pattern>
+            <url-pattern>/servlet/SnoopServlet/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+         </web-resource-collection>
+         <auth-constraint id="AuthConstraint_1">
+            <description>Snoop Servlet Security:+:All Authenticated users for Snoop Servlet.</description>
+            <role-name>All Role</role-name>
+         </auth-constraint>
+         <user-data-constraint id="UserDataConstraint_1">
+            <transport-guarantee>NONE</transport-guarantee>
+         </user-data-constraint>
+      </security-constraint>
+      <security-role id="SecurityRole_1">
+         <description>All Authenticated Users Role.</description>
+         <role-name>All Role</role-name>
+      </security-role>
+      <ejb-ref id="EjbRef_1">
+         <description>EJB Reference to the Increment CMP EJB.</description>
+         <ejb-ref-name>Increment</ejb-ref-name>
+         <ejb-ref-type>Entity</ejb-ref-type>
+         <home>com.ibm.defaultapplication.IncrementHome</home>
+         <remote>com.ibm.defaultapplication.Increment</remote>
+      </ejb-ref>
+   </web-app>

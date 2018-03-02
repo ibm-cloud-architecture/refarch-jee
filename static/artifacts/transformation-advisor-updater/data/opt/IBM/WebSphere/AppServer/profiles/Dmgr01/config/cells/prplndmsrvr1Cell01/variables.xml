@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<variables:VariableMap xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:variables="http://www.ibm.com/websphere/appserver/schemas/5.0/variables.xmi" xmi:id="VariableMap_1">
+  <entries xmi:id="VariableSubstitutionEntry_1162235797046" symbolicName="WAS_CELL_NAME" value="prplndmsrvr1Cell01"/>
+  <entries xmi:id="VariableSubstitutionEntry_1494019693388" symbolicName="DB2UNIVERSAL_JDBC_DRIVER_PATH" value="/opt/db2jars/"/>
+  <entries xmi:id="VariableSubstitutionEntry_1494019693414" symbolicName="UNIVERSAL_JDBC_DRIVER_PATH"/>
+  <entries xmi:id="VariableSubstitutionEntry_1494019693419" symbolicName="DB2UNIVERSAL_JDBC_DRIVER_NATIVEPATH" value="/opt/db2jars/"/>
+</variables:VariableMap>

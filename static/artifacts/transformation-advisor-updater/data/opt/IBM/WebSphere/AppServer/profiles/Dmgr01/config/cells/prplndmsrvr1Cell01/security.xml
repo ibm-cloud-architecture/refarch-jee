@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security:Security xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:orb.securityprotocol="http://www.ibm.com/websphere/appserver/schemas/5.0/orb.securityprotocol.xmi" xmlns:security="http://www.ibm.com/websphere/appserver/schemas/5.0/security.xmi" xmi:id="Security_1" useLocalSecurityServer="true" useDomainQualifiedUserNames="false" enabled="true" cacheTimeout="600" issuePermissionWarning="false" activeProtocol="BOTH" enforceJava2Security="false" enforceFineGrainedJCASecurity="false" appEnabled="true" dynamicallyUpdateSSLConfig="true" allowBasicAuth="true" activeAuthMechanism="LTPA_1" activeUserRegistry="WIMUserRegistry_1" defaultSSLSettings="SSLConfig_1">
+  <authMechanisms xmi:type="security:KRB5" xmi:id="KRB5_1" OID="oid:1.2.840.113554.1.2.2" authContextImplClass="com.ibm.ISecurityLocalObjectTokenBaseImpl.Krb5WSSecurityContextImpl" authConfig="system.KRB5" simpleAuthConfig="system.KRB5" authValidationConfig="system.KRB5" krb5Realm="" krb5Config="" krb5Keytab="" krb5Spn="WAS/${HOST}" trimUserName="true" enabledGssCredDelegate="true"/>
+  <authMechanisms xmi:type="security:LTPA" xmi:id="LTPA_1" OID="oid:1.3.18.0.2.30.2" authContextImplClass="com.ibm.ISecurityLocalObjectTokenBaseImpl.WSSecurityContextLTPAImpl" authConfig="system.LTPA" simpleAuthConfig="system.LTPA" authValidationConfig="system.LTPA" timeout="120" keySetGroup="KeySetGroup_1">
+    <trustAssociation xmi:id="TrustAssociation_1" enabled="false">
+      <interceptors xmi:id="TAInterceptor_1" interceptorClassName="com.ibm.ws.security.web.TAMTrustAssociationInterceptorPlus"/>
+      <interceptors xmi:id="TAInterceptor_2" interceptorClassName="com.ibm.ws.security.spnego.TrustAssociationInterceptorImpl"/>
+    </trustAssociation>
+    <singleSignon xmi:id="SingleSignon_1" requiresSSL="false" domainName="" enabled="true"/>
+  </authMechanisms>
+  <authMechanisms xmi:type="security:SPNEGO" xmi:id="SPNEGO_1" OID="oid:1.3.6.1.5.5.2" authContextImplClass="com.ibm.ws.security.spnego.TrustAssociationInterceptorImpl" allowAppAuthMethodFallback="false"/>
+  <authMechanisms xmi:type="security:RSAToken" xmi:id="RSAToken_1" OID="oid:1.3.18.0.2.30.6" authContextImplClass="com.ibm.ISecurityLocalObjectTokenBaseImpl.WSSecurityContextAdminRSAPropImpl" authConfig="system.DEFAULT" simpleAuthConfig="system.DEFAULT" authValidationConfig="system.DEFAULT" tokenExpiration="600" nonceCacheTimeout="1200" adminCertificateTrustStore="KeyStore_8" adminCertificate="Certificate_1"/>
+  <userRegistries xmi:type="security:LocalOSUserRegistry" xmi:id="LocalOSUserRegistry" serverId="" serverPassword="{xor}" realm="" useRegistryServerId="false" primaryAdminId=""/>
+  <userRegistries xmi:type="security:CustomUserRegistry" xmi:id="CustomUserRegistry_1" useRegistryServerId="false" primaryAdminId="" customRegistryClassName="com.ibm.websphere.security.FileRegistrySample"/>
+  <userRegistries xmi:type="security:LDAPUserRegistry" xmi:id="LDAPUserRegistry_1" serverId="" serverPassword="{xor}" realm="" ignoreCase="true" useRegistryServerId="false" primaryAdminId="" type="IBM_DIRECTORY_SERVER" sslEnabled="false" sslConfig="" baseDN="" bindDN="" bindPassword="{xor}" searchTimeout="120" reuseConnection="true">
+    <searchFilter xmi:id="LDAPSearchFilter_1" userFilter="(&amp;(uid=%v)(objectclass=ePerson))" krbUserFilter="(&amp;(krbPrincipalName=%v)(objectclass=ePerson))" groupFilter="(&amp;(cn=%v)(|(objectclass=groupOfNames)(objectclass=groupOfUniqueNames)))" userIdMap="*:uid" groupIdMap="*:cn" groupMemberIdMap="ibm-allGroups:member;ibm-allGroups:uniqueMember" certificateMapMode="EXACT_DN" certificateFilter=""/>
+    <hosts xmi:id="EndPoint_1" host="" port="389"/>
+  </userRegistries>
+  <userRegistries xmi:type="security:WIMUserRegistry" xmi:id="WIMUserRegistry_1" serverId="" serverPassword="{xor}" realm="defaultWIMFileBasedRealm" ignoreCase="true" useRegistryServerId="false" primaryAdminId="ndmadmin" registryClassName="com.ibm.ws.wim.registry.WIMUserRegistry"/>
+  <authConfig xmi:id="AuthorizationConfig_1" useJACCProvider="false">
+    <authorizationProviders xmi:id="AuthorizationProvider_1" j2eePolicyImplClassName="com.tivoli.pd.as.jacc.TAMPolicy" name="Tivoli Access Manager" policyConfigurationFactoryImplClassName="com.tivoli.pd.as.jacc.TAMPolicyConfigurationFactory" roleConfigurationFactoryImplClassName="com.tivoli.pd.as.jacc.TAMRoleConfigurationFactory" initializeJACCProviderClassName="com.tivoli.pd.as.jacc.cfg.TAMConfigInitialize" requiresEJBArgumentsPolicyContextHandler="false" supportsDynamicModuleUpdates="true"/>
+  </authConfig>
+  <applicationLoginConfig xmi:id="JAASConfiguration_1">
+    <entries xmi:id="JAASConfigurationEntry_1" alias="ClientContainer">
+      <loginModules xmi:id="JAASLoginModule_1" moduleClassName="com.ibm.ws.security.common.auth.module.proxy.WSLoginModuleProxy" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_1" name="delegate" value="com.ibm.ws.security.common.auth.module.WSClientLoginModuleImpl"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_2" alias="WSLogin">
+      <loginModules xmi:id="JAASLoginModule_2" moduleClassName="com.ibm.ws.security.common.auth.module.proxy.WSLoginModuleProxy" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_2" name="delegate" value="com.ibm.ws.security.common.auth.module.WSLoginModuleImpl"/>
+        <options xmi:id="Property_3" name="use_realm_callback" value="false"/>
+        <options xmi:id="Property_4" name="use_appcontext_callback" value="false"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_3" alias="WSKRB5Login">
+      <loginModules xmi:id="JAASLoginModule_3" moduleClassName="com.ibm.ws.security.auth.kerberos.Krb5LoginModuleWrapperClient" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_5" name="storeSharedStateCredentials" value="true" required="false"/>
+        <options xmi:id="Property_6" name="refreshKrb5Config" value="true" required="false"/>
+        <options xmi:id="Property_7" name="credsType" value="INITIATOR" required="false"/>
+        <options xmi:id="Property_8" name="tryFirstPass" value="false" required="false"/>
+        <options xmi:id="Property_9" name="useFirstPass" value="true" required="false"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_4" alias="DefaultPrincipalMapping">
+      <loginModules xmi:id="JAASLoginModule_4" moduleClassName="com.ibm.ws.security.common.auth.module.proxy.WSLoginModuleProxy" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_10" name="delegate" value="com.ibm.ws.security.auth.j2c.WSPrincipalMappingLoginModule"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_5" alias="TrustedConnectionMapping">
+      <loginModules xmi:id="JAASLoginModule_5" moduleClassName="com.ibm.ws.security.common.auth.module.proxy.WSLoginModuleProxy" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_11" name="delegate" value="com.ibm.ws.security.auth.j2c.WSPrincipalMappingLoginModule"/>
+        <options xmi:id="Property_12" name="useTrustedConnection" value="true"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_6" alias="KerberosMapping">
+      <loginModules xmi:id="JAASLoginModule_6" moduleClassName="com.ibm.ws.security.common.auth.module.proxy.WSLoginModuleProxy" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_13" name="delegate" value="com.ibm.ws.security.auth.j2c.WSPrincipalMappingLoginModule"/>
+      </loginModules>
+    </entries>
+  </applicationLoginConfig>
+  <CSI xmi:id="IIOPSecurityProtocol_1">
+    <claims xmi:type="orb.securityprotocol:CommonSecureInterop" xmi:id="CSIv2 Inbound Configuration" stateful="true">
+      <layers xmi:type="orb.securityprotocol:IdentityAssertionLayer" xmi:id="IdentityAssertionLayer_1">
+        <supportedQOP xmi:type="orb.securityprotocol:IdentityAssertionQOP" xmi:id="IdentityAssertionQOP_1" enable="false"/>
+      </layers>
+      <layers xmi:type="orb.securityprotocol:MessageLayer" xmi:id="MessageLayer_1" supportedAuthMechList="LTPA|BASICAUTH">
+        <requiredQOP xmi:type="orb.securityprotocol:MessageQOP" xmi:id="MessageQOP_2" establishTrustInClient="false"/>
+        <supportedQOP xmi:type="orb.securityprotocol:MessageQOP" xmi:id="MessageQOP_1" establishTrustInClient="true"/>
+      </layers>
+      <layers xmi:type="orb.securityprotocol:TransportLayer" xmi:id="TransportLayer_1">
+        <requiredQOP xmi:type="orb.securityprotocol:TransportQOP" xmi:id="TransportQOP_2" establishTrustInClient="false" enableProtection="false" confidentiality="false" integrity="true"/>
+        <supportedQOP xmi:type="orb.securityprotocol:TransportQOP" xmi:id="TransportQOP_1" establishTrustInClient="true" enableProtection="true" confidentiality="true" integrity="true"/>
+        <serverAuthentication xmi:id="IIOPTransport_1" sslConfig=""/>
+      </layers>
+    </claims>
+    <performs xmi:type="orb.securityprotocol:CommonSecureInterop" xmi:id="CSIv2 Outbound Configuration" stateful="true" sessionGCInterval="300000" sessionGCIdleTime="900000">
+      <layers xmi:type="orb.securityprotocol:IdentityAssertionLayer" xmi:id="IdentityAssertionLayer_2">
+        <requiredQOP xmi:type="orb.securityprotocol:IdentityAssertionQOP" xmi:id="IdentityAssertionQOP_3" enable="false"/>
+        <supportedQOP xmi:type="orb.securityprotocol:IdentityAssertionQOP" xmi:id="IdentityAssertionQOP_2" enable="false" trustedId="" trustedPassword="{xor}"/>
+      </layers>
+      <layers xmi:type="orb.securityprotocol:MessageLayer" xmi:id="MessageLayer_2" authenticationLayerRetryCount="3" supportedAuthMechList="LTPA|BASICAUTH">
+        <requiredQOP xmi:type="orb.securityprotocol:MessageQOP" xmi:id="MessageQOP_4" establishTrustInClient="false"/>
+        <supportedQOP xmi:type="orb.securityprotocol:MessageQOP" xmi:id="MessageQOP_3" establishTrustInClient="true"/>
+      </layers>
+      <layers xmi:type="orb.securityprotocol:TransportLayer" xmi:id="TransportLayer_2">
+        <requiredQOP xmi:type="orb.securityprotocol:TransportQOP" xmi:id="TransportQOP_4" establishTrustInClient="false" enableProtection="false" confidentiality="false" integrity="true"/>
+        <supportedQOP xmi:type="orb.securityprotocol:TransportQOP" xmi:id="TransportQOP_3" establishTrustInClient="false" enableProtection="true" confidentiality="true" integrity="true"/>
+        <serverAuthentication xmi:id="IIOPTransport_2" sslConfig=""/>
+      </layers>
+    </performs>
+  </CSI>
+  <IBM xmi:id="IIOPSecurityProtocol_2">
+    <claims xmi:type="orb.securityprotocol:SecureAssociationService" xmi:id="SecureAssociationService_1">
+      <layers xmi:type="orb.securityprotocol:TransportLayer" xmi:id="TransportLayer_3">
+        <supportedQOP xmi:type="orb.securityprotocol:TransportQOP" xmi:id="TransportQOP_5" enableProtection="true" confidentiality="true" integrity="true"/>
+        <serverAuthentication xmi:id="IIOPTransport_3" sslConfig=""/>
+      </layers>
+    </claims>
+    <performs xmi:type="orb.securityprotocol:SecureAssociationService" xmi:id="SecureAssociationService_2">
+      <layers xmi:type="orb.securityprotocol:TransportLayer" xmi:id="TransportLayer_4">
+        <supportedQOP xmi:type="orb.securityprotocol:TransportQOP" xmi:id="TransportQOP_6" enableProtection="true" confidentiality="false" integrity="false"/>
+        <serverAuthentication xmi:id="IIOPTransport_4" sslConfig=""/>
+      </layers>
+    </performs>
+  </IBM>
+  <repertoire xmi:id="SSLConfig_1" alias="CellDefaultSSLSettings" managementScope="ManagementScope_1">
+    <setting xmi:id="SecureSocketLayer_1" clientAuthentication="false" securityLevel="HIGH" enabledCiphers="" jsseProvider="IBMJSSE2" sslProtocol="SSL_TLS" keyStore="KeyStore_1" trustStore="KeyStore_2" trustManager="TrustManager_2" keyManager="KeyManager_1"/>
+  </repertoire>
+  <repertoire xmi:id="SSLConfig_1493663513204" alias="NodeDefaultSSLSettings" managementScope="ManagementScope_1493663513204">
+    <setting xmi:id="SecureSocketLayer_1493663513204" clientAuthentication="false" securityLevel="HIGH" enabledCiphers="" jsseProvider="IBMJSSE2" sslProtocol="SSL_TLS" keyStore="KeyStore_1493663513204" trustStore="KeyStore_2" trustManager="TrustManager_1493663513204" keyManager="KeyManager_1493663513204"/>
+  </repertoire>
+  <repertoire xmi:id="SSLConfig_1493664844783" alias="NodeDefaultSSLSettings" managementScope="ManagementScope_1493664844783">
+    <setting xmi:id="SecureSocketLayer_1493664844783" clientAuthentication="false" securityLevel="HIGH" enabledCiphers="" jsseProvider="IBMJSSE2" sslProtocol="SSL_TLS" keyStore="KeyStore_1493664844783" trustStore="KeyStore_2" trustManager="TrustManager_1493664844783" keyManager="KeyManager_1493664844783"/>
+  </repertoire>
+  <systemLoginConfig xmi:id="JAASConfiguration_2">
+    <entries xmi:id="JAASConfigurationEntry_7" alias="KRB5">
+      <loginModules xmi:id="JAASLoginModule_7" moduleClassName="com.ibm.ws.security.auth.kerberos.Krb5LoginModuleWrapper" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_14" name="storeSharedStateCredentials" value="true" required="false"/>
+        <options xmi:id="Property_15" name="refreshKrb5Config" value="true" required="false"/>
+        <options xmi:id="Property_16" name="credsType" value="both" required="false"/>
+        <options xmi:id="Property_17" name="tryFirstPass" value="true" required="false"/>
+        <options xmi:id="Property_18" name="renewable" value="true" required="false"/>
+        <options xmi:id="Property_19" name="forwardable" value="true" required="false"/>
+        <options xmi:id="Property_20" name="noAddress" value="true" required="false"/>
+      </loginModules>
+      <loginModules xmi:id="JAASLoginModule_8" moduleClassName="com.ibm.ws.security.auth.kerberos.WSKrb5LoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_8" alias="LTPA">
+      <loginModules xmi:id="JAASLoginModule_9" moduleClassName="com.ibm.ws.security.common.auth.module.proxy.WSLoginModuleProxy" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_21" name="delegate" value="com.ibm.ws.security.server.lm.ltpaLoginModule"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_9" alias="SWAM">
+      <loginModules xmi:id="JAASLoginModule_10" moduleClassName="com.ibm.ws.security.common.auth.module.proxy.WSLoginModuleProxy" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_22" name="delegate" value="com.ibm.ws.security.server.lm.swamLoginModule"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_10" alias="wssecurity.IDAssertion">
+      <loginModules xmi:id="JAASLoginModule_11" moduleClassName="com.ibm.ws.security.common.auth.module.proxy.WSLoginModuleProxy" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_23" name="delegate" value="com.ibm.wsspi.wssecurity.auth.module.IDAssertionLoginModule"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_11" alias="wssecurity.Signature">
+      <loginModules xmi:id="JAASLoginModule_12" moduleClassName="com.ibm.ws.security.common.auth.module.proxy.WSLoginModuleProxy" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_24" name="delegate" value="com.ibm.wsspi.wssecurity.auth.module.SignatureLoginModule"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_12" alias="LTPA_WEB">
+      <loginModules xmi:id="JAASLoginModule_13" moduleClassName="com.ibm.ws.security.common.auth.module.proxy.WSLoginModuleProxy" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_25" name="delegate" value="com.ibm.ws.security.web.AuthenLoginModule"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_13" alias="WEB_INBOUND">
+      <loginModules xmi:id="JAASLoginModule_14" moduleClassName="com.ibm.ws.security.server.lm.ltpaLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_15" moduleClassName="com.ibm.ws.security.server.lm.wsMapDefaultInboundLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_14" alias="RMI_INBOUND">
+      <loginModules xmi:id="JAASLoginModule_16" moduleClassName="com.ibm.ws.security.server.lm.ltpaLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_17" moduleClassName="com.ibm.ws.security.server.lm.wsMapDefaultInboundLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_15" alias="DEFAULT">
+      <loginModules xmi:id="JAASLoginModule_18" moduleClassName="com.ibm.ws.security.server.lm.ltpaLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_19" moduleClassName="com.ibm.ws.security.server.lm.wsMapDefaultInboundLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_16" alias="RMI_OUTBOUND">
+      <loginModules xmi:id="JAASLoginModule_20" moduleClassName="com.ibm.ws.security.server.lm.wsMapCSIv2OutboundLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_17" alias="wssecurity.X509BST">
+      <loginModules xmi:id="JAASLoginModule_21" moduleClassName="com.ibm.wsspi.wssecurity.auth.module.X509LoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_18" alias="wssecurity.PkiPath">
+      <loginModules xmi:id="JAASLoginModule_22" moduleClassName="com.ibm.wsspi.wssecurity.auth.module.PkiPathLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_19" alias="wssecurity.PKCS7">
+      <loginModules xmi:id="JAASLoginModule_23" moduleClassName="com.ibm.wsspi.wssecurity.auth.module.PKCS7LoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_20" alias="wssecurity.UsernameToken">
+      <loginModules xmi:id="JAASLoginModule_24" moduleClassName="com.ibm.wsspi.wssecurity.auth.module.UsernameLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_21" alias="wssecurity.IDAssertionUsernameToken">
+      <loginModules xmi:id="JAASLoginModule_25" moduleClassName="com.ibm.wsspi.wssecurity.auth.module.IDAssertionUsernameLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_22" alias="WSS_INBOUND">
+      <loginModules xmi:id="JAASLoginModule_26" moduleClassName="com.ibm.ws.security.server.lm.ltpaLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_27" moduleClassName="com.ibm.ws.security.server.lm.wsMapDefaultInboundLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_23" alias="WSS_OUTBOUND">
+      <loginModules xmi:id="JAASLoginModule_28" moduleClassName="com.ibm.ws.security.server.lm.wsMapCSIv2OutboundLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_24" alias="DESERIALIZE_ASYNCH_CONTEXT">
+      <loginModules xmi:id="JAASLoginModule_29" moduleClassName="com.ibm.ws.security.server.lm.ltpaLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_30" moduleClassName="com.ibm.ws.security.server.lm.wsMapDefaultInboundLoginModule" authenticationStrategy="REQUIRED">
+        <options xmi:id="Property_46" name="com.ibm.ws.security.context.renewToken" value="true"/>
+      </loginModules>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_25" alias="wssecurity.KRB5BST">
+      <loginModules xmi:id="JAASLoginModule_31" moduleClassName="com.ibm.wsspi.wssecurity.auth.module.KRBLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116062" alias="wss.generate.x509">
+      <loginModules xmi:id="JAASLoginModule_1185820116093" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.X509GenerateLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116125" alias="wss.consume.x509">
+      <loginModules xmi:id="JAASLoginModule_1185820116140" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.X509ConsumeLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116171" alias="wss.generate.unt">
+      <loginModules xmi:id="JAASLoginModule_1185820116187" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.UNTGenerateLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116203" alias="wss.consume.unt">
+      <loginModules xmi:id="JAASLoginModule_1185820116218" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.UNTConsumeLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116250" alias="wss.generate.sct">
+      <loginModules xmi:id="JAASLoginModule_1185820116250" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.SCTGenerateLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116251" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.DKTGenerateLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116281" alias="wss.consume.sct">
+      <loginModules xmi:id="JAASLoginModule_1185820116296" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.SCTConsumeLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116297" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.DKTConsumeLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116312" alias="wss.caller">
+      <loginModules xmi:id="JAASLoginModule_1185820116328" moduleClassName="com.ibm.ws.wssecurity.impl.auth.module.PreCallerLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116343" moduleClassName="com.ibm.ws.wssecurity.impl.auth.module.UNTCallerLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116359" moduleClassName="com.ibm.ws.wssecurity.impl.auth.module.X509CallerLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116375" moduleClassName="com.ibm.ws.wssecurity.impl.auth.module.LTPACallerLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116390" moduleClassName="com.ibm.ws.wssecurity.impl.auth.module.LTPAPropagationCallerLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116391" moduleClassName="com.ibm.ws.wssecurity.impl.auth.module.KRBCallerLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116421" moduleClassName="com.ibm.ws.wssecurity.impl.auth.module.WSWSSLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116437" moduleClassName="com.ibm.ws.security.server.lm.ltpaLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116453" moduleClassName="com.ibm.ws.security.server.lm.wsMapDefaultInboundLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116468" alias="wss.generate.pkcs7">
+      <loginModules xmi:id="JAASLoginModule_1185820116484" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.PKCS7GenerateLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116500" alias="wss.consume.pkcs7">
+      <loginModules xmi:id="JAASLoginModule_1185820116515" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.PKCS7ConsumeLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116531" alias="wss.generate.pkiPath">
+      <loginModules xmi:id="JAASLoginModule_1185820116531" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.PkiPathGenerateLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116562" alias="wss.consume.pkiPath">
+      <loginModules xmi:id="JAASLoginModule_1185820116562" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.PkiPathConsumeLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116578" alias="wss.generate.ltpa">
+      <loginModules xmi:id="JAASLoginModule_1185820116593" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.LTPAGenerateLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116609" alias="wss.consume.ltpa">
+      <loginModules xmi:id="JAASLoginModule_1185820116625" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.LTPAConsumeLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116640" alias="wss.generate.ltpaProp">
+      <loginModules xmi:id="JAASLoginModule_1185820116640" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.LTPAPropagationGenerateLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116671" alias="wss.consume.ltpaProp">
+      <loginModules xmi:id="JAASLoginModule_1185820116671" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.LTPAPropagationConsumeLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116687" alias="wss.inbound.propagation">
+      <loginModules xmi:id="JAASLoginModule_1185820116703" moduleClassName="com.ibm.ws.security.server.lm.ltpaLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116718" moduleClassName="com.ibm.ws.security.server.lm.wsMapDefaultInboundLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116734" moduleClassName="com.ibm.ws.wssecurity.platform.websphere.wssapi.token.impl.wssTokenPropagationInboundLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116750" alias="wss.inbound.deserialize">
+      <loginModules xmi:id="JAASLoginModule_1185820116765" moduleClassName="com.ibm.ws.wssecurity.platform.websphere.wssapi.token.impl.wssLtpaLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116781" moduleClassName="com.ibm.ws.wssecurity.platform.websphere.wssapi.token.impl.wssMapDefaultInboundLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116796" moduleClassName="com.ibm.ws.wssecurity.platform.websphere.wssapi.token.impl.wssTokenPropagationInboundLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116812" alias="wss.auth.sts">
+      <loginModules xmi:id="JAASLoginModule_1185820116828" moduleClassName="com.ibm.ws.wssecurity.impl.auth.module.STSDefaultLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116813" alias="wss.generate.KRB5BST">
+      <loginModules xmi:id="JAASLoginModule_1185820116829" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.KRBGenerateLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116835" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.DKTGenerateLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+    <entries xmi:id="JAASConfigurationEntry_1185820116814" alias="wss.consume.KRB5BST">
+      <loginModules xmi:id="JAASLoginModule_1185820116830" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.KRBConsumeLoginModule" authenticationStrategy="REQUIRED"/>
+      <loginModules xmi:id="JAASLoginModule_1185820116837" moduleClassName="com.ibm.ws.wssecurity.wssapi.token.impl.DKTConsumeLoginModule" authenticationStrategy="REQUIRED"/>
+    </entries>
+  </systemLoginConfig>
+  <authDataEntries xmi:id="JAASAuthData_1494019481160" alias="prplndmsrvr1CellManager01/BusAlias" userId="bususer" password="{xor}PTNvKDk2LDc=" description=""/>
+  <authDataEntries xmi:id="JAASAuthData_1494019523981" alias="prplndmsrvr1CellManager01/DBUser" userId="db2inst1" password="{xor}DyotLzM6bzE6" description=""/>
+  <webAuthAttrs xmi:id="DescriptiveProperty_8" name="com.ibm.wsspi.security.web.webAuthReq" value="lazy" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="lazy,persisting,always" inclusive="false" firstClass="false"/>
+  <webAuthAttrs xmi:id="DescriptiveProperty_9" name="com.ibm.wsspi.security.web.failOverToBasicAuth" value="false" type="boolean" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+  <managementScopes xmi:id="ManagementScope_1" scopeName="(cell):prplndmsrvr1Cell01" scopeType="cell"/>
+  <managementScopes xmi:id="ManagementScope_2" scopeName="(cell):prplndmsrvr1Cell01:(node):prplndmsrvr1CellManager01" scopeType="node"/>
+  <managementScopes xmi:id="ManagementScope_1493663513204" scopeName="(cell):prplndmsrvr1Cell01:(node):prplwas7srvr1Node01" scopeType="node"/>
+  <managementScopes xmi:id="ManagementScope_1493664844783" scopeName="(cell):prplndmsrvr1Cell01:(node):prplwas7srvr2Node01" scopeType="node"/>
+  <managementScopes xmi:id="ManagementScope_1494341340741" scopeName="(cell):prplndmsrvr1Cell01:(node):prplhttpsrvr1.csplab.local-node:(server):webserver1" scopeType="server"/>
+  <keyStores xmi:id="KeyStore_1" name="CellDefaultKeyStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/key.p12" type="PKCS12" fileBased="true" hostList="" description="Default key store for prplndmsrvr1Cell01" usage="SSLKeys" managementScope="ManagementScope_1"/>
+  <keyStores xmi:id="KeyStore_2" name="CellDefaultTrustStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/trust.p12" type="PKCS12" fileBased="true" hostList="" description="Default trust store for prplndmsrvr1Cell01" usage="SSLKeys" managementScope="ManagementScope_1"/>
+  <keyStores xmi:id="KeyStore_3" name="CellLTPAKeys" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/ltpa.jceks" type="JCEKS" fileBased="true" hostList="" description="LTPA key store for prplndmsrvr1Cell01" usage="KeySetKeys" managementScope="ManagementScope_1"/>
+  <keyStores xmi:id="KeyStore_4" name="DmgrDefaultRootStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/nodes/prplndmsrvr1CellManager01/root-key.p12" type="PKCS12" fileBased="true" hostList="" description="Root certificate key store for prplndmsrvr1CellManager01" usage="RootKeys" managementScope="ManagementScope_2"/>
+  <keyStores xmi:id="KeyStore_5" name="DmgrDefaultDeletedStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/nodes/prplndmsrvr1CellManager01/deleted.p12" type="PKCS12" fileBased="true" hostList="" description="Key store containing deleted certificates for prplndmsrvr1CellManager01" usage="DeletedKeys" managementScope="ManagementScope_2"/>
+  <keyStores xmi:id="KeyStore_6" name="DmgrDefaultSignersStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/nodes/prplndmsrvr1CellManager01/default-signers.p12" type="PKCS12" fileBased="true" hostList="" description="Key store containing default signers for prplndmsrvr1CellManager01" usage="DefaultSigners" managementScope="ManagementScope_2"/>
+  <keyStores xmi:id="KeyStore_7" name="CellRSATokenKeyStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/rsatoken-key.p12" type="PKCS12" fileBased="true" hostList="" description="RSAToken key store for prplndmsrvr1Cell01" usage="RSATokenKeys" managementScope="ManagementScope_1"/>
+  <keyStores xmi:id="KeyStore_8" name="CellRSATokenTrustStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/rsatoken-trust.p12" type="PKCS12" fileBased="true" hostList="" description="RSAToken key store for prplndmsrvr1Cell01" usage="RSATokenKeys" managementScope="ManagementScope_1"/>
+  <keyStores xmi:id="KeyStore_9" name="DmgrRSATokenRootStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/nodes/prplndmsrvr1CellManager01/rsatoken-root-key.p12" type="PKCS12" fileBased="true" hostList="" description="RSAToken root certificate key store for prplndmsrvr1CellManager01" usage="RSATokenKeys" managementScope="ManagementScope_2"/>
+  <keyStores xmi:id="KeyStore_1493663513204" name="NodeDefaultKeyStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/nodes/prplwas7srvr1Node01/key.p12" type="PKCS12" fileBased="true" hostList="" description="Default key store for prplwas7srvr1Node01" usage="SSLKeys" managementScope="ManagementScope_1493663513204"/>
+  <keyStores xmi:id="KeyStore_1493663513208" name="NodeDefaultTrustStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/nodes/prplwas7srvr1Node01/trust.p12" type="PKCS12" fileBased="true" hostList="" description="Default trust store for prplwas7srvr1Node01" usage="SSLKeys" managementScope="ManagementScope_1493663513204"/>
+  <keyStores xmi:id="KeyStore_1493664844783" name="NodeDefaultKeyStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/nodes/prplwas7srvr2Node01/key.p12" type="PKCS12" fileBased="true" hostList="" description="Default key store for prplwas7srvr2Node01" usage="SSLKeys" managementScope="ManagementScope_1493664844783"/>
+  <keyStores xmi:id="KeyStore_1493664844786" name="NodeDefaultTrustStore" password="{xor}CDo9Hgw=" provider="IBMJCE" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/nodes/prplwas7srvr2Node01/trust.p12" type="PKCS12" fileBased="true" hostList="" description="Default trust store for prplwas7srvr2Node01" usage="SSLKeys" managementScope="ManagementScope_1493664844783"/>
+  <keyStores xmi:id="KeyStore_1494341340748" name="CMSKeyStore" password="{xor}CDo9Hgw=" provider="IBMCMSProvider" location="${CONFIG_ROOT}/cells/prplndmsrvr1Cell01/nodes/prplhttpsrvr1.csplab.local-node/servers/webserver1/plugin-key.kdb" type="CMSKS" fileBased="true" createStashFileForCMS="true" description="CMSKeyStore for web server webserver1." managementScope="ManagementScope_1494341340741"/>
+  <trustManagers xmi:id="TrustManager_1" name="IbmX509" provider="IBMJSSE2" algorithm="IbmX509" managementScope="ManagementScope_1"/>
+  <trustManagers xmi:id="TrustManager_2" name="IbmPKIX" provider="IBMJSSE2" algorithm="IbmPKIX" trustManagerClass="" managementScope="ManagementScope_1">
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1" name="com.ibm.security.enableCRLDP" value="false" type="boolean" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_2" name="com.ibm.jsse2.checkRevocation" value="false" type="boolean" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_3" name="ocsp.enable" value="false" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_4" name="ocsp.responderURL" value="http://ocsp.example.net:80" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_5" name="ocsp.responderCertSubjectName" value="CN=OCSP Responder, O=XYZ Corp" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_6" name="ocsp.responderCertIssuerName" value="CN=Enterprise CA, O=XYZ Corp" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_7" name="ocsp.responderCertSerialNumber" value="2A:FF:00" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+  </trustManagers>
+  <trustManagers xmi:id="TrustManager_1493663513208" name="IbmX509" provider="IBMJSSE2" algorithm="IbmX509" managementScope="ManagementScope_1493663513204"/>
+  <trustManagers xmi:id="TrustManager_1493663513204" name="IbmPKIX" provider="IBMJSSE2" algorithm="IbmPKIX" trustManagerClass="" managementScope="ManagementScope_1493663513204">
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493663513208" name="com.ibm.security.enableCRLDP" value="false" type="boolean" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493663513209" name="com.ibm.jsse2.checkRevocation" value="false" type="boolean" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493663513210" name="ocsp.enable" value="false" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493663513211" name="ocsp.responderURL" value="http://ocsp.example.net:80" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493663513212" name="ocsp.responderCertSubjectName" value="CN=OCSP Responder, O=XYZ Corp" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493663513213" name="ocsp.responderCertIssuerName" value="CN=Enterprise CA, O=XYZ Corp" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493663513214" name="ocsp.responderCertSerialNumber" value="2A:FF:00" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+  </trustManagers>
+  <trustManagers xmi:id="TrustManager_1493664844786" name="IbmX509" provider="IBMJSSE2" algorithm="IbmX509" managementScope="ManagementScope_1493664844783"/>
+  <trustManagers xmi:id="TrustManager_1493664844783" name="IbmPKIX" provider="IBMJSSE2" algorithm="IbmPKIX" trustManagerClass="" managementScope="ManagementScope_1493664844783">
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493664844786" name="com.ibm.security.enableCRLDP" value="false" type="boolean" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493664844787" name="com.ibm.jsse2.checkRevocation" value="false" type="boolean" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493664844788" name="ocsp.enable" value="false" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493664844789" name="ocsp.responderURL" value="http://ocsp.example.net:80" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493664844790" name="ocsp.responderCertSubjectName" value="CN=OCSP Responder, O=XYZ Corp" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493664844791" name="ocsp.responderCertIssuerName" value="CN=Enterprise CA, O=XYZ Corp" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+    <additionalTrustManagerAttrs xmi:id="DescriptiveProperty_1493664844792" name="ocsp.responderCertSerialNumber" value="2A:FF:00" type="String" displayNameKey="" nlsRangeKey="" hoverHelpKey="" range="" inclusive="false" firstClass="false"/>
+  </trustManagers>
+  <keyManagers xmi:id="KeyManager_1" name="IbmX509" provider="IBMJSSE2" algorithm="IbmX509" keyManagerClass="" managementScope="ManagementScope_1"/>
+  <keyManagers xmi:id="KeyManager_1493663513204" name="IbmX509" provider="IBMJSSE2" algorithm="IbmX509" keyManagerClass="" managementScope="ManagementScope_1493663513204"/>
+  <keyManagers xmi:id="KeyManager_1493664844783" name="IbmX509" provider="IBMJSSE2" algorithm="IbmX509" keyManagerClass="" managementScope="ManagementScope_1493664844783"/>
+  <keySetGroups xmi:id="KeySetGroup_1" name="CellLTPAKeySetGroup" wsSchedule="WSSchedule_1" keySet="KeySet_1 KeySet_2" managementScope="ManagementScope_1"/>
+  <keySets xmi:id="KeySet_1" name="CellLTPAKeyPair" aliasPrefix="LTPAKeyPair" password="{xor}CDo9Hgw=" maxKeyReferences="2" deleteOldKeys="true" keyGenerationClass="com.ibm.ws.security.ltpa.LTPAKeyPairGenerator" isKeyPair="true" keyStore="KeyStore_3" managementScope="ManagementScope_1">
+    <keyReference xmi:id="KeyReference_1" keyAlias="LTPAKeyPair_1" version="1"/>
+  </keySets>
+  <keySets xmi:id="KeySet_2" name="CellLTPASecret" aliasPrefix="LTPASecret" password="{xor}CDo9Hgw=" maxKeyReferences="2" deleteOldKeys="true" keyGenerationClass="com.ibm.ws.security.ltpa.LTPAKeyGenerator" keyStore="KeyStore_3" managementScope="ManagementScope_1">
+    <keyReference xmi:id="KeyReference_2" keyAlias="LTPASecret_1" version="1"/>
+  </keySets>
+  <wsSchedules xmi:id="WSSchedule_1" name="LTPAKeySetSchedule" frequency="90" dayOfWeek="1" hour="22"/>
+  <wsSchedules xmi:id="WSSchedule_2" name="ExpirationMonitorSchedule" frequency="30" dayOfWeek="1" hour="21" minute="30" nextStartDate="1518406253759"/>
+  <wsNotifications xmi:id="WSNotification_1" name="MessageLog" logToSystemOut="true" emailList=""/>
+  <wsCertificateExpirationMonitor xmi:id="WSCertificateExpirationMonitor_1" name="Certificate Expiration Monitor" autoReplace="true" deleteOld="true" daysBeforeNotification="60" isEnabled="true" wsNotification="WSNotification_1" wsSchedule="WSSchedule_2"/>
+  <sslConfigGroups xmi:id="SSLConfigGroup_1" name="prplndmsrvr1Cell01" direction="inbound" sslConfig="SSLConfig_1" managementScope="ManagementScope_1"/>
+  <sslConfigGroups xmi:id="SSLConfigGroup_2" name="prplndmsrvr1Cell01" direction="outbound" sslConfig="SSLConfig_1" managementScope="ManagementScope_1"/>
+  <sslConfigGroups xmi:id="SSLConfigGroup_1493663513215" name="prplwas7srvr1Node01" direction="inbound" sslConfig="SSLConfig_1493663513204" managementScope="ManagementScope_1493663513204"/>
+  <sslConfigGroups xmi:id="SSLConfigGroup_1493663513216" name="prplwas7srvr1Node01" direction="outbound" sslConfig="SSLConfig_1493663513204" managementScope="ManagementScope_1493663513204"/>
+  <sslConfigGroups xmi:id="SSLConfigGroup_1493664844786" name="prplwas7srvr2Node01" direction="inbound" sslConfig="SSLConfig_1493664844783" managementScope="ManagementScope_1493664844783"/>
+  <sslConfigGroups xmi:id="SSLConfigGroup_1493664844787" name="prplwas7srvr2Node01" direction="outbound" sslConfig="SSLConfig_1493664844783" managementScope="ManagementScope_1493664844783"/>
+  <properties xmi:id="Property_20" name="security.enablePluggableAuthentication" value="true" required="false"/>
+  <properties xmi:id="Property_21" name="com.ibm.CSI.rmiOutboundPropagationEnabled" value="true" required="false"/>
+  <properties xmi:id="Property_22" name="com.ibm.CSI.rmiInboundPropagationEnabled" value="true" required="false"/>
+  <properties xmi:id="Property_23" name="com.ibm.CSI.rmiOutboundLoginEnabled" value="false" required="false"/>
+  <properties xmi:id="Property_24" name="com.ibm.ws.security.webInboundPropagationEnabled" value="true" required="false"/>
+  <properties xmi:id="Property_25" name="com.ibm.ws.security.ssoInteropModeEnabled" value="false" required="false"/>
+  <properties xmi:id="Property_26" name="com.ibm.CSI.supportedTargetRealms" value="" required="false"/>
+  <properties xmi:id="Property_27" name="com.ibm.CSI.rmiInboundLoginConfig" value="system.RMI_INBOUND" required="false"/>
+  <properties xmi:id="Property_28" name="com.ibm.CSI.rmiOutboundLoginConfig" value="system.RMI_OUTBOUND" required="false"/>
+  <properties xmi:id="Property_29" name="com.ibm.ws.security.webInboundLoginConfig" value="system.WEB_INBOUND" required="false"/>
+  <properties xmi:id="Property_30" name="com.ibm.ws.security.defaultLoginConfig" value="system.DEFAULT" required="false"/>
+  <properties xmi:id="Property_31" name="com.ibm.wsspi.security.ltpa.tokenFactory" value="com.ibm.ws.security.ltpa.LTPATokenFactory|com.ibm.ws.security.ltpa.LTPAToken2Factory|com.ibm.ws.security.ltpa.AuthzPropTokenFactory" required="false"/>
+  <properties xmi:id="Property_32" name="com.ibm.wsspi.security.token.authenticationTokenFactory" value="com.ibm.ws.security.ltpa.LTPATokenFactory" required="false"/>
+  <properties xmi:id="Property_33" name="com.ibm.wsspi.security.token.authorizationTokenFactory" value="com.ibm.ws.security.ltpa.AuthzPropTokenFactory" required="false"/>
+  <properties xmi:id="Property_34" name="com.ibm.wsspi.security.token.propagationTokenFactory" value="com.ibm.ws.security.ltpa.AuthzPropTokenFactory" required="false"/>
+  <properties xmi:id="Property_35" name="com.ibm.wsspi.security.token.singleSignonTokenFactory" value="com.ibm.ws.security.ltpa.LTPAToken2Factory" required="false"/>
+  <properties xmi:id="Property_42" name="com.ibm.ws.security.webChallengeIfCustomSubjectNotFound" value="true" required="false"/>
+  <properties xmi:id="Property_43" name="com.ibm.security.useFIPS" value="false" required="false"/>
+  <properties xmi:id="Property_44" name="com.ibm.websphere.security.DeferTAItoSSO" value="com.ibm.ws.security.spnego.TrustAssociationInterceptorImpl" description="Trust Association Interceptors in this list will be invoked after Single Sign On user validation." required="false"/>
+  <properties xmi:id="Property_45" name="com.ibm.ws.security.propagationExcludeList" value="com.ibm.security.jgss.*:javax.security.auth.kerberos.KerberosKey:javax.security.auth.kerberos.KerberosTicket" description="JGSS credential is not serializable. Do not propagate Kerberos ticket and key" required="false"/>
+  <properties xmi:id="Property_46" name="com.ibm.websphere.security.krb.allowLTPAAuth" value="true" description="Allow LTPA authentication when Kerberos is an active authentication mechanism" required="false"/>
+  <properties xmi:id="Property_47" name="com.ibm.websphere.security.krb.canonical_host" value="true" description="Use canonical host name and key to validate the SPNEGO request" required="false"/>
+  <properties xmi:id="Property_1493662414133" name="com.ibm.ssl.defaultCertReqSubjectDN" value="cn=prplndmsrvr1.csplab.local,ou=prplndmsrvr1Cell01,ou=prplndmsrvr1CellManager01,o=IBM,c=US"/>
+  <properties xmi:id="Property_1493662414148" name="com.ibm.ssl.rootCertSubjectDN" value="cn=prplndmsrvr1.csplab.local,ou=Root Certificate,ou=prplndmsrvr1Cell01,ou=prplndmsrvr1CellManager01,o=IBM,c=US"/>
+  <properties xmi:id="Property_1493662414165" name="com.ibm.ssl.rootCertValidDays" value="5475"/>
+  <properties xmi:id="Property_1493662414177" name="com.ibm.ssl.defaultCertReqDays" value="365"/>
+  <certificates xmi:id="Certificate_1" alias="default" keyStore="KeyStore_7"/>
+</security:Security>

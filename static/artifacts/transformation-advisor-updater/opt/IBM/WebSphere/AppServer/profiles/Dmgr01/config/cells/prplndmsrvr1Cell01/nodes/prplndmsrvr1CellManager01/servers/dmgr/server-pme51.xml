@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmeserver:PME51ServerExtension xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:pmeserver="http://www.ibm.com/websphere/appserver/schemas/5.0/pmeserver.xmi" xmi:id="PME51ServerExtension_1">
+  <compensationService xmi:id="CompensationService_1" enable="false" compensationHandlerRetryLimit="-1" compensationHandlerRetryInterval="30"/>
+  <workAreaPartitionService xmi:id="WorkAreaPartitionService_1" enable="false"/>
+</pmeserver:PME51ServerExtension>

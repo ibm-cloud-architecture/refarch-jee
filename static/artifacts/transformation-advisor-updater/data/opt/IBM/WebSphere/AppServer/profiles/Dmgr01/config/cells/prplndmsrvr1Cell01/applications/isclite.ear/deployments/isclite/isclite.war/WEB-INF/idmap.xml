@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idmap:mappings xmlns:idmap="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-idmap.xsd">
+  <idmap:module uniqueName="com.ibm.isclite.ISCAdminPortlet">
+    <idmap:page name="isclite:hidden:page-SPSVS-com.ibm.isclite.portletpref.layoutElement.A">
+      <idmap:window name="com.ibm.isclite.portletpref.window.A" pii="14394319"/>
+    </idmap:page>
+    <idmap:page name="isclite:hidden:page-SPSVS-com.ibm.isclite.welcomeportlet.layoutElement.A">
+      <idmap:window name="com.ibm.isclite.welcomeportlet.window.1" pii="-1809308291"/>
+      <idmap:window name="com.ibm.isclite.welcomeportlet.window.2" pii="-1809308290"/>
+    </idmap:page>
+  </idmap:module>
+  <idmap:module uniqueName="com.ibm.portlet.ear.wim">
+    <idmap:page name="com.ibm.wim.management.navigationElement.groups-SPSVS-com.ibm.wim.management.layoutElement.groups">
+      <idmap:window name="com.ibm.wim.management.window.groups" pii="1134559554"/>
+    </idmap:page>
+    <idmap:page name="com.ibm.wim.management.navigationElement.users-SPSVS-com.ibm.wim.management.layoutElement.users">
+      <idmap:window name="com.ibm.wim.management.window.users" pii="-890388762"/>
+    </idmap:page>
+  </idmap:module>
+  <idmap:module uniqueName="com.ibm.websphere.product">
+    <idmap:page name="isclite:hidden:page-SPSVS-com.ibm.websphere.product.layoutElement.A">
+      <idmap:window name="com.ibm.websphere.product.window.A" pii="1596276050"/>
+    </idmap:page>
+  </idmap:module>
+</idmap:mappings>

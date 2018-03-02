@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<topology.nodegroup:NodeGroup xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:topology.nodegroup="http://www.ibm.com/websphere/appserver/schemas/6.0/topology.nodegroup.xmi" xmi:id="builtin_DefaultNodeGroup" name="DefaultNodeGroup" description="WebSphere Default Node Group.">
+  <members xmi:id="NodeGroupMember_1073317248558" nodeName="prplndmsrvr1Node01"/>
+</topology.nodegroup:NodeGroup>

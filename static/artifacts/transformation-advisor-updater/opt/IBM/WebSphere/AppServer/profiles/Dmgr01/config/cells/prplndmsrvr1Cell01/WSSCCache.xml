@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache:SCClientCache xmlns:cache="http://www.ibm.com/xmlns/prod/websphere/200608/WsSecureConversation/cache">
+        <cache:Configuration>
+		<cache:Property Name="renewIntervalBeforeTimeoutMinutes" Value="10"/>
+		<cache:Property Name="minutesInCacheAfterTimeout" Value="10"/>
+	        <cache:Property Name="distributedCache" Value="false"/>
+	</cache:Configuration>
+</cache:SCClientCache>

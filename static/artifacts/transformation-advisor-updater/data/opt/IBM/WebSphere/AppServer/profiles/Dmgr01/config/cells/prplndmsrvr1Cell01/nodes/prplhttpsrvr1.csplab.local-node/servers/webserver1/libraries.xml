@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libraries:Library xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:libraries="http://www.ibm.com/websphere/appserver/schemas/5.0/libraries.xmi" xmi:id="Library_1493369867871" name="IBM WebSphere Application Server traditional V7.0 JAX-RS Library">
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/httpcore.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/jcl-over-slf4j.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/commons-lang.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/ibm-wink-jaxrs.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/slf4j-jdk14.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/slf4j-api.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/jsr311-api.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/httpclient.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/webdav/wink-jaxrs-webdav.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/jackson/jackson-core-asl.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/jackson/jackson-mapper-asl.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/jackson/jackson-jaxrs.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/web2mobilefep_1.1/optionalLibraries/jaxrs_1.X/jackson/jackson-xc.jar</classPath>
+</libraries:Library>

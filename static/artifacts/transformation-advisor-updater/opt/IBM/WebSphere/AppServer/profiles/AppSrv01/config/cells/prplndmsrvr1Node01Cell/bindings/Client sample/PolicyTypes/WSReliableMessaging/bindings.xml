@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rmBinding:busConfiguration xmlns:rmBinding="http://www.ibm.com/websphere/webservices/wsrmPolicyBinding" xmlns:rmPolicy="http://www.ibm.com/websphere/webservices/wsrmPolicySet">
+    <rmBinding:busName></rmBinding:busName>
+    <rmBinding:messagingEngineName></rmBinding:messagingEngineName>
+</rmBinding:busConfiguration>

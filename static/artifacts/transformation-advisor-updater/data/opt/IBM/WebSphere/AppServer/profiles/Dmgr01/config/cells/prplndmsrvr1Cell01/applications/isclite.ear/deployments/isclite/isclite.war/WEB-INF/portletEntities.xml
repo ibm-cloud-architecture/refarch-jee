@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portletentities:ibm-portal-portletentities xmlns:base="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd" xmlns:portletentities="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-portletentities.xsd">
+  <portletentities:application-definition appID="com.ibm.isclite.ISCAdminPortlet" version="6.1.0.0">
+    <portletentities:portlet-definition resourceLinkRef="1388159033" uniqueName="com.ibm.isclite.portletpref.appElementDefinition.A">
+      <portletentities:portlet-entity uniqueName="com.ibm.isclite.portletpref.appElement.A">
+        <portletentities:title>
+          <base:nls-ref key="mytask.xml.portlet" locationName="classes/nls/PortletResources"/>
+        </portletentities:title>
+        <portletentities:access-control application-role="all authenticated portal users" role-type="Privileged User"/>
+        <portletentities:access-control application-role="iscadmins" role-type="Privileged User"/>
+      </portletentities:portlet-entity>
+    </portletentities:portlet-definition>
+    <portletentities:portlet-definition resourceLinkRef="79746353" uniqueName="com.ibm.isclite.identityportlet.appElementDefinition.A">
+      <portletentities:portlet-entity uniqueName="com.ibm.isclite.identityportlet.appElement.A">
+        <portletentities:title>
+          <base:nls-ref key="consoleIdentity.xml.portlet" locationName="classes/nls/PortletResources"/>
+        </portletentities:title>
+        <portletentities:portlet-window-identifier uniqueName="-1035398910"/>
+        <portletentities:access-control application-role="administrator" role-type="Privileged User"/>
+        <portletentities:access-control application-role="iscadmins" role-type="Privileged User"/>
+      </portletentities:portlet-entity>
+    </portletentities:portlet-definition>
+    <portletentities:portlet-definition resourceLinkRef="1099256734" uniqueName="com.ibm.isclite.welcomeportlet.appElementDefinition.A">
+      <portletentities:portlet-entity uniqueName="com.ibm.isclite.welcomeportlet.appElement.A">
+        <portletentities:title>
+          <base:nls-ref key="welcome.xml.portlet" locationName="classes/nls/PortletResources"/>
+        </portletentities:title>
+        <portletentities:access-control application-role="all authenticated portal users" role-type="Privileged User"/>
+        <portletentities:access-control application-role="iscadmins" role-type="Privileged User"/>
+      </portletentities:portlet-entity>
+    </portletentities:portlet-definition>
+    <portletentities:portlet-definition resourceLinkRef="-1897085334" uniqueName="com.ibm.isclite.welcomeportlet.appElementDefinition.B">
+      <portletentities:portlet-entity uniqueName="com.ibm.isclite.welcomeportlet.appElement.B">
+        <portletentities:title>
+          <base:nls-ref key="iscVersionPtltTitle" locationName="classes/nls/PortletResources"/>
+        </portletentities:title>
+        <portletentities:access-control application-role="all authenticated portal users" role-type="Privileged User"/>
+        <portletentities:access-control application-role="iscadmins" role-type="Privileged User"/>
+      </portletentities:portlet-entity>
+    </portletentities:portlet-definition>
+  </portletentities:application-definition>
+  <portletentities:application-definition appID="com.ibm.websphere.product" version="6.1.0.0">
+    <portletentities:portlet-definition resourceLinkRef="1082909733" uniqueName="com.ibm.websphere.product.appElementDefinition.A">
+      <portletentities:title>
+        <base:nls-ref key="wasportlet.page.title" locationName="classes/nls/PortletResources"/>
+      </portletentities:title>
+      <portletentities:portlet-entity uniqueName="com.ibm.websphere.product.appElement.A">
+        <portletentities:title>
+          <base:nls-ref key="wasportlet.portlet.title" locationName="classes/nls/PortletResources"/>
+        </portletentities:title>
+      </portletentities:portlet-entity>
+    </portletentities:portlet-definition>
+  </portletentities:application-definition>
+  <portletentities:application-definition appID="com.ibm.portlet.ear.wim" version="6.1">
+    <portletentities:portlet-definition resourceLinkRef="-172252696" uniqueName="com.ibm.wim.management.appElementDefinition.groups">
+      <portletentities:title>
+        <base:nls-ref key="manageGroups" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+      </portletentities:title>
+      <portletentities:portlet-entity uniqueName="com.ibm.wim.management.appElement.groups">
+        <portletentities:title>
+          <base:nls-ref key="manageGroups" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+        </portletentities:title>
+        <portletentities:portlet-window-identifier uniqueName="1134559554"/>
+        <portletentities:access-control application-role="iscadmins" role-type="Privileged User"/>
+        <portletentities:access-control application-role="administrator" role-type="Privileged User"/>
+      </portletentities:portlet-entity>
+    </portletentities:portlet-definition>
+    <portletentities:portlet-definition resourceLinkRef="984073182" uniqueName="com.ibm.wim.management.appElementDefinition.users">
+      <portletentities:title>
+        <base:nls-ref key="manageUsers" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+      </portletentities:title>
+      <portletentities:portlet-entity uniqueName="com.ibm.wim.management.appElement.users">
+        <portletentities:title>
+          <base:nls-ref key="manageUsers" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+        </portletentities:title>
+        <portletentities:portlet-window-identifier uniqueName="-890388762"/>
+        <portletentities:access-control application-role="iscadmins" role-type="Privileged User"/>
+        <portletentities:access-control application-role="administrator" role-type="Privileged User"/>
+      </portletentities:portlet-entity>
+    </portletentities:portlet-definition>
+  </portletentities:application-definition>
+  <portletentities:resource-link name="PortletPref" portletApplication="com.ibm.isclite.ISCAdminPortlet" type="static" uniqueName="1388159033"/>
+  <portletentities:resource-link name="WelcomePortlet" portletApplication="com.ibm.isclite.ISCAdminPortlet" type="static" uniqueName="1099256734"/>
+  <portletentities:resource-link name="ISCProductDetails" portletApplication="com.ibm.isclite.ISCAdminPortlet" type="static" uniqueName="-1897085334"/>
+  <portletentities:resource-link name="ConsoleIdentityPortlet" portletApplication="com.ibm.isclite.ISCAdminPortlet" type="static" uniqueName="79746353"/>
+  <portletentities:resource-link name="WASAboutPortlet" portletApplication="com.ibm.websphere.product" type="static" uniqueName="1082909733"/>
+  <portletentities:resource-link name="WIM User Management" portletApplication="com.ibm.wim.management.users.5fdb94f930" type="static" uniqueName="984073182"/>
+  <portletentities:resource-link name="WIM Group Management" portletApplication="com.ibm.wim.management.users.5fdb94f930" type="static" uniqueName="-172252696"/>
+</portletentities:ibm-portal-portletentities>

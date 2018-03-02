@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rolebasedauthz="http://www.ibm.com/websphere/appserver/schemas/5.0/rolebasedauthz.xmi">
+  <xmi:Documentation>
+    <contact>{Your Contact Info}</contact>
+  </xmi:Documentation>
+  <rolebasedauthz:AuthorizationTableExt xmi:id="AuthorizationTableExt_1" context="domain">
+    <authorizations xmi:id="RoleAssignmentExt_1" role="SecurityRoleExt_1">
+      <specialSubjects xmi:type="rolebasedauthz:ServerExt" xmi:id="ServerExt_1"/>
+      <specialSubjects xmi:type="rolebasedauthz:PrimaryAdminExt" xmi:id="PrimaryAdminExt_1"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignmentExt_2" role="SecurityRoleExt_2"/>
+    <authorizations xmi:id="RoleAssignmentExt_3" role="SecurityRoleExt_3"/>
+    <authorizations xmi:id="RoleAssignmentExt_4" role="SecurityRoleExt_4"/>
+    <authorizations xmi:id="RoleAssignmentExt_5" role="SecurityRoleExt_5"/>
+    <authorizations xmi:id="RoleAssignmentExt_6" role="SecurityRoleExt_6">
+      <specialSubjects xmi:type="rolebasedauthz:ServerExt" xmi:id="ServerExt_2"/>
+      <specialSubjects xmi:type="rolebasedauthz:PrimaryAdminExt" xmi:id="PrimaryAdminExt_2"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignmentExt_7" role="SecurityRoleExt_7"/>
+    <authorizations xmi:id="RoleAssignmentExt_8" role="SecurityRoleExt_8"/>
+    <roles xmi:id="SecurityRoleExt_1" roleName="administrator"/>
+    <roles xmi:id="SecurityRoleExt_2" roleName="operator"/>
+    <roles xmi:id="SecurityRoleExt_3" roleName="configurator"/>
+    <roles xmi:id="SecurityRoleExt_4" roleName="monitor"/>
+    <roles xmi:id="SecurityRoleExt_5" roleName="deployer"/>
+    <roles xmi:id="SecurityRoleExt_6" roleName="adminsecuritymanager"/>
+    <roles xmi:id="SecurityRoleExt_7" roleName="nobody"/>
+    <roles xmi:id="SecurityRoleExt_8" roleName="iscadmins"/>
+  </rolebasedauthz:AuthorizationTableExt>
+</xmi:XMI>

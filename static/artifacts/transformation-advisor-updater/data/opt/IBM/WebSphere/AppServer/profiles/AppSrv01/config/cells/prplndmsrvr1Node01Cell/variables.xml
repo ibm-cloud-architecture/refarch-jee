@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<variables:VariableMap xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:variables="http://www.ibm.com/websphere/appserver/schemas/5.0/variables.xmi" xmi:id="VariableMap_1">
+  <entries xmi:id="VariableSubstitutionEntry_1" symbolicName="WAS_CELL_NAME" value="prplndmsrvr1Node01Cell" description="WAS cell name"/>
+</variables:VariableMap>

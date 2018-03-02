@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright IBM Corp. This is the DTD For the WebSphere product version data 
+files that contain product installation information. -->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:annotation>
+        <xsd:documentation>
+        Copyright IBM Corp, 2002.  This is the DTD For the WebSphere V5.0
+        product version data files that contain product installation information.
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:element name="efix-driver">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="apar-info" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="component-update" minOccurs="1" maxOccurs="unbounded"/>
+                <xsd:element ref="platform-prereq" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="product-prereq" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="efix-prereq" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="custom-property" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type ="xsd:string" use="required"/>
+            <xsd:attribute name="short-description" type="xsd:string" use="required"/>
+            <xsd:attribute name="long-description" type="xsd:string" use="required"/>
+            <xsd:attribute name="is-trial" type="xsd:boolean" use="required" default="false"/>
+            <xsd:attribute name="expiration-date" type ="xsd:date" default=""/> 
+            <xsd:attribute name="build-version" type ="xsd:string" use="required"/>
+            <xsd:attribute name="build-date" type ="xsd:date" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="apar-info">
+        <xsd:sequence>
+            <xsd:element ref="custom-property" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="number" type ="xsd:string" use="required"/>
+        <xsd:attribute name="date" type ="xsd:date" use="required"/>
+        <xsd:attribute name="short-description" type="xsd:string" use="required"/>
+        <xsd:attribute name="long-description" type="xsd:string" default="""/>
+    </xsd:element>
+
+    <xsd:element name="ptf-driver">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="component-update" minOccurs="1" maxOccurs="unbounded"/>
+                <xsd:element ref="product-update" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="platform-prereq" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="product-prereq" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="included-efix" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="custom-property" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type ="xsd:string" use="required"/>
+            <xsd:attribute name="short-description" type="xsd:string" use="required"/>
+            <xsd:attribute name="long-description" type="xsd:string" use="required"/>
+            <xsd:attribute name="build-version" type ="xsd:string" use="required"/>
+            <xsd:attribute name="build-date" type ="xsd:date" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="component-update">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="component-prereq" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="final-version" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="custom-property" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="component-name" type ="xsd:string" use="required"/>
+            <xsd:attribute name="update-type" type="update-type" use="required"/>
+            <xsd:attribute name="is-required" type ="xsd:boolean" use="required" default="true"/>
+            <xsd:attribute name="is-recommended" type ="xsd:boolean" use="required" default="true"/>
+            <xsd:attribute name="is-optional" type ="xsd:boolean" use="required" default="false"/>
+            <xsd:attribute name="is-external" type ="xsd:boolean" use="required" default="true"/>
+            <xsd:attribute name="root-property-file" type ="xsd:anyURL" default=""/>
+            <xsd:attribute name="root-property-name" type ="xsd:string" default=""/>
+            <xsd:attribute name="root-property-value" type ="xsd:string" default=""/>
+            <xsd:attribute name="is-custom" type ="xsd:boolean" use="required" default="false"/>
+            <xsd:attribute name="primary-content" type ="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="efix-prereq">
+        <xsd:complexType>
+            <xsd:attribute name="efix-id" type="xsd:string" use="required"/>
+            <xsd:attribute name="is-negative" type ="xsd:boolean" use="required" default="false"/>
+            <xsd:attribute name="install-index" type="xsd:string" default=""/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="product-update">
+        <xsd:complexType>
+            <xsd:attribute name="product-id" type ="xsd:string" use="required"/>
+            <xsd:attribute name="product-name" type ="xsd:string" use="required"/>
+            <xsd:attribute name="build-version" type ="xsd:string" use="required"/>
+            <xsd:attribute name="build-date" type ="xsd:date" use="required"/>
+            <xsd:attribute name="build-level" type ="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="platform-prereq">
+        <xsd:complexType>
+            <xsd:attribute name="architecture" type ="xsd:string" use="required"/>
+            <xsd:attribute name="os-platform" type ="xsd:string" default=""/>
+            <xsd:attribute name="os-version" type ="xsd:string" default=""/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="product-prereq">
+        <xsd:complexType>
+            <xsd:attribute name="product-id" type ="xsd:string" default=""/>
+            <xsd:attribute name="build-version" type ="xsd:string" default=""/>
+            <xsd:attribute name="build-date" type ="xsd:date" default=""/>
+            <xsd:attribute name="build-level" type ="xsd:string" default=""/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="component-prereq">
+        <xsd:complexType>
+            <xsd:attribute name="component-name" type ="xsd:string" use="required"/>
+            <xsd:attribute name="spec-version" type ="xsd:string" default=""/>
+            <xsd:attribute name="build-version" type ="xsd:string" default=""/>
+            <xsd:attribute name="build-date" type ="xsd:date" default=""/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="included-efix">
+        <xsd:complexType>
+            <xsd:attribute name="efix-id" type ="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="custom-property">
+        <xsd:complexType>
+            <xsd:attribute name="property-name" type ="xsd:string" use="required"/>
+            <xsd:attribute name="property-type" type ="xsd:string" use="required"/>
+            <xsd:attribute name="property-value" type ="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="efix-applied">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="component-applied" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="efix-id" type ="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="ptf-applied">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ptf-applied" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="ptf-id" type ="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="component-applied">
+        <xsd:complexType>
+            <xsd:attribute name="component-name" type="xsd:string" use="required"/>
+            <xsd:attribute name="update-type" type="update-type" use="required"/>
+            <xsd:attribute name="is-required" type ="xsd:boolean" use="required" default="true"/>
+            <xsd:attribute name="is-optional" type ="xsd:boolean" use="required" default="false"/>
+            <xsd:attribute name="is-external" type ="xsd:boolean" use="required" default="false"/>
+            <xsd:attribute name="root-property-file" type ="xsd:anyURL" default=""/>
+            <xsd:attribute name="root-property-name" type ="xsd:string" default=""/>
+            <xsd:attribute name="root-property-value" type ="xsd:string" default=""/>
+            <xsd:attribute name="log-name" type="xsd:anyURL" use="required"/>
+            <xsd:attribute name="backup-name" type="xsd:anyURL" use="required"/>
+            <xsd:attribute name="time-stamp" type="xsd:date" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="initial-version">
+        <xsd:complexType>
+            <xsd:attribute name="component-name" type="xsd:string" use="required"/>
+            <xsd:attribute name="spec-version" type ="xsd:string" use="required"/>
+            <xsd:attribute name="build-version" type ="xsd:string" use="required"/>
+            <xsd:attribute name="build-date" type ="xsd:date" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="final-version">
+        <xsd:complexType>
+            <xsd:attribute name="component-name" type="xsd:string" use="required"/>
+            <xsd:attribute name="spec-version" type ="xsd:string" use="required"/>
+            <xsd:attribute name="build-version" type ="xsd:string" use="required"/>
+            <xsd:attribute name="build-date" type ="xsd:date" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="update-type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="add"/>
+            <xsd:enumeration value="replace"/>
+            <xsd:enumeration value="remove"/>
+            <xsd:enumeration value="patch"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
+

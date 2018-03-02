@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<securityBindings xmlns="http://www.ibm.com/xmlns/prod/websphere/200710/ws-securitybinding">
+  <securityBinding name="application">
+    <securityOutboundBindingConfig>
+      <signingInfo order="1" name="symmetric-signingInfoResponse">
+        <signingPartReference reference="response:app_signparts">
+          <transform algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+        </signingPartReference>
+        <signingKeyInfo reference="gen_signkeyinfo"/>
+      </signingInfo>
+      <keyInfo type="STRREF" name="gen_signkeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentGenerator">
+        <tokenReference reference="SymmetricGenerator"/>
+      <derivedKeyInfo>
+          <requireDerivedKeys/>
+          <requireExplicitDerivedKeys/>
+      </derivedKeyInfo>
+      </keyInfo>
+      <tokenGenerator name="SymmetricGenerator" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator">
+      <valueType localName="http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct" uri="" />
+        <callbackHandler classname="com.ibm.ws.wssecurity.impl.auth.callback.WSTrustCallbackHandler">
+      </callbackHandler>
+        <jAASConfig configName="system.wss.generate.sct"/>
+      </tokenGenerator>
+      <encryptionInfo order="3" name="symmetric-encryptionInfoResponse">
+        <encryptionPartReference reference="response:app_encparts">
+          <dataEncryptionKeyInfo reference="gen_enckeyinfo"/>
+        </encryptionPartReference>
+      </encryptionInfo>
+      <keyInfo type="STRREF" name="gen_enckeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentGenerator">
+        <tokenReference reference="SymmetricGenerator"/>
+      <derivedKeyInfo>
+          <requireDerivedKeys/>
+          <requireExplicitDerivedKeys/>
+      </derivedKeyInfo>
+      </keyInfo>
+    </securityOutboundBindingConfig>
+    <securityInboundBindingConfig>
+      <encryptionInfo name="symmetric-encryptionInfoRequest">
+        <encryptionPartReference reference="request:app_encparts">
+          <dataEncryptionKeyInfo reference="dec_keyinfo"/>
+        </encryptionPartReference>
+      </encryptionInfo>
+      <keyInfo name="dec_keyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentConsumer">
+        <tokenReference reference="SymmetricConsumer"/>
+      <derivedKeyInfo>
+          <requireDerivedKeys/>
+          <requireExplicitDerivedKeys/>
+      </derivedKeyInfo>
+      </keyInfo>
+      <tokenConsumer classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer" name="SymmetricConsumer">
+      <valueType localName="http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct" uri="" />
+        <callbackHandler classname="com.ibm.ws.wssecurity.impl.auth.callback.SCTConsumeCallbackHandler"/>
+        <jAASConfig configName="system.wss.consume.sct"/>
+      </tokenConsumer>
+      <signingInfo name="symmetric-SigningInfoRequest">
+        <signingPartReference reference="request:app_signparts">
+          <transform algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+        </signingPartReference>
+        <signingKeyInfo reference="con_signkeyinfo"/>
+      </signingInfo>
+      <keyInfo name="con_signkeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentConsumer">
+        <tokenReference reference="SymmetricConsumer"/>
+      <derivedKeyInfo>
+          <requireDerivedKeys/>
+          <requireExplicitDerivedKeys/>
+      </derivedKeyInfo>
+      </keyInfo>
+    </securityInboundBindingConfig>
+  </securityBinding>
+</securityBindings>

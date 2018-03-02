@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-jar PUBLIC "-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN" "http://java.sun.com/dtd/ejb-jar_2_0.dtd">
+<ejb-jar id="ejb-jar_ID">
+      <description>Contains the Increment EJB module used by the IBM WebSphere Application Server DefaultApplication.</description>
+      <display-name>Increment EJB module</display-name>
+      <enterprise-beans>
+         <entity id="ContainerManagedEntity_1">
+            <description>This is the CMP EJB module used by the HitCount demonstration in the IBM WebSphere Application Server DefaultApplication.</description>
+            <display-name>Increment EJB module</display-name>
+            <ejb-name>Increment</ejb-name>
+            <home>com.ibm.defaultapplication.IncrementHome</home>
+            <remote>com.ibm.defaultapplication.Increment</remote>
+            <ejb-class>com.ibm.defaultapplication.IncrementBean</ejb-class>
+            <persistence-type>Container</persistence-type>
+            <prim-key-class>com.ibm.defaultapplication.IncrementKey</prim-key-class>
+            <reentrant>False</reentrant>
+            <cmp-version>2.x</cmp-version>
+            <abstract-schema-name>Increment</abstract-schema-name>
+            <cmp-field id="CMPAttribute_1">
+               <field-name>primaryKey</field-name>
+            </cmp-field>
+            <cmp-field id="CMPAttribute_2">
+               <field-name>theValue</field-name>
+            </cmp-field>
+         </entity>
+      </enterprise-beans>
+      <assembly-descriptor id="AssemblyDescriptor_1">
+      </assembly-descriptor>
+   </ejb-jar>

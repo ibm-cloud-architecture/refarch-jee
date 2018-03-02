@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ibm.ejs.models.base.bindings.applicationbnd:ApplicationBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com.ibm.ejs.models.base.bindings.applicationbnd="applicationbnd.xmi" xmi:id="Application_ID_Bnd" appName="ivtApp">
+  <authorizationTable xmi:id="AuthorizationTable_1">
+    <authorizations xmi:id="RoleAssignment_1">
+      <specialSubjects xmi:type="com.ibm.ejs.models.base.bindings.applicationbnd:AllAuthenticatedUsers" xmi:id="AllAuthenticatedUsers_1183122155328" name="AllAuthenticatedUsers"/>
+      <role href="META-INF/application.xml#SecurityRole_1183122155328"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_2">
+      <specialSubjects xmi:type="com.ibm.ejs.models.base.bindings.applicationbnd:Everyone" xmi:id="Everyone_1183122155328" name="Everyone"/>
+      <role href="META-INF/application.xml#SecurityRole_1183122155329"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1183122155328">
+      <role href="META-INF/application.xml#SecurityRole_1183122155330"/>
+    </authorizations>
+  </authorizationTable>
+  <application href="META-INF/application.xml#Application_ID"/>
+</com.ibm.ejs.models.base.bindings.applicationbnd:ApplicationBinding>

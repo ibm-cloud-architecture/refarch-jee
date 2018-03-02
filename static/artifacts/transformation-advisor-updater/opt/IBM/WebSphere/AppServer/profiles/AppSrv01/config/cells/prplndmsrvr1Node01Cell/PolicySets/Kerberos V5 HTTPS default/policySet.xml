@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ps:PolicySet xmlns:ps="http://www.ibm.com/xmlns/prod/websphere/200605/policyset" xmlns:psa="http://www.ibm.com/xmlns/prod/websphere/200605/policysetattachment" version="7.0.0.0" type="application" name="Kerberos V5 HTTPS default" description="$KEY_policySetDescription020" default="true">
+    <ps:PolicyType type="WSSecurity" provides="" enabled="true"></ps:PolicyType>
+    <ps:PolicyType type="SSLTransport" provides="" enabled="true"></ps:PolicyType>
+    <ps:PolicyType type="WSAddressing" provides="" enabled="true"></ps:PolicyType>
+</ps:PolicySet>

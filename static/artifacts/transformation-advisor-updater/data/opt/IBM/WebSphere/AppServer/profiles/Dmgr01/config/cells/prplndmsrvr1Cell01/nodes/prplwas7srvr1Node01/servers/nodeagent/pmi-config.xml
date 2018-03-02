@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmiservice:PMIModule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:pmiservice="http://www.ibm.com/websphere/appserver/schemas/6.0/pmiservice.xmi" xmi:id="PMIModule_1" moduleName="pmi" type="" enable="" >
+  
+  <pmimodules xmi:id="PMIModule_101" moduleName="DCSStats.Group" type="com.ibm.ws.dcs.stat.DCSStats" enable="" />  
+  <pmimodules xmi:id="PMIModule_102" moduleName="hamanagerModule" type="hamanagerModule" enable="" />  
+  <pmimodules xmi:id="PMIModule_103" moduleName="jvmRuntimeModule" type="jvmRuntimeModule" enable="4,1,3,5" />  
+  <pmimodules xmi:id="PMIModule_104" moduleName="orbPerfModule" type="orbPerfModule#" enable="">
+    <pmimodules xmi:id="PMIModule_130" moduleName="orbPerfModule.interceptors" type="orbPerfModule#orbPerfModule.interceptors" enable=""/>
+  </pmimodules>
+  <pmimodules xmi:id="PMIModule_105" moduleName="systemModule" type="systemModule" enable="1" />
+  <pmimodules xmi:id="PMIModule_106" moduleName="threadPoolModule" type="threadPoolModule" enable="4" />  
+  <pmimodules xmi:id="PMIModule_107" moduleName="wlmModule" type="wlmModule#" enable="">
+        <pmimodules xmi:id="PMIModule_108" moduleName="wlmModule.client" type="wlmModule#wlmModule.client" enable="" />
+        <pmimodules xmi:id="PMIModule_109" moduleName="wlmModule.server" type="wlmModule#wlmModule.server" enable="" />
+  </pmimodules>  
+</pmiservice:PMIModule>

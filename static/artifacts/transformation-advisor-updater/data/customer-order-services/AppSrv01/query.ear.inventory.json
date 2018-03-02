@@ -1,0 +1,180 @@
+{
+   "report": "inventory",
+   "version": "2.2",
+   "options": [
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "applications": [
+      "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/query.ear/query.ear"
+   ],
+   "sharedLibraries": [
+   ],
+   "archives": {
+      "ears": 1,
+      "wars": 0,
+      "rars": 0,
+      "ejbs": 1,
+      "webFragments": 0,
+      "utilityJars": 0,
+      "appClients": 0
+   },
+   "summary": {
+      "servlets": 0,
+      "jsps": 0,
+      "jpaEntities": 0,
+      "bmpEntityBeans": 0,
+      "cmpEntityBeans": 0,
+      "messageDrivenBeans": 0,
+      "singletonSessionBeans": 0,
+      "statefulSessionBeans": 0,
+      "statelessSessionBeans": 1,
+      "jaxrpcConsumers": 0,
+      "jaxrpcProviders": 0,
+      "jaxrsConsumers": 0,
+      "jaxrsProviders": 0,
+      "jaxwsConsumers": 0,
+      "jaxwsProviders": 0
+   },
+   "archiveInventory": [
+      {
+         "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/query.ear/query.ear",
+         "moduleType": "Enterprise archive",
+         "moduleVersion": "1.3",
+         "metadataComplete": null,
+         "archives": {
+            "wars": 0,
+            "rars": 0,
+            "ejbs": 1,
+            "utilityJars": 0,
+            "appClients": 0
+         },
+         "summary": {
+            "servlets": 0,
+            "jsps": 0,
+            "jpaEntities": 0,
+            "bmpEntityBeans": 0,
+            "cmpEntityBeans": 0,
+            "messageDrivenBeans": 0,
+            "singletonSessionBeans": 0,
+            "statefulSessionBeans": 0,
+            "statelessSessionBeans": 1,
+            "jaxrpcConsumers": 0,
+            "jaxrpcProviders": 0,
+            "jaxrsConsumers": 0,
+            "jaxrsProviders": 0,
+            "jaxwsConsumers": 0,
+            "jaxwsProviders": 0
+         },
+         "potentialDeploymentProblemsSummary": {
+            "archivesContainingDuplicateClasses": 0,
+            "archivesContainingJavaEEorSEClasses": 1,
+            "archivesContainingConflictingOpenSourceSoftwareClasses": 0,
+            "archivesContainingWebSphereClasses": 1,
+            "archivesNotReferencedInTheApplication": 0,
+            "archivesWithMissingDependenciesInTheApplication": 1,
+            "classesWithSystemLevelJVMConfiguration": 0,
+            "sharedLibrariesReferencingApplicationClasses": 0
+         },
+         "potentialDeploymentProblemsDetails": [
+            {
+               "duplicateClassesWithinClassLoader": [
+               ]
+            },
+            {
+               "duplicateClassesAcrossApplication": [
+               ]
+            },
+            {
+               "javaEEandSEClasses": [
+                  {
+                     "conflictingPackages": [
+                        "org.omg.stub.java.lang",
+                        "org.omg.stub.java.util",
+                        "org.omg.stub.javax.ejb"
+                     ],
+                     "packageLocation": [
+                        "querybean.jar"
+                     ]
+                  }
+               ]
+            },
+            {
+               "duplicateWebSphereClasses": [
+                  {
+                     "conflictingPackages": [
+                        "com.ibm.websphere.csi",
+                        "com.ibm.websphere.ejbquery"
+                     ],
+                     "packageLocation": [
+                        "querybean.jar"
+                     ]
+                  }
+               ]
+            },
+            {
+               "openSourceSoftwareClasses": [
+               ]
+            },
+            {
+               "archivesNotReferenced": [
+               ]
+            },
+            {
+               "missingDependencies": [
+                  {
+                     "missingDependencies": [
+                        "com.ibm.ObjectQuery.engine"
+                     ],
+                     "archive": [
+                        "querybean.jar"
+                     ]
+                  }
+               ]
+            },
+            {
+               "classesWithSystemLevelJVMConfiguration": [
+               ]
+            },
+            {
+               "sharedLibraryDependencies": [
+               ]
+            }
+         ],
+         "performanceConsiderations": {
+            "archivesThatAreCandidatesForMetadataCompleteTrueAttribute": [
+            ],
+            "webModulesWithExcessiveClassFiles": [
+            ],
+            "webModulesWithExcessiveStaticResources": [
+            ]
+         },
+         "containedArchiveInventory": [
+            {
+               "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/query.ear/query.ear/querybean.jar",
+               "moduleType": "EJB module",
+               "moduleVersion": "2.0",
+               "metadataComplete": "true",
+               "summary": {
+                  "servlets": 0,
+                  "jsps": 0,
+                  "jpaEntities": 0,
+                  "bmpEntityBeans": 0,
+                  "cmpEntityBeans": 0,
+                  "messageDrivenBeans": 0,
+                  "singletonSessionBeans": 0,
+                  "statefulSessionBeans": 0,
+                  "statelessSessionBeans": 1,
+                  "jaxrpcConsumers": 0,
+                  "jaxrpcProviders": 0,
+                  "jaxrsConsumers": 0,
+                  "jaxrsProviders": 0,
+                  "jaxwsConsumers": 0,
+                  "jaxwsProviders": 0
+               }
+            }
+         ]
+      }
+   ],
+   "sharedLibraryDetails": [
+   ]
+}

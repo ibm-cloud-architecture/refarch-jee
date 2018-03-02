@@ -1,0 +1,7 @@
+// WebSphere Application Server Security Policy for the Default Application
+
+// Required for Snoop Servlet's call to get User Name from getUserPrincipal()
+grant codeBase "file:DefaultWebApplication.war" {
+  permission java.security.SecurityPermission "printIdentity";
+};
+

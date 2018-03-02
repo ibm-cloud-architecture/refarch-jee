@@ -1,0 +1,627 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE tuningRules[
+<!ELEMENT generalAttribute (#PCDATA)>
+<!ATTLIST generalAttribute name CDATA #IMPLIED>
+<!ATTLIST generalAttribute type CDATA #IMPLIED>
+<!ELEMENT runtimeAttribute (#PCDATA)>
+<!ATTLIST runtimeAttribute name CDATA #IMPLIED>
+<!ATTLIST runtimeAttribute type CDATA #IMPLIED>
+
+<!ELEMENT ruleEngine (runtimeAttribute+,generalAttribute+)>
+<!ATTLIST ruleEngine id CDATA #IMPLIED>
+
+<!ELEMENT class (#PCDATA)>
+<!ELEMENT enabled (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT nlsKey_component (#PCDATA)>
+<!ELEMENT nlsKey_name (#PCDATA)>
+<!ELEMENT param (#PCDATA)>
+<!ATTLIST param name CDATA #IMPLIED>
+<!ELEMENT type (#PCDATA)>
+
+<!ELEMENT rule (name,type,enabled,nlsKey_name,nlsKey_component,class,param*)>
+<!ATTLIST rule id CDATA #IMPLIED>
+<!ELEMENT tuningRules (ruleEngine,rule+)>
+]>
+
+
+<tuningRules>
+   <ruleEngine id="EngineParameters">
+        <runtimeAttribute type="Boolean" name="enabled">false</runtimeAttribute>
+        <runtimeAttribute type="Boolean" name="traceResponseEnabled">true</runtimeAttribute>
+        <runtimeAttribute type="Integer" name="traceResponseLevel">104</runtimeAttribute>
+        <runtimeAttribute type="Boolean" name="fileResponseEnabled">false</runtimeAttribute>
+        <runtimeAttribute type="Integer" name="fileResponseLevel">108</runtimeAttribute>
+        <runtimeAttribute type="Boolean" name="mBeanResponseEnabled">true</runtimeAttribute>
+        <runtimeAttribute type="Integer" name="mBeanResponseLevel">104</runtimeAttribute>
+        <runtimeAttribute type="Integer" name="duration">10</runtimeAttribute>
+                       
+        <generalAttribute type="Integer" name="maxAlertStreak">1</generalAttribute>
+        <generalAttribute type="Integer" name="minCpuUsage">50</generalAttribute>
+        <generalAttribute type="Integer" name="cpuSaturated">90</generalAttribute>
+        <generalAttribute type="Integer" name="calculationInterval">240</generalAttribute>
+        <generalAttribute type="Integer" name="numberOfProcessors">0</generalAttribute>
+        <generalAttribute type="Integer" name="refreshIteration">0</generalAttribute>
+                                                                                         
+   </ruleEngine>
+   
+
+
+   <!-- ================================ IMMEDIATE ALERT =============================== -->
+
+ <!-- LIDB4427-2 -->                                  
+    <rule id="xComponentUseViolationAlert">   
+      <name>Cross Component Use JCA Programming Model Violation</name>
+      <type>immediateAlert</type>
+      <enabled>false</enabled>
+      <zos_enabled>true</zos_enabled>  
+      <nlsKey_name>perfTuningAdmin.immediateAlertName.xComponentUseViolationAlert</nlsKey_name>     
+      <nlsKey_component>perfTuningAdmin.componentName.J2C.ConnectionManager</nlsKey_component>
+      <class/>         
+      <param name="minTimeBetweenAlerts">30.0</param>
+      <performanceImpact>high</performanceImpact>
+   </rule>
+
+   <!-- LIDB4427-2 -->
+   <rule id="multiThreadUseViolationAlert">   
+      <name>Multi-Thread Use JCA Programming Model Violation</name>
+      <type>immediateAlert</type>
+      <enabled>false</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.immediateAlertName.multiThreadUseViolationAlert</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.J2C.ConnectionManager</nlsKey_component>
+      <class/>
+      <param name="minTimeBetweenAlerts">30.0</param>
+      <performanceImpact>high</performanceImpact>
+   </rule>                                                       
+               
+   <rule id="LTCConnPerThreadLimitAlert">   
+      <name>LTC Connection per Thread Limit Rule</name>
+      <type>immediateAlert</type>
+      <enabled>false</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.immediateAlertName.LTCConnPerThreadLimitAlert</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.J2C.ConnectionManager</nlsKey_component>
+      <class/>
+      <param name="LTCThreadMaxConnLimitThreshold">2</param>
+      <param name="poolLowEffAlertWindowMinutes">5</param>
+      <performanceImpact>high</performanceImpact>
+   </rule>                                                       
+               
+   <rule id="LTCNestingAlert">   
+      <name>LTC Nesting Rule</name>
+      <type>immediateAlert</type>
+      <enabled>false</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.immediateAlertName.LTCNestingAlert</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.J2C.ConnectionManager</nlsKey_component>
+      <class/>
+      <param name="LTCNestingDepthThreshold">3</param>
+      <performanceImpact>high</performanceImpact>
+   </rule>                                                       
+               
+   <rule id="LTCSerialReuseViolationAlert">   
+      <name>LTC Serial Reuse Violation Alert Rule</name>
+      <type>immediateAlert</type>
+      <enabled>false</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.immediateAlertName.LTCSerialReuseViolationAlert</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.J2C.ConnectionManager</nlsKey_component>
+      <class/>
+      <performanceImpact>high</performanceImpact>
+   </rule>                                                       
+               
+   <rule id="connErrorAlert">   
+      <name>Connection Error Alert Rule</name>
+      <type>immediateAlert</type>
+      <enabled>false</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.immediateAlertName.connErrorAlert</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.J2C.ConnectionManager</nlsKey_component>
+      <class/>
+      <param name="connErrorAlertWindowMinutes">5</param>
+      <param name="connErrorAlertMaxThreshold">2</param>
+      <performanceImpact>high</performanceImpact>
+   </rule>                                                       
+
+   <rule id="connLowEffAlert">   
+      <name>Connection Low Percent Efficiency Rule</name>
+      <type>immediateAlert</type>
+      <enabled>false</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.immediateAlertName.connLowEffAlert</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.J2C.ConnectionManager</nlsKey_component>
+      <class/>
+      <param name="connLowEfficiencyThreshold">50</param>
+      <performanceImpact>high</performanceImpact>
+   </rule>                                                       
+
+   <rule id="hungConnModeAlert">   
+      <name>Hung Connection Alert Rule</name>
+      <type>immediateAlert</type>
+      <enabled>false</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.immediateAlertName.hungConnModeAlert</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.J2C.ConnectionManager</nlsKey_component>
+      <class/>
+      <performanceImpact>high</performanceImpact>
+   </rule>                                                       
+
+   <rule id="poolLowEffAlert">   
+      <name>Pool Low Percent Efficiency Rule</name>
+      <type>immediateAlert</type>
+      <enabled>false</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.immediateAlertName.poolLowEffAlert</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.J2C.ConnectionManager</nlsKey_component>
+      <class/>
+      <param name="poolLowEfficiencyThreshold">50</param>
+      <param name="poolLowEffAlertWindowMinutes">5</param>
+      <performanceImpact>high</performanceImpact>
+   </rule>                                                       
+
+   <rule id="surgeModeAlert">   
+      <name>Surge Mode Rule</name>
+      <type>immediateAlert</type>
+      <enabled>false</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.immediateAlertName.surgeModeAlert</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.J2C.ConnectionManager</nlsKey_component>
+      <class/>
+      <performanceImpact>high</performanceImpact>
+   </rule>                                                       
+
+
+   <!-- ================================ Server Rules =============================== -->
+   
+    <rule id="ServerRule01">
+      <name>No Room For New Sessions Rule Statefull</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.NoRoomForNewSessionRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer.session</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.NoRoomForNewSessionRuleStatefull</class>
+      
+      <performanceImpact>low</performanceImpact>
+   </rule>   
+      
+   <rule id="ServerRule02">
+      <name>Live Session Statefull</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.LiveSessionsRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer.session</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.LiveSessionStatefull</class>
+      <performanceImpact>low</performanceImpact>
+        
+   </rule>
+   
+   <rule id="ServerRule03">
+      <name>Session Read and Write Size Statefull</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.SessionSizeRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer.session</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.SessionSizeRuleStatefull</class>
+      <param name="MaximinReadSessionSizeInK">16</param>
+      <param name="MaximinWriteSessionSizeInK">16</param>
+      <performanceImpact>low</performanceImpact>
+   </rule>
+   
+   <rule id="ServerRule04">
+      <name>Session Read and Write Time Statefull</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.SessionSizeTimeRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer.session</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.SessionSizeTimeRuleStatefull</class>
+      <param name="MaxSessionReadTimeInMs">500</param>
+      <param name="MaxSessionWriteTimeInMs">1000</param>
+      <performanceImpact>low</performanceImpact>
+   </rule>
+
+   
+      
+      
+   <rule id="ServerRule05">
+      <name>Servlet Engine Unbounded Rule Statefull</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>false</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.ServletEngineUnboundedPoolRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.SeUnboundedPoolRuleStatefull</class>
+      <param name="tooManyThreadsPerProcessor">50</param>
+      <performanceImpact>low</performanceImpact>
+   </rule>
+
+     
+   <rule id="ServerRule06">
+      <name>Servlet Engine Thread Pool Rule Statefull</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>false</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.ServletEnginePoolRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.SEPoolRuleStatefull</class>
+      <param name="LowFractionOfThreadsWorking">0.50</param>
+      <param name="HighFractionOfThreadsWorking">0.99</param>
+      <param name="SuggestedIncreaseInPercent">15</param>
+      <param name="SuggestedDecreaseOfNonUsedThreadsInPercent">70</param>
+      <param name="StdevThreshold">9</param>
+      <param name="calculationInterval">240</param>
+      <performanceImpact>low</performanceImpact>
+   </rule>
+   
+         
+   <rule id="ServerRule07">
+      <name>Orb Unbounded Rule Statefull</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>false</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.OrbUnboundedPoolRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.orb</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.OrbUnboundedPoolRuleStatefull</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="tooManyThreadsPerProcessor">50</param>
+   </rule>
+   
+   <rule id="ServerRule08">
+      <name>Orb Pool Rule Statefull</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>false</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.OrbPoolRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.orb</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.OrbPoolRuleStatefull</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="LowFractionOfThreadsWorking">0.50</param>
+      <param name="HighFractionOfThreadsWorking">0.99</param>
+      <param name="SuggestedIncreaseInPercent">15</param>
+      <param name="SuggestedDecreaseOfNonUsedThreadsInPercent">70</param>
+      <param name="StdevThreshold">9</param>
+      <param name="calculationInterval">240.0</param>
+   </rule>
+
+         
+         
+   <rule id="ServerRule09">
+      <name>DataSource Connection Pool Min and Max Size Rule Statefull</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.DSPoolMinAndMaxSize</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.datasource</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.DSPoolMinAndMaxSizeStatefull</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="MinPercentOfPoolUsed">85</param>
+      <param name="IncreasePercentage">25</param>
+      <param name="HighUsageThreshold">99</param>
+   </rule>
+   <rule id="ServerRule10">
+      <name>DataSource Prep Stmt Discard Rule Statefull</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.DSPrepStmtRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.datasource</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.DSPrepStmtRuleStatefull</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="DiscardRateThreshold">0.1</param>
+   </rule>
+
+        
+      
+    <rule id="ServerRule11">
+      <name>Memory Leak Rule</name>
+      <type>server</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.MemoryLeakPrototype</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.jvm</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.leakProtoType_1.MemoryLeakRule</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="minMemoryPercentage">7</param> 
+      <param name="minDuration">10</param> 
+      <param name="summaryMech">3</param> 
+      <param name="treeHeight">5</param> 
+      <param name="numberLeaves">10</param>
+      <param name="analyzeExpandingHeap">1</param>
+      <param name="expandingHeapFreeMemoryThreshold">25</param>
+      <param name="expandingHeapHeapUsedPercentage">80</param>
+      <param name="keepTimes">1</param>
+      <param name="numberOfDecreasingExceptions">1</param>
+      <param name="enableDebugFile">0</param>
+      
+      <param name="slidingWindow">0</param>
+      <param name="alertMetric">85</param>
+      <param name="historicalMode">1</param>
+    </rule>    
+   
+   <!-- ================================ Client Rules =============================== -->
+   
+   <rule id="CLIENT_RULE_1">
+      <name>No Room For New Sessions Rule Stateless</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.NoRoomForNewSessionRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer.session</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.NoRoomForNewSessionRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="RefreshIteration">0</param>
+      <param name="MinCpuUsageForWorkingSystem">50</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_2">
+      <name>Live Session Stateless</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.LiveSessionsRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer.session</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.LiveSessionStateless</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="RefreshIteration">0</param>
+      <param name="MinCpuUsageForWorkingSystem">50</param>
+      <param name="calculationInterval">300</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_3">
+      <name>Session Read and Write Size Stateless</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.SessionSizeRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer.session</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.SessionSizeRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="RefreshIteration">0</param>
+      <param name="MaximinReadSessionSizeInK">16</param>
+      <param name="MaximinWriteSessionSizeInK">16</param>
+      <param name="MinCpuUsageForWorkingSystem">50</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_4">
+      <name>Session Read and Write Time Stateless</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.SessionSizeTimeRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer.session</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.SessionSizeTimeRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="RefreshIteration">0</param>
+      <param name="MaxSessionReadTimeInMs">500</param>
+      <param name="MaxSessionWriteTimeInMs">1000</param>
+      <param name="MinCpuUsageForWorkingSystem">50</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_5">
+      <name>Servlet Engine Unbounded Rule Stateless</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>false</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.ServletEngineUnboundedPoolRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.SeUnboundedPoolRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="numberOfProcessors">1</param>
+      <param name="tooManyThreadsPerProcessor">50</param>
+      <param name="calculationInterval">300</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_6">
+      <name>Servlet Engine Thread Pool Rule Stateless</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>false</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.ServletEnginePoolRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.SEPoolRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="CpuThresholdForSaturatedSystem">90</param>
+      <param name="LowFractionOfThreadsWorking">0.50</param>
+      <param name="HighFractionOfThreadsWorking">0.99</param>
+      <param name="MinCpuUsageForWorkingSystem">50</param>
+      <param name="SuggestedIncreaseInPercent">15</param>
+      <param name="SuggestedDecreaseOfNonUsedThreadsInPercent">70</param>
+      <param name="StdevThreshold">9</param>
+      <param name="calculationInterval">300</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_7">
+      <name>Orb Unbounded Rule Stateless</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>false</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.OrbUnboundedPoolRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.orb</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.OrbUnboundedPoolRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="numberOfProcessors">4</param>
+      <param name="tooManyThreadsPerProcessor">50</param>
+      <param name="calculationInterval">300</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_8">
+      <name>Orb Pool Rule Stateless</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>false</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.OrbPoolRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.orb</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.OrbPoolRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="CpuThresholdForSaturatedSystem">90</param>
+      <param name="LowFractionOfThreadsWorking">0.50</param>
+      <param name="HighFractionOfThreadsWorking">0.99</param>
+      <param name="MinCpuUsageForWorkingSystem">50</param>
+      <param name="SuggestedIncreaseInPercent">15</param>
+      <param name="SuggestedDecreaseOfNonUsedThreadsInPercent">70</param>
+      <param name="StdevThreshold">9</param>
+      <param name="calculationInterval">300</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_9">
+      <name>DataSource Connection Pool Min and Max Size Rule Stateless</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.DSPoolMinAndMaxSize</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.datasource</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.DSPoolMinAndMaxSizeStateless</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="RefreshIteration">0</param>
+      <param name="MinPercentOfPoolUsed">85</param>
+      <param name="MinCpuUsageForWorkingSystem">70</param>
+      <param name="IncreasePercentage">25</param>
+      <param name="CpuNotSaturated">90</param>
+      <param name="HighUsageThreshold">99</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_10">
+      <name>DataSource Prep Stmt Discard Rule Stateless</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.DSPrepStmtRule</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.datasource</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.DSPrepStmtRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="RefreshIteration">0</param>
+      <param name="DiscardRateThreshold">0.1</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_11">
+       <name>JVM Heap Size/Garbage Collection Rule</name>
+       <type>thin_client</type>
+       <enabled>true</enabled>
+       <zos_enabled>true</zos_enabled>
+       <nlsKey_name>perfTuningAdmin.ruleName.JvmHeapSizeGc</nlsKey_name>
+       <nlsKey_component>perfTuningAdmin.componentName.jvm</nlsKey_component>
+       <class>com.ibm.ws.performance.tuning.rule.JvmHeapSizeRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+       <param name="GcTimeThreshold">0.15</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_12">
+       <name>Cache Rule Stateless</name>
+       <type>thin_client</type>
+       <enabled>true</enabled>
+       <zos_enabled>true</zos_enabled>
+       <nlsKey_name>perfTuningAdmin.ruleName.DynaCache</nlsKey_name>
+       <nlsKey_component>perfTuningAdmin.componentName.webContainer.cache</nlsKey_component>
+       <class>com.ibm.ws.performance.tuning.rule.CacheRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+       <param name="SzLowerBoundPercent">.75</param>
+   </rule>
+   
+   <rule id="CLIENT_RULE_13">
+       <name>Session Size W/O Persistence Rule</name>
+       <type>thin_client</type>
+       <enabled>true</enabled>
+       <zos_enabled>true</zos_enabled>
+       <nlsKey_name>perfTuningAdmin.ruleName.SessionWithoutPersistenceRule</nlsKey_name>
+       <nlsKey_component>perfTuningAdmin.componentName.webContainer.session</nlsKey_component>
+       <class>com.ibm.ws.performance.tuning.rule.SessionSizeUnpersistedRuleStateless</class>
+      <performanceImpact>low</performanceImpact>
+       <param name="AvgSessionSizeBoundK">16</param>
+       <param name="MaxSessionSizeBoundK">64</param>
+   </rule>
+   
+   <rule id="CLIENT_CONFIG_RULE_1">
+      <name>JVM Heap Config Rule</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.config.JvmHeap</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.jvm</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.configValidator.JvmHeapConfigRule</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="MinMS">0</param>
+      <param name="MaxMS">256</param>
+      <param name="MinMX">256</param>
+      <param name="MaxMX">1024</param>
+   </rule>
+   
+   <rule id="CLIENT_CONFIG_RULE_2">
+      <name>Web Container Pool Config Rule</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>false</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.config.WebContainerPool</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.configValidator.WebContainerConfigRule</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="SuggestedMinThreadPoolSize">25</param>
+      <param name="SuggestedMaxThreadPoolSize">50</param>
+   </rule>
+   
+   <rule id="CLIENT_CONFIG_RULE_3">
+      <name>ORB Pool Config Rule</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>false</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.config.OrbPool</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.orb</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.configValidator.ORBPoolConfigRule</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="SuggestedMinThreadPoolSize">25</param>
+      <param name="SuggestedMaxThreadPoolSize">50</param>
+   </rule>
+   
+   <rule id="CLIENT_CONFIG_RULE_4">
+      <name>Connection Pool Config Rule</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.config.ConnPool</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.datasource</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.configValidator.ConnectionPoolConfigRule</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="SuggestedMinPoolSize">10</param>
+      <param name="SuggestedMaxPoolSize">30</param>
+      <param name="SuggestedPrepStmtCacheSize">100</param>
+   </rule>
+   
+   <rule id="CLIENT_CONFIG_RULE_5">
+      <name>Dynamic Cache Config Rule</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <zos_enabled>true</zos_enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.config.DynaCache</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.webContainer.cache</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.configValidator.DynamicCacheConfigRule</class>
+      <performanceImpact>low</performanceImpact>
+      <param name="SuggestedCacheSize">2000</param>
+   </rule>
+   
+    <rule id="CLIENT_CONFIG_RULE_6">
+      <name>JIT Rule</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.config.JIT</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.jvm</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.configValidator.JITConfigRule</class>
+      <performanceImpact>low</performanceImpact>
+   </rule>
+   
+   <rule id="CLIENT_CONFIG_RULE_7">
+      <name>Trace Specification Rule</name>
+      <type>thin_client</type>
+      <enabled>true</enabled>
+      <nlsKey_name>perfTuningAdmin.ruleName.config.trace</nlsKey_name>
+      <nlsKey_component>perfTuningAdmin.componentName.trace</nlsKey_component>
+      <class>com.ibm.ws.performance.tuning.rule.configValidator.TraceConfigRule</class>
+      <performanceImpact>low</performanceImpact>
+   </rule>
+
+   
+   
+     
+</tuningRules>

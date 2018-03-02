@@ -1,0 +1,7 @@
+<Fix>
+	<Type>Service Release</Type>
+	<FixName>WebSphere Application Server Java SDK 1.6 SR16 FP40 for Linux 64-bit, X64</FixName>
+	<FixVersion>7.0.0.43</FixVersion>
+	<FixID>7.0.0-WS-WASSDK-LinuxX64-FP0000043</FixID>
+	<SWGFMIDX>HWASK700</SWGFMIDX>
+</Fix>

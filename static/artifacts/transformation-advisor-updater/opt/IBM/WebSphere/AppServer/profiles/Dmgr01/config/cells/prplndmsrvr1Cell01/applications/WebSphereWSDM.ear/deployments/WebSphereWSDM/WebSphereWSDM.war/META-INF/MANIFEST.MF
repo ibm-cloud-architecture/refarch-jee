@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.6.5
+Created-By: 2.4 (IBM Corporation)
+Specification-Title: admin.wsdm
+Specification-Version: 1.1
+Specification-Vendor: IBM Corp.
+Implementation-Title: admin.wsdm
+Implementation-Version: WASX.SERV1 [rr0823.55]
+Implementation-Vendor: IBM Corp.
+UseWSFEP61ScanPolicy: true
+Class-Path: /blddir/WASX.SERV1/SERV1/ws/code/admin.wsdm/src/WebSphereW
+ SDM.ear/WebSphereWSDM/WEB-INF/lib
+

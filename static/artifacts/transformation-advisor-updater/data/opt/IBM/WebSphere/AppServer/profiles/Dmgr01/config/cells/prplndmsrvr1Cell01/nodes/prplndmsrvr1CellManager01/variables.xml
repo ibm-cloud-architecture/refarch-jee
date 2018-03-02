@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<variables:VariableMap xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:variables="http://www.ibm.com/websphere/appserver/schemas/5.0/variables.xmi" xmi:id="VariableMap_1">
+  <entries xmi:id="VariableSubstitutionEntry_11" symbolicName="JVM_CACHE" value="" description="The filesystem patch the pointers to the JVM Cache for the current node are held"/>
+  <entries xmi:id="VariableSubstitutionEntry_17" symbolicName="User-defined_JDBC_DRIVER_PATH" value="" description="The directory where contains the dirver from Custom JDBC2.0-compliant Provider."/>
+  <entries xmi:id="VariableSubstitutionEntry_18" symbolicName="DB2_JDBC_DRIVER_PATH" value="" description="The directory that contains the DB2 JDBC Driver."/>
+  <entries xmi:id="VariableSubstitutionEntry_19" symbolicName="OS400_NATIVE_JDBC_DRIVER_PATH" value="" description="The directory that contains the native JDBC Driver for local DB2 connections on iSeries."/>
+  <entries xmi:id="VariableSubstitutionEntry_20" symbolicName="OS400_TOOLBOX_JDBC_DRIVER_PATH" value="" description="The directory that contains the IBM Toolbox JDBC Driver for remote DB2 connections on iSeries."/>
+  <entries xmi:id="VariableSubstitutionEntry_21" symbolicName="DB2390_JDBC_DRIVER_PATH" value="" description="The directory that contains the DB2 JDBC Driver on zSeries."/>
+  <entries xmi:id="VariableSubstitutionEntry_23" symbolicName="INFORMIX_JDBC_DRIVER_PATH" value="" description="The directory that contains the Informix JDBC Driver."/>
+  <entries xmi:id="VariableSubstitutionEntry_24" symbolicName="SYBASE_JDBC_DRIVER_PATH" value="" description="The directory that contains the Sybase JDBC Driver."/>
+  <entries xmi:id="VariableSubstitutionEntry_25" symbolicName="ORACLE_JDBC_DRIVER_PATH" value="" description="The directory that contains the Oracle thin or oci8  JDBC Driver."/>
+  <entries xmi:id="VariableSubstitutionEntry_26" symbolicName="CONNECTJDBC_JDBC_DRIVER_PATH" value="" description="The directory that contains the unbranded ConnectJDBC  type 4 JDBC Driver for MS SQL Server."/>
+  <entries xmi:id="VariableSubstitutionEntry_27" symbolicName="MSSQLSERVER_JDBC_DRIVER_PATH" value="" description="The directory that contains the Microsoft JDBC driver for MSSQLServer 2000."/>
+  <entries xmi:id="VariableSubstitutionEntry_28" symbolicName="DB2UNIVERSAL_JDBC_DRIVER_PATH" value="/opt/db2jars/" description="The directory that contains the DB2 Universal JDBC driver."/>
+  <entries xmi:id="VariableSubstitutionEntry_30" symbolicName="DB2UNIVERSAL_JDBC_DRIVER_NATIVEPATH" value="/opt/db2jars/" description="Specifies the fully qualified name of the directory containing native files (e.g., .so files) needed by the DB2 Universal JDBC Driver for processing. Normally the value should be left null. The only time a value should be specified is under WAS z/OS when DB2 V8 or higher is installed. In this case, there are .so files that are installed which are needed for DB2 Universal JDBC Driver processing."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404781" symbolicName="WAS_INSTALL_ROOT" value="/opt/IBM/WebSphere/AppServer" description="The filesystem path to the WebSphere product installation directory."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404782" symbolicName="USER_INSTALL_ROOT" value="/opt/IBM/WebSphere/AppServer/profiles/Dmgr01" description="The filesystem path to the user installaton directory."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404783" symbolicName="WAS_LIBS_DIR" value="${WAS_INSTALL_ROOT}/lib" description="The filesystem path to the product lib directory."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404784" symbolicName="WAS_PROPS_DIR" value="${USER_INSTALL_ROOT}/properties" description="The filesystem path to the product properties directory."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404785" symbolicName="WAS_TEMP_DIR" value="${USER_INSTALL_ROOT}/temp" description="The filesystem path to the product temp directory."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404786" symbolicName="APP_INSTALL_ROOT" value="${USER_INSTALL_ROOT}/installedApps" description="The filesystem path to the directory which will contain installed enterprise applications."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404787" symbolicName="LOG_ROOT" value="${USER_INSTALL_ROOT}/logs" description="The filesystem path to the directory which will contain server log files."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404788" symbolicName="DRIVER_PATH" value="${WAS_INSTALL_ROOT}" description="The filesystem path to the directory which will contain drivers."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404789" symbolicName="JAVA_HOME" value="${WAS_INSTALL_ROOT}/java" description="The filesystem path to the Java Virtual Machine installation directory."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404790" symbolicName="MQ_INSTALL_ROOT" value="${WAS_INSTALL_ROOT}/lib/WMQ" description="The filesystem path to the installation directory for WebSphere MQ client libraries."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404791" symbolicName="DEPLOY_TOOL_ROOT" value="${WAS_INSTALL_ROOT}/deploytool/itp" description="The filesystem path to the installation directory for WebSphere EJB Deployment tool."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404792" symbolicName="CONNECTOR_INSTALL_ROOT" value="${USER_INSTALL_ROOT}/installedConnectors" description="The filesystem path to the directory which will contain installed connectors."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404793" symbolicName="WAS_ETC_DIR" value="${USER_INSTALL_ROOT}/etc" description="The filesystem path to the directory which will contain etc config files."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404794" symbolicName="UNIVERSAL_JDBC_DRIVER_PATH" value="${WAS_INSTALL_ROOT}/universalDriver/lib" description="The directory that contains the DB2 Universal JDBC driver license file."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404795" symbolicName="DERBY_JDBC_DRIVER_PATH" value="${WAS_INSTALL_ROOT}/derby/lib" description="The directory that contains the Derby jar files."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404796" symbolicName="WAS_INSTALL_LIBRARY" value="$(was.install.library)" description="The product library for the i5/OS WebSphere product installation."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493662404797" symbolicName="LOCALHOST_NAME" value="localhost" description="The name used to refer to the localhost interface."/>
+  <entries xmi:id="VariableSubstitutionEntry_1493669936237" symbolicName="ARS_NAME" value="ibmARS.ear" description="The name of the IBM Asynchronous Response Servlet application file in the systemApps directory."/>
+</variables:VariableMap>

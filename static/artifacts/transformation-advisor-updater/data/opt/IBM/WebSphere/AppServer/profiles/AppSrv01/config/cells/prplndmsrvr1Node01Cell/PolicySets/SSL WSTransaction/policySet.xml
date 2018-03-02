@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ps:PolicySet xmlns:ps="http://www.ibm.com/xmlns/prod/websphere/200605/policyset" xmlns:psa="http://www.ibm.com/xmlns/prod/websphere/200605/policysetattachment" name="SSL WSTransaction" type="application" description="$KEY_policySetDescription003" default="true" version="7.0.0.0">
+
+    <ps:PolicyType type="WSTransaction"  provides="" enabled="true">
+    </ps:PolicyType>
+
+    <ps:PolicyType type="SSLTransport"  provides="" enabled="true">
+    </ps:PolicyType>
+
+</ps:PolicySet>           
