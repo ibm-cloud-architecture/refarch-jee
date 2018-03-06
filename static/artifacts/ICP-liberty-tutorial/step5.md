@@ -18,7 +18,7 @@ The environment specific runtime variables for the application will be held in C
 
 To create the ConfigMaps execute the following on a [terminal window](troubleshooting.md#open-the-terminal):
 
-1. `cd /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/`
+1. `cd ~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/`
 2. `kubectl create configmap ldap --from-env-file=ldap.env`
 3. `kubectl create configmap orderdb --from-env-file=orderdb.env`
 
@@ -124,6 +124,10 @@ where
 * **<release_name>** is a unique identifier you should choose to uniquely identify each of the pieces your Customer Order Services kubernetes chart will deploy.
 * **<values.yaml>** should be `~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/values.yaml` in our case. **IMPORTANT:** the values.yaml file provided is tailored for the **default values** used throughout this tutorial. If you decided to used others, you need to modify this values.yaml file accordingly.
 * **<path_to_chart_directory>** should be `~/PurpleCompute/git/refarch-jee-customerorder/chart/customerorderservices/` in our case.
+
+In our case then, the Helm command to install the Customer Order Services application all at once would be:
+
+`helm install --name tutorial -f ~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/values.yaml ~/PurpleCompute/git/refarch-jee-customerorder/chart/customerorderservices/`
 
 The output of this command should be the list of the different kubernetes pieces involved in the deployment of the Customer Order Services application.
 
