@@ -90,7 +90,7 @@ The DB2 NodePort value that ICP exposes can be acquired via executing the `kubec
 
 Update the **remote_orderdb.env** file by replacing the string **REPLACE_WITH_NODEPORT** with the NodePort value from above (30494 in our example). On [a terminal window](troubleshooting.md#open-the-terminal), execute:
 
-   1. `~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/remote_orderdb.env`
+   1. `gedit ~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/remote_orderdb.env`
 
    2. Change `REPLACE_WITH_NODEPORT` with the correct NodePort above explained.
 
