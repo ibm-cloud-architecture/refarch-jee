@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hamanagerservice:HAManagerService xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:hamanagerservice="http://www.ibm.com/websphere/appserver/schemas/6.0/hamanagerservice.xmi" xmi:id="HAManagerService_1080665401693" enable="true" description="Template version of HAManager service." activateEnabled="true" isAlivePeriodSec="120" transportBufferSize="10" coreGroupName="DefaultCoreGroup">
+  <threadPool xmi:id="ThreadPool_1080665401693" name="HAManagerService.Pool" minimumSize="2" maximumSize="6" inactivityTimeout="5000" isGrowable="true"/>
+</hamanagerservice:HAManagerService>

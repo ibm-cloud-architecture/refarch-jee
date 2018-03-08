@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationext:ApplicationExtension xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:applicationext="applicationext.xmi" xmlns:application="application.xmi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="Application_ID_Ext">
+  <reloadInterval xsi:nil="true"/>
+  <application href="META-INF/application.xml#Application_ID"/>
+</applicationext:ApplicationExtension>

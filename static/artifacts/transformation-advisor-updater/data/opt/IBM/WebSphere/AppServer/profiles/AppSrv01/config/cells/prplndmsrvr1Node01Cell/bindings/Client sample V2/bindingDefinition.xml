@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<BindingDefinition xmlns="http://www.ibm.com/xmlns/prod/websphere/200711/bindingdefinition" description="$KEY_ClientSampleV2.description" type="client" version="7.0.0.1">
+    <Domain name="global"/>
+</BindingDefinition>

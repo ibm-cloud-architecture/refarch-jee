@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:pmirm="http://www.ibm.com/websphere/appserver/schemas/5.0/pmirm.xmi">
+  <xmi:Documentation>
+    <contact>WebSphere Application Server v5.0 Default Configuration Files v1.4 11/18/03</contact>
+  </xmi:Documentation>
+  <pmirm:PMIRequestMetrics xmi:id="PMIRequestMetrics_1" dynamicEnable="true" enable="false" enableARM="false" traceLevel="HOPS" enableLog="false" armType="ARM40" armTransactionFactory="" armCallback="">
+  <enabledComponents>ALL</enabledComponents>
+   <instrumentedComponents>Servlet</instrumentedComponents>
+   <instrumentedComponents>Servlet Filter</instrumentedComponents>
+   <instrumentedComponents>EJB</instrumentedComponents>
+   <instrumentedComponents>JDBC</instrumentedComponents>
+   <instrumentedComponents>WebServices</instrumentedComponents>
+   <instrumentedComponents>JMS</instrumentedComponents>
+   <instrumentedComponents>AsyncBeans</instrumentedComponents>
+   <instrumentedComponents>Portlet</instrumentedComponents>
+   <instrumentedComponents>SIB</instrumentedComponents>
+   <instrumentedComponents>JCA</instrumentedComponents>
+   <instrumentedComponents>JNDI</instrumentedComponents>
+
+    <filters xmi:id="PMIRMFilter_1" type="URI" enable="false">
+      <filterValues xmi:id="PMIRMFilterValue_1" value="/snoop" enable="false"/>
+      <filterValues xmi:id="PMIRMFilterValue_2" value="/hitcount" enable="false"/>
+    </filters>
+    <filters xmi:id="PMIRMFilter_2" type="EJB" enable="false">
+      <filterValues xmi:id="PMIRMFilterValue_3" value="com.yourco.package.Class.method" enable="false"/>
+      <filterValues xmi:id="PMIRMFilterValue_4" value="com.yourco.package.Class2.*" enable="false"/>
+    </filters>
+    <filters xmi:id="PMIRMFilter_3" type="SOURCE_IP" enable="false">
+      <filterValues xmi:id="PMIRMFilterValue_5" value="255.255.255.255" enable="false"/>
+      <filterValues xmi:id="PMIRMFilterValue_6" value="254.254.254.254" enable="false"/>
+    </filters>
+    <filters xmi:id="PMIRMFilter_4" type="JMS" enable="false">
+      <filterValues xmi:id="PMIRMFilterValue_7" value="destination=aaa" enable="false"/>
+    </filters>
+    <filters xmi:id="PMIRMFilter_5" type="WEB_SERVICES" enable="false">
+     <filterValues xmi:id="PMIRMFilterValue_8" value="wsdlPort=aaa:op=bbb:nameSpace=ccc" enable="false"/>
+    </filters>     
+  </pmirm:PMIRequestMetrics>
+</xmi:XMI>

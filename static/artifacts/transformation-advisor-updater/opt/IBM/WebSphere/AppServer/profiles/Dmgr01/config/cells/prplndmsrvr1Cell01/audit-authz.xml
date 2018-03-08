@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rolebasedauthz="http://www.ibm.com/websphere/appserver/schemas/5.0/rolebasedauthz.xmi">
+  <xmi:Documentation>
+    <contact>{Your Contact Info}</contact>
+  </xmi:Documentation>
+  <rolebasedauthz:AuthorizationTableExt xmi:id="AuthorizationTableExt_11" context="domain">
+    <authorizations xmi:id="RoleAssignmentExt_11" role="SecurityRoleExt_11">
+      <specialSubjects xmi:type="rolebasedauthz:ServerExt" xmi:id="ServerExt_11"/>
+      <specialSubjects xmi:type="rolebasedauthz:PrimaryAdminExt" xmi:id="PrimaryAdminExt_11"/>
+    </authorizations>
+    <roles xmi:id="SecurityRoleExt_11" roleName="auditor"/>
+  </rolebasedauthz:AuthorizationTableExt>
+</xmi:XMI>

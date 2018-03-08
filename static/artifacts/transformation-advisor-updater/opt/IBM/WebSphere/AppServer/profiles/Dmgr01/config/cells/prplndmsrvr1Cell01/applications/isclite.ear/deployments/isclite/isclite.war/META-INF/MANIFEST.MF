@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Created-By: 2.4 (IBM Corporation)
+Class-Path: struts.jar struts-legacy.jar commons-beanutils.jar commons
+ -collections.jar commons-digester.jar commons-fileupload.jar jakarta-
+ oro.jar commons-validator.jar svg_chart_generator.jar svg_chart_util.
+ jar batik-1.5.jar isclite.jar featurereg.jar wsccore-core_module.jar 
+ iscportal.jar AZY_SimpleEncryption.jar iscportal_ext.jar isclite_ext.
+ jar xlaunchapi.jar
+Ant-Version: Apache Ant 1.6.5
+

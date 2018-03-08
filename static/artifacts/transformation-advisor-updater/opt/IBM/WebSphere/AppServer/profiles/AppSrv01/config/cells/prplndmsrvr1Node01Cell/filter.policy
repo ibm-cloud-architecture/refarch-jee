@@ -1,0 +1,40 @@
+//
+// Dynamic Policy - Filter Templates
+//
+// Permissions defined in this file is going to be filtered out in app.policy and was.policy.
+//
+// The security runtime will attempt to remove permissions defined in "filterMask" from
+// application Java 2 Security policy during application start. However, this has some
+// limitations, for example, if the application is grant permission to read and write
+// to all Java system properties, if the following is defined in "filterMask":
+//
+//   java.util.PropertyPermission "someproperty", "write";
+//
+// The security runtime would not remove the permission to read and write to all Java
+// system properties, instead it will log warning during application deployment and
+// application start.
+//
+// The security runtime will deny application the permissions defined in "runtimeFilterMask",
+// no matter what permissions are granted to the application. Basically, all application threads
+// (non-system threads) will be denied permissions defined in "runtimeFilterMask". Be extreme
+// careful of what permissions that defined in "runtimeFilterMask", any other permissions could
+// cause applications fail to run.
+//
+// NOTE: Please do not specify permission java.lang.RuntimePermission "getClassLoader" in
+//       the "runtimeFilterMask", it is not supported at this time.
+//
+
+filterMask {
+  permission java.lang.RuntimePermission "exitVM";
+  permission java.lang.RuntimePermission "setSecurityManager";
+  permission java.security.SecurityPermission "setPolicy";
+  permission javax.security.auth.AuthPermission "setLoginConfiguration";
+};
+
+runtimeFilterMask {
+  permission java.lang.RuntimePermission "exitVM";
+  permission java.lang.RuntimePermission "setSecurityManager";
+  permission java.security.SecurityPermission "setPolicy";
+  permission javax.security.auth.AuthPermission "setLoginConfiguration";
+};
+

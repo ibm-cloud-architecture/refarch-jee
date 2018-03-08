@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:pmeserver="http://www.ibm.com/websphere/appserver/schemas/5.0/pmeserver.xmi" xmlns:activitysessionservice="http://www.ibm.com/websphere/appserver/schemas/5.0/activitysessionservice.xmi" xmlns:workareaservice="http://www.ibm.com/websphere/appserver/schemas/5.0/workareaservice.xmi" xmlns:workmanagerservice="http://www.ibm.com/websphere/appserver/schemas/5.0/workmanagerservice.xmi" xmlns:i18nservice="http://www.ibm.com/websphere/appserver/schemas/5.0/i18nservice.xmi" xmlns:schedulerservice="http://www.ibm.com/websphere/appserver/schemas/5.0/schedulerservice.xmi" xmlns:appprofileservice="http://www.ibm.com/websphere/appserver/schemas/5.0/appprofileservice.xmi" xmlns:applicationserver.ejbcontainer.messagelistener="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.ejbcontainer.messagelistener.xmi" xmlns:objectpoolservice="http://www.ibm.com/websphere/appserver/schemas/5.0/objectpoolservice.xmi" xmlns:startupbeansservice="http://www.ibm.com/websphere/appserver/schemas/6.0/startupbeansservice.xmi">
+  <xmi:Documentation>
+    <contact>WebSphere Application Server Enterprise v5.0 Default Configuration Files</contact>
+  </xmi:Documentation>
+  <pmeserver:PMEServerExtension xmi:id="PMEServerExtension_1">
+    <activitySessionService xmi:id="ActivitySessionService_1" enable="false" defaultTimeout="300"/>
+    <workAreaService xmi:id="WorkAreaService_1" enable="false" maxSendSize="10000" maxReceiveSize="10000"/>
+    <workManagerService xmi:id="WorkManagerService_1" enable="true"/>
+    <i18nService xmi:id="I18NService_1" enable="false"/>
+    <schedulerService xmi:id="SchedulerService_1" enable="true"/>
+    <applicationProfileService xmi:id="ApplicationProfileService_1" enable="false" compatibility="true"/>
+    <objectPoolService xmi:id="ObjectPoolService_1" enable="true"/>
+    <startupBeansService xmi:id="StartupBeansService_1" enable="false"/>
+  </pmeserver:PMEServerExtension>
+</xmi:XMI>

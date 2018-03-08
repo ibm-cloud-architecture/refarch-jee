@@ -1,0 +1,79 @@
+{
+   "report": "analysis",
+   "version": "1.1",
+   "totalRulesFlagged": 3,
+   "filesAffected": 3,
+   "totalResults": 3,
+   "options": [
+      "--sourceAppServer=was70",
+      "--sourceJava=ibm5",
+      "--targetAppServer=was90",
+      "--targetJava=ibm8",
+      "--targetJavaEE=ee7",
+      "--targetCloud=wasVM",
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "severitySummary": [
+      {
+         "severity": "Warning",
+         "totalRulesFlagged": 3,
+         "totalResults": 3
+      }
+   ],
+   "applications": [
+      "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/query.ear/query.ear"
+   ],
+   "rules": [
+      {
+         "ruleName": "CDI scans for implicit beans when there is no beans.xml file",
+         "severity": "Warning",
+         "category": "Java EE 7 / CDI",
+         "results": [
+            {
+               "fileName": "query.ear/querybean.jar",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": ".*(\\.war|\\.jar)",
+                     "lineNumber": 0
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Java EE security",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud",
+         "results": [
+            {
+               "fileName": "query.ear/querybean.jar/META-INF/ejb-jar.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "method-permission",
+                     "lineNumber": 17
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Remote EJB providers",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud (not Liberty Core)",
+         "results": [
+            {
+               "fileName": "query.ear/querybean.jar/com/ibm/ejs/container/_EJSWrapper_Stub.class",
+               "details": [
+                  {
+                     "reference": "Class implements",
+                     "match": "javax.ejb.EJBObject",
+                     "lineNumber": 0
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

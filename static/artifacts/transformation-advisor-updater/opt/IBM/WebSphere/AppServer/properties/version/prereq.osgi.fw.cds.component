@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE component SYSTEM "component.dtd">
+<component name="prereq.osgi.fw.cds" spec-version="2.0.4" build-version="20080225" build-date="3/3/17"/>

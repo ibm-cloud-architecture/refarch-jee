@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ibm-portal-topology 
+  xmlns="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-topology.xsd" 
+  xmlns:base="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-topology ibm-portal-topology.xsd">
+
+    <application-definition appID="com.ibm.isclite.ISCAdminPortlet" version="6.1.0.0">
+        <title>
+            <base:nls-string lang="en">Integrated Solutions Console</base:nls-string>
+        </title>
+   
+        <component-tree uniqueName="com.ibm.isclite.ISCAdminPortlet">
+            <!-- my portlet -->
+            <portlet-definition uniqueName="com.ibm.isclite.portletpref.appElementDefinition.A">
+                <resource-link name="PortletPref" portletApplication="com.ibm.isclite.ISCAdminPortlet" type="static"/>
+            </portlet-definition>  
+            <portlet-entity uniqueName="com.ibm.isclite.portletpref.appElement.A" portletDefinitionRef="com.ibm.isclite.portletpref.appElementDefinition.A">
+                <title>
+                    <base:nls-ref key="mytask.xml.portlet" locationName="classes/nls/PortletResources"/>
+                </title>
+            </portlet-entity>
+            <portlet-definition uniqueName="com.ibm.isclite.welcomeportlet.appElementDefinition.A">
+                <resource-link name="WelcomePortlet" portletApplication="com.ibm.isclite.ISCAdminPortlet" type="static"/>
+            </portlet-definition>  
+            <portlet-entity uniqueName="com.ibm.isclite.welcomeportlet.appElement.A" portletDefinitionRef="com.ibm.isclite.welcomeportlet.appElementDefinition.A">
+                <title>
+                    <base:nls-ref key="welcome.xml.portlet" locationName="classes/nls/PortletResources"/>
+                </title>
+            </portlet-entity>
+            <portlet-definition uniqueName="com.ibm.isclite.welcomeportlet.appElementDefinition.B">
+                <resource-link name="ISCProductDetails" portletApplication="com.ibm.isclite.ISCAdminPortlet" type="static"/>
+            </portlet-definition>
+            <portlet-entity uniqueName="com.ibm.isclite.welcomeportlet.appElement.B" portletDefinitionRef="com.ibm.isclite.welcomeportlet.appElementDefinition.B">
+                <title>
+                    <base:nls-ref key="iscVersionPtltTitle" locationName="classes/nls/PortletResources"/>
+                </title>
+            </portlet-entity>
+            
+            <!-- Console identity portlet -->
+            <portlet-definition uniqueName="com.ibm.isclite.identityportlet.appElementDefinition.A">
+                <resource-link name="ConsoleIdentityPortlet" portletApplication="com.ibm.isclite.ISCAdminPortlet" type="static"/>
+            </portlet-definition>  
+            <portlet-entity uniqueName="com.ibm.isclite.identityportlet.appElement.A" portletDefinitionRef="com.ibm.isclite.identityportlet.appElementDefinition.A">
+                <title>
+                    <base:nls-ref key="consoleIdentity.xml.portlet" locationName="classes/nls/PortletResources"/>
+                </title>
+            </portlet-entity>            
+            <!-- end Console Identity portlet -->
+            
+        </component-tree>      
+
+        <layout-tree>
+            <layout-element uniqueName="com.ibm.isclite.portletpref.layoutElement.A">
+                <title>
+                    <base:nls-ref key="mytask.xml.layout" locationName="classes/nls/PortletResources"/>
+                </title>
+                <simple-container orientation="row" uniqueName="com.ibm.isclite.portletpref.container.A">
+                    <window uniqueName="com.ibm.isclite.portletpref.window.A" >
+                        <title>
+                            <base:nls-ref key="mytask.xml.window" locationName="classes/nls/PortletResources"/>
+                        </title>
+                        <component-definition-ref>com.ibm.isclite.portletpref.appElement.A</component-definition-ref>
+                    </window>
+                </simple-container>
+            </layout-element>
+
+			<!-- Console identity portlet -->
+            <layout-element uniqueName="com.ibm.isclite.identityportlet.layoutElement.A">
+                <title>
+                    <base:nls-ref key="consoleIdentity.xml.layout" locationName="classes/nls/PortletResources"/>
+                </title>
+                <simple-container orientation="row" uniqueName="com.ibm.isclite.identityportlet.container.A">
+                    <window uniqueName="com.ibm.isclite.identityportlet.window.A" >
+                        <title>
+                            <base:nls-ref key="consoleIdentity.xml.window" locationName="classes/nls/PortletResources"/>
+                        </title>
+                        <component-definition-ref>com.ibm.isclite.identityportlet.appElement.A</component-definition-ref>
+                    </window>
+                </simple-container>
+            </layout-element>
+             <!-- end Console Identity portlet -->
+
+            <layout-element uniqueName="com.ibm.isclite.welcomeportlet.layoutElement.A">
+                <title>
+                    <base:nls-ref key="welcome.xml.layout" locationName="classes/nls/PortletResources"/>
+                </title>
+                <simple-container orientation="column" uniqueName="com.ibm.isclite.welcomeportlet.container.1">
+                    <window uniqueName="com.ibm.isclite.welcomeportlet.window.1">
+                        <title>
+                            <base:nls-ref key="welcome.xml.window" locationName="classes/nls/PortletResources"/>
+                        </title>              
+                        <component-definition-ref>com.ibm.isclite.welcomeportlet.appElement.A</component-definition-ref>
+                    </window> 
+                    <window uniqueName="com.ibm.isclite.welcomeportlet.window.2">
+                        <title>
+                            <base:nls-ref key="iscVersionPtltTitle" locationName="classes/nls/PortletResources"/>
+                        </title>
+                        <component-definition-ref>com.ibm.isclite.welcomeportlet.appElement.B</component-definition-ref>
+                    </window>
+                </simple-container>
+            </layout-element>
+        </layout-tree>
+        
+      <navigation-element layoutElementRef="com.ibm.isclite.identityportlet.layoutElement.A" uniqueName="com.ibm.isclite.identityportlet.navigationElement.A">
+        <title>
+          <base:nls-ref key="iscConsoleIdentityPtltTitle" locationName="classes/nls/PortletResources"/>
+        </title>
+       <parent-tree parentTreeRef="systemadmin" ordinal="70"/>
+      </navigation-element>
+        
+    </application-definition>
+</ibm-portal-topology>

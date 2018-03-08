@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200512" xmlns:spe="http://www.ibm.com/xmlns/prod/websphere/200605/ws-securitypolicy-ext" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xmi="http://schema.omg.org/spec/XMI/1.0" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+ <sp:SupportingTokens>
+   <wsp:Policy wsu:Id="request:token_auth">
+     <spe:LTPAToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200512/IncludeToken/AlwaysToRecipient" />
+   </wsp:Policy>
+  </sp:SupportingTokens>
+  <sp:AsymmetricBinding>
+    <wsp:Policy>
+      <sp:InitiatorToken>
+        <wsp:Policy>
+          <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200512/IncludeToken/AlwaysToRecipient">
+            <wsp:Policy>
+              <sp:WssX509V3Token10/>
+            </wsp:Policy>
+          </sp:X509Token>
+        </wsp:Policy>
+      </sp:InitiatorToken>
+      <sp:RecipientToken>
+        <wsp:Policy>
+          <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200512/IncludeToken/AlwaysToInitiator">
+            <wsp:Policy>
+              <sp:WssX509V3Token10/>
+            </wsp:Policy>
+          </sp:X509Token>
+        </wsp:Policy>
+      </sp:RecipientToken>
+      <sp:AlgorithmSuite>
+        <wsp:Policy>
+          <sp:Basic128Rsa15/>
+        </wsp:Policy>
+      </sp:AlgorithmSuite>
+      <sp:Layout>
+        <wsp:Policy>
+          <sp:Strict/>
+        </wsp:Policy>
+      </sp:Layout>
+      <sp:IncludeTimestamp/>
+    </wsp:Policy>
+  </sp:AsymmetricBinding>
+  <wsp:Policy wsu:Id="request:app_signparts">
+    <sp:SignedParts>
+      <sp:Body/>
+      <sp:Header Namespace="http://schemas.xmlsoap.org/ws/2004/08/addressing"/>
+      <sp:Header Namespace="http://www.w3.org/2005/08/addressing"/>
+    </sp:SignedParts>
+    <sp:SignedElements>
+      <sp:XPath>/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Envelope']/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd' and local-name()='Timestamp']</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Envelope']/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd' and local-name()='Timestamp']</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Envelope']/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='BinarySecurityToken'][(name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])=substring-before(@ValueType,':')) and  concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])),':',substring-after(@ValueType,':')) = concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])),':LTPA')]</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Envelope']/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='BinarySecurityToken'][(name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])=substring-before(@ValueType,':')) and  concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])),':',substring-after(@ValueType,':')) = concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])),':LTPA')]</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Envelope']/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='BinarySecurityToken'][(name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])=substring-before(@ValueType,':')) and  concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])),':',substring-after(@ValueType,':')) = concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])),':LTPAv2')]</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Envelope']/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='BinarySecurityToken'][(name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])=substring-before(@ValueType,':')) and  concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])),':',substring-after(@ValueType,':')) = concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])),':LTPAv2')]</sp:XPath>
+    </sp:SignedElements>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="request:app_encparts">
+    <sp:EncryptedParts>
+      <sp:Body/>
+    </sp:EncryptedParts>
+    <sp:EncryptedElements>
+      <sp:XPath>/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Envelope']/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://www.w3.org/2000/09/xmldsig#' and local-name()='Signature']</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Envelope']/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://www.w3.org/2000/09/xmldsig#' and local-name()='Signature']</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Envelope']/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='BinarySecurityToken'][(name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])=substring-before(@ValueType,':')) and  concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])),':',substring-after(@ValueType,':')) = concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])),':LTPA')]</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Envelope']/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='BinarySecurityToken'][(name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])=substring-before(@ValueType,':')) and  concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])),':',substring-after(@ValueType,':')) = concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype/5.0.2'])),':LTPA')]</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Envelope']/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='BinarySecurityToken'][(name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])=substring-before(@ValueType,':')) and  concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])),':',substring-after(@ValueType,':')) = concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])),':LTPAv2')]</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Envelope']/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='BinarySecurityToken'][(name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])=substring-before(@ValueType,':')) and  concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])),':',substring-after(@ValueType,':')) = concat((name(namespace::*[.='http://www.ibm.com/websphere/appserver/tokentype'])),':LTPAv2')]</sp:XPath>
+    </sp:EncryptedElements>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="response:app_signparts">
+    <sp:SignedParts>
+      <sp:Body/>
+      <sp:Header Namespace="http://schemas.xmlsoap.org/ws/2004/08/addressing"/>
+      <sp:Header Namespace="http://www.w3.org/2005/08/addressing"/>
+    </sp:SignedParts>
+    <sp:SignedElements>
+      <sp:XPath>/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Envelope']/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd' and local-name()='Timestamp']</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Envelope']/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd' and local-name()='Timestamp']</sp:XPath>
+    </sp:SignedElements>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="response:app_encparts">
+    <sp:EncryptedParts>
+      <sp:Body/>
+    </sp:EncryptedParts>
+    <sp:EncryptedElements>
+      <sp:XPath>/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Envelope']/*[namespace-uri()='http://schemas.xmlsoap.org/soap/envelope/' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://www.w3.org/2000/09/xmldsig#' and local-name()='Signature']</sp:XPath>
+      <sp:XPath>/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Envelope']/*[namespace-uri()='http://www.w3.org/2003/05/soap-envelope' and local-name()='Header']/*[namespace-uri()='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' and local-name()='Security']/*[namespace-uri()='http://www.w3.org/2000/09/xmldsig#' and local-name()='Signature']</sp:XPath>
+    </sp:EncryptedElements>
+  </wsp:Policy>
+</wsp:Policy>

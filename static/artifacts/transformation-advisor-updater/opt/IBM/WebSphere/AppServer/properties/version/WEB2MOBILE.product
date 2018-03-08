@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE product SYSTEM "product.dtd">
+<product name="Web 2.0 and Mobile Feature Pack">
+  <id>WEB2MOBILE</id>
+  <version>1.1.0.0</version>
+  <build-info
+    date="5/25/11"
+    level="web21122.15"/>
+</product>

@@ -1,0 +1,144 @@
+{
+   "report": "technology",
+   "version": "2.1",
+   "options": [
+      "--baseEdition",
+      "--bluemixEdition",
+      "--coreEdition",
+      "--ndEdition",
+      "--zosEdition",
+      "--traditional",
+      "--liberty",
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "applications": [
+      {
+         "application": "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear",
+         "summary": {
+            "bluemixLiberty": false,
+            "libertyCore": false,
+            "liberty": false,
+            "websphereTraditional": true,
+            "ndLiberty": false,
+            "ndTraditional": true,
+            "zosLiberty": false,
+            "zosTraditional": true
+         },
+         "technologies": [
+            {
+               "technology": "Java Servlet",
+               "bluemixLiberty": true,
+               "libertyCore": true,
+               "liberty": true,
+               "websphereTraditional": true,
+               "ndLiberty": true,
+               "ndTraditional": true,
+               "zosLiberty": true,
+               "zosTraditional": true
+            },
+            {
+               "technology": "JavaServer Pages / Expression Language (JSP/EL)",
+               "bluemixLiberty": true,
+               "libertyCore": true,
+               "liberty": true,
+               "websphereTraditional": true,
+               "ndLiberty": true,
+               "ndTraditional": true,
+               "zosLiberty": true,
+               "zosTraditional": true
+            },
+            {
+               "technology": "Enterprise JavaBeans (EJB) 2.x and 1.x",
+               "bluemixLiberty": true,
+               "libertyCore": false,
+               "liberty": true,
+               "websphereTraditional": true,
+               "ndLiberty": true,
+               "ndTraditional": true,
+               "zosLiberty": true,
+               "zosTraditional": true
+            },
+            {
+               "technology": "Entity Enterprise JavaBeans (EJB)",
+               "bluemixLiberty": false,
+               "libertyCore": false,
+               "liberty": false,
+               "websphereTraditional": true,
+               "ndLiberty": false,
+               "ndTraditional": true,
+               "zosLiberty": false,
+               "zosTraditional": true
+            },
+            {
+               "technology": "Enterprise JavaBeans (EJB) Lite subset",
+               "bluemixLiberty": true,
+               "libertyCore": true,
+               "liberty": true,
+               "websphereTraditional": true,
+               "ndLiberty": true,
+               "ndTraditional": true,
+               "zosLiberty": true,
+               "zosTraditional": true
+            },
+            {
+               "technology": "Remote Enterprise JavaBeans (EJB)",
+               "bluemixLiberty": false,
+               "libertyCore": false,
+               "liberty": true,
+               "websphereTraditional": true,
+               "ndLiberty": true,
+               "ndTraditional": true,
+               "zosLiberty": true,
+               "zosTraditional": true
+            },
+            {
+               "technology": "Java Connector Architecture (JCA)",
+               "bluemixLiberty": true,
+               "libertyCore": false,
+               "liberty": true,
+               "websphereTraditional": true,
+               "ndLiberty": true,
+               "ndTraditional": true,
+               "zosLiberty": true,
+               "zosTraditional": true
+            },
+            {
+               "technology": "Java Transaction API (JTA)",
+               "bluemixLiberty": true,
+               "libertyCore": true,
+               "liberty": true,
+               "websphereTraditional": true,
+               "ndLiberty": true,
+               "ndTraditional": true,
+               "zosLiberty": true,
+               "zosTraditional": true
+            },
+            {
+               "technology": "Java Database Connectivity (JDBC)",
+               "bluemixLiberty": true,
+               "libertyCore": true,
+               "liberty": true,
+               "websphereTraditional": true,
+               "ndLiberty": true,
+               "ndTraditional": true,
+               "zosLiberty": true,
+               "zosTraditional": true
+            }
+         ],
+         "incompleteReportErrors": [
+         ],
+         "footnotes": [
+         ]
+      }
+   ],
+   "overallSummary": {
+      "bluemixLiberty": false,
+      "libertyCore": false,
+      "liberty": false,
+      "websphereTraditional": true,
+      "ndLiberty": false,
+      "ndTraditional": true,
+      "zosLiberty": false,
+      "zosTraditional": true
+   }
+}

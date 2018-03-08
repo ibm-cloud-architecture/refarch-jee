@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+@start_restricted_prolog@
+Version: @(#) 1.5 SIB/ws/code/sib.admin.config/src/config/cells/BaseApplicationServerCell/nodes/DefaultNode/servers/server1/sib-service.xml, SIB.admin.config, WAS70.SIB, o0833.54 05/02/03 11:12:54 [8/22/08 13:55:11]
+
+Licensed Materials - Property of IBM
+
+"Restricted Materials of IBM"
+
+5724-I63, 5724-H88, 5655-N01, 5733-W60, 5630-A36           
+
+(C) Copyright IBM Corp. 2003, 2005 All Rights Reserved.
+
+US Government Users Restricted Rights - Use, duplication or
+disclosure restricted by GSA ADP Schedule Contract with
+IBM Corp.
+@end_restricted_prolog@
+-->
+
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sibservice="http://www.ibm.com/websphere/appserver/schemas/6.0/sibservice.xmi">
+  <sibservice:SIBService xmi:id="SIBService_1" enable="false" />
+</xmi:XMI>
+

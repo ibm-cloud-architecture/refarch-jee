@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE product SYSTEM "product.dtd">
+<product name="Feature Pack for OSGi Applications and Java Persistence API 2.0">
+  <id>ARIESJPA</id>
+  <version>1.0.0.9</version>
+  <build-info
+    date="11/29/12"
+    level="cf091248.03"/>
+</product>

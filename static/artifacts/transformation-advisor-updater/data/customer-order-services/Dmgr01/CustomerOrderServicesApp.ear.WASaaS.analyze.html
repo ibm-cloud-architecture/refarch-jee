@@ -1,0 +1,4197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Detailed Migration Analysis Report</title>
+<meta name="description" content="Detailed Migration Analysis Report">
+<meta name="author" content="IBM WebSphere Application Server Migration Toolkit for Application Binaries">
+<style type="text/css">
+	html, body, div, iframe, h1, h2, h3, h4, p, a, em, sup,
+			b, center, table, tbody, tfoot, thead, tr, th, ul, td {
+			margin:0;
+			padding:0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		html {
+			font-size: 100%;
+		}
+
+		.rec-featureList {
+			list-style: disc inside;
+			margin-left: 20px;
+		}
+		
+
+		div.evaluate {
+			margin-bottom: 20px;
+		}
+
+		/* Table */
+		.inventory table, .analyze table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		
+		.inventory .utility-jar-contents table {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			border-collapse: separate;
+			border-spacing: 0;
+			table-layout: fixed;
+			page-break-inside: avoid;
+			width: 80%;
+		}
+        .inventory .utility-jar-contents th,
+        .inventory .utility-jar-contents td {
+            text-align: left;
+            width: 30%;
+        }
+        .inventory .utility-jar-contents th:first-child,
+        .inventory .utility-jar-contents td:first-child {
+            text-align: left;
+            vertical-align: top;
+            word-wrap: break-word;
+            width: 40%;
+        }
+    .inventory .duplicate-jar-contents table {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			border-collapse: separate;
+			border-spacing: 0;
+			table-layout: fixed;
+			page-break-inside: avoid;
+			width: 90%;
+	}
+
+	.inventory .duplicate-jar-contents td,
+	.inventory .duplicate-jar-contents th {
+		text-align: left;
+		vertical-align: top;
+		width: 35%;
+	}
+
+	.inventory .duplicate-jar-contents td:first-child,
+	.inventory .duplicate-jar-contents th:first-child {
+		text-align: left;
+		vertical-align: top;
+		width: 35%;
+	}
+
+        .inventory .conflicting-jar-contents table {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			border-collapse: separate;
+			border-spacing: 0;
+			table-layout: fixed;
+			page-break-inside: avoid;
+			width: 90%;
+	}
+
+	.inventory .conflicting-jar-contents td,
+	.inventory .conflicting-jar-contents th {
+		text-align: left;
+		vertical-align: top;
+		width: 35%;
+	}
+	
+	.inventory .shared-library-contents td,
+	.inventory .shared-library-contents th {
+		text-align: left;
+		vertical-align: top;
+		width: 20%;
+	}
+
+	.inventory .conflicting-jar-contents td:first-child,
+	.inventory .conflicting-jar-contents th:first-child {
+		text-align: left;
+		vertical-align: top;
+		width: 50%;
+	}
+	
+	.inventory .shared-library-contents td:last-child,
+	.inventory .shared-library-contents th:last-child {
+		text-align: left;
+		vertical-align: top;
+		width: 60%;
+	}
+	
+	.treeKey p {
+		text-align: center;
+		font-size: 12px;
+	}
+
+		 .rectangle {
+		  position: relative;
+		  display: inline-block;
+		  width: 20px;
+		  height: 10px;
+		  background: green;
+		  margin-left: 5px;
+		  margin-right: 3px;
+		}
+
+		.unused { background-color: #FF00FF; }
+		.missing { background-color: #008000; }
+		.websphere { background-color: #9855D4; }
+		.thirdparty { background-color: #FFA500; }
+		.javaee { background-color: #478DE4; }
+		.dup { background-color: #FF0000; }
+		
+		.evaluate table, .inventory table {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			border-collapse: separate;
+			border-spacing: 0;
+			table-layout: fixed;
+			page-break-inside: avoid;
+			width: 100%;
+		}
+		.evaluate table th, .evaluate table td,
+		.inventory table th, .inventory table td {
+			font-size: 1.1em;
+			line-height: 1.3em;
+			padding: 10px 10px;
+			width: 8%;
+		}
+		.evaluate table thead, .inventory table thead {
+			margin-top: 26px;
+		}
+		.evaluate table .highlight {
+			background: #d4f0ff;
+		}
+		.evaluate table .banner td {
+			font-size: 1em;
+			letter-spacing: 0.4px;
+			padding: 6px 6px 6px 10px;
+		}
+		.evaluate table th:first-child, .evaluate table td:first-child{
+			width: 18%;
+		}
+		
+		.inventory table th:first-child, .inventory table td:first-child{
+			width: 20%;
+			word-wrap: break-word;
+		}
+		
+		/* Table: thead */
+		.inventory table tr th {
+			font-weight: bold;
+			text-align: center;
+			vertical-align: bottom;
+		}
+		.evaluate table tr th {
+			font-weight: bold;
+			text-align: left;
+			vertical-align: bottom;
+		}
+		/* Table: tbody */
+		.inventory table tr,
+		.evaluate table tr {
+			text-align: center;
+		}
+		.inventory tr.alternate-row > td,
+		.inventory tr.alternate-row > th,
+		.evaluate tr.alternate-row > td {
+			background: #F6F6F6;
+		}
+		.evaluate table th {
+			border-right: 1px solid #D6D6D6;
+			border-top: 1px solid #D6D6D6;
+		}
+		.inventory table td,
+		.inventory table th,
+		.evaluate table td {
+			background: #fff;
+			border-right: 1px solid #D6D6D6;
+			border-top: 1px solid #D6D6D6;
+			vertical-align: middle;
+		}
+		.evaluate table td[colspan="0"] {
+	        background: #D6D6D6;
+	        color: #5A5A5A;
+	        font-weight: bold;
+	        text-transform: uppercase;
+    	}
+    	.inventory table td:first-child,
+		.inventory table th:first-child,
+		.evaluate table td:first-child {
+			text-align: left;
+			word-wrap: break-word;
+		}
+		.inventory table td:last-child,
+		.inventory table th:last-child,
+		.evaluate table td:last-child {
+			border-right: 0 none;
+		}
+
+		.evaluate table .checkmark {
+			font-size: large;
+			color: #00B4A0;
+	        font-weight: bold;
+		}
+		.disclaimer {
+			font-size: 0.8em;
+			margin: 10px 0;
+			text-align: center;
+		}
+
+		.footnotetech { padding-left: .25em;} 
+		.footnote { padding-right: .25em;} 
+
+		details,
+		nav {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ul {
+			list-style: none;
+		}
+		/*set initial value*/
+
+		body {
+			background: #ededed;
+			color: #333333;
+			font-size: 1em;
+			/** 16px **/
+			
+			font-family: "HelvRegularIBM", "Helvetica Neue", Arial, sans-serif;
+			padding-bottom: 22px;
+			position: relative;
+		}
+		/***
+					**
+					** Fonts
+					**
+					***/
+
+		h1 {
+			/* 28px % 16 */
+			
+			font-size: 1.75em;
+			font-weight: bold;
+		}
+		h1:first-of-type {
+			margin-top: 20px;
+		}
+		h2 {
+			color: #008571;
+			font-size: 1.3em;
+			font-weight: bold;
+		}
+		h3 {
+			font-size: 1.125em;
+			font-weight: bold;
+		}
+		h1,
+		h2,
+		h3,
+		h4,
+		p {
+			margin: 10px 0;
+		}
+		p,
+		a {
+			/* 14 (pixels) % 16 (pixels) */
+			
+			font-size: 0.875rem;
+		}
+		p > a {
+			font-size: 1em;
+		}
+		a {
+			color: #333;
+			text-decoration: none;
+		}
+		p b,
+		caption b {
+			font-weight: bold;
+		}
+		a:hover {
+			color: #4178BE;
+			text-decoration: underline;
+		}
+		
+		ul ul .feature-list {
+			padding-left: 20px;
+		}
+  		ul ul .feature {
+			padding-left: 40px;
+		}
+		
+		pre {
+            background: #dfe9e9;
+            font-family: "Courier New", Courier, monospace, sans-serif;
+            font-size: 0.8em;
+            line-height: 20px;
+            padding: 0 20px;
+            text-align: left;
+            overflow: auto;
+            width: 100%;
+        }
+		
+		.blueAnchor {
+			color: #4178BE;
+			text-decoration: underline;
+		}
+		
+		code {
+            color: #333;
+            font-family: "Courier New", Courier, monospace, sans-serif;
+            font-size: 0.875em;
+            text-align: left;
+        }
+		
+		.courier {
+			font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+		}
+		.bolden {
+			font-weight: bold;
+			font-family: "HelvNeueBold";
+		}
+		.bulletList {
+			font-size: 0.75em;
+			list-style: disc;
+			margin-left: 20px;
+			line-height: 1.75em;
+		}
+		.analyze .flash__numbers,
+		.inventory .flash__numbers {
+			font-family: "HelvBoldIBM", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, Roboto, sans-serif;
+			font-size: 2.75em;
+		}
+		
+		.analyze .shared ul,
+        .analyze .shared ol {
+            list-style: disc inside;
+            margin-left: 20px;
+        }
+
+        .analyze .shared li,
+        .analyze .shared li {
+            line-height: 1.8em;
+            margin: 5px 0;
+        }
+		/***
+					**
+					** Wrapper
+					**
+					***/
+		.archivePath {
+			word-wrap: break-word;
+		}
+		.wrapper {
+			position: relative;
+			margin-right: auto;
+			margin-left: auto;
+			width: 96%;
+			/* Holding outermost DIV */
+		}
+		.wrapper:nth-child(2) {
+			padding-bottom: 22px;
+		}
+		.clear {
+			clear: both;
+		}
+		.show {
+			display: block;
+		}
+		.hide {
+			display: none;
+		}
+		.inventory .wrapSummary {
+			position: relative;
+		}
+		.inventory .wrapSummary table {
+			width: 85%;
+		}
+		.wrapSummary canvas {
+			right: 0;
+			top: 0;
+		}
+		.fixedCanvas {
+			max-height: 400px;
+		}
+		.floating-box-narrow {
+			display: inline-block;
+			min-height: 400px;
+			width: 30%;
+		}
+		.floating-box-wide {
+			width: 69%;
+			display: inline-block;
+			min-height: 50px;
+    		overflow: auto;
+		}
+		.evaluate .floating-box-wider {
+			width: 100%;
+			display: inline-block;
+		}
+		.evaluate .floating-box {
+			width: 100%;
+			display: inline-block;
+		}
+		.inventory .floating-box-medium {
+			display: inline-block;
+			min-height: 200px;
+			width: 50%;
+		}
+		.performance-considerations {
+			width: 50%;
+		}
+		.performance-considerations-list-of-jars {
+			margin-top: 15px;
+		}
+		/***
+					**
+					** "Jump To" Navigation
+					**
+					***/
+
+		.nav-wrapper {
+			background-color: #fff;
+			position: absolute;
+			right: 0;
+			top: 0;
+			z-index: 5;
+		}
+		.fixed nav {
+			position: fixed;
+			right: 2%;
+			top: 0;
+		}
+		.fixed-in-bluemix nav {
+			position: fixed;
+			top: 52px;
+		}
+		.na-fixed nav {
+			position: relative;
+		}
+		.na-fixed #backToTopNav {
+			display: none;
+		}
+		.fixed-in-bluemix #backToTopNav,
+		.fixed #backToTopNav {
+			display: block;
+		}
+		/* Removing padding, margin and "list-style" from the "ul",
+					* and adding "position:relative" */
+
+		nav ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			position: relative;
+		}
+		/* Positioning the navigation items inline */
+
+		nav li {
+			background-color: #4178be;
+			color: #fff;
+			display: inline-block;
+		}
+		/* Styling the links */
+
+		nav a {
+			color: #fff;
+			display: block;
+			font-size: 0.9em;
+			min-width: 88px;
+			padding: 15px 60px 15px 10px;
+			position: relative;
+			text-align: right;
+			text-decoration: none;
+		}
+		nav a .scroll-bottom-caret {
+			position: absolute;
+			left: 80%;
+			top: 18px;
+		}
+		nav a .scroll-bottom-caret:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			border-top: 10px solid #fff;
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+		}
+		nav a .scroll-bottom-caret:after {
+			content: '';
+			position: absolute;
+			left: 4px;
+			top: 0;
+			border-top: 6px solid #4178be;
+			border-left: 6px solid transparent;
+			border-right: 6px solid transparent;
+		}
+		/* Background color change on Hover */
+
+		nav a:hover {
+			background-color: #4178be;
+			color: #fff;
+			text-decoration: none;
+		}
+		/* Hide Dropdowns by Default
+					* and giving it a position of absolute */
+
+		nav ul ul {
+			border: 1px solid #d6d6d6;
+			display: none;
+			max-height: 85vh;
+			overflow: auto;
+			position: absolute;
+			right: 0;
+			top: 100%;
+		}
+		/* Display Dropdowns on Hover */
+
+		nav ul li:hover > ul {
+			display: block;
+		}
+		/* Fisrt Tier Dropdown */
+
+		nav ul ul li {
+			background-color: #fff;
+			display: list-item;
+			float: none;
+			min-width: 400px;
+			position: relative;
+		}
+		nav ul ul a {
+			color: #000;
+			line-height: 18px;
+			padding: 9px 20px 9px 40px;
+			text-align: left;
+		}
+		nav ul ul .na-title {
+			font-weight: bold;
+			padding-left: 20px;
+		}
+		.consolidated nav ul ul .na-sub-title {
+            padding-left: 30px;
+        }
+		nav ul ul .na-sub-title {
+            font-weight: bold;
+            padding-left: 25px;
+        }
+        
+        nav ul ul .na-sub-sub-title {
+            padding-left: 50px;
+        }
+        
+		/***
+					**
+					** Fake Header
+					**
+					***/
+
+		.date-time {
+			margin-bottom: 5px;
+		}
+		.date-time + .courier {
+			margin-top: 5px;
+		}
+		.date-time .date {
+			margin-right: 10px;
+		}
+		.recap {
+			margin-top: 30px;
+		}
+		.recap ul {
+			overflow: hidden;
+		}
+		.inventory .recap li {
+			background: #fff;
+			display: block;
+			float: left;
+			margin: 10px;
+			padding: 10px 3px;
+			width: 11.5%;
+			min-height: 100px;
+			text-align: center;
+			word-wrap: break-word;
+		}
+		.analyze .recap li {
+            background: #fff;
+            display: block;
+			float: left;
+			margin: 10px;
+			padding: 10px 3px;
+			width: 14.5%;
+			min-height: 125px;
+			text-align: center;
+        }
+        .consolidated .recap-alternate li,
+		.inventory .recap-alternate li {
+			background: #ededed;
+			display: block;
+			float: left;
+			margin: 10px;
+			padding: 10px 3px;
+			width: 14.5%;
+			min-height: 125px;
+			max-height: 125px;
+			text-align: center;
+		}
+		.recap li:first-child {
+			margin-left: 0;
+		}
+		
+		.analyze > .wrapper > .recap li:last-child {
+            background: transparent;
+            margin-right: 0;
+            padding: 0;
+            text-align: left;
+            min-width: 49.5%;
+            max-width: 49.5%;
+        }
+        
+        .analyze > .wrapper > .recap li:last-child p {
+            font-size: 0.8em;
+            margin: 5px 0 20px;
+            line-height: 1.3em;
+        }
+
+		/***
+		**
+		** Header Sections and Expand/Collapse All
+		**
+		***/
+		.header-sections {
+			margin-top: 30px;
+			overflow: hidden;
+		}
+		.consolidated-header-sections {
+			overflow: hidden;
+		}
+		.consolidated-header-sections h2 {
+			margin-top: 0px;
+		}
+		.header-sections h2,
+		.consolidated-header-sections h2,
+		.expand-collapse-holder,
+		.expand-collapse-holder a {
+			display: inline-block;
+		}
+		.analyze .header-sections h2,
+		.inventory .header-sections h2,
+		.analyze .expand-collapse-holder,
+		.inventory .expand-collapse-holder {
+			line-height: 42px;
+		}
+		.analyze .header-sections h2,
+		.inventory .header-sections h2,
+		.analyze .expand-collapse-holder a,
+		.inventory .expand-collapse-holder a {
+			float: left;
+		}
+		.analyze .header-sections h2,
+		.inventory .header-sections h2 {
+			margin-top: 0;
+		}
+
+		/***
+		**
+		** Expand/Collapse All
+		**
+		***/
+		.expand-collapse-holder {
+			float: right;
+			margin-top: 4px;
+			margin-bottom: 4px;
+		}
+		.expand-collapse-holder a {
+			border-right: 1px solid #000;
+			color: #4178BE;
+			line-height: 12px;
+			margin-right: 0;
+			padding: 5px 15px 10px;
+		}
+		.expand-collapse-holder a:last-child {
+			border-right: 0 none;
+		}
+		.expand-collapse-holder .disabled {
+			color: #333;
+			cursor: default;
+			opacity: 0.5;
+			pointer-events: none;
+		}
+		
+		/***
+        **
+        ** Detailed Results by Rule: List of Rules
+        **
+        ***/
+        .detailed-results-title {
+			color: #008571;
+		}
+		
+		.consolidated .detailed-results-by-severity { 
+			padding: 0px;
+		}
+		
+		.detailed-results-by-severity { 
+			padding: 20px;
+			background: #fff;
+		}
+        
+        .consolidated .detailed-results-by-rule {
+        	margin-left: 0px;
+        }
+        
+        .detailed-results-by-rule { 
+			padding-bottom: 0;
+			margin-left: 5px;
+			padding-top: 10px;
+			background: #ededed;
+		}
+
+        .rule {
+            background: #fff;
+            margin-bottom: 40px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .rules {
+            margin: 10px;
+            padding: 15px;
+            width: 95%;
+        }
+
+        .rule:last-child { margin-bottom: 0; }
+
+        .rule-title h3, { display: inline-block; }
+
+        .rule-title h3 {
+            margin: 0;
+            line-height: 22px;
+            width: 70%;
+        }
+
+		.rule-title h3 em {
+            font-size: 0.8em;
+        	font-weight: normal;
+        }
+		
+		/* Tree charts
+		*/
+		.trees {
+		    border-bottom: 3px solid #D6D6D6;
+		    border-top: 3px solid #D6D6D6;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            padding-bottom: 5px;
+
+            overflow: auto;
+		}
+		
+		.horizontal-breaks {
+		    border-top: 3px solid #D6D6D6;
+            		margin-bottom: 15px;
+            		margin-top: 15px;
+            		padding-top: 10px;
+		}
+		
+		/***
+		**
+		** Inventory Details by Application: List of Application/Archives
+		**
+		***/
+
+		.inventory .inventory-details-by-app {
+			padding-bottom: 22px;
+		}
+		.archive {
+			background: #fff;
+			margin-bottom: 40px;
+			padding: 20px;
+			position: relative;
+		}
+		.problemSummary {
+			background: #fff;
+			margin-bottom: 40px;
+			padding: 20px;
+			position: relative;
+		}
+		.archive:last-child {
+			margin-bottom: 0;
+		}
+		.archive-title h3 {
+			display: inline-block;
+		}
+		.archive-title h3 {
+			margin: 0;
+			line-height: 22px;
+			width: 70%;
+		}
+		.archive-title h3 span {
+			font-size: 0.8em;
+			font-weight: normal;
+		}
+		.js-toggle-actions {
+			display: inline-block;
+			position: absolute;
+			text-align: center;
+			top: 19px;
+			right: 20px;
+		}
+		.js-toggle-actions a {
+			color: #4178BE;
+			display: inline-block;
+			float: left;
+			padding: 5px 10px;
+		}
+		.js-toggle-actions a:last-child {
+			/*border-left: 1px solid #333;*/
+		}
+		
+		/***
+        **
+        ** Rule Fix
+        **
+        ***/
+        .rule-fix,            
+        .rule-result { margin-top: 20px; }
+
+        .rule-fix h3,
+        .rule-additional-help h3,        
+        .rule-result h3 { margin-bottom: 20px; }
+
+        .rule-fix p,
+        .rule-additional-help p,        
+        .rule-result p { line-height: 1.5em; }
+
+        .rule-fix a,
+        .rule-additional-help a        
+        {
+            color: #4178BE;
+            text-decoration: underline;
+        }
+
+        .rule-fix        
+        {
+            border-bottom: 3px solid #D6D6D6;
+            margin-bottom: 30px;
+            margin-top: 30px;
+            padding-bottom: 20px;
+
+            max-height: 400px;
+            overflow: auto;
+        }
+        
+        .rule-additional-help {
+        	background-color: #fff;
+        	padding-left: 20px;
+        	padding-bottom: 10px;
+        }    
+        
+        .rule-additional-help h3:first-child {
+        	padding-top: 10px;
+        }    
+        
+
+        .analyze .table-code { width: 100%; }
+
+        .rule-fix pre,
+        .rule-additional-help pre {
+            padding: 10px 0 10px 20px;
+            width: auto;
+            white-space: pre;
+            white-space: -moz-pre;
+            white-space: -pre;
+            white-space: -o-pre;
+            word-wrap: break-word;
+        }
+		
+		/***
+        **
+        ** Connectivity Summary
+        **
+        ***/
+        .consolidated .connectivity-summary {
+        	padding-top: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        
+        .connectivity-summary {
+            background: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .connectivity-summary table {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.8em;
+
+            border-collapse: separate;
+            border-spacing: 0;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .connectivity-summary table caption {
+            line-height: 1.4em;
+            padding-bottom: 20px;
+            text-align: left;
+        }
+
+        .connectivity-summary tr.summary {
+            background: #d4f0ff;
+        }
+
+        .connectivity-summary tr.hiddenRow {
+            display: none;
+            vertical-align: middle;
+            visibility: hidden;
+        }
+
+        .connectivity-summary tr.visibleRow {
+            vertical-align: middle;
+            visibility: visible;
+        }
+
+        .connectivity-summary tr.summary .col1summarymodule { 
+        	font-weight: bold; 
+        	word-break: break-all;
+        }
+
+       	.connectivity-summary tr.visibleRow .col1main { 
+       		padding-left: .2em;
+        	word-wrap: break-word;
+        }
+
+      	.connectivity-summary tr.visibleRow .col1child { 
+       		padding-left: .7em;
+        	word-wrap: break-word;
+        }
+
+       	.connectivity-summary tr.visibleRow .col1grandchild { 
+       		padding-left: 1.2em;
+        	word-wrap: break-word;
+        }
+
+		.connectivity-summary th,
+        .connectivity-summary td {
+            border-bottom: 1px solid #D6D6D6;
+            border-right: 1px solid #D6D6D6;
+            line-height: 1.2em;
+            text-align: center;
+            width: 8%;
+        }
+
+        .connectivity-summary th:first-child,
+        .connectivity-summary td:first-child,
+        .connectivity-summary .visibleRow td:first-child {
+            text-align: left;
+            width: 15%;
+        }
+
+        .connectivity-summary .summary td:first-child:hover { cursor: pointer; }
+
+        .connectivity-summary th:last-child,
+        .connectivity-summary td:last-child { border-right: 0 none; }
+
+        .connectivity-summary th {
+            color: #5A5A5A;
+            font-weight: bold;
+            padding: .5em;
+            vertical-align: bottom;
+        }
+
+        .connectivity-summary td { padding: .5em; }
+		
+		/***
+        **
+        ** Tables:
+        ** Rule Result Tables
+        **
+        ***/
+        .rule-result table {
+            font-family: Arial, Helvetica, sans-serif;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .rule-result tbody tr {
+            border-top: 1px solid #D6D6D6;
+        }
+
+        .rule-result tbody tr.results {
+            border-top: 0 none;
+        }
+
+        .rule-result th,
+        .rule-result td {
+            font-size: 0.875em;
+            line-height: 1.2em;
+            padding-bottom: 10px;
+            padding-left: 0;
+            padding-right: 10px;
+            padding-top: 10px;
+            text-align: left;
+            width: 23%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .rule-result tr.header-archive td[colspan="4"] {
+            padding-left: 5px;
+        	background-color: #ededed;
+        	font-weight: bold;
+        }
+        
+        .custom-colspan {
+        	background-color: #ededed;
+        	font-weight: bold;
+        }
+        
+        .custom-colspan td{
+        	padding-left: 5px;
+        }
+
+        .rule-result td.indentFileName {
+            padding-left: 15px;
+        }
+
+        .rule-result th:first-child,
+        .rule-result td:first-child {
+            width: 40%;
+        }
+
+ 		.rule-result th:last-child,
+		.rule-result td:last-child {
+			width: 10%;
+			text-align: right;
+		}
+		
+		.rule-result td[colspan="4"]{
+            text-align: left;
+		}
+		
+        .rule-result th {
+            color: #5A5A5A;
+            font-weight: bold;
+            padding-top: 0;
+            text-transform: uppercase;
+            vertical-align: bottom;
+        }
+
+        .rule-result td:first-child { padding-right: 30px; }
+        .rule-result td { vertical-align: top; }
+        
+        /***
+        **
+        ** Tables:
+        ** Rule Severity Summary Table
+        **
+        ***/
+        .rule-severity table {
+            font-family: Arial, Helvetica, sans-serif;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .rule-severity tbody tr {
+            border-top: 1px solid #D6D6D6;
+        }
+
+        .rule-severity th,
+        .rule-severity td {
+            font-size: 0.875em;
+            line-height: 1.2em;
+            padding-bottom: 10px;
+            padding-left: 0;
+            padding-right: 10px;
+            padding-top: 10px;
+            text-align: left;
+            width: 15%;
+            white-space: pre-wrap;
+            word-wrap: normal;
+        }
+        
+        .rule-severity th:first-child,
+        .rule-severity td:first-child {
+            text-align: center;
+			width: 10%;
+        }
+
+ 		.rule-severity th:last-child,
+		.rule-severity td:last-child {
+			width: 50%;
+			text-align: left;
+		}
+		
+		.rule-severity td.center,
+		.rule-severity th.center {
+            text-align: center;
+		}
+				
+		.rule-severity td.severity-label,
+		.rule-severity th.severity-label {
+			width: 10%;
+		}
+				
+        .rule-severity th {
+            color: #5A5A5A;
+            font-weight: bold;
+            padding-top: 0;
+            text-transform: uppercase;
+            vertical-align: bottom;
+        }
+
+        .rule-severity td { vertical-align: top; }
+
+        .rule-severity-summary {
+            background: #fff;
+            padding: 20px 20px 20px 20px;
+            position: relative;
+        }
+        
+        /***
+        **
+        ** Analyzed Rule Header
+        **
+        ***/
+        #jsRulesAnalyzedTitle {
+            margin-top: 22px;
+            position: relative;
+        }
+
+        .detailed-analysis-by-rule {
+            background: #fff;
+            padding: 20px 20px 50px 20px;
+            position: relative;
+        }
+
+        .detailed-analysis-by-rule.read-more {
+            height: auto;
+        }
+
+        .detailed-analysis-by-rule.read-less {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .detailed-read-more-button {
+            background-color: #F6F6F6;
+            /* IE10+ */
+            background-image: -ms-linear-gradient(top, #ffffff 0%, #F6F6F6 27%, #ededed 100%);
+            /* Mozilla Firefox */
+            background-image: -moz-linear-gradient(top, #ffffff 0%, #F6F6F6 27%, #ededed 100%);
+            /* Opera */
+            background-image: -o-linear-gradient(top, #ffffff 0%, #F6F6F6 27%, #ededed 100%);
+            /* Webkit (Safari/Chrome 10) */
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(27, #F6F6F6), color-stop(100, #ededed));
+            /* Webkit (Chrome 11+) */
+            background-image: -webkit-linear-gradient(top, #ffffff 0%, #F6F6F6 27%, #ededed 100%);
+            /* W3C Markup */
+            background-image: linear-gradient(to bottom, #ffffff 0%, #F6F6F6 27%, #ededed 100%);
+
+            bottom: 0;
+            color: #4178BE;
+            display: block;
+            height: 20px;
+            left: 0;
+            padding: 20px 0;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+        }
+
+        .detailed-analysis-by-rule h4,
+        .detailed-analysis-by-rule h5 { font-weight: bold; }
+
+        /***
+        **
+        ** Individual Analyzed Rule
+        **
+        ***/
+        .analyzed-rule h3,
+        .analyzed-rule h4,
+        .analyzed-rule h5 { margin-bottom: 15px; }
+
+        .analyzed-rule ul {
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+		
+		/***
+		**
+		** Archive Details
+		**
+		***/
+
+		.archive-details {
+			margin-bottom: 20px;
+			margin-top: 20px;
+			padding-bottom: 10px;
+		}
+		.inventory .archive-details h3 {
+			margin-bottom: 20px;
+		}
+		.cons-li-p,
+		.inventory .archive-details p {
+			line-height: 1.5em;
+		}
+		.inventory .archive-details a {
+			color: #4178BE;
+			text-decoration: underline;
+		}	
+		
+		/*
+					**
+					** Added Shake on 04/12/14
+					**
+					*/
+
+		@keyframes shake {
+			10%, 90% {
+				transform: translate3d(-1px, 0, 0);
+			}
+			20%,
+			80% {
+				transform: translate3d(2px, 0, 0);
+			}
+			30%,
+			50%,
+			70% {
+				transform: translate3d(-4px, 0, 0);
+			}
+			40%,
+			60% {
+				transform: translate3d(4px, 0, 0);
+			}
+		}
+		.shake {
+			-webkit-animation-name: animation;
+			-webkit-animation-duration: 2s;
+			-webkit-animation-timing-function: ease-in-out;
+			-webkit-animation-iteration-count: 1;
+			-webkit-animation-play-state: running;
+			animation-name: animation;
+			animation-duration: 2s;
+			animation-timing-function: ease-in-out;
+			animation-iteration-count: 1;
+			animation-play-state: running;
+			background-color: #fff;
+		}
+		@-webkit-keyframes animation {
+			100.0% {
+				background-color: #d4f0ff;
+			}
+			50.0% {
+				background-color: #e9f7ff;
+			}
+			0% {
+				background-color: #fff;
+			}
+		}
+		@keyframes animation {
+			100.0% {
+				background-color: #d4f0ff;
+			}
+			50.0% {
+				background-color: #e9f7ff;
+			}
+			0% {
+				background-color: #fff;
+			}
+		}
+		/*
+					.shake {
+					animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+					transform: translate3d(0, 0, 0);
+					backface-visibility: hidden;
+					perspective: 1000px;
+					}
+					*/
+
+		.is-paused {
+			animation-play-state: paused;
+		}
+		/*
+        **
+        ** End - Added Shake on 04/12/14
+        **
+        */
+        
+        .rule-fix table.borders,
+ 		.rule-additional-help table.borders {table-layout: auto;
+                width: auto;
+				border-collapse: collapse;
+				border: solid 2px gray;
+				border-spacing: 0;}
+ 		.rule-fix .borders td, 
+ 		.rule-additional-help .borders td, 
+ 		.rule-fix .borders th, 
+ 		.rule-additional-help .borders th, 
+ 		.rule-fix .borders tr, 
+ 		.rule-additional-help .borders tr, 
+ 		.rule-fix .borders thead,
+ 		.rule-additional-help .borders thead {table-layout: auto;
+                width: auto;
+				border-collapse: collapse;
+				border: solid 1px gray;
+				padding: 5px;
+  				vertical-align: text-top;}				
+ 		.rule-fix .borders thead.highlight,
+ 		.rule-additional-help .borders thead.highlight { background: #d4f0ff }
+ 		
+ 		.rule-fix ul {
+            list-style: disc outside;
+            margin-left: 20px;
+        }
+ 		
+ 		.rule-fix ol {
+            list-style: decimal outside;
+            margin-left: 20px;
+        }
+		 .circle {
+		  position: relative;
+		  display: inline-block;
+		  width: 28px;
+		  height: 0;
+		  padding: 14px 0;
+		  line-height: 0;
+		  border-radius: 50%;
+		  background: green;
+		  color: white;
+		  font-family: Times New Roman, Helvetica, Arial Black, sans;
+		  font-weight: bolder;
+		  font-size: 22px;
+		  text-align: center;
+		  margin-right: 5px;
+		}
+		
+		 .circle-small {
+		  position: relative;
+		  display: inline-block;
+		  width: 20px;
+		  height: 0;
+		  padding: 10px 0;
+		  line-height: 0;
+		  border-radius: 50%;
+		  background: green;
+		  color: white;
+		  font-family: Times New Roman, Helvetica, Arial Black, sans;
+		  font-weight: bolder;
+		  font-size: 14px;
+		  text-align: center;
+		  margin-right: 3px;
+		}
+
+		.rule-category { background-color: #4187be;
+						border-radius: 5px;
+						color: white;
+						font-size: 1em; 
+						padding: 3px 6px;
+						margin-left: 20px;
+		}
+		
+		.sev-info { background-color: #4187be; }
+		.sev-error { background-color: #FF5050; }
+		.sev-warn { background: #EFC100; color: #323232; }
+		
+		.sev-info:before { content: 'i'; }
+		.sev-warn:before { content: '!'; }
+		.sev-error:before { content: '\00D7'; }	
+		
+		.analyze table.code {table-layout: auto;
+                width: auto;
+				border-collapse: collapse;
+				border: solid 2px gray;
+				border-spacing: 0;
+				background-color: #F7F8F9;}
+		.analyze table.code td{table-layout: auto;
+                width: auto;
+				border-right: 1px;
+  				border-bottom: 1px;
+				border: solid 1px gray;
+				padding: 5px;}				
+
+		.analyze .Text 			{ } 
+		.analyze .Italic			{font-family: tahoma; font-size: 80%; font-style: italic}
+		.analyze .Strong			{font-family: tahoma; font-size: 80%; font-weight: bold}
+		.analyze .Header			{font-family: tahoma; font-size: 16px; color: black; font-weight: bold; }
+		.analyze .SubHeader		{font-size: 100%; color: black; font-weight: bold; }
+		.analyze .Code		    {font-family: monospace; color: black;  } 
+		.analyze .JavaType 		{font-family: tahoma; font-size: 80%; color: black; } 		
+		.analyze .JavaKeyword	{font-family: tahoma; font-size: 80%; color: #7F0055; font-weight: bold; } 		
+		.analyze .JavaConst 		{font-family: tahoma; font-size: 80%; color: #2A00FF; } 		
+		.analyze .JavaComment	{font-family: tahoma; font-size: 80%; color: #3F7F5F  } 		
+		.analyze .Javadoc		{font-family: tahoma; font-size: 80%; color: blue  } 		
+		.analyze .XmlDefinition	{font-family: tahoma; font-size: 80%; color: black; font-style: italic }
+		.analyze .XmlElement 	{font-family: tahoma; font-size: 80%; color: #3F7F7F; } 		
+		.analyze .XmlElementVal 	{font-family: tahoma; font-size: 80%; color: black }
+		.analyze .XmlAttr 		{font-family: tahoma; font-size: 80%; color: #7F007F } 		
+		.analyze .XmlAttrVal		{font-family: tahoma; font-size: 80%; color: #2A00FF; font-style: italic } 		
+
+
+		.analyze .indent 		{padding-left: 10px;}
+		.analyze .indent2 		{padding-left: 20px;}
+		.analyze .indent3 		{padding-left: 30px;}
+		.analyze .indent4 		{padding-left: 40px;}
+		.analyze .tableIndent1	{margin-left: 20px;}
+		.analyze .FilePath		{ font-style: italic; }
+		
+		
+		/*IBM Rave Tree styling*/
+		.node circle {
+			cursor: pointer;
+			fill: #fff;
+			stroke: steelblue;
+			stroke-width: 1.5px;
+		}
+		
+		.node text {
+			font-size: 14px;
+		}
+		
+		path.link {
+			fill: none;
+			stroke: #ccc;
+			stroke-width: 1.5px;
+		}
+		
+		.alternate {
+			background: #ededed;
+		}
+		
+		/***
+					**
+					** Print Styles
+					**
+					***/
+
+		@media print {
+			@page { margin-left: 0.5cm ;
+				margin-right: 0.5cm;
+				margin-top: 1.5cm;
+				margin-bottom: 1.5cm;
+			}
+			body, .evaluate table {
+				font-size: 0.8em;
+			}
+			.analyze a:link,
+			.inventory a:link,
+			.analyze a:visited,
+			.inventory a:visited {
+				color: #781351
+			}
+			.inventory h2, .inventory h3 {
+				page-break-after: avoid;
+			}
+			.evaluate table th, .evaluate table td {
+				padding: 5px;
+			}
+			.evaluate .highlight {
+				color: #008571;
+			}
+			.evaluate body {
+				-webkit-print-color-adjust: exact;
+				/** 16px **/
+			}
+			.evaluate .archive-title h3 {
+				page-break-before: always;
+				margin-bottom: 0;
+			}
+			.noprint,
+			.rule-title .js-toggle-actions,
+			.archive-title .js-toggle-actions {
+				display: none;
+			}
+			
+			.rule-fix.hide,
+            .rule-result.hide,
+            .detailed-analysis-by-rule.hide {
+                display: block;
+            }
+			
+			.archive-details.hide {
+				display: block;
+			}
+			.flash__numbers {
+				font-size: 2.75rem;
+			}
+			
+			.circle {
+            	border: 1px solid #000;
+		  		font-size: 14px;
+		  		width: 20px;
+		  		padding: 10px 0;
+            }
+
+            .rule-category {
+            	border: 1px solid #000;
+            }
+			
+			.inventory .wrapSummary {
+				page-break-inside: avoid;
+			}
+			.inventory .recap {
+				page-break-before: avoid;
+				page-break-inside: avoid;
+			}
+			.analyze .recap li, .inventory .recap li {
+				border: 1px solid #000;
+				margin: 5px;
+			}
+			.analyze > .wrapper > .recap li:last-child {
+                border: 0 none;
+            }
+			
+			.header-sections {
+				margin-top: 0;
+			}
+			.inventory .header-sections, .evaluate .header-sections {
+                page-break-after: avoid;
+            }
+            
+            .consolidated > .wrapper > ul > li > div.archive-title {
+            	border-top: 4px solid #000;
+            }
+            
+			.archive {
+				padding: 0;
+			}
+			.problemSummary {
+				padding: 0;
+			}
+			#inventoryDetailsByApp {
+				border-top: 4px solid #000;
+				padding-top: 22px;
+			}
+			.archive-details {
+				padding-left: 15px;
+				page-break-before: avoid;
+				margin-bottom: 10px;
+				margin-top: 10px;
+				padding-bottom: 10px;
+				height: auto;
+				max-height: none;
+			}
+			.archive-title {
+				page-break-after: avoid;
+			}
+			.evaluate .archive-title {
+				page-break-before: always;
+			}
+			.utility-jar-contents {
+				page-break-before: avoid;
+			}
+			
+			.connectivity-summary,
+            .rule {
+                padding: 0;
+            }
+
+            .connectivity-summary {
+                padding-bottom: 22px;
+            }
+
+            .connectivity-summary table tr.hiddenRow {
+                display: table-row;
+                vertical-align: middle;
+                visibility: visible;
+            }
+
+            .connectivity-summary table tr.summary td {
+                border-bottom: 4px solid #000;
+                border-top: 4px solid #000;
+            }
+
+            .connectivity-summary th,
+            .connectivity-summary td {
+                font-size: 10px;
+            }
+
+            .connectivity-summary th {
+                word-break: break-all;
+            }
+
+            .connectivity-summary td {
+                padding: 5px;
+            }
+
+            #detailResultsByRule {
+                border-top: 4px solid #000;
+                padding-top: 22px;
+            }
+
+         	#AdditionalHelpTitle {
+                border-top: 4px solid #000;
+                padding-top: 22px;
+            }
+
+            #jsRulesAnalyzedTitle {
+                border-top: 4px solid #000;
+                padding-top: 22px;
+            }
+
+            .rules li {
+                list-style: inside disc;
+                list-style: none;
+            }
+
+            .rule-fix,
+            .rule-additional-help,
+            .rule-result {
+                padding-left: 15px;
+            }
+
+            .rule-fix,
+            .rule-additional-help {
+                margin-bottom: 10px;
+                margin-top: 10px;
+                padding-bottom: 10px;
+                height: auto;
+                max-height: none;
+            }
+
+            .detailed-analysis-by-rule.read-less {
+                height: auto;
+                overflow: auto;
+                padding: 0;
+            }
+
+            .detailed-analysis-by-rule.read-less .detailed-read-more-button {
+                display: none;
+            }
+
+            /* Improve colour contrast of links */
+            .code-comparison-table td {
+                border-bottom: 1px solid #000;
+                border-right: 1px solid #000;
+                border-top: 1px solid #000;
+                width: auto;
+            }
+
+            .code-comparison-table td pre {
+                display: block;
+                margin: 0 auto;
+            }
+
+            .rule-fix pre {
+                border: 1px solid #000;
+                margin: 0 0 0 20px;
+                padding: 0 0 0 10px;
+                width: 95%;
+            }
+			
+			.inventory .wrapper:nth-child(2),
+			.evaluate .wrapper:nth-child(2) {
+				padding-bottom: 0;
+			}
+			.trees {
+            	height: auto;
+				width: auto;
+				max-height: none;
+				overflow: visible;
+			}
+			.floating-box-wide {
+				height: auto;
+				width: auto;
+				max-height: none;
+				overflow: visible;
+			}
+			.floating-box-wider {
+				height: auto;
+				width: auto;
+				max-height: none;
+				overflow: visible;
+			}
+			.evaluate .inventory-details-by-app {
+				page-break-before: always;
+			}
+			.evaluate table {
+				page-break-before: avoid;
+				margin-top: 1px;
+				border-left: 1px solid #D6D6D6;
+				border-right: 1px solid #D6D6D6;
+				border-bottom: 1px solid #D6D6D6;
+			}
+			.evaluate table th {
+				border-top: 1px solid #D6D6D6;
+			}
+			.evaluate table td[colspan="0"] {
+            	padding-left: 5px;
+        	}
+		}
+</style>
+</head>
+<body id="top" class="analyze">
+  <div id="wrapper" class="wrapper" role="main">
+  <div class="nav-wrapper na-fixed noprint" role="navigation">
+    <nav class="jump-to-rule-nav">
+      <ul>
+        <li><a href="#">Jump To Rule<div class="scroll-bottom-caret show"></div></a>
+          <ul class="inner--list--hide">
+            <li id="backToTopNav"><a href="#top" class="na-title jump-item">Back to top</a></li>
+            <li><a href="#ruleSeveritySummary" class="na-title jump-item">Rule Severity Summary</a></li>
+            <li><a href="#analyze_ConnectivitySummary" class="na-title jump-item">Connectivity Rules Summary</a></li>
+            <li><a href="#detailResultsByRule" class="na-title jump-item">Detailed Results by Rule</a></li>
+<li><a href="#analyze_severity1" class="na-sub-title jump-item"><span class="circle-small sev-error"></span>Severe Rules</a></li>            <li><a href="#category1" class="na-sub-sub-title jump-item">Java EE 7 / OpenJPA to EclipseLink JPA (4)</a></li>
+<li><a href="#analyze_severity2" class="na-sub-title jump-item"><span class="circle-small sev-warn"></span>Warning Rules</a></li>            <li><a href="#category2" class="na-sub-sub-title jump-item">All application servers (3)</a></li>
+            <li><a href="#category3" class="na-sub-sub-title jump-item">Java EE 7 / CDI (9)</a></li>
+            <li><a href="#category4" class="na-sub-sub-title jump-item">Java EE 7 / OpenJPA to EclipseLink JPA (1)</a></li>
+            <li><a href="#category5" class="na-sub-sub-title jump-item">Technology connectivity considerations for IBM Cloud (3)</a></li>
+<li><a href="#analyze_severity3" class="na-sub-title jump-item"><span class="circle-small sev-info"></span>Information Rules</a></li>            <li><a href="#category6" class="na-sub-sub-title jump-item">Java SE version migration / Java SE 8 compatibility impacts (2)</a></li>
+            <li><a href="#analyze_AdditionalRuleHelp" class="na-title jump-item">Additional Rule Help</a></li>
+            <li><a href="#jsRulesAnalyzedTitle" class="na-title jump-item">Rules Analyzed</a></li>
+          </ul> <!-- end of first tier drop down -->
+        </li>
+      </ul>
+    </nav>
+  </div>
+    <h1>Detailed Migration Analysis Report</h1>
+    <p class="date-time"><span class="date">2/2/18 10:12 AM</span></p>
+<p class="courier archivePath">/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear </p>
+  <div class="recap" role="main">
+<ul>
+      <li><p class="flash__numbers bolden cons-li-p">8</p><p class="cons-li-p">Rules flagged</p></li>
+      <li><p class="flash__numbers bolden cons-li-p">22</p><p class="cons-li-p">Total results</p></li>
+    <li>
+          <p class="courier"><span class="bolden">Source options</span><br/>&#8209;&#8209;sourceAppServer=was70 &#8209;&#8209;sourceJava=ibm5</p>
+          <p class="courier"><span class="bolden">Target options</span><br/>&#8209;&#8209;targetAppServer=was90 &#8209;&#8209;targetJava=ibm8 &#8209;&#8209;targetJavaEE=ee7 &#8209;&#8209;targetCloud=wasVM</p>
+          <p class="courier"><span class="bolden">Scan options</span><br/>&#8209;&#8209;excludePackages=com.ibm.websphere, com.ibm.ws, com.ibm.db2, com.informix, com.microsoft, com.sybase, com.sun, java, javax, net, oracle, org, sqlj, _ibmjsp</p>
+    </li>
+    </ul>
+  </div>
+<div id="ruleSeveritySummary" class="detailed-results-header header-sections" role="main">
+  <h2 class="detailed-results-title">Rule Severity Summary</h2>
+</div>
+<div id="js-rule-severity" class="rule-severity-summary" role="main">
+<div class="rule-severity">
+<table summary="This table summarizes how many rules and rule results are included in the report for each rule severity. A description for each rule severity is also provided.">
+<thead>
+  <tr>
+    <th class="center">Symbol</th>
+    <th class="severity-label">Label</th>
+    <th class="center">Rules flagged</th>
+    <th class="center">Total results</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="circle sev-error"></span></td>
+<td class="severity-label"><a class="blueAnchor jump-item" href="#analyze_severity1">Severe</a></td>
+<td class="center">2</td>
+<td class="center">4</td>
+<td>Severe rules indicate an API removal or behavior change that can break the application and must be addressed.</td>
+</tr>
+<tr>
+<td><span class="circle sev-warn"></span></td>
+<td class="severity-label"><a class="blueAnchor jump-item" href="#analyze_severity2">Warning</a></td>
+<td class="center">5</td>
+<td class="center">16</td>
+<td>Warning rules indicate behavior changes that might break the application and should be evaluated.</td>
+</tr>
+<tr>
+<td><span class="circle sev-info"></span></td>
+<td class="severity-label"><a class="blueAnchor jump-item" href="#analyze_severity3">Information</a></td>
+<td class="center">1</td>
+<td class="center">2</td>
+<td>Information rules indicate the use of deprecated APIs or minor behavior changes that will not affect most applications.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="header-sections list-header" role="main"><h2 id="analyze_ConnectivitySummary" class="detailed-results-title">Connectivity Rules Summary</h2>
+</div>
+<div class="connectivity-summary" role="main">
+<table summary="This table summarizes the flagged connectivity rules for each Java archive. Select the links in the column header to view all detailed results for that rule. Select the number links within this table to view the detailed results for that specific Java archive.">
+<caption>This table summarizes the flagged connectivity rules for each Java archive. Select the links in the column header to view all detailed results for that rule. Select the number links within this table to view the detailed results for that specific Java archive.</caption>
+<thead>
+<tr class="results"> 
+<th class="col1module"></th>
+<th class="col2thru12"><a href="#analyze_DatabasesRule">Databases</a></th>
+<th class="col2thru12">Enterprise information systems (EIS)</th>
+<th class="col2thru12"><a href="#analyze_ApplicationSecurityRule">Java EE security</a></th>
+<th class="col2thru12">Java Message Service (JMS)</th>
+<th class="col2thru12">JavaMail server</th>
+<th class="col2thru12">Message-Driven Beans (MDB)</th>
+<th class="col2thru12">Remote EJB lookups</th>
+<th class="col2thru12">Remote EJB providers</th>
+<th class="col2thru12">Remote web services</th>
+<th class="col2thru12">Third-party security</th>
+<th class="col2thru12">Vendor specific messaging</th>
+</tr>
+</thead>
+<tbody>
+<tr class="summary"><td class="col1summarymodule"><span class="status">&#43;</span> CustomerOrderServicesApp.ear</td>
+<td class="col2thru12"><a href="#analyze_DatabasesRule-CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar"><b>1</b></a></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"><a href="#analyze_ApplicationSecurityRule-CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war"><b>2</b></a></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+</tr>
+<tr class="hiddenRow" id="rowHiddenMod1-1">
+<td class="col1main">CustomerOrderServicesApp.ear</td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+</tr>
+<tr class="hiddenRow" id="rowHiddenMod1-2">
+<td class="col1child">  CustomerOrderServices-0.1.0-SNAPSHOT.jar</td>
+<td class="col2thru12"><a href="#analyze_DatabasesRule-CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar">1</a></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+</tr>
+<tr class="hiddenRow" id="rowHiddenMod1-3">
+<td class="col1child">  CustomerOrderServicesTest-0.1.0-SNAPSHOT.war</td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"><a href="#analyze_ApplicationSecurityRule-CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war">1</a></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+</tr>
+<tr class="hiddenRow" id="rowHiddenMod1-4">
+<td class="col1child">  CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war</td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"><a href="#analyze_ApplicationSecurityRule-CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war">1</a></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+<td class="col2thru12"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="detailResultsByRule" class="detailed-results-header header-sections" role="main">
+  <h2 class="detailed-results-title">Detailed Results by Rule</h2>
+  <div class="expand-collapse-holder noprint">
+    <a href="#" class="expand-all almighty">Expand all</a>
+    <a href="#" class="collapse-all almighty disabled">Collapse all</a>
+  </div>
+</div>
+<div class="detailed-results-by-severity" role="main">
+<div class="detailed-results-header">
+<h2 class="detailed-results-title" id="analyze_severity1">Severe Rules</h2></div><div class="detailed-results-by-rule"><p>
+<span class="rule-category" id="category1">
+Java EE 7 / OpenJPA to EclipseLink JPA</span></p>  <ul class="rules">
+    <li id="analyze_JpaCacheProperties" class="rule">
+      <div class="rule-title">        <h3><span class="circle sev-error"></span>Disable the persistence unit second-level cache <em>(1)</em></h3>
+        <div class="js-toggle-actions noprint">
+          <a href="#" class="recommendation-toggle-help rule-help-toggle">Show rule help</a>
+          <a href="#" class="recommendation-toggle-results results-toggle">Show results</a>
+        </div>
+      </div>
+      <div id="helpJpaCacheBehavior" class="rule-fix shared hide">
+        <h3>Rule Help</h3>
+
+<p>
+OpenJPA disables the second-level cache by default, whereas EclipseLink enables the second-level cache by default.
+If you are migrating an application that does not use the cache, you can
+disable the cache in EclipseLink by setting the following element in a
+version 2.0 or 2.1 <span class="FilePath">persistence.xml</span> file:
+<pre>
+   &lt;shared-cache-mode&gt;NONE&lt;/shared-cache-mode&gt;
+</pre>
+<p>
+For a version 1.0 <span class="FilePath">persistence.xml</span> file, you can 
+disable the cache in EclipseLink adding the following property:
+</p>
+<pre>
+   &lt;property name="eclipselink.cache.shared.default" value="false"/&gt;
+</pre>
+<p>
+This rule detects <code>&lt;persistence-unit&gt;</code> configurations in the
+<span class="FilePath">META-INF/persistence.xml</span> file where the current caching configuration results
+in a different default caching behavior in EclipseLink. It also helps you clean
+up <code>openjpa.DataCache</code> properties, which are ignored by EclipseLink.
+</p>
+<p>
+To determine whether a configuration change is required, the rule examines combinations of the following settings:
+</p>
+<ul>
+<li>The <code>&lt;shared-cache-mode&gt;</code> configuration element</li>
+<li>The <code>javax.persistence.sharedCache.mode</code> persistence property</li>
+<li>The <code>openjpa.DataCache</code> persistence property</li>
+</ul>
+<p>
+ If the <code>openjpa.DataCache</code> property is not specified or is set to <code>false</code> and the shared cache mode
+ configuration is omitted or set to <code>UNSPECIFIED</code>, in EclipseLink you must
+ change the configuration to disable the cache. 
+ Because EclipseLink enables caching by default, an <code>openjpa.DataCache</code> property 
+ set to <code>true</code> in OpenJPA is equivalent to having no shared cache mode setting 
+ in EclipseLink or to setting <code>shared-cache-mode</code> to <code>ALL</code>. 
+ If you manually remove the <code>openjpa.DataCache</code> configuration,
+ do not continue to run this rule because it will detect no configuration as a behavior change.
+</p>
+<p>
+ The quick fix for this rule sets an explicit value for the shared cache mode so
+ that the rule does not continue to flag the <code>persistence-unit</code>.
+ The quick fix evaluates the <code>openjpa.DataCache</code> setting and modifies existing or creates new
+<code>shared-cache-mode</code> configuration or <code>javax.persistence.sharedCache.mode</code> properties
+so that your applications have the same cache mode behavior in EclipseLink as they did in OpenJPA.
+In OpenJPA, when both a specification-defined shared cache value and the <code>openjpa.DataCache</code> 
+property are set, the specification-defined value is used unless it is <code>UNSPECIFIED</code>. 
+If the value is <code>UNSPECIFIED</code>, the <code>openjpa.DataCache</code> property is used
+to determine the correct value of the shared cache mode.
+</p>
+<p>
+For example, in the following <span class="FilePath">persistence.xml</span> file,
+the rule flags all of the <code>&lt;persistence-unit&gt;</code> elements because
+they require changes to the caching configuration to maintain the same 
+caching behavior in EclipseLink as it was in OpenJPA. 
+</p>
+<table summary="This table provides more information about the rule, sometimes in the form of an excerpt from a file demonstrating the migration issue." bgcolor="#F7F8F9" border="1" cellpadding="2px">
+<thead>
+<tr>
+<th>Source persistence.xml file for OpenJPA</th>
+<th>Quick fix changes to persistence.xml file for EclipseLink
+</tr>
+</thead>
+<tr><td>
+<pre>
+&lt;persistence&gt;
+
+  &lt;<b>persistence-unit</b> name="example1"&gt;
+    ...
+    &lt;shared-cache-mode&gt;UNSPECIFIED&lt;/shared-cache-mode&gt;
+    ...
+  &lt;/persistence-unit&gt;
+
+  &lt;<b>persistence-unit</b> name="example2"&gt;
+     ...
+     &lt;properties&gt;
+        &lt;property name="openjpa.DataCache" value="true"/&gt;
+     &lt;/properties&gt;
+     ...
+  &lt;/persistence-unit&gt;
+
+  &lt;<b>persistence-unit</b> name="example3"&gt;
+     ...
+     &lt;properties&gt;
+        &lt;-- no cache properties set --&gt;
+     &lt;/properties&gt;
+     ...
+  &lt;/persistence-unit&gt;
+
+
+  &lt;<b>persistence-unit</b> name="example4"&gt;
+     ...
+     &lt;properties&gt;
+        &lt;property name="openjpa.DataCache" 
+                  value="false"/&gt;
+        &lt;property name="javax.persistence.sharedCache.mode" 
+                  value="ALL"/&gt;
+     &lt;/properties&gt;
+     ...
+  &lt;/persistence-unit&gt;
+
+&lt;/persistence&gt;
+</pre>
+</td>
+<td>
+<pre>
+&lt;persistence&gt;
+
+  &lt;persistence-unit name="example1"&gt;
+    ...
+    &lt;shared-cache-mode&gt;NONE&lt;/shared-cache-mode&gt;
+    ...
+  &lt;/persistence-unit&gt;
+
+  &lt;persistence-unit name="example2"&gt;
+     ...
+     &lt;shared-cache-mode&gt;ALL&lt;/shared-cache-mode&gt;
+     &lt;properties&gt;
+     &lt;/properties&gt;
+     ...
+  &lt;/persistence-unit&gt;
+
+  &lt;persistence-unit name="example3"&gt;
+     ...
+     &lt;shared-cache-mode&gt;NONE&lt;/shared-cache-mode&gt;
+     &lt;properties&gt;
+        &lt;-- no cache properties set --&gt;
+     &lt;/properties&gt;
+     ...
+  &lt;/persistence-unit&gt;
+
+  &lt;persistence-unit name="example4"&gt;
+     ...
+     &lt;properties&gt;
+        &lt;property name="javax.persistence.sharedCache.mode" 
+                  value="ALL"/&gt;
+     &lt;/properties&gt;
+     ...
+  &lt;/persistence-unit&gt;
+
+&lt;/persistence&gt;
+</pre>
+</td></tr></table>
+<p>
+The quick fix deletes the <code>openjpa.DataCache</code> property if it has a simple
+<code>true</code> or <code>false</code> value.
+If the <code>openjpa.DataCache</code> property configuration has additional parameters 
+such as in the following example, the quick fix leaves the property so you can determine 
+if any additional manual changes are needed.  
+Evaluate the <code>openjpa.DataCache</code> property for additional migration,
+and then remove the property because it is not used by EclipseLink.
+</p>
+<pre>
+    &lt;property name="openjpa.DataCache" value="true(Types=com.test.Person;com.test.Employee)"/&gt;
+</pre>
+<p>
+If both <code>shared-cache-mode</code> and <code>javax.persistence.sharedCache.mode</code> are
+defined in the same <code>persistence-unit</code>, the quick fix updates the <code>shared-cache-mode</code> 
+value if needed and deletes the <code>javax.persistence.sharedCache.mode</code> property.
+</p>
+<p>
+For JPA 1.0 <span class="FilePath">persistence.xml</span> files, the <code>&lt;shared-cache-mode&gt;</code> 
+element is not valid. The quick fix evaluates the values of
+<code>openjpa.DataCache</code> and <code>javax.persistence.sharedCache.mode</code> persistence properties
+and adds an <code>eclipselink.cache.shared.default</code> persistence property when needed.
+</p>
+<p>
+For more information on migrating vendor-specific JPA configuration properties, see the following resources:
+<ul>
+<li><a href="https://wiki.eclipse.org/EclipseLink/Examples/JPA/Migration/OpenJPA"
+target="_blank">
+How To Migrate from OpenJPA to EclipseLink JPA</a></li>
+<li><a href="http://openjpa.apache.org/builds/2.4.0/apache-openjpa/docs/ref_guide_caching.html#ref_guide_cache_conf"
+target="_blank">
+OpenJPA Reference Guide: Chapter 10. Caching</a></li>
+</ul>
+      </div>
+      <div class="rule-result hide">
+        <h3>Results</h3>
+<table summary="This table provides details on rule results, including the affected file name, reference information, match criteria, and line number if available. Results are grouped together by archive name with a row that spans all columns.">
+<thead>
+  <tr>
+    <th>File name</th>
+    <th>Reference details</th>
+    <th>Match criteria</th>
+    <th>Line number</th>
+  </tr>
+</thead>
+<tbody>
+<tr id="analyze_JpaCacheProperties-CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar</b></td>
+</tr>
+<tr>
+<td class="indentFileName">META-INF/persistence.xml</td>
+<td></td>
+<td>persistence-unit</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+      </div>
+    </li>
+    <li id="analyze_OpenJPAConfigurationProperties" class="rule">
+      <div class="rule-title">        <h3><span class="circle sev-error"></span>OpenJPA and WebSphere JPA configuration properties must be migrated <em>(3)</em></h3>
+        <div class="js-toggle-actions noprint">
+          <a href="#" class="recommendation-toggle-help rule-help-toggle">Show rule help</a>
+          <a href="#" class="recommendation-toggle-results results-toggle">Show results</a>
+        </div>
+      </div>
+      <div id="helpOpenJpaConfigurationProperties" class="rule-fix shared hide">
+        <h3>Rule Help</h3>
+
+<p>
+This rule detects OpenJPA and WebSphere vendor-specific JPA 2.0 configuration properties in the
+<span class="FilePath">persistence.xml</span> file. You must manually migrate these properties 
+to standardized or EclipseLink properties.
+The rule flags any <code>property</code> element with a <code>name</code> attribute
+that starts with <code>openjpa.*</code> or <code>wsjpa.*</code> except for 
+the <code>openjpa.jdbc.Schema</code> property, which is flagged by 
+<a href="#helpOpenJpaJdbcSchemaConfigurationProperty" class="Rule-Help__Inner-Link">openjpa.jdbc.Schema rule</a> and <code>openjpa.LockManager</code> property, 
+which is flagged by 
+<a href="#helpOpenJPALockManager" class="Rule-Help__Inner-Link">openjpa.LockManager rule</a>.
+The <code>wsjpa</code> configuration properties are specific to the WebSphere JPA 2.0 
+implementation built on OpenJPA.
+</p>
+<p>
+In the following <span class="FilePath">persistence.xml</span> file, 
+all four <code>property</code> elements are flagged by this rule. 
+</p>
+<table summary="This table provides more information about the rule, sometimes in the form of an excerpt from a file demonstrating the migration issue." bgcolor="#F7F8F9" border="1" cellpadding="2px">
+<tr><td>
+<pre>
+&lt;persistence&gt;
+  &lt;persistence-unit name="openjpa"&gt;
+    &lt;properties&gt;
+      ...
+      &lt;property name="openjpa.ConnectionURL "
+                   value="jdbc:db2://host.ibm.com:50000/mydb2user" /&gt;
+      &lt;property name="openjpa.ConnectionDriverName" value="com.ibm.db2.jcc.DB2Driver" /&gt;
+      &lt;property name="openjpa.ConnectionUserName" value="mydb2user" /&gt;
+      &lt;property name="openjpa.ConnectionPassword" value="password" /&gt;      
+      ...
+    &lt;/properties&gt;
+  &lt;/persistence-unit&gt;
+&lt;/persistence&gt;
+</pre>
+</td></tr></table>
+<p>
+To resolve the issue, change the property name to a standardized property when there is one
+available.
+</p>
+<table summary="This table provides more information about the rule, sometimes in the form of an excerpt from a file demonstrating the migration issue." bgcolor="#F7F8F9" border="1" cellpadding="2px">
+<tr><td>
+<pre>
+&lt;persistence&gt;
+  &lt;persistence-unit name="openjpa"&gt;
+    &lt;properties&gt;
+      ...   
+      &lt;property name="javax.persistence.jdbc.url"
+                   value="jdbc:db2://host.ibm.com:50000/mydb2user" /&gt;
+      &lt;property name="javax.persistence.jdbc.driver" value="com.ibm.db2.jcc.DB2Driver" /&gt;
+      &lt;property name="javax.persistence.jdbc.user" value="mydb2user" /&gt;
+      &lt;property name="javax.persistence.jdbc.password" value="password" /&gt;
+      ...
+    &lt;/properties&gt;
+  &lt;/persistence-unit&gt;
+&lt;/persistence&gt;
+</pre>
+</td></tr></table>
+<p>
+The second-level cache is enabled in EclipseLink by default.
+If you have <code>&lt;property name="openjpa.DataCache" value="true"/&gt;</code> set in a 
+a <code>persistence-unit</code>, you can remove this property.
+For more information, see the <a href="#helpJpaCacheBehavior" class="Rule-Help__Inner-Link">Disable the persistence unit second-level cache</a>
+rule.
+</p>
+<p>
+For more information on migrating vendor-specific JPA configuration properties, see the following resources:
+<ul>
+<li><a href="https://wiki.eclipse.org/EclipseLink/Examples/JPA/Migration/OpenJPA/PersistenceXML"
+target="_blank">
+Migration from OpenJPA to EclipseLink: Persistence XML</a></li>
+<li><a href="https://www.eclipse.org/eclipselink/documentation/2.6/jpa/extensions/persistenceproperties_ref.htm#sthref733"
+target="_blank">
+EclipseLink Persistence Property Extensions Reference</a>
+</li>
+</ul>
+      </div>
+      <div class="rule-result hide">
+        <h3>Results</h3>
+<table summary="This table provides details on rule results, including the affected file name, reference information, match criteria, and line number if available. Results are grouped together by archive name with a row that spans all columns.">
+<thead>
+  <tr>
+    <th>File name</th>
+    <th>Reference details</th>
+    <th>Match criteria</th>
+    <th>Line number</th>
+  </tr>
+</thead>
+<tbody>
+<tr id="analyze_OpenJPAConfigurationProperties-CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar</b></td>
+</tr>
+<tr>
+<td class="indentFileName">META-INF/persistence.xml</td>
+<td></td>
+<td>property.name=openjpa.MaxFetchDepth</td>
+<td>16</td>
+</tr>
+<tr>
+<td></td><td></td>
+<td>property.name=openjpa.jdbc.DBDictionary</td>
+<td>19</td>
+</tr>
+<tr>
+<td></td><td></td>
+<td>property.name=openjpa.jdbc.MappingDefaults</td>
+<td>17</td>
+</tr>
+</tbody>
+</table>
+      </div>
+    </li>
+  </ul>
+</div></div>
+<div class="detailed-results-by-severity" role="main">
+<div class="detailed-results-header">
+<h2 class="detailed-results-title" id="analyze_severity2">Warning Rules</h2></div><div class="detailed-results-by-rule"><p>
+<span class="rule-category" id="category2">
+All application servers</span></p>  <ul class="rules">
+    <li id="analyze_CreateThreadMethodsInWebOrEjbProject" class="rule">
+      <div class="rule-title">        <h3><span class="circle sev-warn"></span>Do not start unmanaged threads within the web or EJB container <em>(3)</em></h3>
+        <div class="js-toggle-actions noprint">
+          <a href="#" class="recommendation-toggle-help rule-help-toggle">Show rule help</a>
+          <a href="#" class="recommendation-toggle-results results-toggle">Show results</a>
+        </div>
+      </div>
+      <div id="helpBehaviorCreateThread" class="rule-fix shared hide">
+        <h3>Rule Help</h3>
+
+<p>
+This rule flags calls to the <span class="Code">start()</span> method on <span class="Code">java.lang.Thread</span> objects 
+and calls to the <span class="Code">run()</span> method on objects that implement the <span class="Code">java.lang.Runnable</span> interface
+within web and EJB modules. 
+</p>
+<p>
+<p>Managing threads is important within the web or EJB containers.  Applications should use the services provided
+for handling threads instead of starting unmanaged threads for the 
+following reasons:
+</p>
+<ul>
+<li>The application server does not recognize unmanaged threads.</li>
+<li>Applications running in unmanaged threads do not have access to Java EE contextual information.</li>
+<li>Applications running in unmanaged threads can use resources without being monitored by the application server.</li>
+<li>Unmanaged threads can adversely affect application server functions such as shut down 
+and resource recovery after a failure.</li>
+<li>An administrator cannot control the number of unmanaged threads or their use of resources.</li>
+</ul>
+<p>
+Where possible, configure applications to use the Concurrency Utilities ManagedExecutorService introduced in Java EE 7.
+For additional information on the Concurrency Utilities APIs, see the following resources:
+<ul>
+<li><a href="http://www14.software.ibm.com/webapp/wsbroker/redirect?version=phil&product=was-nd-mp&topic=rwlp_feature_concurrent-1.0" target="_blank">Concurrency Utilities for Java EE 1.0</a></li>
+<li><a href="http://www14.software.ibm.com/webapp/wsbroker/redirect?version=phil&product=was-libcore-mp&topic=twlp_config_managedexecutor" 
+target="_blank">
+Configuring ManagedExecutorService instances</a> for configuration information.</li> 
+<li>
+<a href="http://docs.oracle.com/javaee/7/api/javax/enterprise/concurrent/ManagedExecutorService.html" 
+target="_blank">
+javax.enterprise.concurrent.ManagedExecutorService</a> for API information.</li>
+</ul>
+<p>
+For WebSphere Application Server traditional Version 8.5.5 and prior, use the work manager to schedule asynchronous beans. 
+See 
+<a href="http://www14.software.ibm.com/webapp/wsbroker/redirect?version=phil&product=was-nd-mp&topic=casb_workmgr" 
+target="_blank">
+Work managers</a> for more information.
+</p>
+      </div>
+      <div class="rule-result hide">
+        <h3>Results</h3>
+<table summary="This table provides details on rule results, including the affected file name, reference information, match criteria, and line number if available. Results are grouped together by archive name with a row that spans all columns.">
+<thead>
+  <tr>
+    <th>File name</th>
+    <th>Reference details</th>
+    <th>Match criteria</th>
+    <th>Line number</th>
+  </tr>
+</thead>
+<tbody>
+<tr id="analyze_CreateThreadMethodsInWebOrEjbProject-CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar</b></td>
+</tr>
+<tr>
+<td class="indentFileName">junit/awtui/TestRunner.class</td>
+<td>Method runSuite</td>
+<td>java.lang.Thread.start(*)</td>
+<td>512</td>
+</tr>
+<tr>
+<td class="indentFileName">junit/extensions/ActiveTestSuite.class</td>
+<td>Method runTest</td>
+<td>java.lang.Thread.start(*)</td>
+<td>49</td>
+</tr>
+<tr>
+<td class="indentFileName">junit/swingui/TestRunner.class</td>
+<td>Method doRunTest</td>
+<td>java.lang.Thread.start(*)</td>
+<td>719</td>
+</tr>
+</tbody>
+</table>
+      </div>
+    </li>
+  </ul>
+<p>
+<span class="rule-category" id="category3">
+Java EE 7 / CDI</span></p>  <ul class="rules">
+    <li id="analyze_MissingBeansFile" class="rule">
+      <div class="rule-title">        <h3><span class="circle sev-warn"></span>CDI scans for implicit beans when there is no beans.xml file <em>(9)</em></h3>
+        <div class="js-toggle-actions noprint">
+          <a href="#" class="recommendation-toggle-help rule-help-toggle">Show rule help</a>
+          <a href="#" class="recommendation-toggle-results results-toggle">Show results</a>
+        </div>
+      </div>
+      <div id="helpMissingBeansXmlRule" class="rule-fix shared hide">
+        <h3>Rule Help</h3>
+
+<p>
+		    The Contexts and Dependency Injection (CDI) 1.1 specification introduced implicit bean discovery mode, 
+			resulting in behavior and performance changes from the Java Platform, Enterprise Edition (Java EE)
+			6 CDI 1.0 implementation in WebSphere Application Server.
+		</p>
+		<p>
+			This rule flags the <span class="FilePath">WEB-INF</span> or <span
+				class="FilePath">META-INF</span> folder if the project does not
+			contain a <span class="FilePath">beans.xml</span> file. When moving
+			from Java EE 6 CDI 1.0 to Java EE 7 CDI 1.1 or later, implicit bean
+			discovery results in all WAR and JAR files being scanned by the
+			runtime, even if they do not have a <span class="FilePath">beans.xml</span>
+			file. This can lead to bean discovery performance degradation if you
+			enable the <span class="Code">cdi-1.2</span> feature on Liberty.
+		</p>
+		<p> 
+			In Java EE 7, if no <span class="FilePath">beans.xml</span> file is defined, the runtime automatically
+			scans for bean-defining annotations. To
+			disable this behavior, add a <span class="FilePath">beans.xml</span>
+			file with bean discovery mode set to <span class="FilePath">none</span>, as 
+			shown in the following example.
+		</p>
+<table summary="This table provides more information about the rule, sometimes in the form of an excerpt from a file demonstrating the migration issue." bgcolor="#F7F8F9" border="1" cellpadding="2px">
+<tr><td>
+<pre class="JavaType">
+<code>
+&lt;beans xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+		  		      http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd" 
+		  		      bean-discovery-mode="none" version="1.1"&gt;
+&lt;/beans&gt;
+</code>
+</pre>
+</td></tr></table>
+		<p>
+			On Liberty, you can
+			also disable this behavior by adding the following property to the <span
+				class="FilePath">server.xml</span> file.
+		</p>
+		<table summary="This table provides more information about the rule, sometimes in the form of an excerpt from a file demonstrating the migration issue." bgcolor="#F7F8F9" border="1" cellpadding="2px">
+<tr><td>
+<pre class="JavaType">
+<code>
+&lt;cdi12 enableImplicitBeanArchives="false"/&gt;
+</code>
+</pre>
+</td></tr></table>
+		<p>
+			On WebSphere Application Server traditional, this behavior can be disabled in the following ways:
+		</p>
+		<ul>
+		<li>
+			Setting the <code>enableImplicitBeanArchives</code> custom property to false disables CDI-related 
+			annotation scanning steps for archives that do not contain a bean descriptor such as the beans.xml file.
+		</li>
+		<li>
+			Setting the <code>enableCDI</code> custom property to false, disables all CDI steps. This value 
+			should be set to false if no CDI is needed on the server level.
+		</li>
+		</ul>
+		<p>
+			For more information on setting these properties in WebSphere traditional, see the <a href="http://www-01.ibm.com/support/docview.wss?uid=swg21983564"
+				target="_blank">
+				Custom Properties for improving application startup in WebSphere Application Server</a> documentation.
+		</p>
+		<p>
+			For more information on the Java EE 7 CDI 1.2 implementation, see <a href="http://www14.software.ibm.com/webapp/wsbroker/redirect?version=cord&product=was-nd-mp&topic=cwlp_cdi_behavior"
+				target="_blank">
+				Contexts and Dependency Injection 1.2 behavior changes</a>.
+		</p>
+	      </div>
+      <div class="rule-result hide">
+        <h3>Results</h3>
+<table summary="This table provides details on rule results, including the affected file name, reference information, match criteria, and line number if available. Results are grouped together by archive name with a row that spans all columns.">
+<thead>
+  <tr>
+    <th>File name</th>
+    <th>Reference details</th>
+    <th>Match criteria</th>
+    <th>Line number</th>
+  </tr>
+</thead>
+<tbody>
+<tr id="analyze_MissingBeansFile-CustomerOrderServicesApp.ear" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear</b></td>
+</tr>
+<tr>
+<td class="indentFileName">CustomerOrderServices-0.1.0-SNAPSHOT.jar</td>
+<td></td>
+<td>.*(\.war|\.jar)</td>
+<td></td>
+</tr>
+<tr>
+<td class="indentFileName">CustomerOrderServicesTest-0.1.0-SNAPSHOT.war</td>
+<td></td>
+<td>.*(\.war|\.jar)</td>
+<td></td>
+</tr>
+<tr>
+<td class="indentFileName">CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war</td>
+<td></td>
+<td>.*(\.war|\.jar)</td>
+<td></td>
+</tr>
+<tr>
+<td class="indentFileName">lib/JSON4J.jar</td>
+<td></td>
+<td>.*(\.war|\.jar)</td>
+<td></td>
+</tr>
+<tr id="analyze_MissingBeansFile-CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war</b></td>
+</tr>
+<tr>
+<td class="indentFileName">WEB-INF/lib/dbunit-2.2.jar</td>
+<td></td>
+<td>.*(\.war|\.jar)</td>
+<td></td>
+</tr>
+<tr>
+<td class="indentFileName">WEB-INF/lib/junit.jar</td>
+<td></td>
+<td>.*(\.war|\.jar)</td>
+<td></td>
+</tr>
+<tr>
+<td class="indentFileName">WEB-INF/lib/junitee.jar</td>
+<td></td>
+<td>.*(\.war|\.jar)</td>
+<td></td>
+</tr>
+<tr id="analyze_MissingBeansFile-CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war</b></td>
+</tr>
+<tr>
+<td class="indentFileName">dojo/util/shrinksafe/js.jar</td>
+<td></td>
+<td>.*(\.war|\.jar)</td>
+<td></td>
+</tr>
+<tr>
+<td class="indentFileName">dojo/util/shrinksafe/shrinksafe.jar</td>
+<td></td>
+<td>.*(\.war|\.jar)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+      </div>
+    </li>
+  </ul>
+<p>
+<span class="rule-category" id="category4">
+Java EE 7 / OpenJPA to EclipseLink JPA</span></p>  <ul class="rules">
+    <li id="analyze_JpaOrmXml" class="rule">
+      <div class="rule-title">        <h3><span class="circle sev-warn"></span>Mapping files are not processed during OpenJPA to EclipseLink migration <em>(1)</em></h3>
+        <div class="js-toggle-actions noprint">
+          <a href="#" class="recommendation-toggle-help rule-help-toggle">Show rule help</a>
+          <a href="#" class="recommendation-toggle-results results-toggle">Show results</a>
+        </div>
+      </div>
+      <div id="helpOrmXml" class="rule-fix shared hide">
+        <h3>Rule Help</h3>
+
+<p>
+The OpenJPA to EclipseLink Migration rule set primarily detects migration issues
+in Java Persistence API (JPA) annotation definitions.
+Because information in mapping files is not migrated, this rule detects <span class="FilePath">META-INF/orm.xml</span> entity mapping files.  
+The rule also detects references to <code>mapping-file</code> elements in 
+<span class="FilePath">META-INF/persistence.xml</span> files because mapping files can
+be any XML file on the classpath.
+</p>
+<p>
+The entity mapping files
+might contain issues that are similar to the issues in JPA annotations.
+For mapping files to be compatible with EclipseLink, 
+you must manually assess the files for the issues and make any necessary changes.
+</p>
+<p>
+For more information about what to migrate, see the help for the annotation rules and the 
+<a href="https://wiki.eclipse.org/EclipseLink/Examples/JPA/Migration/OpenJPA/Mappings"
+target="_blank">
+OpenJPA to EclipseLink JPA Migration: Mappings</a> guide.
+</p>
+      </div>
+      <div class="rule-result hide">
+        <h3>Results</h3>
+<table summary="This table provides details on rule results, including the affected file name, reference information, match criteria, and line number if available. Results are grouped together by archive name with a row that spans all columns.">
+<thead>
+  <tr>
+    <th>File name</th>
+    <th>Reference details</th>
+    <th>Match criteria</th>
+    <th>Line number</th>
+  </tr>
+</thead>
+<tbody>
+<tr id="analyze_JpaOrmXml-CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar</b></td>
+</tr>
+<tr>
+<td class="indentFileName">META-INF/orm.xml</td>
+<td></td>
+<td>entity-mappings</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+      </div>
+    </li>
+  </ul>
+<p>
+<span class="rule-category" id="category5">
+Technology connectivity considerations for IBM Cloud</span></p>  <ul class="rules">
+    <li id="analyze_DatabasesRule" class="rule">
+      <div class="rule-title">        <h3><span class="circle sev-warn"></span>Databases <em>(1)</em></h3>
+        <div class="js-toggle-actions noprint">
+          <a href="#" class="recommendation-toggle-help rule-help-toggle">Show rule help</a>
+          <a href="#" class="recommendation-toggle-results results-toggle">Show results</a>
+        </div>
+      </div>
+      <div id="helpDatabases" class="rule-fix shared hide">
+        <h3>Rule Help</h3>
+
+<p>When migrating applications using databases to a cloud platform, 
+consider how to maintain access to the database from the cloud.
+</p>
+<p>The following Java packages indicate use of a database:</p>
+<ul>
+<li><code>java.sql</code></li>
+<li><code>javax.sql</code></li>
+<li><code>javax.persistence</code></li>
+<li><code>org.apache.ibatis</code></li>
+<li><code>org.hibernate</code></li>
+<li><code>org.springframework.dao</code></li>
+<li><code>org.springframework.jdbc</code></li>
+<li><code>org.ektorp</code></li>
+<li><code>org.lightcouch</code></li>
+<li><code>org.jcouchdb</code></li>
+<li><code>com.buycentives.jrelax</code></li>
+<li><code>com.mongodb</code></li>
+</ul>
+<p>This rule flags the following references in the <span class="FilePath">persistence.xml</span> file: 
+</p>
+<ul>
+<li><code>&lt;property name="javax.persistence.jdbc.url"/&gt;</code></li>
+<li><code>&lt;jta-data-source&gt;<i>data source name</i>&lt;/jta-data-source&gt;</code></li>
+<li><code>&lt;non-jta-data-source&gt;<i>data source name</i>&lt;/non-jta-data-source&gt;</code></li>
+</ul>
+<p>
+This rule also flags resource references with a type of
+<code>&lt;res-type&gt;javax.sql.DataSource&lt;/res-type&gt;</code> element in <code>application.xml</code>, 
+<code>application-client.xml</code>, <code>ejb-jar.xml</code>, or <code>web.xml</code> files.
+</p>
+<p>Each database Java API type referenced by an application is flagged only once per Eclipse project or Java archive. 
+For example, if <code>java.sql</code> and <code>javax.persistence</code> APIs are both used in an Eclipse project, 
+you get two results for that project.  The results do not give you an indication of how
+many databases are being accessed. Rather, they give an indication of the technologies that you use 
+to access databases.
+</p>
+<p>
+All <code>javax.persistence.jdbc.url</code> properties are flagged because
+they must be reconfigured when you use a VPN tunnel.
+</p>
+<p>
+In the following <span class="FilePath">persistence.xml</span> file, 
+the <code>property</code> element with <code>name="javax.persistence.jdbc.url"</code> is flagged by this rule. 
+</p>
+<table summary="This table provides more information about the rule, sometimes in the form of an excerpt from a file demonstrating the migration issue." bgcolor="#F7F8F9" border="1" cellpadding="2px">
+<tr><td>
+<pre>
+&lt;persistence&gt;
+  &lt;persistence-unit name="openjpa"&gt;
+    &lt;properties&gt;
+      ...
+      &lt;property name="javax.persistence.jdbc.url"
+                   value="jdbc:db2://host.ibm.com:50000/mydb2user" /&gt;
+       ...
+    &lt;/properties&gt;
+  &lt;/persistence-unit&gt;
+&lt;/persistence&gt;
+</pre>
+</td></tr></table>
+<h4>How to Resolve</h4>
+		<p>You can use a VPN tunnel, such as the Bluemix Secure Gateway or 
+		SoftLayer Gateway as a Service, to create a secure connection to 
+		your existing on-premises database provider.
+		</p>
+		<p>
+			For more information about configuring a secure connection, see 
+			<a href="#helpSecureConnection" class="Rule-Help__Inner-Link">Configuring a VPN</a>.
+		</p>
+		<p> After configuring your gateway, connect your application to the
+			new destination by using the cloud host and port number that is
+			provided when you created the destination.
+			The following URL is an example of an IBM DB2 database URL:</p>
+			<ul>
+			<li><span class="Code">jdbc:db2://&lt;cloud host&gt;:&lt;cloud port&gt;/&lt;database name&gt;</span></li>
+			</ul>
+<p>
+For situations where you want to move your data to the cloud, you can use
+Bluemix services for SQL, Cloudant NoSQL, and Mongo databases.  For more
+information, see the <a href="https://console.ng.bluemix.net/docs/services/data_analytics.html"
+target="_blank">
+Data &amp; Analytics</a> services available.
+</p>
+      </div>
+      <div class="rule-result hide">
+        <h3>Results</h3>
+<table summary="This table provides details on rule results, including the affected file name, reference information, match criteria, and line number if available. Results are grouped together by archive name with a row that spans all columns.">
+<thead>
+  <tr>
+    <th>File name</th>
+    <th>Reference details</th>
+    <th>Match criteria</th>
+    <th>Line number</th>
+  </tr>
+</thead>
+<tbody>
+<tr id="analyze_DatabasesRule-CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar</b></td>
+</tr>
+<tr>
+<td class="indentFileName">META-INF/persistence.xml</td>
+<td></td>
+<td>jta-data-source=jdbc/orderds</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+      </div>
+    </li>
+    <li id="analyze_ApplicationSecurityRule" class="rule">
+      <div class="rule-title">        <h3><span class="circle sev-warn"></span>Java EE security <em>(2)</em></h3>
+        <div class="js-toggle-actions noprint">
+          <a href="#" class="recommendation-toggle-help rule-help-toggle">Show rule help</a>
+          <a href="#" class="recommendation-toggle-results results-toggle">Show results</a>
+        </div>
+      </div>
+      <div id="helpApplicationSecurity" class="rule-fix shared hide">
+        <h3>Rule Help</h3>
+
+<p>
+When moving applications that use Java EE security to the cloud, 
+consider how the application uses the user registry, Trust Association Interceptors (TAI), and JAAS custom login modules,
+as well as your on-premises security server. 
+</p>
+<p>
+This rule flags the following elements related to Java EE security:</p>
+<h4>Java Servlet</h4>
+<p>The following Java annotations and method calls indicate use of Java EE security:</p>
+<ul>
+<li><code>javax.servlet.annotation.ServletSecurity</code></li>
+<li><code>javax.servlet.http.HttpServletRequest.getRemoteUser</code></li>
+<li><code>javax.servlet.http.HttpServletRequest.getUserPrincipal</code></li>
+<li><code>javax.servlet.http.HttpServletRequest.isUserInRole</code></li>
+</ul>
+<p>The following deployment descriptor elements also indicate use of Java EE security in the web container:</p>
+<ul>
+<li><code>&lt;security-constraint&gt;</code> in the <code>WEB-INF/web.xml</code> file.</li>
+</ul>
+<!-- Note to translator, do not translate the terms "BASIC", "FORM" or "CLIENT-CERT" -->
+<p>Applications that authenticate users specify a standard authentication method (BASIC, FORM, CLIENT-CERT) on the
+<code>&lt;login-config&gt;</code> element and its <code>&lt;auth-method&gt;</code> sub-element in the <code>WEB-INF/web.xml</code> file.</p>
+ 
+<h4>Enterprise Java Beans</h4>
+<p>The following Java annotations and method calls indicate use of Java EE security in the EJB container:</p>
+<ul>
+<li><code>javax.annotation.security.RolesAllowed</code></li>
+<li><code>javax.annotation.security.PermitAll</code></li>
+<li><code>javax.annotation.security.DenyAll</code></li>
+<li><code>javax.ejb.EJBContext.getCallerPrincipal</code></li>
+<li><code>javax.ejb.EJBContext.isCallerInRole</code></li>
+
+</ul>
+<p>The following deployment descriptor elements also indicate use of Java EE security:</p>
+<ul>
+<li><code>&lt;method-permission&gt;</code> in the <code>ejb-jar.xml</code> file.</li>
+</ul>
+<p>This rule is flagged once per Eclipse project or Java archive.</p>
+
+		<h4>How to Resolve</h4>
+		<p>You can use a VPN tunnel, such as the Bluemix Secure Gateway or 
+		SoftLayer Gateway as a Service, to create a secure connection to 
+		your existing on-premises security provider.
+		</p>
+		<p>
+			For more information about configuring a secure connection, see
+			<a href="#helpSecureConnection" class="Rule-Help__Inner-Link">Configuring a VPN</a>.
+		</p>
+		<p> After configuring your gateway, connect your application to the
+			new destination by using the cloud host and port number that is
+			provided when you created the destination.
+			The following URLs are examples of Lightweight Directory Access Protocol (LDAP) URLs:
+		</p>
+			<ul>
+			<li><span class="Code">ldap://&lt;cloud host&gt;:&lt;cloud port&gt;/...</span></li>
+			<li><span class="Code">ldaps://&lt;cloud host&gt;:&lt;cloud port&gt;/...</span></li>
+			</ul>
+      </div>
+      <div class="rule-result hide">
+        <h3>Results</h3>
+<table summary="This table provides details on rule results, including the affected file name, reference information, match criteria, and line number if available. Results are grouped together by archive name with a row that spans all columns.">
+<thead>
+  <tr>
+    <th>File name</th>
+    <th>Reference details</th>
+    <th>Match criteria</th>
+    <th>Line number</th>
+  </tr>
+</thead>
+<tbody>
+<tr id="analyze_ApplicationSecurityRule-CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war</b></td>
+</tr>
+<tr>
+<td class="indentFileName">WEB-INF/web.xml</td>
+<td></td>
+<td>security-constraint</td>
+<td>21</td>
+</tr>
+<tr id="analyze_ApplicationSecurityRule-CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war</b></td>
+</tr>
+<tr>
+<td class="indentFileName">WEB-INF/web.xml</td>
+<td></td>
+<td>security-constraint</td>
+<td>27</td>
+</tr>
+</tbody>
+</table>
+      </div>
+    </li>
+  </ul>
+</div></div>
+<div class="detailed-results-by-severity" role="main">
+<div class="detailed-results-header">
+<h2 class="detailed-results-title" id="analyze_severity3">Information Rules</h2></div><div class="detailed-results-by-rule"><p>
+<span class="rule-category" id="category6">
+Java SE version migration / Java SE 8 compatibility impacts</span></p>  <ul class="rules">
+    <li id="analyze_NumberFormatRounding" class="rule">
+      <div class="rule-title">        <h3><span class="circle sev-info"></span>Behavior change in rounding in NumberFormat and DecimalFormat format methods <em>(2)</em></h3>
+        <div class="js-toggle-actions noprint">
+          <a href="#" class="recommendation-toggle-help rule-help-toggle">Show rule help</a>
+          <a href="#" class="recommendation-toggle-results results-toggle">Show results</a>
+        </div>
+      </div>
+      <div id="helpJRE8NumberFormatRounding" class="rule-fix shared hide">
+        <h3>Rule Help</h3>
+
+<p>
+Java 8 introduces a behavior change in the rounding behavior of decimal numbers 
+using the <code>format</code>
+method on the <span class="Code">java.text.NumberFormat</span> and the
+<span class="Code">java.text.DecimalFormat</span> classes
+when the value is very close to a tie, sitting exactly at the rounding position
+specified in the formatting pattern. The change affects numbers with a binary
+numeric representation that is not exact.
+</p>
+<p>
+For example, the closest binary approximation of 0.015 that a computer can reach is
+0.01499999999999999944488848768742172978818416595458984375.  If you round that number to two
+digits, in Java 8 the answer is .01 because .004999999.... is less than .005.
+In previous versions of Java, the answer is 0.02.
+</p>
+<p>
+This rule flags calls to the <code>NumberFormat</code> and
+<code>DecimalFormat</code> <code>format</code> methods when they are called with 
+a <code>double</code> primitive or a <code>java.lang.Double</code> object 
+as the first parameter.
+The following example shows the use of the <code>format</code> methods.
+</p>
+<table summary="This table provides more information about the rule, sometimes in the form of an excerpt from a file demonstrating the migration issue." bgcolor="#F7F8F9" border="1" cellpadding="2px">
+<tr>
+<td>
+<pre>
+   public static void main(String[] args) {
+		
+		java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(3);
+		double aDouble;
+		String myStr;
+
+		aDouble = 0.8055d;
+		myStr = <b>nf.format(aDouble)</b>;
+		System.out.println("format(" + aDouble + ") returns \"" + myStr + "\". Expecting \"0.805\".");
+		
+		nf.setMaximumFractionDigits(2);
+		aDouble = 0.015d;
+		myStr = <b>nf.format(aDouble)</b>;
+		System.out.println("format(" + aDouble + ") returns \"" + myStr + "\". Expecting \"0.01\".");		
+	
+	
+        NumberFormat percent = NumberFormat.getPercentInstance();
+        percent.setMinimumFractionDigits(1);
+        percent.setMaximumFractionDigits(1);
+        percent.setRoundingMode(RoundingMode.HALF_EVEN);
+        myStr = <b>percent.format(0.5555)</b>;
+        System.out.println("format(0.5555) returns \"" + myStr + "\". Expecting \"55.5%\".");
+
+	}
+</pre>
+</td></tr></table>
+<p>
+If you call this code using Java 7, the following output is displayed:
+</p>
+<pre>
+format(0.8055) returns "0.806". Expecting "0.805".
+format(0.015) returns "0.02". Expecting "0.01".
+format(0.5555) returns "55.6%". Expecting "55.5%".
+</pre>
+<p>
+In Java 8, the following output is displayed:
+</p>
+<pre>
+format(0.8055) returns "0.805". Expecting "0.805".
+format(0.015) returns "0.01". Expecting "0.01".
+format(0.5555) returns "55.5%". Expecting "55.5%".
+</pre>
+<p>
+Be aware of this behavior change because it might affect your program output.
+The <a href="http://bugs.java.com/view_bug.do?bug_id=7131459"
+target="_blank">JDK-7131459 bug report</a> provides more information and shows a number of related
+reports, including bug reports against Java 8 that report this
+as a regression.
+<p>
+For more information about the affected classes, see the following resources:
+<ul>
+<li><a href="http://docs.oracle.com/javase/8/docs/api/java/text/DecimalFormat.html"
+   target="_blank">
+   java.text.DecimalFormat</a> Java documentation</li>
+<li><a href="http://docs.oracle.com/javase/8/docs/api/java/text/NumberFormat.html"
+   target="_blank">
+   java.text.NumberFormat</a> Java documentation</li>
+</ul>
+      </div>
+      <div class="rule-result hide">
+        <h3>Results</h3>
+<table summary="This table provides details on rule results, including the affected file name, reference information, match criteria, and line number if available. Results are grouped together by archive name with a row that spans all columns.">
+<thead>
+  <tr>
+    <th>File name</th>
+    <th>Reference details</th>
+    <th>Match criteria</th>
+    <th>Line number</th>
+  </tr>
+</thead>
+<tbody>
+<tr id="analyze_NumberFormatRounding-CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar" class="header-archive">
+<td colspan="4"><b>CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar</b></td>
+</tr>
+<tr>
+<td class="indentFileName">junit/runner/BaseTestRunner.class</td>
+<td>Method elapsedTimeAsString</td>
+<td>java.text.NumberFormat.format(double)</td>
+<td>147</td>
+</tr>
+<tr>
+<td class="indentFileName">junit/textui/ResultPrinter.class</td>
+<td>Method elapsedTimeAsString</td>
+<td>java.text.NumberFormat.format(double)</td>
+<td>102</td>
+</tr>
+</tbody>
+</table>
+      </div>
+    </li>
+  </ul>
+</div></div>
+<div class="detailed-results-header header-sections" role="main">
+  <h2 id="analyze_AdditionalRuleHelp" class="detailed-results-title">Additional Rule Help</h2>
+</div>
+<div role="main">
+      <div id="helpOpenJPALockManager" class="rule-additional-help shared">
+<h3>The openjpa.LockManager configuration property must be migrated</h3>
+<p>
+			EclipseLink does not have a configuration equivalent to the
+			<code>openjpa.LockManager</code> configuration property. EclipseLink will not
+			recognize this OpenJPA lock mode property and will use the
+			EclipseLink default lock mode instead. In EclipseLink lock modes are
+			set using the 
+			<a href="https://jcp.org/aboutJava/communityprocess/final/jsr338/index.html?cm_mc_uid=22008991045614567620713&cm_mc_sid_50200000=1462558773">
+				JPA 2.1 specification</a>, which provide lock APIs such as the <code>EntityManager lock</code>
+			method or the <code>Query setLockMode</code> method. See the specification for details.
+		</p>
+		<p>
+			The rule flags the following OpenJPA lock manager property name in
+			the <span class="FilePath">persistence.xml</span> file.
+		</p>
+		<table summary="This table provides more information about the rule, sometimes in the form of an excerpt from a file demonstrating the migration issue." bgcolor="#F7F8F9" border="1" cellpadding="2px">
+<tr><td>
+<pre>
+&lt;persistence-unit name="JPAService"&gt;
+	&lt;properties&gt;
+	    &lt;property name="openjpa.LockManager" value="pessimistic"&gt;
+	&lt;/properties&gt;
+&lt;/persistence-unit&gt;
+</pre>
+</td></tr>
+</table>
+		<p>
+			For information about this OpenJPA to EclipseLink migration issue,
+			see the <a
+				href="https://wiki.eclipse.org/EclipseLink/Examples/JPA/Migration/OpenJPA/PersistenceXML"
+				target="_blank">
+				Migration from OpenJPA to EclipseLink: Persistence XML</a> guide.
+		</p>
+	      </div>
+      <div id="helpOpenJpaJdbcSchemaConfigurationProperty" class="rule-additional-help shared">
+<h3>The openjpa.jdbc.Schema configuration property must be migrated to the mapping file</h3>
+<p>
+This rule detects the <code>openjpa.jdbc.Schema</code> configuration 
+property in the <span class="FilePath">persistence.xml</span> file. 
+This property must be manually migrated to the XML object-relational mapping file,
+<span class="FilePath">META-INF/orm.xml</span>, or to the mapping file
+defined by the <code>mapping-file</code> element for the <code>persistence-unit</code>.
+Other <code>openjpa</code> and <code>wsjpa</code> configuration properties are flagged by a
+<a href="#helpOpenJpaConfigurationProperties" class="Rule-Help__Inner-Link">different rule</a>.
+</p>
+<p>
+In the following <span class="FilePath">persistence.xml</span> file, 
+the <code>property</code> element is flagged by this rule. 
+</p>
+<table summary="This table provides more information about the rule, sometimes in the form of an excerpt from a file demonstrating the migration issue." bgcolor="#F7F8F9" border="1" cellpadding="2px">
+<tr><td>
+<pre>
+&lt;persistence&gt;
+  &lt;persistence-unit name="openjpa"&gt;
+    &lt;mapping-file&gt;orm.xml&lt;/mapping-file&gt;
+    &lt;properties&gt;
+      ...
+      &lt;property name="openjpa.jdbc.Schema" value="EJB30"/&gt;
+      ...
+    &lt;/properties&gt;
+  &lt;/persistence-unit&gt;
+&lt;/persistence&gt;
+</pre>
+</td></tr></table>
+<p>
+Migrate this property value to the <code>schema</code> element in the mapping file. 
+The following example shows the migrated property value in a
+<span class="FilePath">orm.xml</span> mapping file. 
+If you are not using the default <code>META-INF/orm.xml</code> file, define a <code>mapping-file</code> element
+for each affected <code>persistence-unit</code> in your <span class="FilePath">persistence.xml</span> file.
+</p>
+<table summary="This table provides more information about the rule, sometimes in the form of an excerpt from a file demonstrating the migration issue." bgcolor="#F7F8F9" border="1" cellpadding="2px">
+<tr><td>
+<pre>
+&lt;entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+    version="2.0"&gt;
+    &lt;persistence-unit-metadata&gt;
+        &lt;persistence-unit-defaults&gt;
+            &lt;schema&gt;EJB30&lt;/schema&gt;
+        &lt;/persistence-unit-defaults&gt;
+    &lt;/persistence-unit-metadata&gt;   
+&lt;/entity-mappings&gt;
+</pre>
+</td></tr></table>
+      </div>
+      <div id="helpSecureConnection" class="rule-additional-help shared">
+<h3>Configuring a VPN</h3>
+<p>To securely connect cloud applications to
+			on-premises or cloud-based remote locations, you can use a VPN tunnel such as
+			the Bluemix Secure Gateway or SoftLayer Gateway as a Service.</p>
+		<p>For more information about the Bluemix Secure Gateway, see</p>
+		<ul>
+			<li><a href="https://www.ng.bluemix.net/docs/services/SecureGateway/secure_gateway.html"
+				target="_blank">
+				Getting started with the Secure Gateway</a></li>
+			<li><a href="https://developer.ibm.com/bluemix/2015/03/27/bluemix-secure-gateway-yes-can-get/"
+				target="_blank">
+				Bluemix Secure Gateway: Yes, you CAN get there from here!</a></li>
+		</ul>
+		<p>
+			For more information about configuring the SoftLayer Gateway as a
+			Service, see <a href="https://gateway-as-a-service.com/gaas/ui/help" 
+			target="_blank">
+			Help for Gateway as a Service</a>.
+		</p>
+	      </div>
+</div>
+<div id="jsRulesAnalyzedTitle" class="detailed-results-header header-sections" role="complementary">
+  <h2 id="analyze_RulesAnalyzed" class="detailed-results-title">Rules Analyzed</h2>
+  <div class="expand-collapse-holder noprint">
+    <a href="#" class="read-more almighty">Show more</a>
+    <a href="#" class="read-less almighty disabled">Show less</a>
+  </div>
+</div>
+<div id="js-rules-analyzed-detail" class="detailed-analysis-by-rule clear read-less" role="complementary">
+  <a href="#" title="Show more" class="detailed-read-more-button">Show more</a>
+  <ul>
+    <li class="analyzed-rule shared">
+<h3>All application servers</h3>
+<h4>File Rules</h4>
+<ul>
+<li>Do not start unmanaged threads within the web or EJB container</li>
+</ul>
+<h4>Java Rules</h4>
+<ul>
+<li>Check for compatibility when using system modules</li>
+<li>Do not set certain JVM configuration properties from within an application</li>
+<li>Do not start unmanaged threads within the web or EJB container</li>
+</ul>
+    </li>
+    <li class="analyzed-rule shared">
+<h3>All application servers to WebSphere traditional</h3>
+<h4>Java Rules</h4>
+<ul>
+<li>Do not package JAXP libraries within applications that use JAXB APIs</li>
+</ul>
+    </li>
+    <li class="analyzed-rule shared">
+<h3>Connectivity considerations for IBM Cloud (Docker and WebSphere on Cloud)</h3>
+<h4>Java Rules</h4>
+<ul>
+<li>Validate the URL host and port for cloud access</li>
+</ul>
+<h4>Property Rules</h4>
+<ul>
+<li>Validate the URL host and port for cloud access</li>
+</ul>
+<h4>XML Rules</h4>
+<ul>
+<li>Validate the URL host and port for cloud access</li>
+</ul>
+    </li>
+    <li class="analyzed-rule shared">
+<h3>Java EE 6</h3>
+<h4>JAX-RS 1.1</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Java API for RESTful Web Services (JAX-RS)</li>
+</ul>
+<h4>JPA 2.0</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Java Persistence API (JPA)</li>
+</ul>
+<h4>Servlet 3.0</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Do not use the HttpSession invalidate method for programmatic security logout in Servlet 3.0</li>
+</ul>
+    </li>
+    <li class="analyzed-rule shared">
+<h3>Java EE 7</h3>
+<h4>CDI</h4>
+<h5>File Rules</h5>
+<ul>
+<li>CDI scans for implicit beans when there is no beans.xml file</li>
+<li>The openwebbeans.properties file is not used</li>
+</ul>
+<h5>Java Rules</h5>
+<ul>
+<li>An interceptor for lifecycle callbacks may only declare interceptor binding types that are defined as @Target(TYPE)</li>
+<li>CDI recognizes implicit bean archives</li>
+<li>Check for a behavior change in the InjectionPoint getAnnotated method</li>
+<li>Classes that use both the Specializes and Alternative annotations are not injected into other modules</li>
+<li>Producer fields on session beans must be static</li>
+<li>Transient fields in session-scoped beans cannot fail over successfully</li>
+</ul>
+<h5>XML Rules</h5>
+<ul>
+<li>Check for a valid schema in beans.xml</li>
+<li>Check for the enablement of interceptors, decorators and alternatives in other JAR files</li>
+<li>Do not use the OpenWebBeans schema for beans.xml</li>
+<li>Producer fields on session beans must be static</li>
+</ul>
+<h4>Expression Language 3.0</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Behavior change in coerceToType method with null parameter</li>
+</ul>
+<h4>JAX-RS 2.0</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>@Local JAX-RS interfaces must be implemented</li>
+<li>Configuration is required to use SSL in JAX-RS 2.0</li>
+<li>Packaging Apache Wink APIs with your application might require application changes</li>
+<li>The Apache Wink APIs are not available</li>
+<li>The Apache Wink Client APIs are not available</li>
+<li>The com.ibm.websphere.jaxrs.server.IBMRestFilter class is no longer supported</li>
+<li>The org.apache.wink.client.handlers.LtpaAuthSecurityHandler class is no longer supported</li>
+<li>The org.apache.wink.common.model.atom package is not available</li>
+<li>The org.apache.wink.common.model.multipart package is not available</li>
+<li>Use the isReadable and isWriteable methods to check the media type</li>
+<li>org.codehaus.jackson packages are not available</li>
+</ul>
+<h5>XML Rules</h5>
+<ul>
+<li>Configuration is required to use SSL in JAX-RS 2.0</li>
+</ul>
+<h4>JMS Client 2.0</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Check for a behavior change on message priority and the NoLocal attribute</li>
+<li>Check for a behavior change on setClientID and createDurableSubscriber methods</li>
+</ul>
+<h4>OpenJPA to EclipseLink JPA</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Do not use OpenJPA strings for query hints or properties</li>
+<li>The org.apache.openjpa.enhance.PersistenceCapable interface is not available</li>
+<li>org.apache.openjpa packages are not available</li>
+</ul>
+<h5>XML Rules</h5>
+<ul>
+<li>Disable the persistence unit second-level cache</li>
+<li>Do not use OpenJPA providers in the persistence.xml file</li>
+<li>Mapping files are not processed during OpenJPA to EclipseLink migration</li>
+<li>OpenJPA and WebSphere JPA configuration properties must be migrated</li>
+<li>The openjpa.LockManager configuration property must be migrated</li>
+<li>The openjpa.jdbc.Schema configuration property must be migrated to the mapping file</li>
+</ul>
+<h4>Servlet 3.1</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Check for a behavior change on asynchronous servlets</li>
+<li>Check for a behavior change on the ServletContextListener interface</li>
+<li>Check for a behavior change on the getServerInfo method</li>
+<li>Check for a behavior change on the sendRedirect method</li>
+<li>Check for a behavior change on the setComment method</li>
+<li>Check for a behavior change with URL pattern mapping</li>
+</ul>
+<h5>XML Rules</h5>
+<ul>
+<li>Check for a behavior change in the processing of the absolute-ordering element</li>
+<li>Check for a behavior change on asynchronous servlets</li>
+<li>Check for a behavior change on the ServletContextListener interface</li>
+<li>Check for a behavior change regarding duplicate elements in web descriptors</li>
+<li>Check for a behavior change with URL pattern mapping</li>
+<li>Check for a behavior change with resource reference injection target merging</li>
+</ul>
+    </li>
+    <li class="analyzed-rule shared">
+<h3>Java SE version migration</h3>
+<h4>Java SE 6 compatibility impacts</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Check exception logic on calls to the EventHandler</li>
+<li>Check for Duration and XMLGregorianCalendar equals() method compatibility</li>
+<li>Check for new methods on Java SQL interfaces</li>
+<li>Check for the OverlappingFileLockException for the FileChannel lock() method</li>
+<li>Remove use of double slashes in JMX ObjectName elements</li>
+</ul>
+<h4>Java SE 7 compatibility impacts</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Check for a behavior change for AWT Exception Handler</li>
+<li>Check for a behavior change for File setReadOnly, setWritable and canWrite methods</li>
+<li>Check for a behavior change for URLConnection, HttpURLConnection getInputStream method</li>
+<li>Check for a behavior change for an empty TreeSet add and TreeMap put methods</li>
+<li>Check for a behavior change on DatagramChannel send, receive, and connect methods</li>
+<li>Check for a behavior change on Locale getDefault method</li>
+<li>Check for a behavior change on MouseEvent getButton method</li>
+<li>Check for a behavior change on ThreadGroup setMaxPriority method</li>
+<li>Check for a behavior change on Toolkit getPrintJob method</li>
+<li>Check for a behavior change on Window setBackground method</li>
+<li>Check for a behavior change on isLowerCase and isUpperCase methods</li>
+<li>Check for classes that implement the TypeVisitor interface</li>
+<li>Check for new methods on JDBC interfaces</li>
+<li>Do not define methods declared as final in java.lang.Throwable</li>
+<li>Do not override the Path2D getPathIterator methods</li>
+<li>Do not use removed class XSLTProcessorApplet</li>
+</ul>
+<h4>Java SE 8 compatibility impacts</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Behavior change in exceptions when setting AWT focus traversal keys</li>
+<li>Behavior change in month name formatting for some languages</li>
+<li>Behavior change in most Collection.removeAll and Collection.retainAll implementations</li>
+<li>Behavior change in new instance creation for non-public interfaces</li>
+<li>Behavior change in rounding in NumberFormat and DecimalFormat format methods</li>
+<li>Behavior change in the BigDecimal stripTrailingZeros method for a zero value</li>
+<li>Behavior change in the construction of dynamic proxy classes</li>
+<li>Check for classes that implement the TypeVisitor interface</li>
+<li>DatagramPacket constructor with SocketAddress no longer throws SocketException</li>
+<li>Differences in class loading for JAXP service providers</li>
+<li>MBean and MXBean interfaces must be public</li>
+<li>New methods in java.util.concurrent.ConcurrentHashMap</li>
+<li>The mechanism to select a locale service provider changed</li>
+<li>java.lang.Thread.stop(java.lang.Throwable) is disabled</li>
+</ul>
+    </li>
+    <li class="analyzed-rule shared">
+<h3>Scanning problems</h3>
+<h4>Java Rules</h4>
+<ul>
+<li>Class files contain unresolved compilation problems</li>
+</ul>
+    </li>
+    <li class="analyzed-rule shared">
+<h3>Technology connectivity considerations for IBM Cloud</h3>
+<h4>Java Rules</h4>
+<ul>
+<li>Databases</li>
+<li>Java EE security</li>
+<li>JavaMail server</li>
+<li>Remote web services</li>
+<li>Third-party security</li>
+<li>Vendor specific messaging</li>
+</ul>
+<h4>XML Rules</h4>
+<ul>
+<li>Databases</li>
+<li>Java EE security</li>
+<li>JavaMail server</li>
+<li>Remote web services</li>
+</ul>
+    </li>
+    <li class="analyzed-rule shared">
+<h3>Technology connectivity considerations for IBM Cloud (WebSphere traditional)</h3>
+<h4>File Rules</h4>
+<ul>
+<li>Remote web services</li>
+</ul>
+<h4>Java Rules</h4>
+<ul>
+<li>Remote web services</li>
+</ul>
+    </li>
+    <li class="analyzed-rule shared">
+<h3>Technology connectivity considerations for IBM Cloud (not Liberty Core)</h3>
+<h4>File Rules</h4>
+<ul>
+<li>Enterprise information systems (EIS)</li>
+</ul>
+<h4>Java Rules</h4>
+<ul>
+<li>Enterprise information systems (EIS)</li>
+<li>Java Message Service (JMS)</li>
+<li>Message-Driven Beans (MDB)</li>
+<li>Remote EJB lookups</li>
+<li>Remote EJB providers</li>
+</ul>
+<h4>XML Rules</h4>
+<ul>
+<li>Enterprise information systems (EIS)</li>
+<li>Java Message Service (JMS)</li>
+<li>Message-Driven Beans (MDB)</li>
+<li>Remote EJB lookups</li>
+<li>Remote EJB providers</li>
+</ul>
+    </li>
+    <li class="analyzed-rule shared">
+<h3>WebSphere version migration</h3>
+<h4>Deprecated in V8.0</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Avoid extending the AppDeploymentTask class</li>
+<li>Avoid using the deprecated AppManagementBaseFactory methods</li>
+<li>Avoid using the deprecated IRequest isStartAsync() method</li>
+<li>Avoid using the deprecated WASDirectory methods and fields</li>
+<li>Avoid using the deprecated WebSphere Studio Application Developer Integration Edition libraries</li>
+<li>Avoid using the deprecated com.ibm.websphere.product classes</li>
+<li>Avoid using the deprecated elements in the EditionInfo class</li>
+<li>Avoid using the deprecated elements in the IFilterConfig interface</li>
+<li>The WebSphere Startup Beans Service API was superseded by a newer implementation</li>
+</ul>
+<h5>XML Rules</h5>
+<ul>
+<li>The WebSphere Startup Beans Service API was superseded by a newer implementation</li>
+</ul>
+<h4>Deprecated in V8.5</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Do not use the WSSecurityHelper getLTPACookieFromSSOToken method</li>
+<li>Do not use the WSSecurityHelper revokeSSOCookies method</li>
+</ul>
+<h4>Deprecated in V9.0</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>The CommonJ Timer and Work Manager APIs are deprecated</li>
+<li>The WebSphere Asynchronous Beans API is deprecated</li>
+<li>The optional Java EE 7 technology Java API for XML Registries (JAXR) 1.0 is deprecated</li>
+<li>The optional Java EE 7 technology Java API for XML-based RPC (JAX-RPC) 1.1 is deprecated</li>
+<li>The optional Java EE 7 technology Java EE Application Deployment 1.2 is deprecated</li>
+</ul>
+<h5>XML Rules</h5>
+<ul>
+<li>The optional Java EE 7 technology Enterprise JavaBeans (EJB) entity beans is deprecated</li>
+<li>The optional Java EE 7 technology Java API for XML-based RPC (JAX-RPC) 1.1 is deprecated</li>
+</ul>
+<h4>V7.0 to V8.0 migration</h4>
+<h5>File Rules</h5>
+<ul>
+<li>Detect validation.xml files</li>
+</ul>
+<h5>Java Rules</h5>
+<ul>
+<li>Avoid using the deprecated OracleDataStoreHelper class</li>
+<li>Check for a behavior change for EJB bean presence in a web module</li>
+<li>Check for a behavior change in EJB application exception inheritance</li>
+<li>Check for a behavior change in SOAP Action set on outbound messages </li>
+<li>Check for a behavior change in SOAPMessage methods</li>
+<li>Check for a behavior change in web services SOAP fault codes and strings</li>
+<li>Check for a behavior change on EntityManager refresh(Object entity) method</li>
+<li>Check for a behavior change on OpenJPAEntityManager detach(T pc) method</li>
+<li>Check for a behavior change on SipFactory methods</li>
+<li>Check for a behavior change on some Server MBean operations</li>
+<li>Check for a behavior change on the SIP URI clone method</li>
+<li>Do not use the removed Apache SOAP API</li>
+<li>Do not use the removed method getCause() from ServletErrorReport </li>
+</ul>
+<h5>JSP Rules</h5>
+<ul>
+<li>Do not use Java keywords in JSP and JSF expression language elements</li>
+</ul>
+<h5>XML Rules</h5>
+<ul>
+<li>Check for a behavior change for EJB bean presence in a web module</li>
+<li>Check for a behavior change in EJB application exception inheritance</li>
+<li>Check for a behavior change in JSP configuration of &lt;is-xml&gt; and &lt;page-encoding&gt; options</li>
+<li>Check for a behavior change in web services addressing policy</li>
+<li>Do not use Java keywords in JSP and JSF expression language elements</li>
+</ul>
+<h4>V8.0 to V8.5 migration</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>Check for a behavior change in JPA MetaModel code generation concerning ListAttribute</li>
+<li>Check for a behavior change in JPA cascade strategy</li>
+</ul>
+<h5>XML Rules</h5>
+<ul>
+<li>Check for a behavior change in JPA MetaModel code generation concerning ListAttribute</li>
+<li>Check for a behavior change in JPA cascade strategy</li>
+</ul>
+<h4>V8.0, V8.5 and V9.0 migration</h4>
+<h5>Java Rules</h5>
+<ul>
+<li>The Apache HTTP client API was removed</li>
+</ul>
+<h4>V8.5 to V9.0 migration</h4>
+<h5>File Rules</h5>
+<ul>
+<li>SCA was removed</li>
+</ul>
+<h5>Java Rules</h5>
+<ul>
+<li>SCA was removed</li>
+<li>The CDI OpenWebBeans API was removed</li>
+<li>The CEA system application commsvc.ear was removed</li>
+<li>The Common Event Infrastructure API was removed</li>
+<li>The JSF SunRI engine was removed</li>
+</ul>
+<h5>XML Rules</h5>
+<ul>
+<li>SCA was removed</li>
+<li>The JSF SunRI engine was removed</li>
+</ul>
+    </li>
+  </ul>
+</div>
+</div>
+<script type="text/javascript"> 
+function helpWindow(newHelp)
+  {
+    var helpWindow = window.open(newHelp, 'WebSphereApplicationMigration');
+    helpWindow.focus();
+  }
+</script> 
+<script type="text/javascript"> 
+ /********************************************************************************
+* Licensed Materials - Property of IBM                                         *
+* (C) Copyright IBM Corp. 2016.  All Rights Reserved.                          *
+*                                                                              *
+* US Government Users Restricted Rights - Use, duplication or disclosure       *
+* restricted by GSA ADP Schedule Contract with IBM Corp.                       *
+********************************************************************************/
+       // Detect IE - must be first so the script can be normalized for correct operation in IE
+        var detectIE = function() {
+            var ua = window.navigator.userAgent;
+
+            // Test values; Uncomment to check result
+
+            // IE 10
+            // ua = 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)';
+
+            // IE 11
+            // ua = 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko';
+
+            // Edge 12 (Spartan)
+            // ua = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0';
+
+            // Edge 13
+            // ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586';
+
+            var msie = ua.indexOf('MSIE ');
+            if (msie > 0) {
+            // IE 10 or older => return version number
+            return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+            }
+
+            var trident = ua.indexOf('Trident/');
+            if (trident > 0) {
+                // IE 11 => return version number
+                var rv = ua.indexOf('rv:');
+                return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+            }
+
+            var edge = ua.indexOf('Edge/');
+            if (edge > 0) {
+                // Edge (IE 12+) => return version number
+                return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+            }
+
+            // other browser
+            return false;
+        };
+
+        if (detectIE()) {
+        	// normalize the script for correct operation in IE
+            if("document"in self){if(!("classList"in document.createElement("_"))||document.createElementNS&&!("classList"in document.createElementNS("http://www.w3.org/2000/svg","g"))){(function(t){"use strict";if(!("Element"in t))return;var e="classList",i="prototype",n=t.Element[i],s=Object,r=String[i].trim||function(){return this.replace(/^\s+|\s+$/g,"")},a=Array[i].indexOf||function(t){var e=0,i=this.length;for(;e<i;e++){if(e in this&&this[e]===t){return e}}return-1},o=function(t,e){this.name=t;this.code=DOMException[t];this.message=e},l=function(t,e){if(e===""){throw new o("SYNTAX_ERR","An invalid or illegal string was specified")}if(/\s/.test(e)){throw new o("INVALID_CHARACTER_ERR","String contains an invalid character")}return a.call(t,e)},c=function(t){var e=r.call(t.getAttribute("class")||""),i=e?e.split(/\s+/):[],n=0,s=i.length;for(;n<s;n++){this.push(i[n])}this._updateClassName=function(){t.setAttribute("class",this.toString())}},u=c[i]=[],f=function(){return new c(this)};o[i]=Error[i];u.item=function(t){return this[t]||null};u.contains=function(t){t+="";return l(this,t)!==-1};u.add=function(){var t=arguments,e=0,i=t.length,n,s=false;do{n=t[e]+"";if(l(this,n)===-1){this.push(n);s=true}}while(++e<i);if(s){this._updateClassName()}};u.remove=function(){var t=arguments,e=0,i=t.length,n,s=false,r;do{n=t[e]+"";r=l(this,n);while(r!==-1){this.splice(r,1);s=true;r=l(this,n)}}while(++e<i);if(s){this._updateClassName()}};u.toggle=function(t,e){t+="";var i=this.contains(t),n=i?e!==true&&"remove":e!==false&&"add";if(n){this[n](t)}if(e===true||e===false){return e}else{return!i}};u.toString=function(){return this.join(" ")};if(s.defineProperty){var h={get:f,enumerable:true,configurable:true};try{s.defineProperty(n,e,h)}catch(d){if(d.number===-2146823252){h.enumerable=false;s.defineProperty(n,e,h)}}}else if(s[i].__defineGetter__){n.__defineGetter__(e,f)}})(self)}else{(function(){"use strict";var t=document.createElement("_");t.classList.add("c1","c2");if(!t.classList.contains("c2")){var e=function(t){var e=DOMTokenList.prototype[t];DOMTokenList.prototype[t]=function(t){var i,n=arguments.length;for(i=0;i<n;i++){t=arguments[i];e.call(this,t)}}};e("add");e("remove")}t.classList.toggle("c3",false);if(t.classList.contains("c3")){var i=DOMTokenList.prototype.toggle;DOMTokenList.prototype.toggle=function(t,e){if(1 in arguments&&!this.contains(t)===!e){return e}else{return i.call(this,t)}}}t=null})()}};
+        }
+
+		
+
+ /********************************************************************************
+* Licensed Materials - Property of IBM                                         *
+* (C) Copyright IBM Corp. 2015, 2017.  All Rights Reserved.                          *
+*                                                                              *
+* US Government Users Restricted Rights - Use, duplication or disclosure       *
+* restricted by GSA ADP Schedule Contract with IBM Corp.                       *
+********************************************************************************/
+		document.addEventListener('DOMContentLoaded', function() {
+			
+			var getDocHeight = function() {
+				var D = document;
+				return Math.max(D.body.scrollHeight, D.documentElement.scrollHeight, D.body.offsetHeight, D.documentElement.offsetHeight, D.body.clientHeight, D.documentElement.clientHeight);
+			}
+			var scrollToAnchor = function(link, isConnSummary) {
+				var getBoundsTop, duration, chosenElement;
+
+				if (isConnSummary) {
+					chosenElement = document.getElementById(link);
+					getBoundsTop = chosenElement.getBoundingClientRect().top;
+					duration = 500;
+				} else {
+					chosenElement = document.querySelector('#' + link);
+					getBoundsTop = chosenElement.getBoundingClientRect().top;
+					duration = arguments.length <= 1 || arguments[1] === undefined ? 500 : arguments[1];
+				}
+
+				var mili = 15,
+					scrollPosition = window.scrollY,
+					scrollTarget = scrollPosition + (getBoundsTop - 44),
+					scrollCount = 0,
+					scrollStep = Math.PI / (duration / mili),
+					scrollDirection = scrollTarget > scrollPosition ? 1 : -1,
+					cosParameter = Math.abs(scrollTarget - scrollPosition) / 2,
+					docHeight = getDocHeight(),
+					marginOfError = Math.ceil(cosParameter - cosParameter * Math.cos(1 * scrollStep)),
+					scrollMargin;
+
+				var scrollInterval = setInterval(function() {
+					var reachedEdge = scrollDirection > 0 ? window.scrollY + window.innerHeight >= docHeight - 1 : window.scrollY < 1;
+
+					if (Math.abs(scrollTarget - window.scrollY) > marginOfError && !reachedEdge) {
+						scrollCount += 1;
+						scrollMargin = cosParameter - cosParameter * Math.cos(scrollCount * scrollStep);
+						window.scrollTo(0, scrollPosition + scrollMargin * scrollDirection);
+					} else {
+						clearInterval(scrollInterval);
+
+						if (isConnSummary) {
+							chosenElement.classList.add('shake');
+							chosenElement.classList.add('is-paused');
+
+							setTimeout(function() {
+								chosenElement.classList.remove('is-paused');
+							}, 0);
+						}
+					}
+				}, mili);
+			};
+
+			var browserVersion = detectIE();
+
+			// Shared Variables
+			var navHeight = 44;
+			var recommendationItems = document.getElementsByClassName('recommendation-toggle');
+            		var recommendationHelp = document.getElementsByClassName('recommendation-toggle-help');
+            		var recommendationDetails = document.getElementsByClassName('recommendation-toggle-results');					
+			var hasClass = function(el, cls) {
+				return el.className && new RegExp("(\\s|^)" + cls + "(\\s|$)").test(el.className);
+			};
+
+           var checkForOpenFixesResults = function ( ) {
+                // Check count if rule fix and rule results section are open
+                var currentVisibleRuleFix = document.querySelectorAll('.rule-fix.show').length;
+                var currentVisibleRuleResult = document.querySelectorAll('.rule-result.show').length;
+
+                if ( currentVisibleRuleFix === 0 && currentVisibleRuleResult === 0 ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+
+			var checkForOpenArchiveDetails = function() {
+				// Check if any archive details sections are open
+				var currentVisibleArchive = document.querySelectorAll('.archive-details.show').length;
+
+				if (currentVisibleArchive === 0) {
+					return true;
+				} else {
+					return false;
+				}
+			};
+			var toggleHideShowClasses = function(el, isTrue, subStringForHide, subStringForShow) {
+				var stringForHide = subStringForHide || 'hide';
+				var stringForShow = subStringForShow || 'show';
+
+				if (isTrue) {
+					el.classList.remove(stringForHide);
+					el.classList.add(stringForShow);
+				} else {
+					el.classList.remove(stringForShow);
+					el.classList.add(stringForHide);
+				}
+			};
+
+
+			// Jump To Item
+			var jumpToItems = document.querySelectorAll('.jump-item');
+            var innerList = document.querySelectorAll('.inner--list--hide')[0];
+            var archiveScrollBy = function(e) {
+				e.preventDefault();
+
+				var appId,
+					appArchive,
+					id,
+					archiveDetail,
+					archiveDetailCurrentLocation,
+					archiveDetailTop,
+					scrollToPosition,
+					anchor = e.target;
+
+                if (anchor.tagName === "SPAN") {
+                	anchor = anchor.parentElement;
+                }
+
+				var resultsSection, isHidden, archiveAnchor;
+
+				if (anchor.href) {
+					id = anchor.href.split('#')[1];
+					archiveDetail = document.getElementById(id);
+
+					if (hasClass(archiveDetail,'archive')) {
+						resultsSection = archiveDetail.querySelector('.archive-details');
+						isHidden = hasClass(resultsSection, 'hide');
+
+						if (isHidden) {
+							toggleHideShowClasses(resultsSection, isHidden);
+							archiveAnchor = resultsSection.previousElementSibling.querySelector('.archive-toggle');
+							archiveAnchor.text = "Close details";
+
+							// we want to the opposite of the function
+							// because it will return true if all closed
+							if (!checkForOpenArchiveDetails() && hasClass(collapseAnchor, 'disabled')) {
+								collapseAnchor.classList.remove('disabled');
+							}
+						}
+					} else if (archiveDetail.tagName === "H2" || archiveDetail.tagName === "H3" || archiveDetail.tagName === "H4" || hasClass(archiveDetail,'rule')) {
+						appId = id.split('_')[0];
+						appArchive = document.getElementById(appId);
+
+						if(appArchive != null) {
+							if (hasClass(appArchive,'archive')) {
+								resultsSection = appArchive.querySelector('.archive-details');
+								isHidden = hasClass(resultsSection, 'hide');
+	
+								if (isHidden) {
+									toggleHideShowClasses(resultsSection, isHidden);
+									archiveAnchor = resultsSection.previousElementSibling.querySelector('.archive-toggle');
+									archiveAnchor.text = "Close details";
+	
+									// we want to the opposite of the function
+									// because it will return true if all closed
+									if (!checkForOpenArchiveDetails() && hasClass(collapseAnchor, 'disabled')) {
+										collapseAnchor.classList.remove('disabled');
+									}
+								}
+							}
+						}
+
+					}
+					
+					if (browserVersion) {
+						archiveDetailCurrentLocation = archiveDetail.getBoundingClientRect();
+						archiveDetailTop = archiveDetailCurrentLocation.top;
+						scrollToPosition = archiveDetailTop - navHeight;
+						
+						window.scrollBy(0, scrollToPosition);
+					} else {
+						scrollToAnchor(id);
+					}
+                    
+                    innerList.style.display = 'none';
+                    
+                    setTimeout(function() {
+                    	innerList.removeAttribute('style');
+                    }, 1000);
+				}
+			};
+
+			for (var h = 0; h < jumpToItems.length; h++) {
+				var jumpToItem = jumpToItems[h];
+				jumpToItem.addEventListener('click', archiveScrollBy, false);
+			}
+
+			// Toggle Fixed/Non-Fixed Jump To
+			var scrolledElement = document.querySelector('.nav-wrapper');
+			var listener = function() {
+				var y = window.pageYOffset;
+				var container = document.getElementById("reportContainer")
+				if(container) {
+					var toBeFixed = y >= 490;
+					toggleHideShowClasses(scrolledElement, toBeFixed, 'na-fixed', 'fixed-in-bluemix');
+					var jumpBox = document.getElementsByClassName('jump-to-nav');
+					if(toBeFixed) {//align the jump to box to the right end of the js-rule-severity rather than using
+						//using a percent to alignment will always be accurate reqargless of the size of the window
+						jumpBox[0].style.right = document.getElementById("js-rule-severity").getBoundingClientRect().left+'px';
+					} else {
+						jumpBox[0].removeAttribute('style');
+					}
+				} else {
+					var scrolledElementClientRect = scrolledElement.getBoundingClientRect();
+					var top = scrolledElementClientRect.top;
+					var toBeFixed = y >= top;
+					toggleHideShowClasses(scrolledElement, toBeFixed, 'na-fixed', 'fixed');
+				}
+			};
+
+			window.addEventListener('scroll', listener, false);
+
+
+           // Toggle Hidden Rows in Connectivity Summary
+            var plus = '+', minus = '-';
+            var activeCell = document.querySelectorAll('.summary .col1summarymodule, .summary .col1summarymodule .status');
+            var summaryRows = document.querySelectorAll('.summary');
+            var hiddenRows = document.querySelectorAll('[id^="rowHiddenMod"]');
+            var toggleHiddenRows = function ( e ) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var target;
+                if ( e.target.tagName === 'SPAN' ) {
+                    target = e.target.parentElement.parentElement;
+                } else {
+                    target = e.target.parentElement;
+                }
+
+                for (var m = 0; m < summaryRows.length; m++) {
+                    if ( target === summaryRows[m] ) {
+                        var plusMinus;
+                        var hiddenRowIdx = m + 1;
+                        var targetClass = '[id^="rowHiddenMod' + hiddenRowIdx + '"]';
+                        var neededRows = document.querySelectorAll(targetClass);
+
+                        for (var n = 0; n < neededRows.length; n++) {
+                            var targetRow = neededRows[n];
+                            var isExpanded = hasClass(targetRow, 'visibleRow');
+
+                            toggleHideShowClasses(targetRow, !isExpanded, 'hiddenRow', 'visibleRow');
+
+                            if ( isExpanded ) {
+                                if ( n === 0 ) {
+                                    plusMinus = targetRow.previousElementSibling.querySelector('.status');
+                                    plusMinus.textContent = plus;
+                                }
+                            } else {
+                                if ( n === 0 ) {
+                                    plusMinus = targetRow.previousElementSibling.querySelector('.status');
+                                    plusMinus.textContent = minus;
+                                }
+
+                                var innerTDs = targetRow.querySelectorAll('.col2thru12 a');
+                                for (var p = 0; p < innerTDs.length; p++) {
+                                    var innerTD = innerTDs[p];
+
+                                    innerTD.addEventListener('click', showTable, false);
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            for (var l = 0; l < activeCell.length; l++) {
+                var cell = activeCell[l];
+                cell.addEventListener('click', toggleHiddenRows, false);
+            }
+
+            // Link Headers to Results from Connectivity Summary
+            var connectivitySummaryHeader = document.querySelectorAll('.connectivity-summary .results th a');
+            var showTableFromHeader = function ( e ) {
+                // use preventDefault to allow us to use window.scrollBy
+                e.preventDefault();
+
+                var id, table, resultsSection,
+                    target = e.target;
+
+                if ( target.href ) {
+                    id = target.href.split('#')[1];
+                    table = document.getElementById(id);
+ 
+                    if (browserVersion) {
+                        var navCurrentLocation = table.getBoundingClientRect();
+                        navCurrentLocation = navCurrentLocation.top - navHeight;
+                        window.scrollBy( 0, navCurrentLocation );
+                    } else {
+                        setTimeout( function ( ) {
+                            scrollToAnchor( id );
+                        }, 0);
+                    }
+                }
+            };
+
+            for (var tableHeaders = 0; tableHeaders < connectivitySummaryHeader.length; tableHeaders++) {
+                var tableHeader = connectivitySummaryHeader[tableHeaders];
+                tableHeader.addEventListener('click', showTableFromHeader, false);
+            }
+
+
+            // Link Integer to Results Tables from Connectivity Summary
+            var connectivitySummaryCell = document.querySelectorAll('.summary .col2thru12 a');
+            var showTable = function ( e ) {
+                // use preventDefault to allow us to use window.scrollBy
+                e.preventDefault();
+
+                var id, table, resultsSection,
+                    isHidden, target, anchor;
+
+                if ( e.target.tagName === 'A' ) {
+                    target = e.target;
+                } else {
+                    target = e.target.parentElement;
+                }
+
+                if ( target.href ) {
+                    id = target.href.split('#')[1];
+                    table = document.getElementById(id);
+                    resultsSection = table.parentElement.parentElement.parentElement;
+                    anchor = resultsSection.previousElementSibling.previousElementSibling.querySelector('.results-toggle');
+                    isHidden = hasClass(resultsSection, 'hide');
+
+                    if ( isHidden ) {
+                        toggleHideShowClasses(resultsSection, isHidden);
+
+                        anchor.text = "Close results";
+
+                        // we want to the opposite of the function
+                        // because it will return true if all closed
+                        if ( !checkForOpenFixesResults() && hasClass(collapseAnchor, 'disabled') ) {
+                            collapseAnchor.classList.remove('disabled');
+                        }
+                    }
+
+                    if (browserVersion) {
+                        var navCurrentLocation = table.getBoundingClientRect();
+                        navCurrentLocation = navCurrentLocation.top - navHeight;
+                        window.scrollBy(0, navCurrentLocation);
+                    } else {
+                        setTimeout( function ( ) {
+                            scrollToAnchor( id, true );
+                        }, 0);
+                    }
+                }
+            };
+
+            for (var o = 0; o < connectivitySummaryCell.length; o++) {
+                var anchorCell = connectivitySummaryCell[o];
+                anchorCell.addEventListener('click', showTable, false);
+            }
+
+            // Link Rule Help to Other Rule Helps
+            var ruleHelpInnerLinks = document.querySelectorAll('.Rule-Help__Inner-Link');
+            var showRuleHelp = function ( e ) {
+                // use preventDefault to allow us to use window.scrollBy
+                e.preventDefault();
+
+                var id, table, resultsSection,
+                    isHidden, isAdditionalHelp, target, anchor;
+
+                if ( e.target.href ) {
+                    id = e.target.href.split('#')[1];
+                    resultsSection = document.getElementById(id);
+                    isAdditionalHelp = hasClass(resultsSection, 'rule-additional-help');
+                    
+                    if (!isAdditionalHelp) {
+                        anchor = resultsSection.previousElementSibling.querySelector('.rule-help-toggle');
+                        isHidden = hasClass(resultsSection, 'hide');
+
+                        if ( isHidden ) {
+                            toggleHideShowClasses(resultsSection, isHidden);
+
+                            anchor.text = "Close rule help";
+
+                            // we want to the opposite of the function
+                            // because it will return true if all closed
+                            if ( !checkForOpenFixesResults() && hasClass(collapseAnchor, 'disabled') ) {
+                                collapseAnchor.classList.remove('disabled');
+                            }
+                        }
+                    }
+ 
+                    if (browserVersion) {
+                        var navCurrentLocation = resultsSection.getBoundingClientRect();
+                        navCurrentLocation = navCurrentLocation.top - navHeight;
+                        window.scrollBy( 0, navCurrentLocation );
+                    } else {
+                        scrollToAnchor( id );
+                    }
+                }
+            };
+
+            for (var innerLinks = 0; innerLinks < ruleHelpInnerLinks.length; innerLinks++) {
+                var innerLink = ruleHelpInnerLinks[innerLinks];
+                innerLink.addEventListener('click', showRuleHelp, false);
+            }
+
+			var showArchiveDetail = function(e) {
+				// use preventDefault to allow us to use window.scrollBy
+				e.preventDefault();
+
+				var id, table, resultsSection,
+					isHidden, target, anchor;
+
+				if (e.target.href) {
+					id = e.target.href.split('#')[1];
+					resultsSection = document.getElementById(id);
+					anchor = resultsSection.previousElementSibling.querySelector('.archive-toggle');
+					isHidden = hasClass(resultsSection, 'hide');
+
+					if (isHidden) {
+						toggleHideShowClasses(resultsSection, isHidden);
+
+						anchor.text = "Close details";
+
+						// we want to the opposite of the function
+						// because it will return true if all closed
+						if (!checkForOpenArchiveDetails() && hasClass(collapseAnchor, 'disabled')) {
+							collapseAnchor.classList.remove('disabled');
+						}
+					}
+
+					if (browserVersion) {
+						var navCurrentLocation = resultsSection.getBoundingClientRect();
+						navCurrentLocation = navCurrentLocation.top - navHeight;
+						window.scrollBy(0, navCurrentLocation);
+					} else {
+						scrollToAnchor(id);
+					}
+				}
+			};
+
+
+			// Expand | Collapse Toggle
+			var expandAnchor = document.getElementsByClassName('expand-all')[0];
+			var collapseAnchor = document.getElementsByClassName('collapse-all')[0];
+			var archiveListItem = document.getElementsByClassName('archive');
+			var archiveDetailContent = document.getElementsByClassName('archive-details');
+			var archiveAnchor = document.getElementsByClassName('archive-toggle');
+			var ruleListItem = document.getElementsByClassName('rule');
+            var ruleFixContent = document.getElementsByClassName('rule-fix');
+            var ruleResultContent = document.getElementsByClassName('rule-result');
+            var ruleFixAnchor = document.getElementsByClassName('rule-help-toggle');
+            var ruleResultAnchor = document.getElementsByClassName('results-toggle');
+			var toggleAllContents = function(e) {
+				var anchor = e.target,
+				toggleAnchor = anchor.parentElement.getElementsByClassName('disabled')[0],
+				isExpandAll = hasClass(anchor, 'expand-all'),
+				archiveListLength = archiveListItem.length,
+				archiveListLengthAt0 = archiveListLength - 1;
+				ruleListLength = ruleListItem.length,
+                ruleListLengthAt0 = ruleListLength - 1;
+
+				// prevent default behavior
+				e.preventDefault();
+
+				for (var arc = 0; arc < archiveListLength; arc++) {
+					var currentContent = archiveDetailContent[arc],
+						isCurrentContentHidden = hasClass(currentContent, 'hide'),
+						currentAnchor = archiveAnchor[arc],
+						toExpandAll = isExpandAll && isCurrentContentHidden,
+						toCollapseAll = !isExpandAll && !isCurrentContentHidden;
+
+					toggleHideShowClasses(currentContent, isExpandAll);
+
+					if (isExpandAll) {
+						currentAnchor.text = "Close details";
+
+						if (arc === archiveListLengthAt0) {
+							expandAnchor.classList.add('disabled');
+						}
+					} else {
+						currentAnchor.text = "Show details";
+
+						if (checkForOpenArchiveDetails()) {
+							collapseAnchor.classList.add('disabled');
+						}
+					}
+				}
+				
+				for (var rule = 0; rule < ruleListLength; rule++) {
+                    var currentFixContent = ruleFixContent[rule],
+                    currentResultContent = ruleResultContent[rule],
+                    isCurrentFixContentHidden = hasClass(currentFixContent, 'hide'),
+                    isCurrentResultContentHidden = hasClass(currentResultContent, 'hide'),
+                    currentFixAnchor = ruleFixAnchor[rule],
+                    currentResultAnchor = ruleResultAnchor[rule],
+                    toExpandAll = isExpandAll && isCurrentFixContentHidden || isExpandAll && isCurrentResultContentHidden,
+                    toCollapseAll = !isExpandAll && !isCurrentFixContentHidden || !isExpandAll && !isCurrentResultContentHidden;
+
+                    toggleHideShowClasses( currentFixContent, isExpandAll );
+                    toggleHideShowClasses( currentResultContent, isExpandAll );
+
+                    if ( isExpandAll ) {
+                        currentFixAnchor.text = "Close rule help";
+                        currentResultAnchor.text = "Close results";
+
+                        if ( rule === ruleListLengthAt0 ) {
+                            expandAnchor.classList.add('disabled');
+                        }
+                    } else {
+                        currentFixAnchor.text = "Show rule help";
+                        currentResultAnchor.text = "Show results";
+
+                        if ( checkForOpenFixesResults() ) {
+                            collapseAnchor.classList.add('disabled');
+                        }
+                    }
+                }
+
+				// disable other toggle anchor
+				if (toggleAnchor) {
+					toggleAnchor.classList.remove('disabled');
+					anchor.classList.add('disabled');
+				}
+			};
+			
+            expandAnchor.addEventListener('click', toggleAllContents);
+        	collapseAnchor.addEventListener('click', toggleAllContents);
+
+
+			// Toggle Archive Detail Sections
+			var toggleArchiveDetailSections = function(e) {
+				e.preventDefault();
+
+				var obj = {
+						className: "archive-details",
+						closeArchiveDetail: "Close details",
+						showArchiveDetail: "Show details"
+					};
+
+				var el = e.target.parentNode.parentNode.parentNode.getElementsByClassName(obj.className)[0];
+				var isHidden = hasClass(el, 'hide');
+
+				toggleHideShowClasses(el, isHidden);
+
+				if (isHidden) {
+					e.target.text = obj.closeArchiveDetail;
+
+					// removed disabled on collapse anchor
+					if (!checkForOpenArchiveDetails() && hasClass(collapseAnchor, 'disabled')) {
+						collapseAnchor.classList.remove('disabled');
+					}
+					var currentHiddenArchive = document.querySelectorAll('.archive-details.hide').length;
+					if(currentHiddenArchive===0) {
+						expandAnchor.classList.add('disabled');
+					}
+				} else {
+					e.target.text = obj.showArchiveDetail;
+
+					// Hide nested archive detail sections also
+					var nestedArchiveAnchors = el.getElementsByClassName('recommendation-toggle');
+					for (var i=0; i < nestedArchiveAnchors.length; i++) {
+						closeNestedArchiveDetailSections(nestedArchiveAnchors[i]);
+					}
+
+					// removed disabled on expand anchor
+					if (hasClass(expandAnchor, 'disabled')) {
+						expandAnchor.classList.remove('disabled');
+					}
+
+					if (checkForOpenArchiveDetails()) {
+						collapseAnchor.classList.add('disabled');
+					}
+				}
+			};
+
+			var closeNestedArchiveDetailSections = function(targetElement) {
+				var obj = {
+						className: "archive-details",
+						closeArchiveDetail: "Close details",
+						showArchiveDetail: "Show details"
+					};
+
+				var el = targetElement.parentNode.parentNode.parentNode.getElementsByClassName(obj.className)[0];
+
+				var isHidden = hasClass(el, 'hide');
+
+				if (!isHidden) {
+					toggleHideShowClasses(el, isHidden);
+					targetElement.text = obj.showArchiveDetail;
+
+					// Hide nested archive detail sections also
+					var nestedArchiveAnchors = el.getElementsByClassName('recommendation-toggle');
+					for (var i=0; i < nestedArchiveAnchors.length; i++) {
+						closeNestedArchiveDetailSections(nestedArchiveAnchors[i]);
+					}
+				}
+
+			};
+
+			// Toggle Archive Details
+			for (var i = 0; i < recommendationItems.length; i++) {
+				var anchorArchive = recommendationItems[i];
+				anchorArchive.addEventListener('click', function(e) {
+					toggleArchiveDetailSections(e);
+				}, false);
+			}
+
+           // Toggle Individual Rule Help/Results Sections
+            var toggleResultsbyRuleSections =  function ( e, obj ) {
+                e.preventDefault();
+
+                var el = e.target.parentNode.parentNode.parentNode.getElementsByClassName(obj.className)[0];
+                var isHidden = hasClass(el, 'hide');
+
+                toggleHideShowClasses(el, isHidden);
+
+                if ( isHidden ) {
+                    e.target.text = obj.closeRuleHelp;
+
+                    // removed disabled on collapse anchor
+                    if ( !checkForOpenFixesResults() && hasClass(collapseAnchor, 'disabled') ) {
+                        collapseAnchor.classList.remove('disabled');
+                    }
+                } else {
+                    e.target.text = obj.showRuleHelp;
+
+                    // removed disabled on expand anchor
+                    if ( hasClass(expandAnchor, 'disabled') ) {
+                        expandAnchor.classList.remove('disabled');
+                    }
+
+                    if ( checkForOpenFixesResults() ) {
+                        collapseAnchor.classList.add('disabled');
+                    }
+                }
+            };
+
+            // Toggle Rule Help
+            for (var i = 0; i < recommendationHelp.length; i++) {
+                var anchorRuleFix = recommendationHelp[i];
+                anchorRuleFix.addEventListener('click', function ( e ) {
+                    var obj = {
+                        className: "rule-fix",
+                        closeRuleHelp: "Close rule help",
+                        showRuleHelp: "Show rule help"
+                    };
+
+                    toggleResultsbyRuleSections(e, obj);
+                }, false);
+            }
+
+            // Toggle Results
+            for (var j = 0; j < recommendationDetails.length; j++) {
+                var anchorResults = recommendationDetails[j];
+                anchorResults.addEventListener('click', function ( e ) {
+                    var obj = {
+                        className: "rule-result",
+                        closeRuleHelp: "Close results",
+                        showRuleHelp: "Show results"
+                    };
+
+                    toggleResultsbyRuleSections(e, obj);
+                }, false);
+            }
+
+
+            // Toggle Rules Analyzed
+            var readMoreLessAnchors = document.querySelectorAll('.read-more, .read-less, .detailed-read-more-button');
+            var analyzedDetailSection = document.querySelector('#js-rules-analyzed-detail');
+            var toggleAnalyzedDetailSection = function ( e ) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var expandedButton = document.querySelector('.detailed-read-more-button'),
+                    isExpandedReadMore = hasClass(e.target, 'detailed-read-more-button'),
+                    isReadMore = hasClass(analyzedDetailSection, 'read-less'),
+                    currentLink = document.querySelector('.read-more'),
+                    siblingLink = document.querySelector('.read-less');
+
+                if (!isReadMore) {
+                    currentLink = document.querySelector('.read-less');
+                    siblingLink = document.querySelector('.read-more');
+                }
+
+                if ( isExpandedReadMore && isReadMore ) {
+                    e.target.text ="Show less";
+                    e.target.title ="Show less";
+                }
+
+                if ( !isExpandedReadMore && isReadMore ) { 
+                	expandedButton.text = "Show less"; 
+                	expandedButton.title = "Show less";
+                }
+
+                if ( isExpandedReadMore && !isReadMore ) {
+                    e.target.text ="Show more";
+                    e.target.title ="Show more";
+                }
+
+                if ( !isExpandedReadMore && !isReadMore ) { 
+                	expandedButton.text = "Show more"; 
+                	expandedButton.title = "Show more";
+                }
+
+                toggleHideShowClasses(analyzedDetailSection, isReadMore, 'read-less', 'read-more');
+                currentLink.classList.add('disabled');
+                siblingLink.classList.remove('disabled');
+            };
+
+            for (var k = 0; k < readMoreLessAnchors.length; k++) {
+                var readMoreLessAnchor = readMoreLessAnchors[k];
+                var rulesAnalyzedRoot = document.getElementById('js-rules-analyzed-detail');
+
+                if (readMoreLessAnchor !== rulesAnalyzedRoot) {
+                    readMoreLessAnchor.addEventListener('click', toggleAnalyzedDetailSection);
+                }
+            }
+
+		}, false);
+		
+</script> 
+</body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ibm-portal-topology xmlns="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-topology.xsd" xmlns:navigation="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-navigation.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:base="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd" xsi:schemaLocation="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-topology ibm-portal-topology.xsd">
+
+    <application-definition version="6.1.0.0" appID="com.ibm.websphere.product">
+        <title>
+            <base:nls-string lang="en">WebSphere Application Server</base:nls-string>
+        </title>
+        <component-tree uniqueName="com.ibm.websphere.product.tree">
+            <portlet-definition uniqueName="com.ibm.websphere.product.appElementDefinition.A">
+                <title>
+                    <base:nls-ref key="wasportlet.page.title" locationName="classes/nls/PortletResources"/>
+                </title>
+                <resource-link name="WASAboutPortlet" portletApplication="com.ibm.websphere.product" type="static"/>
+            </portlet-definition>  
+            <portlet-entity uniqueName="com.ibm.websphere.product.appElement.A" portletDefinitionRef="com.ibm.websphere.product.appElementDefinition.A">
+                <title>
+                    <base:nls-ref key="wasportlet.portlet.title" locationName="classes/nls/PortletResources"/>
+                </title>
+            </portlet-entity>
+            
+        </component-tree>
+        <layout-tree>
+            <layout-element uniqueName="com.ibm.websphere.product.layoutElement.A">
+                <title>
+                    <base:nls-ref key="wasportlet.page.title" locationName="classes/nls/PortletResources"/>
+                </title>
+                <simple-container orientation="row" uniqueName="com.ibm.websphere.product.container.A">
+                    <window uniqueName="com.ibm.websphere.product.window.A">
+                        <title>
+                            <base:nls-ref key="wasportlet.portlet.title" locationName="classes/nls/PortletResources"/>
+                        </title> 
+                        <component-definition-ref>com.ibm.websphere.product.appElement.A</component-definition-ref>
+                    </window>
+                </simple-container>
+            </layout-element>
+        </layout-tree>
+        
+        <navigation-element uniqueName="com.ibm.wim.management.navigationElement.users"/>
+        <navigation-element uniqueName="com.ibm.wim.management.navigationElement.groups"/>
+
+    </application-definition>
+    <about-page>com.ibm.websphere.product.layoutElement.A</about-page>
+</ibm-portal-topology>

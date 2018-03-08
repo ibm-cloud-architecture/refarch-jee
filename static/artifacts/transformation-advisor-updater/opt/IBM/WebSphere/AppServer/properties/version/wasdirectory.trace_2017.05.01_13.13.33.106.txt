@@ -1,0 +1,2 @@
+May 1, 2017 1:13:33 PM com.ibm.websphere.product.logger.WASDirectoryLogger <init>
+INFO: Logger for install root: /opt/IBM/WebSphere/AppServer, is initialized successfully.

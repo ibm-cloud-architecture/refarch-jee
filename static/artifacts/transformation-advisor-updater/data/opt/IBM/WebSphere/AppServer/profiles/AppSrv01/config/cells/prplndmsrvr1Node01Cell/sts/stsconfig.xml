@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stsconfig:STSConfigGroup
+	xmlns:stsconfig="http://www.ibm.com/xmlns/prod/websphere/200608/securitytokenservice"
+	Name="STSConfigGroup">
+	<stsconfig:STSConfigGroup Name="TrustServiceProperties">
+		<stsconfig:STSProperty Name="policySetCacheTimeoutMinutes" Value="120" Type="undeletable" />
+	</stsconfig:STSConfigGroup>
+	<stsconfig:STSConfigGroup Name="PolicySet">
+		<stsconfig:STSConfigGroup Name="Schemas">
+			<stsconfig:STSProperty Name="wst10Draft"
+				Value="http://schemas.xmlsoap.org/ws/2005/02/trust" />
+			<stsconfig:STSProperty Name="wsc10Draft"
+				Value="http://schemas.xmlsoap.org/ws/2005/02/sc/sct" />
+			<stsconfig:STSProperty Name="wst13"
+				Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512" />
+			<stsconfig:STSProperty Name="wsc13"
+				Value="http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct" />
+		</stsconfig:STSConfigGroup>
+	</stsconfig:STSConfigGroup>
+
+	<stsconfig:STSConfigGroup Name="MessageReceiver">
+		<stsconfig:STSConfigGroup
+			Name="http://schemas.xmlsoap.org/ws/2005/02/trust">
+			<stsconfig:STSConfigGroup Name="Action">
+				<stsconfig:STSProperty Name="issue" Type="RST"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Issue" />
+				<stsconfig:STSProperty Name="cancel" Type="RST"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Cancel" />
+				<stsconfig:STSProperty Name="renew" Type="RST"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Renew" />
+				<stsconfig:STSProperty Name="validate" Type="RST"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Validate" />
+				<stsconfig:STSProperty Name="issue" Type="RSTR"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Issue" />
+				<stsconfig:STSProperty Name="cancel" Type="RSTR"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Cancel" />
+				<stsconfig:STSProperty Name="renew" Type="RSTR"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Renew" />
+				<stsconfig:STSProperty Name="validate" Type="RSTR"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="RequestType">
+				<stsconfig:STSProperty Name="issue"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/Issue" />
+				<stsconfig:STSProperty Name="cancel"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/Cancel" />
+				<stsconfig:STSProperty Name="renew"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/Renew" />
+				<stsconfig:STSProperty Name="validate"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/Validate" />
+			</stsconfig:STSConfigGroup>
+		</stsconfig:STSConfigGroup>
+		<stsconfig:STSConfigGroup
+			Name="http://schemas.xmlsoap.org/ws/2005/02/sc/sct">
+			<stsconfig:STSConfigGroup Name="Action">
+				<stsconfig:STSProperty Name="issue" Type="RST"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT" />
+				<stsconfig:STSProperty Name="cancel" Type="RST"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT/Cancel" />
+				<stsconfig:STSProperty Name="renew" Type="RST"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT/Renew" />
+				<stsconfig:STSProperty Name="issue" Type="RSTR"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT" />
+				<stsconfig:STSProperty Name="cancel" Type="RSTR"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT/Cancel" />
+				<stsconfig:STSProperty Name="renew" Type="RSTR"
+					Value="http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT/Renew" />
+			</stsconfig:STSConfigGroup>
+		</stsconfig:STSConfigGroup>
+		<stsconfig:STSConfigGroup
+                        Name="http://docs.oasis-open.org/ws-sx/ws-trust/200512">
+			<stsconfig:STSConfigGroup Name="Action">
+				<stsconfig:STSProperty Name="issue" Type="RST"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Issue" />
+				<stsconfig:STSProperty Name="cancel" Type="RST"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Cancel" />
+				<stsconfig:STSProperty Name="renew" Type="RST"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Renew" />
+				<stsconfig:STSProperty Name="validate" Type="RST"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Validate" />
+				<stsconfig:STSProperty Name="issue" Type="RSTR"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTRC/IssueFinal" />
+				<stsconfig:STSProperty Name="cancel" Type="RSTR"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/CancelFinal" />
+				<stsconfig:STSProperty Name="renew" Type="RSTR"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/RenewFinal" />
+				<stsconfig:STSProperty Name="validate" Type="RSTR"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/ValidateFinal" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="RequestType">
+				<stsconfig:STSProperty Name="issue"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/Issue" />
+				<stsconfig:STSProperty Name="cancel"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/Cancel" />
+				<stsconfig:STSProperty Name="renew"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/Renew" />
+				<stsconfig:STSProperty Name="validate"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/Validate" />
+				<stsconfig:STSProperty Name="batchissue"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/BatchIssue" />
+				<stsconfig:STSProperty Name="batchcancel"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/BatchCancel" />
+				<stsconfig:STSProperty Name="batchrenew"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/BatchRenew" />
+				<stsconfig:STSProperty Name="batchvalidate"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/BatchValidate" />
+			</stsconfig:STSConfigGroup>
+		</stsconfig:STSConfigGroup>
+		<stsconfig:STSConfigGroup
+			Name="http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct">
+			<stsconfig:STSConfigGroup Name="Action">
+				<stsconfig:STSProperty Name="issue" Type="RST"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/SCT" />
+				<stsconfig:STSProperty Name="cancel" Type="RST"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/SCT/Cancel" />
+				<stsconfig:STSProperty Name="renew" Type="RST"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/SCT/Renew" />
+				<stsconfig:STSProperty Name="issue" Type="RSTR"
+					Value=" http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/SCT" />
+				<stsconfig:STSProperty Name="cancel" Type="RSTR"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/SCT/Cancel" />
+				<stsconfig:STSProperty Name="renew" Type="RSTR"
+					Value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/SCT/Renew" />
+			</stsconfig:STSConfigGroup>
+		</stsconfig:STSConfigGroup>
+	</stsconfig:STSConfigGroup>
+	<stsconfig:STSConfigGroup Name="STSMapping">
+		<stsconfig:STSConfigGroup Name="Default">
+			<stsconfig:STSConfigGroup Name="Issue">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|issue,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|issue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Cancel">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|cancel,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|cancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Renew">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|renew,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|renew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Validate">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|validate,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="IssueActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|issue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="CancelActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|cancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="RenewActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|renew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="ValidateActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchIssue">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|issue,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchissue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchCancel">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|cancel,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchcancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchRenew">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|renew,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchrenew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchValidate">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|validate,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchvalidate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchIssueActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchissue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchCancelActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchcancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchRenewActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchrenew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchValidateActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchvalidate" />
+			</stsconfig:STSConfigGroup>
+		</stsconfig:STSConfigGroup>
+		<stsconfig:STSConfigGroup Name="Security Context Token">
+			<stsconfig:STSConfigGroup Name="Issue">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|Action|issue,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|issue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Cancel">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|Action|cancel,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|cancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Renew">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|Action|renew,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|renew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Validate">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|Action|validate,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="IssueActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|issue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="CancelActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|cancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="RenewActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|renew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="ValidateActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Issue">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/sc/sct|Action|issue,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|issue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Cancel">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/sc/sct|Action|cancel,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|cancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Renew">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/sc/sct|Action|renew,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|renew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Validate">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|Action|validate,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="IssueActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|issue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="CancelActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|cancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="RenewActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|renew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="ValidateActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://schemas.xmlsoap.org/ws/2005/02/trust|RequestType|validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Issue">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|issue,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|issue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Cancel">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|cancel,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|cancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Renew">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|renew,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|renew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Validate">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|validate,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="IssueActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|issue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="CancelActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|cancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="RenewActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|renew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="ValidateActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchIssue">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|issue,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchissue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchCancel">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|cancel,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchcancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchRenew">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|renew,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchrenew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchValidate">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|validate,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchvalidate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchIssueActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchissue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchCancelActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchcancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchRenewActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchrenew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchValidateActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchvalidate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Issue">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct|Action|issue,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|issue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Cancel">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct|Action|cancel,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|cancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Renew">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct|Action|renew,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|renew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="Validate">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|validate,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="IssueActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|issue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="CancelActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|cancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="RenewActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|renew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="ValidateActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|validate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchIssue">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct|Action|issue,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchissue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchCancel">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct|Action|cancel,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchcancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchRenew">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct|Action|renew,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchrenew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchValidate">
+				<stsconfig:STSProperty Name="Action" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|Action|validate,RST" />
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchvalidate" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchIssueActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchissue" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchCancelActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchcancel" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchRenewActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchrenew" />
+			</stsconfig:STSConfigGroup>
+			<stsconfig:STSConfigGroup Name="BatchValidateActionNull">
+				<stsconfig:STSProperty Name="TokenType" Type="EMK" Value="$URI" />
+				<stsconfig:STSProperty Name="RequestType" Type="EMK"
+					Value="#MessageReceiver|http://docs.oasis-open.org/ws-sx/ws-trust/200512|RequestType|batchvalidate" />
+			</stsconfig:STSConfigGroup>
+		</stsconfig:STSConfigGroup>
+	</stsconfig:STSConfigGroup>
+</stsconfig:STSConfigGroup>

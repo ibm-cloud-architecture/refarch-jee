@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--HTTP server plugin config file for the cell prplndmsrvr1Cell01 generated on 2017.05.01 at 01:54:05 PM CDT-->
+<Config ASDisableNagle="false" AcceptAllContent="false" AppServerPortPreference="HostHeader" ChunkedResponse="false" FIPSEnable="false" FailoverToNext="false" HTTPMaxHeaders="300" IISDisableFlushFlag="false" IISDisableNagle="false" IISPluginPriority="High" IgnoreDNSFailures="false" KillWebServerStartUpOnParseErr="false" MarkBusyDown="false" OS400ConvertQueryStringToJobCCSID="false" RefreshInterval="60" ResponseChunkSize="64" SSLConsolidate="true" TrustedProxyEnable="false" VHostMatchingCompat="false">
+   <Log LogLevel="Error" Name="/opt/IBM/WebSphere/Plugins/logs/http_plugin.log"/>
+   <Property Name="ESIEnable" Value="true"/>
+   <Property Name="ESIMaxCacheSize" Value="1024"/>
+   <Property Name="ESIInvalidationMonitor" Value="false"/>
+   <Property Name="ESIEnableToPassCookies" Value="false"/>
+   <Property Name="ESICacheidFull" Value="false"/>
+   <Property Name="PluginInstallRoot" Value="/opt/IBM/WebSphere/Plugins/"/>
+   <ServerCluster CloneSeparatorChange="false" GetDWLMTable="false" IgnoreAffinityRequests="true" LoadBalance="Round Robin" Name="dmgr_prplndmsrvr1CellManager01_Cluster" PostBufferSize="64" PostSizeLimit="-1" RemoveSpecialHeaders="true" RetryInterval="60" ServerIOTimeoutRetry="-1">
+      <Server ConnectTimeout="0" ExtendedHandshake="false" MaxConnections="-1" Name="prplndmsrvr1CellManager01_dmgr" ServerIOTimeout="0" WaitForContinue="false"/>
+      <PrimaryServers>
+         <Server Name="prplndmsrvr1CellManager01_dmgr"/>
+      </PrimaryServers>
+   </ServerCluster>
+   <RequestMetrics armEnabled="false" loggingEnabled="false" rmEnabled="false" traceLevel="HOPS">
+      <filters enable="false" type="URI">
+         <filterValues enable="false" value="/snoop"/>
+         <filterValues enable="false" value="/hitcount"/>
+      </filters>
+      <filters enable="false" type="SOURCE_IP">
+         <filterValues enable="false" value="255.255.255.255"/>
+         <filterValues enable="false" value="254.254.254.254"/>
+      </filters>
+      <filters enable="false" type="JMS">
+         <filterValues enable="false" value="destination=aaa"/>
+      </filters>
+      <filters enable="false" type="WEB_SERVICES">
+         <filterValues enable="false" value="wsdlPort=aaa:op=bbb:nameSpace=ccc"/>
+      </filters>
+   </RequestMetrics>
+</Config>

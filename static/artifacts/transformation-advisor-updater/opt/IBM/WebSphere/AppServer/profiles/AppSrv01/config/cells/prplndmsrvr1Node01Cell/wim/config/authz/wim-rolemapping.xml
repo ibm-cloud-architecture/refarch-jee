@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  Begin Copyright
+
+  Licensed Materials - Property of IBM
+
+  Virtual Member Manager
+
+  (C) Copyright IBM Corp. 2005 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+  %Z% %W% %I% %E% %U%
+
+  End Copyright
+-->
+<PolicySet
+    PolicyCombiningAlgId="urn:oasis:names:tc:1.0:policy-combining-algorithm:first-applicable"
+    PolicySetId="urn:ibm:xacml-java-security:role-mapping:WIM Policy_role"
+    xmlns:pol="urn:com:ibm:sec:authz:policy-internal" xmlns="urn:oasis:names:tc:xacml:1.0:policy">
+    <Target>
+        <Subjects>
+            <AnySubject/>
+        </Subjects>
+        <Resources>
+            <AnyResource/>
+        </Resources>
+        <Actions>
+            <AnyAction/>
+        </Actions>
+    </Target>
+    <Policy
+        RuleCombiningAlgId="urn:ibm:xacml-java-security:rule-combining-algorithm:most-specific-block-overrides" PolicyId="urn:ibm:xacml-java-security:role-mapping:WIM Policy_role:mappings">
+        <Target>
+            <Subjects>
+                <AnySubject/>
+            </Subjects>
+            <Resources>
+                <AnyResource/>
+            </Resources>
+            <Actions>
+                <AnyAction/>
+            </Actions>
+        </Target>
+        <Rule RuleId="Rule1" Effect="Permit">
+            <Target>
+                <Subjects>
+                    <Subject>
+                        <SubjectMatch MatchId="urn:ibm:xacml-java-security:java.security.Principal:equals">
+                            <AttributeValue DataType="urn:ibm:xacml-java-security:data-type:java.security.Principal">
+                                <AttributeValue DataType="com.ibm.sec.auth.subjectx.VirtualPrincipal">
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="Name">AllAuthenticatedUsers</AttributeValue>
+                                </AttributeValue>
+                            </AttributeValue>
+                            <SubjectAttributeDesignator
+                                AttributeId="urn:oasis:names:tc:1.0:subject:subject-id" DataType="urn:ibm:xacml-java-security:data-type:java.security.Principal"/>
+                        </SubjectMatch>
+                    </Subject>
+                </Subjects>
+                <Resources>
+                    <AnyResource/>
+                </Resources>
+                <Actions>
+                    <AnyAction/>
+                </Actions>
+            </Target>
+            <Condition FunctionId="urn:ibm:xacml-java-security:com.ibm.sec.authz.jaccx.role.RoleCondition:match">
+                <Apply FunctionId="urn:ibm:xacml-java-security:com.ibm.sec.authz.jaccx.role.RoleCondition:bag">
+                    <AttributeValue DataType="urn:ibm:xacml-java-security:data-type:com.ibm.sec.authz.jaccx.role.RoleCondition">
+                        <AttributeValue DataType="com.ibm.sec.authz.jaccx.role.ScopedRoleAssignmentCondition">
+                            <AttributeValue
+                                DataType="http://www.w3.org/2001/XMLSchema#string" Name="Role">Account-Owner-Role</AttributeValue>
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:com.ibm.sec.authz.jaccx.resource.ResourceScope" Name="ResourceScope">
+                                <AttributeValue DataType="com.ibm.sec.authz.jaccx.resource.TreeBasedResourceScope">
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#integer" Name="PropagationRule">4</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="PropagationRuleStr">SELF_AND_DESCENDANTS</AttributeValue>
+                                    <AttributeValue
+                                    DataType="urn:ibm:xacml-java-security:data-type:com.ibm.sec.authz.jaccx.resource.Resource" Name="RootResource">
+                                    <AttributeValue DataType="com.ibm.sec.authz.jaccx.resource.TreeBasedResource">
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="Type"/>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="ID">/root</AttributeValue>
+                                    </AttributeValue>
+                                    </AttributeValue>
+                                </AttributeValue>
+                            </AttributeValue>
+                        </AttributeValue>
+                    </AttributeValue>
+                </Apply>
+            </Condition>
+        </Rule>
+    </Policy>
+</PolicySet>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions
+	targetNamespace="http://docs.oasis-open.org/wsdm/muws2-2.wsdl"
+	xmlns:tns="http://docs.oasis-open.org/wsdm/muws2-2.wsdl"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdl-soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsa="http://www.w3.org/2005/08/addressing"
+	xmlns:muws-p2-wsdl="http://docs.oasis-open.org/wsdm/muws1-2.wsdl"
+	xmlns:muws2="http://docs.oasis-open.org/wsdm/muws2-2.xsd"
+	xmlns:muws1="http://docs.oasis-open.org/wsdm/muws1-2.xsd"
+	xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
+	xmlns:wsrf-r="http://docs.oasis-open.org/wsrf/r-2"
+	xmlns:wsrf-rl="http://docs.oasis-open.org/wsrf/rl-2"
+	xmlns:wsrf-bf="http://docs.oasis-open.org/wsrf/bf-2"
+	xmlns:wsrf-rp="http://docs.oasis-open.org/wsrf/rp-2"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" name="muws2-2">
+
+	<types>
+		<xs:schema elementFormDefault="qualified"
+			targetNamespace="http://docs.oasis-open.org/wsdm/muws2-2.wsdl">
+			<xs:import
+				namespace="http://docs.oasis-open.org/wsdm/muws2-2.xsd"
+				schemaLocation="WSDM-MUWS-Part2-1_1.xsd" />
+
+			<xs:import
+				namespace="http://docs.oasis-open.org/wsdm/muws1-2.xsd"
+				schemaLocation="WSDM-MUWS-Part1-1_1.xsd" />
+		</xs:schema>
+
+			<!-- Added for the RelationshipResource portType -->
+			<xs:schema elementFormDefault="qualified"
+				targetNamespace="http://schemas.xmlsoap.org/ws/2004/09/mex">
+				<xs:include schemaLocation="WS-MetadataExchange-2004_09.xsd" />
+			</xs:schema>
+			<xs:schema elementFormDefault="qualified"
+				targetNamespace="http://docs.oasis-open.org/wsrf/rp-2">
+				<xs:include schemaLocation="WS-ResourceProperties-1_2.xsd" />
+			</xs:schema>
+			<xs:schema elementFormDefault="qualified"
+				targetNamespace="http://docs.oasis-open.org/wsrf/r-2">
+				<xs:include schemaLocation="WS-Resource-1_2.xsd" />
+			</xs:schema>
+			
+	</types>
+
+
+	<message name="QueryRelationshipsByTypeRequest">
+		<part name="body" element="muws2:QueryRelationshipsByType" />
+	</message>
+
+	<message name="QueryRelationshipsByTypeResponse">
+		<part name="body"
+			element="muws2:QueryRelationshipsByTypeResponse" />
+	</message>
+
+	<!-- Added for the RelationshipResource portType -->
+
+	<wsdl:message name="GetMetadataMsg">
+		<wsdl:part name="GetMetadataMsg" element="wsx:GetMetadata" />
+	</wsdl:message>
+	<wsdl:message name="GetMetadataResponseMsg">
+		<wsdl:part name="GetMetadataResponseMsg" element="wsx:Metadata" />
+	</wsdl:message>
+	<wsdl:message name="ResourceUnknownFault">
+		<wsdl:part name="ResourceUnknownFault"
+			element="wsrf-r:ResourceUnknownFault" />
+	</wsdl:message>
+	<wsdl:message name="ResourceUnavailableFault">
+		<wsdl:part name="ResourceUnavailableFault"
+			element="wsrf-r:ResourceUnavailableFault" />
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyDocumentRequest">
+		<wsdl:part name="GetResourcePropertyDocumentRequest"
+			element="wsrf-rp:GetResourcePropertyDocument" />
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyDocumentResponse">
+		<wsdl:part name="GetResourcePropertyDocumentResponse"
+			element="wsrf-rp:GetResourcePropertyDocumentResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyRequest">
+		<wsdl:part name="GetResourcePropertyRequest"
+			element="wsrf-rp:GetResourceProperty" />
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyResponse">
+		<wsdl:part name="GetResourcePropertyResponse"
+			element="wsrf-rp:GetResourcePropertyResponse" />
+	</wsdl:message>
+	<wsdl:message name="InvalidResourcePropertyQNameFault">
+		<wsdl:part name="InvalidResourcePropertyQNameFault"
+			element="wsrf-rp:InvalidResourcePropertyQNameFault" />
+	</wsdl:message>
+	<wsdl:message name="GetMultipleResourcePropertiesRequest">
+		<wsdl:part name="GetMultipleResourcePropertiesRequest"
+			element="wsrf-rp:GetMultipleResourceProperties" />
+	</wsdl:message>
+	<wsdl:message name="GetMultipleResourcePropertiesResponse">
+		<wsdl:part name="GetMultipleResourcePropertiesResponse"
+			element="wsrf-rp:GetMultipleResourcePropertiesResponse" />
+	</wsdl:message>
+
+	<portType name="RelationshipPortType"
+		wsrf-rp:ResourceProperties="muws2:RelationshipType">
+		<wsdl:operation name="GetMetadata">
+			<wsdl:input
+				wsa:Action="http://schemas.xmlsoap.org/ws/2004/09/mex/GetMetadata"
+				name="GetMetadataMsg" message="tns:GetMetadataMsg" />
+			<wsdl:output
+				wsa:Action="http://schemas.xmlsoap.org/ws/2004/09/mex/GetMetadataResponse"
+				name="GetMetadataResponseMsg" message="tns:GetMetadataResponseMsg" />
+		</wsdl:operation>
+		<wsdl:operation name="GetResourcePropertyDocument">
+			<wsdl:input
+				wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourcePropertyDocument/GetResourcePropertyDocumentRequest"
+				name="GetResourcePropertyDocumentRequest"
+				message="tns:GetResourcePropertyDocumentRequest" />
+			<wsdl:output
+				wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourcePropertyDocument/GetResourcePropertyDocumentResponse"
+				name="GetResourcePropertyDocumentResponse"
+				message="tns:GetResourcePropertyDocumentResponse" />
+			<wsdl:fault name="ResourceUnknownFault"
+				message="tns:ResourceUnknownFault" />
+			<wsdl:fault name="ResourceUnavailableFault"
+				message="tns:ResourceUnavailableFault" />
+		</wsdl:operation>
+		<wsdl:operation name="GetResourceProperty">
+			<wsdl:input
+				wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourceProperty/GetResourcePropertyRequest"
+				name="GetResourcePropertyRequest"
+				message="tns:GetResourcePropertyRequest" />
+			<wsdl:output
+				wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourceProperty/GetResourcePropertyResponse"
+				name="GetResourcePropertyResponse"
+				message="tns:GetResourcePropertyResponse" />
+			<wsdl:fault name="ResourceUnknownFault"
+				message="tns:ResourceUnknownFault" />
+			<wsdl:fault name="ResourceUnavailableFault"
+				message="tns:ResourceUnavailableFault" />
+			<wsdl:fault name="InvalidResourcePropertyQNameFault"
+				message="tns:InvalidResourcePropertyQNameFault" />
+		</wsdl:operation>
+		<wsdl:operation name="GetMultipleResourceProperties">
+			<wsdl:input
+				wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetMultipleResourceProperties/GetMultipleResourcePropertiesRequest"
+				name="GetMultipleResourcePropertiesRequest"
+				message="tns:GetMultipleResourcePropertiesRequest" />
+			<wsdl:output
+				wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetMultipleResourceProperties/GetMultipleResourcePropertiesResponse"
+				name="GetMultipleResourcePropertiesResponse"
+				message="tns:GetMultipleResourcePropertiesResponse" />
+			<wsdl:fault name="ResourceUnknownFault"
+				message="tns:ResourceUnknownFault" />
+			<wsdl:fault name="ResourceUnavailableFault"
+				message="tns:ResourceUnavailableFault" />
+			<wsdl:fault name="InvalidResourcePropertyQNameFault"
+				message="tns:InvalidResourcePropertyQNameFault" />
+		</wsdl:operation>
+	</portType>
+
+</definitions>
+
+<!--   
+	WSDL COPY Material
+	Copy and paste the operation specification below into a portType definition of the WSDL documents of a web service.
+	
+	NOTE: You must import the MUWS WSDL (wsdmmuws2-2).
+	
+	<operation name="QueryRelationshipsByType">
+	<input name="QueryRelationshipsByTypeRequest"
+	message="muws-p2-wsdl:QueryRelationshipsByTypeRequest"/>
+	<output name="QueryRelationshipsByTypeResponse"
+	message="muws-p2-wsdl:QueryRelationshipsByTypeResponse"/>
+	</operation>
+	
+-->

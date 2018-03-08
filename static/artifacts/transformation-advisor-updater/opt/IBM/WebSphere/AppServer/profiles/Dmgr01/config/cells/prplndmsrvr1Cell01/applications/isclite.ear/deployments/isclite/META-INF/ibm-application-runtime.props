@@ -1,0 +1,8 @@
+#Created by WebSphere.  Do not modify.
+#Mon Jun 16 11:35:44 CDT 2008
+com.ibm.ws.runtime.components.isclite.war=WebSphere\:specname\=WS_WebContainer
+com.ibm.ws.runtime.components.WIMPortlet.war=WebSphere\:specname\=WS_WebContainer+WebSphere\:specname\=WS_PortletContainer
+com.ibm.ws.runtime.components.adminredirector.war=WebSphere\:specname\=WS_WebContainer
+com.ibm.ws.runtime.components.ISCAdminPortlet.war=WebSphere\:specname\=WS_WebContainer+WebSphere\:specname\=WS_PortletContainer
+com.ibm.ws.runtime.components.iehs.war=WebSphere\:specname\=WS_WebContainer
+com.ibm.ws.runtime.components.wasportlet.war=WebSphere\:specname\=WS_WebContainer+WebSphere\:specname\=WS_PortletContainer

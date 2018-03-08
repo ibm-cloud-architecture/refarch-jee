@@ -1,0 +1,7 @@
+<Fix>
+	<Type>Fix Pack</Type>
+	<FixName>WebSphere Application Server Network Deployment v7.0.0 Fix Pack 43</FixName>
+	<FixVersion>7.0.0.43</FixVersion>
+	<FixID>7.0.0-WS-WAS-FP0000043</FixID>
+	<SWGFMIDX>HWASN700</SWGFMIDX>
+</Fix>

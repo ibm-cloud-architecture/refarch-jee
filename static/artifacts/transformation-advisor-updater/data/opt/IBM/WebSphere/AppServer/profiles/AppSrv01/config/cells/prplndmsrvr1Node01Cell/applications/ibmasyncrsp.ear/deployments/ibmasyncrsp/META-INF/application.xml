@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application PUBLIC "-//Sun Microsystems, Inc.//DTD J2EE Application 1.2//EN" "http://java.sun.com/j2ee/dtds/application_1_2.dtd">
+
+   <application id="Application_ID">
+      <display-name>WebSphere ASYNC Response Servlet Application</display-name>
+      <description>This application contains the JAX-WS async response servlet</description>
+      <module id="WebModule_1">
+         <web>
+            <web-uri>ibmasyncrsp.war</web-uri>
+            <context-root>/IBM_WS_SYS_RESPONSESERVLET</context-root>
+         </web>
+      </module>
+      <security-role id="SecurityRole_1177535736906">
+	     <role-name>AuthenticatedWebServicesUsers</role-name> 
+	  </security-role>
+   </application>

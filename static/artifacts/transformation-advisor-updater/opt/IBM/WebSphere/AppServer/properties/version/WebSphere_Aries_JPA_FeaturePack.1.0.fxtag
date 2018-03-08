@@ -1,0 +1,7 @@
+<Fix>
+	<Type>Fix Pack</Type>
+	<FixName>IBM WebSphere Application Server V7 Feature Pack for OSGi Applications and Java Persistence API Fix Pack 9</FixName>
+	<FixVersion>1.0.0.9</FixVersion>
+	<FixID>1.0.0-WS-ARIESJPA-FP0000009</FixID>
+	<SWGFMIDX>JOSGAJ100</SWGFMIDX>
+</Fix>

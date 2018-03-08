@@ -1,0 +1,200 @@
+{
+   "report": "analysis",
+   "version": "1.1",
+   "totalRulesFlagged": 6,
+   "filesAffected": 9,
+   "totalResults": 13,
+   "options": [
+      "--sourceAppServer=was70",
+      "--sourceJava=ibm5",
+      "--targetAppServer=liberty",
+      "--targetJava=ibm8",
+      "--targetJavaEE=ee6",
+      "--targetCloud=docker",
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "severitySummary": [
+      {
+         "severity": "Severe",
+         "totalRulesFlagged": 1,
+         "totalResults": 1
+      },
+      {
+         "severity": "Warning",
+         "totalRulesFlagged": 4,
+         "totalResults": 10
+      },
+      {
+         "severity": "Information",
+         "totalRulesFlagged": 1,
+         "totalResults": 2
+      }
+   ],
+   "applications": [
+      "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear"
+   ],
+   "rules": [
+      {
+         "ruleName": "Behavior change in rounding in NumberFormat and DecimalFormat format methods",
+         "severity": "Information",
+         "category": "Java SE version migration / Java SE 8 compatibility impacts",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/runner/BaseTestRunner.class",
+               "details": [
+                  {
+                     "reference": "Method elapsedTimeAsString",
+                     "match": "java.text.NumberFormat.format(double)",
+                     "lineNumber": 147
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/textui/ResultPrinter.class",
+               "details": [
+                  {
+                     "reference": "Method elapsedTimeAsString",
+                     "match": "java.text.NumberFormat.format(double)",
+                     "lineNumber": 102
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Behavior change on lookups for Enterprise JavaBeans",
+         "severity": "Severe",
+         "category": "WebSphere traditional to Liberty",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/ibm-web-bnd.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "ejb-ref.binding-name=ejblocal:org.pwte.example.service.ProductSearchService",
+                     "lineNumber": 5
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Databases",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar/META-INF/persistence.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "jta-data-source=jdbc/orderds",
+                     "lineNumber": 5
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Do not start unmanaged threads within the web or EJB container",
+         "severity": "Warning",
+         "category": "All application servers",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/awtui/TestRunner.class",
+               "details": [
+                  {
+                     "reference": "Method runSuite",
+                     "match": "java.lang.Thread.start(*)",
+                     "lineNumber": 512
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/extensions/ActiveTestSuite.class",
+               "details": [
+                  {
+                     "reference": "Method runTest",
+                     "match": "java.lang.Thread.start(*)",
+                     "lineNumber": 49
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/swingui/TestRunner.class",
+               "details": [
+                  {
+                     "reference": "Method doRunTest",
+                     "match": "java.lang.Thread.start(*)",
+                     "lineNumber": 719
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Java EE security",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/web.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "security-constraint",
+                     "lineNumber": 21
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war/WEB-INF/web.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "security-constraint",
+                     "lineNumber": 27
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Managing data inside and between Docker containers",
+         "severity": "Warning",
+         "category": "Docker (IBM Containers)",
+         "results": [
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/runner/BaseTestRunner.class",
+               "details": [
+                  {
+                     "reference": "Method savePreferences",
+                     "match": "java.io.FileOutputStream",
+                     "lineNumber": 57
+                  },
+                  {
+                     "reference": "Method savePreferences",
+                     "match": "java.io.FileOutputStream",
+                     "lineNumber": 62
+                  },
+                  {
+                     "reference": "Method savePreferences",
+                     "match": "java.io.FileOutputStream",
+                     "lineNumber": 64
+                  }
+               ]
+            },
+            {
+               "fileName": "CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar/junit/swingui/TestRunner.class",
+               "details": [
+                  {
+                     "reference": "Method saveHistory",
+                     "match": "java.io.FileWriter",
+                     "lineNumber": 723
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<variables:VariableMap xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:variables="http://www.ibm.com/websphere/appserver/schemas/5.0/variables.xmi" xmi:id="VariableMap_1">
+  <entries xmi:id="VariableSubstitutionEntry_1183122130203" symbolicName="SERVER_LOG_ROOT" value="${LOG_ROOT}/server1" description="The log root directory for server server1."/>
+  <entries xmi:id="VariableSubstitutionEntry_1183122130218" symbolicName="WAS_SERVER_NAME" value="server1" description="Name of the application server."/>
+</variables:VariableMap>

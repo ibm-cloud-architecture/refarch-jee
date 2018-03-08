@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app id="WebApp_1186421983750">
+    <display-name>Websphere WSDM</display-name>
+<servlet id="Servlet_1">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.ApplicationService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.ApplicationService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_2">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.ServiceGroupService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.ServiceGroupService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_21">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.AppServiceGroupService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.AppServiceGroupService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_22">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.DomainResourcesServiceGroupService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.DomainResourcesServiceGroupService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_3">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.ServletService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.ServletService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_4">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.ApplicationServerService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.ApplicationServerService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_5">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.EJBService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.EJBService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_6">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.J2EEFactoryService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.J2EEFactoryService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_7">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.JVMService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.JVMService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_8">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.WebServiceService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.WebServiceService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_9">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.WebSphereDomainService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.WebSphereDomainService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_10">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.DataSourceService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.DataSourceService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_11">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.WebSphereClusterService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.WebSphereClusterService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_12">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.JaxwsWebServiceService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.JaxwsWebServiceService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet id="Servlet_13">
+	    <servlet-name>com.ibm.websphere.management.wsdm.jaxws.JaxrpcWebServiceService</servlet-name>
+	    <servlet-class>com.ibm.websphere.management.wsdm.jaxws.JaxrpcWebServiceService</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.ApplicationService</servlet-name>
+	<url-pattern>/services/application</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.ServiceGroupService</servlet-name>
+	<url-pattern>/services/service-group</url-pattern>
+  </servlet-mapping> 
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.AppServiceGroupService</servlet-name>
+	<url-pattern>/services/application-service-group</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.DomainResourcesServiceGroupService</servlet-name>
+	<url-pattern>/services/domain-resources-service-group</url-pattern>
+  </servlet-mapping>
+<!--
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.VMServiceGroupService</servlet-name>
+	<url-pattern>/services/vm-service-group</url-pattern>
+  </servlet-mapping>   
+-->
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.ServletService</servlet-name>
+	<url-pattern>/services/servlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.ApplicationServerService</servlet-name>
+	<url-pattern>/services/applicationserver</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.EJBService</servlet-name>
+	<url-pattern>/services/ejb</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.J2EEFactoryService</servlet-name>
+	<url-pattern>/services/factory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.JVMService</servlet-name>
+	<url-pattern>/services/jvm</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.WebServiceService</servlet-name>
+	<url-pattern>/services/webservices</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.WebSphereDomainService</servlet-name>
+	<url-pattern>/services/webspheredomain</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.DataSourceService</servlet-name>
+	<url-pattern>/services/datasource</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.WebSphereClusterService</servlet-name>
+	<url-pattern>/services/webspherecluster</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.JaxwsWebServiceService</servlet-name>
+	<url-pattern>/services/jaxwswebservices</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>com.ibm.websphere.management.wsdm.jaxws.JaxrpcWebServiceService</servlet-name>
+	<url-pattern>/services/jaxrpcwebservices</url-pattern>
+  </servlet-mapping>
+</web-app>

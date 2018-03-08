@@ -1,0 +1,42 @@
+//
+// Dynamic Policy - Enterprise Application Templates
+//
+// J2EE 1.4 Specification
+//
+// NOTE: Syntax errors in the policy files will cause the enterprise application FAIL to start.
+//       Extreme care should be taken when editing these policy files. It is advised to use
+//       the policytool provided by the JDK for editing the policy files
+//       (WAS_HOME/java/jre/bin/policytool). 
+//
+
+grant codeBase "file:${application}" {
+  // The following are required by Java mail
+  permission java.io.FilePermission "${was.install.root}${/}lib${/}mail-impl.jar", "read";
+  permission java.io.FilePermission "${was.install.root}${/}lib${/}activation-impl.jar", "read";
+};
+
+grant codeBase "file:${jars}" {
+  permission java.net.SocketPermission "*", "connect";
+  permission java.util.PropertyPermission "*", "read";
+};
+
+grant codeBase "file:${connectorComponent}" {
+  permission java.net.SocketPermission "*", "connect";
+  permission java.util.PropertyPermission "*", "read";
+};
+
+grant codeBase "file:${webComponent}" {
+  permission java.io.FilePermission "${was.module.path}", "read";
+  permission java.io.FilePermission "${was.module.path}${/}-", "read, write";
+  permission java.lang.RuntimePermission "loadLibrary.*";
+  permission java.lang.RuntimePermission "queuePrintJob";
+  permission java.net.SocketPermission "*", "connect";
+  permission java.util.PropertyPermission "*", "read";
+};
+
+grant codeBase "file:${ejbComponent}" {
+ permission java.lang.RuntimePermission "queuePrintJob";
+ permission java.net.SocketPermission "*", "connect";
+ permission java.util.PropertyPermission "*", "read";
+};
+

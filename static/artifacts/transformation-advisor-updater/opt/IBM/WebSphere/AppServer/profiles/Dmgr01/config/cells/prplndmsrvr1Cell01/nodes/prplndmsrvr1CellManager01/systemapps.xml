@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serverindex:ServerIndex xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:serverindex="http://www.ibm.com/websphere/appserver/schemas/5.0/serverindex.xmi" xmi:id="ServerIndex_1162233833187">
+  <serverEntries xmi:id="ServerEntry_1" serverDisplayName="dmgr" serverName="dmgr" serverType="DEPLOYMENT_MANAGER">
+    <deployedApplications>${WAS_INSTALL_ROOT}/systemApps/filetransferSecured.ear</deployedApplications>
+    <deployedApplications>${WAS_INSTALL_ROOT}/systemApps/ManagementEJB.ear</deployedApplications>
+  </serverEntries>
+</serverindex:ServerIndex>

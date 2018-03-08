@@ -1,0 +1,4 @@
+#Created by WebSphere.  Do not modify.
+#Mon Jun 16 11:35:05 CDT 2008
+com.ibm.ws.runtime.components.ivt_app.war=WebSphere\:specname\=WS_WebContainer
+com.ibm.ws.runtime.components.ivtEJB.jar=WebSphere\:specname\=WS_EJBContainer

@@ -1,0 +1,330 @@
+{
+   "report": "inventory",
+   "version": "2.2",
+   "options": [
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "applications": [
+      "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear"
+   ],
+   "sharedLibraries": [
+   ],
+   "archives": {
+      "ears": 1,
+      "wars": 2,
+      "rars": 0,
+      "ejbs": 1,
+      "webFragments": 0,
+      "utilityJars": 6,
+      "appClients": 0
+   },
+   "summary": {
+      "servlets": 2,
+      "jsps": 0,
+      "jpaEntities": 7,
+      "bmpEntityBeans": 0,
+      "cmpEntityBeans": 0,
+      "messageDrivenBeans": 0,
+      "singletonSessionBeans": 0,
+      "statefulSessionBeans": 0,
+      "statelessSessionBeans": 2,
+      "jaxrpcConsumers": 0,
+      "jaxrpcProviders": 0,
+      "jaxrsConsumers": 0,
+      "jaxrsProviders": 3,
+      "jaxwsConsumers": 0,
+      "jaxwsProviders": 0
+   },
+   "archiveInventory": [
+      {
+         "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear",
+         "moduleType": "Enterprise archive",
+         "moduleVersion": "5",
+         "metadataComplete": null,
+         "archives": {
+            "wars": 2,
+            "rars": 0,
+            "ejbs": 1,
+            "utilityJars": 6,
+            "appClients": 0
+         },
+         "summary": {
+            "servlets": 2,
+            "jsps": 0,
+            "jpaEntities": 7,
+            "bmpEntityBeans": 0,
+            "cmpEntityBeans": 0,
+            "messageDrivenBeans": 0,
+            "singletonSessionBeans": 0,
+            "statefulSessionBeans": 0,
+            "statelessSessionBeans": 2,
+            "jaxrpcConsumers": 0,
+            "jaxrpcProviders": 0,
+            "jaxrsConsumers": 0,
+            "jaxrsProviders": 3,
+            "jaxwsConsumers": 0,
+            "jaxwsProviders": 0
+         },
+         "potentialDeploymentProblemsSummary": {
+            "archivesContainingDuplicateClasses": 0,
+            "archivesContainingJavaEEorSEClasses": 0,
+            "archivesContainingConflictingOpenSourceSoftwareClasses": 0,
+            "archivesContainingWebSphereClasses": 0,
+            "archivesNotReferencedInTheApplication": 3,
+            "archivesWithMissingDependenciesInTheApplication": 5,
+            "classesWithSystemLevelJVMConfiguration": 0,
+            "sharedLibrariesReferencingApplicationClasses": 0
+         },
+         "potentialDeploymentProblemsDetails": [
+            {
+               "duplicateClassesWithinClassLoader": [
+               ]
+            },
+            {
+               "duplicateClassesAcrossApplication": [
+               ]
+            },
+            {
+               "javaEEandSEClasses": [
+               ]
+            },
+            {
+               "duplicateWebSphereClasses": [
+               ]
+            },
+            {
+               "openSourceSoftwareClasses": [
+               ]
+            },
+            {
+               "archivesNotReferenced": [
+                  {
+                     "archive": "CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junitee.jar",
+                     "referencedBy": ""
+                  },
+                  {
+                     "archive": "CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war/dojo/util/shrinksafe/js.jar",
+                     "referencedBy": "CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war/dojo/util/shrinksafe/shrinksafe.jar"
+                  },
+                  {
+                     "archive": "CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war/dojo/util/shrinksafe/shrinksafe.jar",
+                     "referencedBy": ""
+                  }
+               ]
+            },
+            {
+               "missingDependencies": [
+                  {
+                     "missingDependencies": [
+                        "org.apache.commons.collections.set",
+                        "org.apache.commons.lang.builder",
+                        "org.apache.commons.logging",
+                        "org.apache.poi.hssf.usermodel",
+                        "org.apache.tools.ant",
+                        "org.apache.tools.ant.types"
+                     ],
+                     "archive": [
+                        "CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/dbunit-2.2.jar"
+                     ]
+                  },
+                  {
+                     "missingDependencies": [
+                        "org.apache.wink.client",
+                        "org.apache.wink.client.handlers"
+                     ],
+                     "archive": [
+                        "CustomerOrderServicesTest-0.1.0-SNAPSHOT.war"
+                     ]
+                  },
+                  {
+                     "missingDependencies": [
+                        "org.apache.xmlbeans"
+                     ],
+                     "archive": [
+                        "CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war/dojo/util/shrinksafe/js.jar"
+                     ]
+                  },
+                  {
+                     "missingDependencies": [
+                        "org.codehaus.jackson.annotate"
+                     ],
+                     "archive": [
+                        "CustomerOrderServices-0.1.0-SNAPSHOT.jar"
+                     ]
+                  },
+                  {
+                     "missingDependencies": [
+                        "org.codehaus.jackson.jaxrs"
+                     ],
+                     "archive": [
+                        "CustomerOrderServicesTest-0.1.0-SNAPSHOT.war",
+                        "CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war"
+                     ]
+                  }
+               ]
+            },
+            {
+               "classesWithSystemLevelJVMConfiguration": [
+               ]
+            },
+            {
+               "sharedLibraryDependencies": [
+               ]
+            }
+         ],
+         "performanceConsiderations": {
+            "archivesThatAreCandidatesForMetadataCompleteTrueAttribute": [
+            ],
+            "webModulesWithExcessiveClassFiles": [
+            ],
+            "webModulesWithExcessiveStaticResources": [
+            ]
+         },
+         "containedArchiveInventory": [
+            {
+               "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear/CustomerOrderServices-0.1.0-SNAPSHOT.jar",
+               "moduleType": "EJB module",
+               "moduleVersion": "3.0",
+               "metadataComplete": "false",
+               "summary": {
+                  "servlets": 0,
+                  "jsps": 0,
+                  "jpaEntities": 7,
+                  "bmpEntityBeans": 0,
+                  "cmpEntityBeans": 0,
+                  "messageDrivenBeans": 0,
+                  "singletonSessionBeans": 0,
+                  "statefulSessionBeans": 0,
+                  "statelessSessionBeans": 2,
+                  "jaxrpcConsumers": 0,
+                  "jaxrpcProviders": 0,
+                  "jaxrsConsumers": 0,
+                  "jaxrsProviders": 0,
+                  "jaxwsConsumers": 0,
+                  "jaxwsProviders": 0
+               }
+            },
+            {
+               "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war",
+               "moduleType": "Web module",
+               "moduleVersion": "2.5",
+               "metadataComplete": "Unspecified",
+               "archives": {
+                  "ejbs": 0,
+                  "webFragments": 0,
+                  "utilityJars": 3
+               },
+               "summary": {
+                  "servlets": 1,
+                  "jsps": 0,
+                  "jpaEntities": 0,
+                  "bmpEntityBeans": 0,
+                  "cmpEntityBeans": 0,
+                  "messageDrivenBeans": 0,
+                  "singletonSessionBeans": 0,
+                  "statefulSessionBeans": 0,
+                  "statelessSessionBeans": 0,
+                  "jaxrpcConsumers": 0,
+                  "jaxrpcProviders": 0,
+                  "jaxrsConsumers": 0,
+                  "jaxrsProviders": 0,
+                  "jaxwsConsumers": 0,
+                  "jaxwsProviders": 0
+               },
+               "containedArchiveInventory": [
+                  {
+                     "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/dbunit-2.2.jar",
+                     "moduleType": "Utility JAR",
+                     "containedPackages": [
+                        "org.dbunit",
+                        "org.dbunit.ant",
+                        "org.dbunit.database",
+                        "org.dbunit.dataset",
+                        "org.dbunit.ext",
+                        "org.dbunit.operation",
+                        "org.dbunit.util"
+                     ]
+                  },
+                  {
+                     "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junit.jar",
+                     "moduleType": "Utility JAR",
+                     "containedPackages": [
+                        "junit.awtui",
+                        "junit.extensions",
+                        "junit.framework",
+                        "junit.runner",
+                        "junit.swingui",
+                        "junit.textui"
+                     ]
+                  },
+                  {
+                     "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear/CustomerOrderServicesTest-0.1.0-SNAPSHOT.war/WEB-INF/lib/junitee.jar",
+                     "moduleType": "Utility JAR",
+                     "containedPackages": [
+                        "junit.htmlui",
+                        "org.junitee.output",
+                        "org.junitee.runner",
+                        "org.junitee.servlet",
+                        "org.junitee.util"
+                     ]
+                  }
+               ]
+            },
+            {
+               "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war",
+               "moduleType": "Web module",
+               "moduleVersion": "3.0",
+               "metadataComplete": "Unspecified",
+               "archives": {
+                  "ejbs": 0,
+                  "webFragments": 0,
+                  "utilityJars": 2
+               },
+               "summary": {
+                  "servlets": 1,
+                  "jsps": 0,
+                  "jpaEntities": 0,
+                  "bmpEntityBeans": 0,
+                  "cmpEntityBeans": 0,
+                  "messageDrivenBeans": 0,
+                  "singletonSessionBeans": 0,
+                  "statefulSessionBeans": 0,
+                  "statelessSessionBeans": 0,
+                  "jaxrpcConsumers": 0,
+                  "jaxrpcProviders": 0,
+                  "jaxrsConsumers": 0,
+                  "jaxrsProviders": 3,
+                  "jaxwsConsumers": 0,
+                  "jaxwsProviders": 0
+               },
+               "containedArchiveInventory": [
+                  {
+                     "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war/dojo/util/shrinksafe/js.jar",
+                     "moduleType": "Utility JAR",
+                     "containedPackages": [
+                        "org.mozilla.classfile",
+                        "org.mozilla.javascript"
+                     ]
+                  },
+                  {
+                     "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear/CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war/dojo/util/shrinksafe/shrinksafe.jar",
+                     "moduleType": "Utility JAR",
+                     "containedPackages": [
+                        "org.dojotoolkit.shrinksafe"
+                     ]
+                  }
+               ]
+            },
+            {
+               "archiveName": "/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/config/cells/prplndmsrvr1Cell01/applications/CustomerOrderServicesApp.ear/CustomerOrderServicesApp.ear/lib/JSON4J.jar",
+               "moduleType": "Utility JAR",
+               "containedPackages": [
+                  "com.ibm.json"
+               ]
+            }
+         ]
+      }
+   ],
+   "sharedLibraryDetails": [
+   ]
+}

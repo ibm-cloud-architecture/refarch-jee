@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd" version="v1.0" id="com.ibm.isclite.ISCAdminPortlet" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd">
+   <portlet>
+    <description>Simple Portlet for testing PortletAction</description>
+    <portlet-name>PortletPref</portlet-name>
+    <display-name>My Task</display-name>
+    <portlet-class>com.ibm.isclite.portletPref.PortletPref</portlet-class>
+        <expiration-cache>-1</expiration-cache>
+
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>VIEW</portlet-mode>
+      <portlet-mode>HELP</portlet-mode>
+    </supports>
+
+    <supported-locale>en</supported-locale>
+
+    <portlet-info>
+      <title>My Task</title>
+      <short-title>My Task</short-title>
+      <keywords>My Task</keywords>
+    </portlet-info>
+</portlet>
+   
+   <portlet>
+       <portlet-name>WelcomePortlet</portlet-name>
+       <display-name>Welcome Portlet</display-name>
+       <portlet-class>com.ibm.isclite.portlet.welcome.WelcomePortlet</portlet-class>
+       <expiration-cache>0</expiration-cache>
+       <supports>
+           <mime-type>text/html</mime-type>
+           <portlet-mode>VIEW</portlet-mode>
+           <portlet-mode>HELP</portlet-mode>
+       </supports>
+       <supported-locale>en</supported-locale>
+
+       <portlet-info>
+           <title>Welcome Portlet</title>
+           <short-title>Welcome Portlet</short-title>
+           <keywords>Welcome Portlet</keywords>
+       </portlet-info>
+  </portlet>
+
+   <portlet>
+       <portlet-name>ISCProductDetails</portlet-name>
+       <display-name>ISC Product Details</display-name>
+       <portlet-class>com.ibm.isclite.portlet.welcome.ISCProductDetails</portlet-class>
+       <expiration-cache>0</expiration-cache>
+       <supports>
+           <mime-type>text/html</mime-type>
+           <portlet-mode>VIEW</portlet-mode>
+       </supports>
+       <supported-locale>en</supported-locale>
+
+       <portlet-info>
+           <title>ISC Product Details</title>
+           <short-title>ISC Product Details</short-title>
+           <keywords>ISC Product Details</keywords>
+       </portlet-info>
+  </portlet>
+
+   <portlet>
+    	<description>Console Identity Portlet</description>
+    	<portlet-name>ConsoleIdentityPortlet</portlet-name>
+   		<display-name>Console Identity</display-name>
+    	<portlet-class>com.ibm.isclite.portlet.identity.ConsoleIdentityPortlet</portlet-class>
+        <expiration-cache>0</expiration-cache>
+
+    	<supports>
+      		<mime-type>text/html</mime-type>
+      		<portlet-mode>VIEW</portlet-mode>
+      		<portlet-mode>HELP</portlet-mode>
+    	</supports>
+
+    	<supported-locale>en</supported-locale>
+
+    	<portlet-info>
+      		<title>Console Identity</title>
+      		<short-title>Console Identity</short-title>
+      		<keywords>Console Identity</keywords>
+    	</portlet-info>
+	</portlet>
+
+ 
+</portlet-app>

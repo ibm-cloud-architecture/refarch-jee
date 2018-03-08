@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serverindex:ServerIndex xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:serverindex="http://www.ibm.com/websphere/appserver/schemas/5.0/serverindex.xmi" xmi:id="ServerIndex_1494082075814">
+  <serverEntries xmi:id="ServerEntry_1494082075815" serverDisplayName="CustomerOrder_member1" serverName="CustomerOrder_member1" serverType="APPLICATION_SERVER"/>
+</serverindex:ServerIndex>

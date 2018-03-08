@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Begin Copyright
+
+  Licensed Materials - Property of IBM
+
+  Virtual Member Manager
+
+  (C) Copyright IBM Corp. 2005 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+  %Z% %W% %I% %E% %U%
+
+  End Copyright
+-->
+<xsd:schema xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns="http://www.ibm.com/websphere/wim" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ecore:nsPrefix="wim" ecore:package="com.ibm.websphere.wim.model" targetNamespace="http://www.ibm.com/websphere/wim" version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+       
+  <!-- properties  -->
+  <xsd:element name="parent" type="Entity"/>
+  <xsd:element name="children" type="Entity"/>
+  <xsd:element name="groups" type="Group"/>
+  <xsd:element name="members" type="Entity"/>
+  <xsd:element name="createTimestamp" type="xsd:dateTime"/>
+  <xsd:element name="modifyTimestamp" type="xsd:dateTime"/>
+	
+  <xsd:element name="cn" type="xsd:string"/>
+  <xsd:element name="uid" type="xsd:string"/>
+  <xsd:element name="sn" type="xsd:string"/>
+  <xsd:element name="givenName" type="xsd:string"/>
+  <xsd:element name="initials" type="xsd:string"/>
+  <xsd:element name="mail" type="xsd:string"/>
+
+  <xsd:element name="displayName" type="xsd:string"/>
+  <xsd:element name="preferredLanguage" type="xsd:string"/>
+  <xsd:element name="jpegPhoto" type="xsd:base64Binary"/>
+  <xsd:element name="labeledURI" type="xsd:string"/>
+  <xsd:element name="carLicense" type="xsd:string"/>
+  <xsd:element name="telephoneNumber" type="xsd:string"/>
+  <xsd:element name="facsimileTelephoneNumber" type="xsd:string"/>
+  <xsd:element name="pager" type="xsd:string"/>
+  <xsd:element name="mobile" type="xsd:string"/>
+  <xsd:element name="homePostalAddress" type="xsd:string"/>
+  <xsd:element name="postalAddress" type="xsd:string"/>
+  <xsd:element name="roomNumber" type="xsd:string"/>
+  <xsd:element name="l" type="xsd:string"/>
+  <xsd:element name="localityName" type="xsd:string"/>
+  <xsd:element name="st" type="xsd:string"/>
+  <xsd:element name="stateOrProvinceName" type="xsd:string"/>
+  <xsd:element name="street" type="xsd:string"/>
+  <xsd:element name="postalCode" type="xsd:string"/>
+  <xsd:element name="employeeNumber" type="xsd:string"/>
+  <xsd:element name="employeeType" type="xsd:string"/>
+  <xsd:element name="manager" type="IdentifierType"/>
+  <xsd:element name="secretary" type="IdentifierType"/>
+  <xsd:element name="businessCategory" type="xsd:string"/>
+  <xsd:element name="departmentNumber" type="xsd:string"/>
+  <xsd:element name="seeAlso" type="xsd:string"/>
+			
+
+  <xsd:element name="title" type="xsd:string"/>
+  <xsd:element name="c" type="xsd:string"/>
+  <xsd:element name="countryName" type="xsd:string"/>
+  <!-- For Migration -->
+  <xsd:element name="ibm-primaryEmail" type="xsd:string"/>
+  <xsd:element name="ibm-jobTitle" type="xsd:string"/>
+		
+
+  <xsd:element name="o" type="xsd:string"/>
+  <xsd:element name="ou" type="xsd:string"/>
+  <xsd:element name="dc" type="xsd:string"/>
+
+  <xsd:element name="principalName" type="xsd:string"/>
+  <xsd:element name="kerberosId" type="xsd:string"/>
+  <xsd:element name="realm" type="xsd:string"/>
+  <xsd:element name="password" type="xsd:base64Binary"/>
+  <xsd:element name="certificate" type="xsd:base64Binary"/>
+
+  <xsd:element name="city" type="xsd:string"/>
+  <xsd:element name="homeAddress" type="AddressType" />
+  <xsd:element name="businessAddress"  type="AddressType" />
+  <xsd:element name="description" type="xsd:string"/>
+	
+
+  <xsd:complexType name="AddressType">
+    <xsd:sequence>
+      <xsd:element name="nickName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element ref="street" minOccurs="1" maxOccurs="unbounded"/>
+      <xsd:element ref="city" minOccurs="1" maxOccurs="1"/>
+      <xsd:element ref="stateOrProvinceName"/>
+      <xsd:element ref="postalCode"/>
+      <xsd:element ref="countryName" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+	
+
+  <xsd:complexType name="LangType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute ref="xml:lang" default="en"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+	
+
+
+  <xsd:complexType name="IdentifierType">
+    <xsd:attribute name="uniqueId" type="xsd:token"/>
+    <xsd:attribute name="uniqueName" type="xsd:token"/>
+    <xsd:attribute name="externalId" type="xsd:token"/>
+    <xsd:attribute name="externalName" type="xsd:token"/>
+    <xsd:attribute name="repositoryId" type="xsd:token"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ViewIdentifierType">
+    <xsd:attribute name="viewName" type="xsd:string"/>
+    <xsd:attribute name="viewEntryUniqueId" type="xsd:token"/>
+    <xsd:attribute name="viewEntryName" type="xsd:string"/>
+  </xsd:complexType>
+	
+  <!-- entities  -->
+  <xsd:complexType name="Entity">
+    <xsd:sequence>
+      <xsd:element name="identifier" type="IdentifierType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="viewIdentifiers" type="ViewIdentifierType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="parent"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="children"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="groups"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="createTimestamp"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="modifyTimestamp"/>
+			
+      <!-- Entitlement information -->
+      <xsd:element maxOccurs="1" minOccurs="0" name="entitlementInfo" type="EntitlementInfoType"/>
+       <!-- Change type: add, delete, modify, rename (LI 80118) -->
+      <xsd:element name="changeType" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="RolePlayer">
+    <xsd:complexContent>
+      <xsd:extension base="Entity">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="partyRoles" type="PartyRole"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="GeographicLocation">
+    <xsd:complexContent>
+      <xsd:extension base="Entity">
+        <xsd:sequence>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="Locality">
+    <xsd:complexContent>
+      <xsd:extension base="GeographicLocation">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="l"/>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="localityName"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="st"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="stateOrProvinceName"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="street"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="seeAlso"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="description"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="Country">
+    <xsd:complexContent>
+      <xsd:extension base="GeographicLocation">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="c"/>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="countryName"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="description"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="Container">
+    <xsd:complexContent>
+      <xsd:extension base="Entity">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="cn"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="Party">
+    <xsd:complexContent>
+      <xsd:extension base="RolePlayer">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="LoginAccount">
+    <xsd:complexContent>
+      <xsd:extension base="Party">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="principalName"/>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="password"/>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="realm"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="certificate"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="Group">
+    <xsd:complexContent>
+      <xsd:extension base="Party">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="1" ref="cn"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="members" type="Entity"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="displayName"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="description"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="businessCategory"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="seeAlso"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="Person">
+    <xsd:complexContent>
+      <xsd:extension base="Party">
+        <xsd:group ref="PersonPropertyGroup"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:group name="PersonPropertyGroup">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="uid"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="cn"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="sn"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="preferredLanguage"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="displayName"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="initials"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="mail"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="ibm-primaryEmail"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="jpegPhoto"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="labeledURI"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="carLicense"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="telephoneNumber"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="facsimileTelephoneNumber"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="pager"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="mobile"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="homePostalAddress"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="postalAddress"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="roomNumber"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="l"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="localityName"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="st"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="stateOrProvinceName"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="street"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="postalCode"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="city"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="employeeType"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="employeeNumber"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="manager"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="secretary"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="departmentNumber"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="title"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="ibm-jobTitle"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="c"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="countryName"/>
+      <xsd:element ref="givenName" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element ref="homeAddress" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element ref="businessAddress" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="description"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="businessCategory"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="seeAlso"/>
+      <xsd:element maxOccurs="1" minOccurs="0" ref="kerberosId"/>      
+    </xsd:sequence>
+  </xsd:group>
+
+  <xsd:complexType name="PersonAccount">
+    <xsd:complexContent>
+      <xsd:extension base="LoginAccount">
+        <xsd:group ref="PersonPropertyGroup"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="OrgContainer">
+    <xsd:complexContent>
+      <xsd:extension base="Party">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="o"/>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="ou"/>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="dc"/>
+          <xsd:element maxOccurs="1" minOccurs="0" ref="cn"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="telephoneNumber"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="facsimileTelephoneNumber"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="postalAddress"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="l"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="localityName"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="st"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="stateOrProvinceName"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="street"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="postalCode"/>
+          <xsd:element ref="businessAddress" minOccurs="0" maxOccurs="1" />
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="description"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="businessCategory"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" ref="seeAlso"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="PartyRole">
+    <xsd:complexContent>
+      <xsd:extension base="RolePlayer">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="1" name="primaryRolePlayer" type="RolePlayer"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="relatedRolePlayer" type="RolePlayer"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- Entitlement -->
+  <xsd:complexType name="EntitlementType">
+    <xsd:attribute name="method" type="xsd:string"/>
+    <xsd:attribute name="object" type="xsd:string"/>
+    <xsd:attribute name="attribute" type="xsd:string"/>
+  </xsd:complexType>
+	
+  <!-- Entitlement Information -->
+  <xsd:complexType name="EntitlementInfoType">
+    <xsd:sequence>
+      <xsd:element name="roles" type="xsd:string"
+                maxOccurs="unbounded" minOccurs="0"/>
+      <xsd:element name="entitlements" type="EntitlementType"
+                maxOccurs="unbounded" minOccurs="0"/>
+      <xsd:element name="entitlementCheckResult" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="CheckPointType">
+  	<xsd:sequence>
+  		<xsd:element name="repositoryId" type="xsd:token"
+  			maxOccurs="1" minOccurs="1">
+  		</xsd:element>
+  		<xsd:element name="repositoryCheckPoint" type="xsd:token" maxOccurs="1" minOccurs="0"></xsd:element>
+  	</xsd:sequence>
+  </xsd:complexType>
+
+</xsd:schema>

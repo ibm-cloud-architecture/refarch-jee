@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coregroupbridgeservice:CoreGroupBridgeSettings xmi:version="2.0" 
+                                                xmlns:xmi="http://www.omg.org/XMI" 
+                                                xmlns:coregroupbridgeservice="http://www.ibm.com/websphere/appserver/schemas/6.0/coregroupbridgeservice.xmi" 
+                                                xmi:id="CoreGroupBridgeSettings_1">
+    <coreGroupAccessPoints xmi:id="CoreGroupAccessPoint_1" 
+        		       name="CGAP_1" 
+       			       coreGroup="DefaultCoreGroup"/>
+    <accessPointGroups xmi:id="AccessPointGroup_1" 
+	  	               name="DefaultAccessPointGroup" 
+		               coreGroupAccessPointRefs="CoreGroupAccessPoint_1"/>
+</coregroupbridgeservice:CoreGroupBridgeSettings>
+

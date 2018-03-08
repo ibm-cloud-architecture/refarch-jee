@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<variables:VariableMap xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:variables="http://www.ibm.com/websphere/appserver/schemas/5.0/variables.xmi" xmi:id="VariableMap_1494341340090">
+  <entries xmi:id="VariableSubstitutionEntry_1494341340091" symbolicName="SERVER_LOG_ROOT" value="${LOG_ROOT}/webserver1" description="The log root directory for server webserver1."/>
+  <entries xmi:id="VariableSubstitutionEntry_1494341340092" symbolicName="WAS_SERVER_NAME" value="webserver1" description="Name of the application server."/>
+  <entries xmi:id="VariableSubstitutionEntry_1494341340671" symbolicName="WEB_INSTALL_ROOT" value="/opt/IBM/HTTPServer" description="Web Server Install Root for webserver1."/>
+  <entries xmi:id="VariableSubstitutionEntry_1495655253654" symbolicName="ARS_NAME" value="ibmARS.ear" description="The name of the IBM Asynchronous Response Servlet application file in the systemApps directory."/>
+</variables:VariableMap>

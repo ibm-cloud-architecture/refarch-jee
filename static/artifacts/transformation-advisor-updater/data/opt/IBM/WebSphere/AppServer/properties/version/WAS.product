@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE product SYSTEM "product.dtd">
+<product name="IBM WebSphere Application Server - ND">
+  <id>ND</id>
+  <version>7.0.0.43</version>
+  <build-info
+    date="3/23/17"
+    level="cf431712.01"/>
+</product>

@@ -1,0 +1,5 @@
+#Created by WebSphere.  Do not modify.
+#Thu Oct 12 13:06:38 CDT 2017
+com.ibm.ws.runtime.components.CustomerOrderServices-0.1.0-SNAPSHOT.jar=WebSphere\:specname\=WS_EJBContainer
+com.ibm.ws.runtime.components.CustomerOrderServicesTest-0.1.0-SNAPSHOT.war=WebSphere\:specname\=WS_WebContainer
+com.ibm.ws.runtime.components.CustomerOrderServicesWeb-0.1.0-SNAPSHOT.war=WebSphere\:specname\=WS_WebContainer

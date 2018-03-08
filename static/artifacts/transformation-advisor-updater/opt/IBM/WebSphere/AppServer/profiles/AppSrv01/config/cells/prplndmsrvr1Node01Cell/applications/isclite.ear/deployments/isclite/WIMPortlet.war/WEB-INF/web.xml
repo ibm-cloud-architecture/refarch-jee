@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app id="WebApp1">
+	<display-name>WIM</display-name>
+
+	<servlet id="wim.user">
+		<servlet-name>wim.user</servlet-name>
+		<display-name>Manage Users</display-name>
+		<servlet-class>com.ibm.ws.wim.gui.servlets.UserSrv</servlet-class>
+	</servlet>
+	<servlet id="wim.group">
+		<servlet-name>wim.group</servlet-name>
+		<display-name>Manage Groups</display-name>
+		<servlet-class>com.ibm.ws.wim.gui.servlets.GroupSrv</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>wim.user</servlet-name>
+		<url-pattern>/user</url-pattern>
+	</servlet-mapping>	
+
+	<servlet-mapping>
+		<servlet-name>wim.group</servlet-name>
+		<url-pattern>/group</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

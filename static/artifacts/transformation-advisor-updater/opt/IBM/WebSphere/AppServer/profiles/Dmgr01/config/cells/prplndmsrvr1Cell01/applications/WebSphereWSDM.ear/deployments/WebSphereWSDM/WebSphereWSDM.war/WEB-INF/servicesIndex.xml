@@ -1,0 +1,208 @@
+<?xml version="1.0" ?>
+<services>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/application}ApplicationService" type="JAX-WS">
+        <endpoint name="ApplicationPort">
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+            <operation name="Start"/>
+            <operation name="Stop"/>
+            <operation name="StartRecursive"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/data-source}DataSourceService" type="JAX-WS">
+        <endpoint name="DataSource">
+            <operation name="ShowPoolContents"/>
+            <operation name="PurgePoolContents"/>
+            <operation name="Pause"/>
+            <operation name="Resume"/>
+            <operation name="GetStatus"/>
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+            <operation name="SetResourceProperties"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/web-service}WebServiceService" type="JAX-WS">
+        <endpoint name="WebServicePort">
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+            <operation name="Start"/>
+            <operation name="Stop"/>
+            <operation name="StartRecursive"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/ejb}EJBService" type="JAX-WS">
+        <endpoint name="EJBPort">
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://docs.oasis-open.org/wsrf/sgw-2}ServiceGroupService" type="JAX-WS">
+        <endpoint name="ServiceGroupPort">
+            <operation name="GetMetadata"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+            <operation name="Subscribe"/>
+            <operation name="GetCurrentMessage"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/webspheredomain}DomainService" type="JAX-WS">
+        <endpoint name="DomainPort">
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+            <operation name="Redeploy"/>
+            <operation name="Undeploy"/>
+            <operation name="Distribute"/>
+            <operation name="GetAttribute"/>
+            <operation name="QueryNames"/>
+            <operation name="GetResources"/>
+            <operation name="InstallApplication"/>
+            <operation name="UninstallApplication"/>
+            <operation name="UpdateApplication"/>
+            <operation name="ListApplications"/>
+            <operation name="Subscribe"/>
+            <operation name="GetCurrentMessage"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://docs.oasis-open.org/wsrf/sgw-2}DomainResourcesServiceGroupService" type="JAX-WS">
+        <endpoint name="DomainResourcesServiceGroupPort">
+            <operation name="GetMetadata"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/server}ApplicationServerService" type="JAX-WS">
+        <endpoint name="ApplicationServerPort">
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+            <operation name="SetResourceProperties"/>
+            <operation name="Start"/>
+            <operation name="Stop"/>
+            <operation name="StartRecursive"/>
+            <operation name="Restart"/>
+            <operation name="StopImmediate"/>
+            <operation name="GetProductVersion"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://docs.oasis-open.org/wsrf/sgw-2}AppServiceGroupService" type="JAX-WS">
+        <endpoint name="AppServiceGroupPort">
+            <operation name="GetMetadata"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/jaxwsweb-services}JaxwsWebServiceService" type="JAX-WS">
+        <endpoint name="JaxwsWebServicePort">
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+            <operation name="GetManageabilityReferences"/>
+            <operation name="Subscribe"/>
+            <operation name="GetCurrentMessage"/>
+            <operation name="Start"/>
+            <operation name="Stop"/>
+            <operation name="StartRecursive"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/webspherecluster}ClusterService" type="JAX-WS">
+        <endpoint name="Cluster">
+            <operation name="Start"/>
+            <operation name="Stop"/>
+            <operation name="StopImmediate"/>
+            <operation name="RippleStart"/>
+            <operation name="ExportRouteTable"/>
+            <operation name="DumpClusterInfo"/>
+            <operation name="GetAvailable"/>
+            <operation name="SetAvailable"/>
+            <operation name="SetUnavailable"/>
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+            <operation name="SetResourceProperties"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://docs.oasis-open.org/wsrf/sgw-2}VMServiceGroupService" type="JAX-WS">
+        <endpoint name="VMServiceGroupPort">
+            <operation name="GetMetadata"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/servlet}ServletService" type="JAX-WS">
+        <endpoint name="ServletPort">
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/jaxrpcweb-services}JaxrpcWebServiceService" type="JAX-WS">
+        <endpoint name="JaxrpcWebServicePort">
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+            <operation name="GetManageabilityReferences"/>
+            <operation name="Subscribe"/>
+            <operation name="GetCurrentMessage"/>
+            <operation name="Start"/>
+            <operation name="Stop"/>
+            <operation name="StartRecursive"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/j2ee/factory}J2EEFactoryService" type="JAX-WS">
+        <endpoint name="J2EEFactoryPort">
+            <operation name="GetMetadata"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+        </endpoint>
+    </webservice>
+    <webservice name="{http://www.ibm.com/xmlns/prod/websphere/management/jvm}JVMService" type="JAX-WS">
+        <endpoint name="JVMPort">
+            <operation name="GetMetadata"/>
+            <operation name="Destroy"/>
+            <operation name="SetTerminationTime"/>
+            <operation name="GetResourcePropertyDocument"/>
+            <operation name="GetResourceProperty"/>
+            <operation name="GetMultipleResourceProperties"/>
+        </endpoint>
+    </webservice>
+</services>

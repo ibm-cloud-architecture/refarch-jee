@@ -25,10 +25,11 @@ On [a terminal window](troubleshooting.md#open-the-terminal), execute
 
 The second one includes the application source code. On [a terminal window](troubleshooting.md#open-the-terminal), execute
 
-1. If you completed **Step 1** in this tutorial, then execute `rm -rf ~/git/refarch-jee-customerorder/`. Otherwise, skip this step.
-2. `git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git`
-3. `cd refarch-jee-customerorder`
-4. `git checkout liberty`
+1. **If you completed Step 1** in this tutorial, then execute `rm -rf ~/PurpleCompute/git/refarch-jee-customerorder/`. Otherwise, skip this step.
+2. `cd ~/PurpleCompute/git`
+3. `git clone https://github.com/ibm-cloud-architecture/refarch-jee-customerorder.git`
+4. `cd refarch-jee-customerorder`
+5. `git checkout liberty`
 
    ![Local 2](/static/imgs/localEAR/local2.png)
 
@@ -36,8 +37,9 @@ The second one includes the application source code. On [a terminal window](trou
 
 Maven is a project management tool. It is based on Project Object Model (POM). Maven is generally used for projects build, dependency and documentation. Basically, it simplifies the project build. We are using Maven for building our project ear. On [a terminal window](troubleshooting.md#open-the-terminal), execute:
 
-1. `cd CustomerOrderServicesProject`
-2. `mvn clean package`
+1. `cd ~/PurpleCompute/git/refarch-jee-customerorder`
+2. `cd CustomerOrderServicesProject`
+3. `mvn clean package`
 
 This command will build **CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear** in **target** directory of **CustomerOrderServicesApp** for you. You can see the below message once the build is successful.
 
@@ -60,39 +62,43 @@ Before running the application on the Liberty server, we need to configure it. A
 
 For this tutorial, we provide you with these configuration files ready to be used out of the box so that the Customer Order Services application works right away in Liberty. You only need to copy them from the GitHub repository location, which you have just downloaded to your machine, to the Liberty server directory on your machine and install the server's utilities. For doing all that, execute on [a terminal window](troubleshooting.md#open-the-terminal):
 
-1. Copy **server.xml** into the Liberty server directory:
+1. Change directory to:
+
+   `cd ~`
+
+2. Copy **server.xml** into the Liberty server directory:
 
    ```
-   cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/server.xml \
-   /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer
+   cp ~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/server.xml \
+   ~/PurpleCompute/wlp/usr/servers/defaultServer
    ```
 
-2. Copy **server.env** into the Liberty server directory:
+3. Copy **server.env** into the Liberty server directory:
 
    ```
-   cp /home/skytap/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/server.env.step2 \
-   /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer/server.env
+   cp ~/PurpleCompute/git/refarch-jee/static/artifacts/ICP-liberty-tutorial/tutorialConfigFiles/server.env.step2 \
+   ~/PurpleCompute/wlp/usr/servers/defaultServer/server.env
    ```
 
-   You should now see the following two files in your Liberty server path (`/home/skytap/PurpleCompute/wlp/usr/servers/defaultServer`)
+   You should now see the following two files in your Liberty server path (`~/PurpleCompute/wlp/usr/servers/defaultServer`)
 
    ![Step 2 img 1](/static/imgs/LibertyToolKit/step2-1.png)
 
-3. The correct NodePort address will need to be specified in the copied *server.env* file, as this value changes for every Kubernetes deployment.  This value is acquired via the `kubectl get services` command:
+4. The correct NodePort address will need to be specified in the copied *server.env* file, as this value changes for every Kubernetes deployment.  This value is acquired via the `kubectl get services` command:
 
    ![Configure 1](/static/imgs/toLiberty/Source85.png)
 
    **IMPORTANT:** you **must** have completed the [Recreate Db2 Datastore on ICP](step1.md#recreate-db2-datastore-on-icp) section in previous step 1 in order to see the database service above. If you have not, please complete it now.
 
-4. Update the new server.env file by replacing the string **REPLACE_WITH_NODEPORT** with the value to the right of 50000. In the example above, this value would be **30494**. On [a terminal window](troubleshooting.md#open-the-terminal), execute:
+5. Update the new server.env file by replacing the string **REPLACE_WITH_NODEPORT** with the value to the right of 50000. In the example above, this value would be **30494**. On [a terminal window](troubleshooting.md#open-the-terminal), execute:
 
-   1. `gedit /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer/server.env`
+   1. `gedit ~/PurpleCompute/wlp/usr/servers/defaultServer/server.env`
 
    2. Change `REPLACE_WITH_NODEPORT` with the correct NodePort above explained.
 
    3. Save & close.
 
-5. Install the Liberty server features/utilities needed to run the Customer Order Services application (specified in the server.xml file).
+6. Install the Liberty server features/utilities needed to run the Customer Order Services application (specified in the server.xml file).
 
    On [a terminal window](troubleshooting.md#open-the-terminal), execute:
 
@@ -115,12 +121,12 @@ For more information on the Liberty server configuration specified in the server
 
 Now, we want to deploy the ear file our Customer Order Services application got built into. In order to do so, we need to drop this ear file into an specific folder within the Liberty server installation directory. On [a terminal window](troubleshooting.md#open-the-terminal), execute:
 
-1. `cd /home/skytap/PurpleCompute/git/refarch-jee-customerorder/CustomerOrderServicesApp/target` <sup>\*</sup>_(You should see the build output ear file called **CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear**)_
-2. `cp CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear /home/skytap/PurpleCompute/wlp/usr/servers/defaultServer/apps`
+1. `cd ~/PurpleCompute/git/refarch-jee-customerorder/CustomerOrderServicesApp/target` <sup>\*</sup>_(You should see the build output ear file called **CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear**)_
+2. `cp CustomerOrderServicesApp-0.1.0-SNAPSHOT.ear ~/PurpleCompute/wlp/usr/servers/defaultServer/apps`
 
 Now, you are done with the configuration and the app is ready for deployment. To run the app on Liberty, execute on [a terminal window](troubleshooting.md#open-the-terminal):
 
-1. Go into the Liberty server binaries folder: `cd /home/skytap/PurpleCompute/wlp/bin`
+1. Go into the Liberty server binaries folder: `cd ~/PurpleCompute/wlp/bin`
 2. Start the server: `./server start defaultServer`
 
    ![Start server](/static/imgs/localEAR/local6.png)

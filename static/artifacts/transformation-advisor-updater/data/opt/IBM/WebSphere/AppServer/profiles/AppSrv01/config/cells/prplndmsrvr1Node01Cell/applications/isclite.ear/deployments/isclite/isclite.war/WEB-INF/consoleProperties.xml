@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<consoleproperties:ibm-portal-consoleproperties
+  xmlns:consoleproperties="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-consoleproperties.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-consoleproperties.xsd ibm-portal-consoleproperties.xsd">
+	<consoleproperties:console-property id="ISC.CONSOLE.ID" value="ISC.CONSOLE.ID.CUSTOM"/>
+	<consoleproperties:console-property id="ISC.CONSOLE.ID.MAXLEN" value="27"/>
+	<consoleproperties:console-property id="ISC.CONSOLE.ID.CUSTOM" value=""/>
+</consoleproperties:ibm-portal-consoleproperties>

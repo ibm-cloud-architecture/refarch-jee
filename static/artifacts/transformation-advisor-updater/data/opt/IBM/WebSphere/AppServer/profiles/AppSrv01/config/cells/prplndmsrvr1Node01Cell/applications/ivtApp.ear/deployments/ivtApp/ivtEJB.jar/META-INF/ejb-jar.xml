@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-jar PUBLIC "-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 1.1//EN" "http://java.sun.com/j2ee/dtds/ejb-jar_1_1.dtd">
+
+   <ejb-jar id="ejb-jar_ID">
+      <description>IVT Stateful Session EJB</description>
+      <display-name>IVT EJB Module</display-name>
+      <enterprise-beans>
+         <session id="Session_1">
+            <description>Verify Stateful Session EJB</description>
+            <display-name>Verification of Stateful Session EJB</display-name>
+            <ejb-name>ivtEJBObject</ejb-name>
+            <home>com.ibm.websphere.ivt.ivtEJB.ivtEJBHome</home>
+            <remote>com.ibm.websphere.ivt.ivtEJB.ivtEJBObject</remote>
+            <ejb-class>com.ibm.websphere.ivt.ivtEJB.ivtEJBSession</ejb-class>
+            <session-type>Stateful</session-type>
+            <transaction-type>Container</transaction-type>
+         </session>
+      </enterprise-beans>
+      <assembly-descriptor id="AssemblyDescriptor_1">
+         <container-transaction id="MethodTransaction_1">
+            <method id="MethodElement_1">
+               <ejb-name>ivtEJBObject</ejb-name>
+               <method-name>*</method-name>
+            </method>
+            <trans-attribute>Never</trans-attribute>
+         </container-transaction>
+      </assembly-descriptor>
+   </ejb-jar>

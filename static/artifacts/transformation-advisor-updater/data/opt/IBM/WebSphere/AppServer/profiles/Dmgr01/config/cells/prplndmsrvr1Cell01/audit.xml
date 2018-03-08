@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security:Audit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:security="http://www.ibm.com/websphere/appserver/schemas/5.0/security.xmi" xmi:id="Audit_1173199825578">
+  <auditSpecifications xmi:id="AuditSpecification_1173199825608" name="DefaultAuditSpecification_1" enabled="true">
+    <event>SECURITY_AUTHN</event>
+    <outcome>SUCCESS</outcome>
+  </auditSpecifications>
+  <auditSpecifications xmi:id="AuditSpecification_1173199825609" name="DefaultAuditSpecification_2" enabled="true">
+    <event>SECURITY_AUTHN</event>
+    <outcome>DENIED</outcome>
+  </auditSpecifications>
+  <auditSpecifications xmi:id="AuditSpecification_1173199825610" name="DefaultAuditSpecification_3" enabled="true">
+    <event>SECURITY_RESOURCE_ACCESS</event>
+    <outcome>SUCCESS</outcome>
+  </auditSpecifications>
+  <auditSpecifications xmi:id="AuditSpecification_1173199825611" name="DefaultAuditSpecification_4" enabled="true">
+    <event>SECURITY_AUTHN</event>
+    <outcome>REDIRECT</outcome>
+  </auditSpecifications>
+  <auditPolicy xmi:id="AuditPolicy_1173199825608" auditEnabled="false" auditPolicy="NOWARN" auditorId="" auditorPwd="" sign="false" encrypt="false" batching="false" verbose="false">
+    <auditEventFactories xmi:id="AuditEventFactory_1173199825608" name="auditEventFactoryImpl_1" className="com.ibm.ws.security.audit.AuditEventFactoryImpl" auditServiceProvider="AuditServiceProvider_1173199825608" auditSpecifications="AuditSpecification_1173199825608 AuditSpecification_1173199825609 AuditSpecification_1173199825610 AuditSpecification_1173199825611"/>
+    <auditServiceProviders xmi:id="AuditServiceProvider_1173199825608" name="auditServiceProviderImpl_1" className="com.ibm.ws.security.audit.BinaryEmitterImpl" eventFormatterClass="" maxFileSize="10" maxLogs="100" fileLocation="$(LOG_ROOT)" auditSpecifications="AuditSpecification_1173199825608 AuditSpecification_1173199825609 AuditSpecification_1173199825610 AuditSpecification_1173199825611"/>
+  </auditPolicy>
+</security:Audit>

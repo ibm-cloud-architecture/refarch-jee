@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serverindex:ServerIndex xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:serverindex="http://www.ibm.com/websphere/appserver/schemas/5.0/serverindex.xmi" xmi:id="ServerIndex_1183122131421">
+  <serverEntries xmi:id="ServerEntry_1183122131437" serverDisplayName="server1" serverName="server1" serverType="APPLICATION_SERVER">
+    <deployedApplications>${WAS_INSTALL_ROOT}/systemApps/ManagementEJB.ear</deployedApplications>
+    <deployedApplications>${WAS_INSTALL_ROOT}/systemApps/filetransferSecured.ear</deployedApplications>
+    <deployedApplications>${WAS_INSTALL_ROOT}/systemApps/SchedulerCalendars.ear</deployedApplications>
+  </serverEntries>
+</serverindex:ServerIndex>

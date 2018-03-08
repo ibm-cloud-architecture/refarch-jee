@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--THIS PRODUCT CONTAINS RESTRICTED MATERIALS OF IBM
+5724-i63, 5724-H88(C) COPYRIGHT International Business Machines Corp., 1997, 2014
+All Rights Reserved * Licensed Materials - Property of IBM
+US Government Users Restricted Rights - Use, duplication or disclosure
+restricted by GSA ADP Schedule Contract with IBM Corp.--> 
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app id="WebApp_2">
+    <display-name>adminconsole redirector</display-name>
+
+    <servlet>
+        <servlet-name>RedirectServlet</servlet-name>
+        <servlet-class>com.ibm.ws.console.RedirectorServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RedirectServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>/admin</welcome-file>
+    </welcome-file-list>
+
+</web-app>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200512" xmlns:spe="http://www.ibm.com/xmlns/prod/websphere/200605/ws-securitypolicy-ext">
+    <sp:SupportingTokens>
+        <wsp:Policy wsu:Id="request:GSS_Kerberosv5_AP_REQ">
+            <spe:CustomToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200512/IncludeToken/Once">
+                <wsp:Policy>
+                    <spe:WssCustomToken localname="http://docs.oasis-open.org/wss/oasis-wss-kerberos-token-profile-1.1#GSS_Kerberosv5_AP_REQ"/>
+                </wsp:Policy>
+            </spe:CustomToken>
+        </wsp:Policy>
+    </sp:SupportingTokens>
+</wsp:Policy>

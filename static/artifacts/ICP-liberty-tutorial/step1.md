@@ -358,23 +358,27 @@ To utilize the Db2 database provided for IBM Cloud Private, a persistent volume 
 
    ![Source migration 76](/static/imgs/toLiberty/Source76.png)
 
-3. Review the presented documentation for the IBM Db2 Developer-C Helm Chart and click **Configure** at the very bottom.
-4. In the *Configuration* section, enter a **Release name** (preferably with only lower-case letters and hyphens - this tutorial will use **db2-cos**) and select the **Target namespace** of *purplecompute*.
+3. **Select version 1.1.2** for the IBM DB2 Helm Chart to be installed. You can find it on the left hand side of your screen.
+
+   ![Source migration 94](/static/imgs/toLiberty/Source94.png)
+
+4. Review the presented documentation for the IBM Db2 Developer-C Helm Chart and click **Configure** at the very bottom.
+5. In the *Configuration* section, enter a **Release name** (preferably with only lower-case letters and hyphens - this tutorial will use **db2-cos**) and select the **Target namespace** of *purplecompute*.
     ![Db2 setup 01](/static/imgs/db2-on-icp/db2Setup01.png)
-5. In the *Docker image configuration* section,
+6. In the *Docker image configuration* section,
     * Make sure **Docker Repository** and **tag** fields get values **na.cumulusrepo.com/hcicp_dev/db2server_dec** and **11.1.2.2b** respectively. The reason for this is that the Skytap image you are working on comes with that DB2 Docker image pre-pulled so that you don't need to go off to the internet to pull it down.
     * Follow the [link](http://ibm.biz/db2-dsm-license) in the **secret** field to retrieve a validated image secret.  Copy and paste this value from the other browser window into this entry field.
     ![Db2 setup 02](/static/imgs/db2-on-icp/db2Setup02.png)
     ![Db2 setup 02b](/static/imgs/db2-on-icp/db2Setup02b.png)
-6. In the *Db2 instance configuration* section, enter a username (defaults to **admin**) and a password (this tutorial will use **passw0rd**).  Note that the password defaults are randomly generated, so you will need to provide a known password here.
+7. In the *Db2 instance configuration* section, enter a username (defaults to **admin**) and a password (this tutorial will use **passw0rd**).  Note that the password defaults are randomly generated, so you will need to provide a known password here.
     ![Db2 setup 03](/static/imgs/db2-on-icp/db2Setup03.png)
-7. In the *Database configuration options* section, enter **ORDERDB** in the *Database Name* field.
-8. In the *Data volume configuration* section, update the *Size of the volume claim* field to be **2Gi**.  Kubernetes will automatically map the creation of a new PersistentVolumeClaim to the PersistentVolume created in the previous section.
+8. In the *Database configuration options* section, enter **ORDERDB** in the *Database Name* field.
+9. In the *Data volume configuration* section, update the *Size of the volume claim* field to be **2Gi**.  Kubernetes will automatically map the creation of a new PersistentVolumeClaim to the PersistentVolume created in the previous section.
     ![Db2 setup 04](/static/imgs/db2-on-icp/db2Setup04.png)
-9. In the *Resource configuration* section, update the *Memory limit* field to be **8Gi**.
+10. In the *Resource configuration* section, update the *Memory limit* field to be **8Gi**.
     ![Db2 setup 05](/static/imgs/db2-on-icp/db2Setup05.png)
-10. Click **Install**.
-11. Once the Helm installation is underway, click **View Helm Release** on the dialog.
+11. Click **Install**.
+12. Once the Helm installation is underway, click **View Helm Release** on the dialog.
 
 #### Validate Db2 Helm Chart deployment
 
@@ -698,7 +702,7 @@ The Liberty profile is a simplified, lightweight development and application run
 
 The application server configuration is described in a series of elements in the **server.xml** configuration file. We are now going to see what we need to describe in that server.xml configuration file to get our Liberty server prepared to successfully run our Customer Order Services application.
 
-In this section, we are going to see the different configuration pieces for the Liberty server to run the Customer Order Services application. As said above, this is done by editing the server.xml file which lives in `/home/skytap/PurpleCompute/wlp/usr/servers/defaultServer`.
+In this section, we are going to see the different configuration pieces for the Liberty server to run the Customer Order Services application. As said above, this is done by editing the server.xml file which lives in `~/PurpleCompute/wlp/usr/servers/defaultServer`.
 
 You can manually edit this server.xml file yourself using your preferred editor or you can also do so in eclipse:
 

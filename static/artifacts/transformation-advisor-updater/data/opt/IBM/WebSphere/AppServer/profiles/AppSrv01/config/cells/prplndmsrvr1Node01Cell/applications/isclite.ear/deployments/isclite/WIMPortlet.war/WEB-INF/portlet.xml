@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd" version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd" id="com.ibm.wim.management.users.5fdb94f930">
+   <portlet>
+	  <portlet-name>WIM User Management</portlet-name>
+      <display-name>Manage Users</display-name>
+      <display-name xml:lang="en">Manage Users</display-name>
+      <portlet-class>com.ibm.ws.wim.gui.servlets.UserSrv</portlet-class>
+      <init-param>
+         <name>action</name>
+         <value>search</value>
+      </init-param>
+      <expiration-cache>0</expiration-cache>
+      <supports>
+         <mime-type>text/html</mime-type>
+         <portlet-mode>view</portlet-mode>
+         <portlet-mode>help</portlet-mode>
+      </supports>
+      <supported-locale>en</supported-locale>
+      <resource-bundle>com.ibm.ws.wim.gui.res.wim</resource-bundle>
+      <portlet-info>
+         <title>WIM User Management</title>
+      </portlet-info>
+   </portlet>
+
+   <portlet>
+	  <portlet-name>WIM Group Management</portlet-name>
+      <display-name>Manage Groups</display-name>
+      <display-name xml:lang="en">Manage Groups</display-name>
+      <portlet-class>com.ibm.ws.wim.gui.servlets.GroupSrv</portlet-class>
+      <init-param>
+         <name>action</name>
+         <value>search</value>
+      </init-param>
+      <expiration-cache>0</expiration-cache>
+      <supports>
+         <mime-type>text/html</mime-type>
+         <portlet-mode>view</portlet-mode>
+         <portlet-mode>help</portlet-mode>
+      </supports>
+      <supported-locale>en</supported-locale>
+      <resource-bundle>com.ibm.ws.wim.gui.res.wim</resource-bundle>
+      <portlet-info>
+         <title>WIM Group Management</title>
+      </portlet-info>
+   </portlet>
+
+</portlet-app>

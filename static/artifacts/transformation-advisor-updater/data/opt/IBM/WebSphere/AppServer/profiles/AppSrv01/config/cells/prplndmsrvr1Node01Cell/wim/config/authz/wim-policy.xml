@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  Begin Copyright
+
+  Licensed Materials - Property of IBM
+
+  Virtual Member Manager
+
+  (C) Copyright IBM Corp. 2005 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+  %Z% %W% %I% %E% %U%
+
+  End Copyright
+-->
+<PolicySet
+    PolicyCombiningAlgId="urn:oasis:names:tc:1.0:policy-combining-algorithm:first-applicable"
+    PolicySetId="urn:ibm:xacml-java-security:policy:WIM Policy"
+    xmlns:pol="urn:com:ibm:sec:authz:policy-internal" xmlns="urn:oasis:names:tc:xacml:1.0:policy">
+    <Target>
+        <Subjects>
+            <AnySubject/>
+        </Subjects>
+        <Resources>
+            <AnyResource/>
+        </Resources>
+        <Actions>
+            <AnyAction/>
+        </Actions>
+    </Target>
+    <Policy
+        RuleCombiningAlgId="urn:oasis:names:tc:1.0:rule-combining-algorithm:first-applicable" PolicyId="urn:ibm:xacml-java-security:policy:WIM Policy:role-based-policy">
+        <Target>
+            <Subjects>
+                <AnySubject/>
+            </Subjects>
+            <Resources>
+                <AnyResource/>
+            </Resources>
+            <Actions>
+                <AnyAction/>
+            </Actions>
+        </Target>
+        <Rule RuleId="role-based-rule0" Effect="Permit">
+            <Target>
+                <Subjects>
+                    <Subject>
+                        <SubjectMatch MatchId="urn:ibm:function:role-match">
+                            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Account-Owner-Role</AttributeValue>
+                            <SubjectAttributeDesignator
+                                AttributeId="urn:oasis:names:tc:1.0:subject:subject-id" DataType="urn:ibm:xacml-java-security:data-type:java.security.Principal"/>
+                        </SubjectMatch>
+                    </Subject>
+                </Subjects>
+                <Resources>
+                    <AnyResource/>
+                </Resources>
+                <Actions>
+                    <AnyAction/>
+                </Actions>
+            </Target>
+            <Condition FunctionId="urn:ibm:xacml-java-security:java.security.Permission:match">
+                <Apply FunctionId="urn:ibm:xacml-java-security:java.security.Permission:bag">
+                    <AttributeValue DataType="urn:ibm:xacml-java-security:data-type:java.security.Permission">
+                        <AttributeValue DataType="com.ibm.sec.authz.jaccx.condition.ConditionalPermission">
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:java.security.Permission" Name="WrappedPermission">
+                                <AttributeValue DataType="com.ibm.sec.authz.provider.MethodPermission">
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="Actions">UPDATE</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="ResourceType">Entity/RolePlayer/Party/LoginAccount/*</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string"
+                                    Name="Attribute" IsNull="true">null</AttributeValue>
+                                </AttributeValue>
+                            </AttributeValue>
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:com.ibm.sec.authz.jaccx.condition.Condition" Name="Condition">
+                                <AttributeValue DataType="com.ibm.sec.authz.jaccx.condition.OwnerCondition"/>
+                            </AttributeValue>
+                        </AttributeValue>
+                    </AttributeValue>
+                    <AttributeValue DataType="urn:ibm:xacml-java-security:data-type:java.security.Permission">
+                        <AttributeValue DataType="com.ibm.sec.authz.jaccx.condition.ConditionalPermission">
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:java.security.Permission" Name="WrappedPermission">
+                                <AttributeValue DataType="com.ibm.sec.authz.provider.MethodPermission">
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="Actions">READ</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="ResourceType">Entity/RolePlayer/Party/LoginAccount/*</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="Attribute">unchecked</AttributeValue>
+                                </AttributeValue>
+                            </AttributeValue>
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:com.ibm.sec.authz.jaccx.condition.Condition" Name="Condition">
+                                <AttributeValue DataType="com.ibm.sec.authz.jaccx.condition.OwnerCondition"/>
+                            </AttributeValue>
+                        </AttributeValue>
+                    </AttributeValue>
+                    <AttributeValue DataType="urn:ibm:xacml-java-security:data-type:java.security.Permission">
+                        <AttributeValue DataType="com.ibm.sec.authz.jaccx.condition.ConditionalPermission">
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:java.security.Permission" Name="WrappedPermission">
+                                <AttributeValue DataType="com.ibm.sec.authz.provider.MethodPermission">
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="Actions">WRITE</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="ResourceType">Entity/RolePlayer/Party/LoginAccount/*</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="Attribute">unchecked</AttributeValue>
+                                </AttributeValue>
+                            </AttributeValue>
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:com.ibm.sec.authz.jaccx.condition.Condition" Name="Condition">
+                                <AttributeValue DataType="com.ibm.sec.authz.jaccx.condition.OwnerCondition"/>
+                            </AttributeValue>
+                        </AttributeValue>
+                    </AttributeValue>
+                    <AttributeValue DataType="urn:ibm:xacml-java-security:data-type:java.security.Permission">
+                        <AttributeValue DataType="com.ibm.sec.authz.jaccx.condition.ConditionalPermission">
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:java.security.Permission" Name="WrappedPermission">
+                                <AttributeValue DataType="com.ibm.sec.authz.provider.MethodPermission">
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="Actions">WRITE</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="ResourceType">Entity/RolePlayer/Party/LoginAccount/*</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="Attribute">sensitive</AttributeValue>
+                                </AttributeValue>
+                            </AttributeValue>
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:com.ibm.sec.authz.jaccx.condition.Condition" Name="Condition">
+                                <AttributeValue DataType="com.ibm.sec.authz.jaccx.condition.OwnerCondition"/>
+                            </AttributeValue>
+                        </AttributeValue>
+                    </AttributeValue>
+                    <AttributeValue DataType="urn:ibm:xacml-java-security:data-type:java.security.Permission">
+                        <AttributeValue DataType="com.ibm.sec.authz.jaccx.condition.ConditionalPermission">
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:java.security.Permission" Name="WrappedPermission">
+                                <AttributeValue DataType="com.ibm.sec.authz.provider.MethodPermission">
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="Actions">SEARCH</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string" Name="ResourceType">Entity/RolePlayer/Party/LoginAccount/*</AttributeValue>
+                                    <AttributeValue
+                                    DataType="http://www.w3.org/2001/XMLSchema#string"
+                                    Name="Attribute" IsNull="true">null</AttributeValue>
+                                </AttributeValue>
+                            </AttributeValue>
+                            <AttributeValue
+                                DataType="urn:ibm:xacml-java-security:data-type:com.ibm.sec.authz.jaccx.condition.Condition" Name="Condition">
+                                <AttributeValue DataType="com.ibm.sec.authz.jaccx.condition.OwnerCondition"/>
+                            </AttributeValue>
+                        </AttributeValue>
+                    </AttributeValue>
+                </Apply>
+            </Condition>
+        </Rule>
+    </Policy>
+</PolicySet>

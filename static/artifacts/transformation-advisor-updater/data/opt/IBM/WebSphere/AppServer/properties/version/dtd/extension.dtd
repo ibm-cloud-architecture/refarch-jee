@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright IBM Corp. This is the DTD For the WebSphere product version data 
+files that contain product installation information. -->
+
+
+<!ELEMENT extension (#PCDATA)>
+<!ATTLIST extension id CDATA #REQUIRED name CDATA #REQUIRED>
+	

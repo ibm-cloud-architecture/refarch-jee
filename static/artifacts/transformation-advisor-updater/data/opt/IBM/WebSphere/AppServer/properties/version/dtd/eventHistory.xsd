@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright IBM Corp. This is the DTD For the WebSphere product version data 
+files that contain product installation information. -->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="event-history">
+        <xsd:annotation>
+            <xsd:documentation>
+            Copyright IBM Corp, 2002. This is the DTD For the WebSphere V5.0
+            product version data files that contain product installation information
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="update-event" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="update-event">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="initial-version" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="final-version" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="update-event" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+
+            <xsd:attribute name="event-type" type="event-type" use="required"/>
+            <xsd:attribute name="parent-id" type ="xsd:string" use="required"/>
+            <xsd:attribute name="id" type ="xsd:string" use="required"/>
+
+            <xsd:attribute name="is-required" type="xsd:boolean" default="false"/>
+            <xsd:attribute name="is-custom" type="xsd:boolean" default="false"/>
+            <xsd:attribute name="primary-content" type ="xsd:anyURI" default=""/>
+
+            <xsd:attribute name="update-action" type="update-action" use="required"/>
+            <xsd:attribute name="update-type" type="update-type" default="composite"/>
+
+            <xsd:attribute name="is-external" type ="xsd:boolean" default="false"/>
+            <xsd:attribute name="root-property-file" type ="xsd:anyURL" default=""/>
+            <xsd:attribute name="root-property-name" type ="xsd:string" default=""/>
+            <xsd:attribute name="root-property-value" type ="xsd:string" default=""/>
+
+            <xsd:attribute name="log-name" type="xsd:anyURI" default=""/>
+            <xsd:attribute name="backup-name" type="xsd:anyURI" default=""/>
+
+            <xsd:attribute name="start-time-stamp" type="xsd:dateTime" use="required"/>
+            <xsd:attribute name="end-time-stamp" type="xsd:dateTime" default=""/>
+
+            <xsd:attribute name="result" type="event-result" default="failed"/>
+            <xsd:attribute name="result-message" type="xsd:string" default=""/>
+
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="event-type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="efix"/>
+            <xsd:enumeration value="ptf"/>
+            <xsd:enumeration value="component"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="update-type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="add"/>
+            <xsd:enumeration value="replace"/>
+            <xsd:enumeration value="remove"/>
+            <xsd:enumeration value="patch"/>
+            <xsd:enumeration value="composite"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="update-action">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="install"/>
+            <xsd:enumeration value="uninstall"/>
+            <xsd:enumeration value="selective-install"/>
+            <xsd:enumeration value="selective-uninstall"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="event-result">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="success"/>
+            <xsd:enumeration value="failure"/>
+            <xsd:enumeration value="cancelled"/>
+            <xsd:enumeration value="partialSuccess"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
+
+
+

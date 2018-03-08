@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Begin Copyright
+
+  Licensed Materials - Property of IBM
+
+  Virtual Member Manager
+
+  (C) Copyright IBM Corp. 2005 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+  %Z% %W% %I% %E% %U%
+
+  End Copyright
+-->
+<sdo:datagraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:config="http://www.ibm.com/websphere/wim/config" xmlns:sdo="commonj.sdo">
+  <config:configurationProvider maxPagingResults="500" maxSearchResults="4500" maxTotalPagingResults="1000"
+      pagedCacheTimeOut="900" pagingEntityObject="true" searchTimeOut="600000">
+    <config:dynamicModel xsdFileName="wimdatagraph.xsd"/>
+    <config:supportedEntityTypes defaultParent="o=defaultWIMFileBasedRealm" name="Group">
+      <config:rdnProperties>cn</config:rdnProperties>
+    </config:supportedEntityTypes>
+    <config:supportedEntityTypes defaultParent="o=defaultWIMFileBasedRealm" name="OrgContainer">
+      <config:rdnProperties>o</config:rdnProperties>
+      <config:rdnProperties>ou</config:rdnProperties>
+      <config:rdnProperties>dc</config:rdnProperties>
+      <config:rdnProperties>cn</config:rdnProperties>
+    </config:supportedEntityTypes>
+    <config:supportedEntityTypes defaultParent="o=defaultWIMFileBasedRealm" name="PersonAccount">
+      <config:rdnProperties>uid</config:rdnProperties>
+    </config:supportedEntityTypes>
+    <config:repositories xsi:type="config:FileRepositoryType" adapterClassName="com.ibm.ws.wim.adapter.file.was.FileAdapter"
+        id="InternalFileRepository" supportPaging="false" messageDigestAlgorithm="SHA-1">
+      <config:baseEntries name="o=defaultWIMFileBasedRealm"/>
+    </config:repositories>
+    <config:realmConfiguration defaultRealm="defaultWIMFileBasedRealm">
+      <config:realms delimiter="/" name="defaultWIMFileBasedRealm" securityUse="active">
+        <config:participatingBaseEntries name="o=defaultWIMFileBasedRealm"/>
+        <config:uniqueUserIdMapping propertyForInput="uniqueName" propertyForOutput="uniqueName"/>
+        <config:userSecurityNameMapping propertyForInput="principalName" propertyForOutput="principalName"/>
+        <config:userDisplayNameMapping propertyForInput="principalName" propertyForOutput="principalName"/>
+        <config:uniqueGroupIdMapping propertyForInput="uniqueName" propertyForOutput="uniqueName"/>
+        <config:groupSecurityNameMapping propertyForInput="cn" propertyForOutput="cn"/>
+        <config:groupDisplayNameMapping propertyForInput="cn" propertyForOutput="cn"/>
+      </config:realms>
+    </config:realmConfiguration>
+    <config:pluginManagerConfiguration>
+      <config:topicSubscriberList>
+        <config:topicSubscriber topicSubscriberName="DefaultDAViewProcessor" topicSubscriberType="ModificationSubscriber">
+          <config:className>com.ibm.ws.wim.plugins.orgview.impl.DefaultDAViewProcessorImpl</config:className>
+        </config:topicSubscriber>
+      </config:topicSubscriberList>
+      <config:topicRegistrationList>
+        <config:topicEmitter topicEmitterName="com.ibm.ws.wim.ProfileManager.create">
+          <config:preExit>
+            <config:notificationSubscriberList/>
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+          </config:preExit>
+          <config:inlineExit inlineExitName="createInViewExplicit">
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+          </config:inlineExit>
+          <config:postExit>
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+            <config:notificationSubscriberList/>
+          </config:postExit>
+        </config:topicEmitter>
+        <config:topicEmitter topicEmitterName="com.ibm.ws.wim.ProfileManager.delete">
+          <config:preExit>
+            <config:notificationSubscriberList/>
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+          </config:preExit>
+          <config:inlineExit inlineExitName="deleteInViewExplicit">
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+          </config:inlineExit>
+          <config:postExit>
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+            <config:notificationSubscriberList/>
+          </config:postExit>
+        </config:topicEmitter>
+        <config:topicEmitter topicEmitterName="com.ibm.ws.wim.ProfileManager.update">
+          <config:preExit>
+            <config:notificationSubscriberList/>
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+          </config:preExit>
+          <config:postExit>
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+            <config:notificationSubscriberList/>
+          </config:postExit>
+        </config:topicEmitter>
+        <config:topicEmitter topicEmitterName="com.ibm.ws.wim.ProfileManager.get">
+          <config:preExit>
+            <config:notificationSubscriberList/>
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+          </config:preExit>
+          <config:inlineExit inlineExitName="getInViewExplicit">
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+          </config:inlineExit>
+          <config:postExit>
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+            <config:notificationSubscriberList/>
+          </config:postExit>
+        </config:topicEmitter>
+        <config:topicEmitter topicEmitterName="com.ibm.ws.wim.authz.ProfileSecurityManager">
+          <config:preExit>
+            <config:notificationSubscriberList/>
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+          </config:preExit>
+          <config:inlineExit inlineExitName="getInViewExplicit">
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+          </config:inlineExit>
+          <config:postExit>
+            <config:modificationSubscriberList>
+              <config:modificationSubscriber>
+                <config:modificationSubscriberReference>DefaultDAViewProcessor</config:modificationSubscriberReference>
+                <config:realmList>All</config:realmList>
+              </config:modificationSubscriber>
+            </config:modificationSubscriberList>
+            <config:notificationSubscriberList/>
+          </config:postExit>
+        </config:topicEmitter>
+      </config:topicRegistrationList>
+    </config:pluginManagerConfiguration>
+    <config:authorization
+        isSecurityEnabled="true" useSystemJACCProvider="false" importPolicyFromFile="true"
+        isAttributeGroupingEnabled="true" defaultAttributeGroup="default" 
+        jaccPolicyClass="com.ibm.sec.authz.provider.CommonAuthzPolicy" 
+        jaccRoleMappingClass="com.ibm.sec.authz.provider.CommonAuthzRoleMapping" 
+        jaccPolicyConfigFactoryClass="com.ibm.sec.authz.provider.CommonAuthzPolicyConfigurationFactory" 
+        jaccRoleMappingConfigFactoryClass="com.ibm.sec.authz.provider.CommonAuthzRoleMappingConfigurationFactory"
+        jaccRoleToPermissionPolicyId="WIM Policy"
+        jaccPrincipalToRolePolicyId="WIM Policy"
+        jaccRoleToPermissionPolicyFileName="wim-policy.xml"
+        jaccPrincipalToRolePolicyFileName="wim-rolemapping.xml">
+        <config:attributeGroups>
+            <config:groupName>general</config:groupName>
+            <config:attributeNames>cn</config:attributeNames>
+            <config:attributeNames>sn</config:attributeNames>
+            <config:attributeNames>uid</config:attributeNames>
+        </config:attributeGroups>
+        <config:attributeGroups>
+            <config:groupName>sensitive</config:groupName>
+            <config:attributeNames>password</config:attributeNames>
+        </config:attributeGroups>
+        <config:attributeGroups>
+            <config:groupName>unchecked</config:groupName>
+            <config:attributeNames>identifier</config:attributeNames>
+            <config:attributeNames>createTimestamp</config:attributeNames>
+            <config:attributeNames>modifyTimestamp</config:attributeNames>
+            <config:attributeNames>entitlementInfo</config:attributeNames>
+        </config:attributeGroups>
+    </config:authorization>
+  </config:configurationProvider>
+</sdo:datagraph>

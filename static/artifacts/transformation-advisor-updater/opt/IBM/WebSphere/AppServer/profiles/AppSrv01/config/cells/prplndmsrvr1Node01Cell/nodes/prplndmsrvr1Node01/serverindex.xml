@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serverindex:ServerIndex xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:serverindex="http://www.ibm.com/websphere/appserver/schemas/5.0/serverindex.xmi" xmi:id="ServerIndex_1" hostName="prplndmsrvr1.csplab.local">
+  <serverEntries xmi:id="ServerEntry_1183122129640" serverName="server1" serverType="APPLICATION_SERVER">
+    <deployedApplications>WebSphereWSDM.ear/deployments/WebSphereWSDM</deployedApplications>
+    <deployedApplications>isclite.ear/deployments/isclite</deployedApplications>
+    <deployedApplications>DefaultApplication.ear/deployments/DefaultApplication</deployedApplications>
+    <deployedApplications>ivtApp.ear/deployments/ivtApp</deployedApplications>
+    <deployedApplications>query.ear/deployments/query</deployedApplications>
+    <deployedApplications>ibmasyncrsp.ear/deployments/ibmasyncrsp</deployedApplications>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129640" endPointName="BOOTSTRAP_ADDRESS">
+      <endPoint xmi:id="EndPoint_1183122129640" host="prplndmsrvr1.csplab.local" port="2809"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129641" endPointName="SOAP_CONNECTOR_ADDRESS">
+      <endPoint xmi:id="EndPoint_1183122129641" host="prplndmsrvr1.csplab.local" port="8880"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129642" endPointName="ORB_LISTENER_ADDRESS">
+      <endPoint xmi:id="EndPoint_1183122129642" host="prplndmsrvr1.csplab.local" port="9101"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129643" endPointName="SAS_SSL_SERVERAUTH_LISTENER_ADDRESS">
+      <endPoint xmi:id="EndPoint_1183122129643" host="prplndmsrvr1.csplab.local" port="9406"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129644" endPointName="CSIV2_SSL_SERVERAUTH_LISTENER_ADDRESS">
+      <endPoint xmi:id="EndPoint_1183122129644" host="prplndmsrvr1.csplab.local" port="9405"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129645" endPointName="CSIV2_SSL_MUTUALAUTH_LISTENER_ADDRESS">
+      <endPoint xmi:id="EndPoint_1183122129645" host="prplndmsrvr1.csplab.local" port="9404"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129646" endPointName="WC_adminhost">
+      <endPoint xmi:id="EndPoint_1183122129646" host="*" port="9061"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129647" endPointName="WC_defaulthost">
+      <endPoint xmi:id="EndPoint_1183122129647" host="*" port="9080"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129648" endPointName="DCS_UNICAST_ADDRESS">
+      <endPoint xmi:id="EndPoint_1183122129648" host="*" port="9353"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129649" endPointName="WC_adminhost_secure">
+      <endPoint xmi:id="EndPoint_1183122129649" host="*" port="9044"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129650" endPointName="WC_defaulthost_secure">
+      <endPoint xmi:id="EndPoint_1183122129650" host="*" port="9443"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129651" endPointName="SIP_DEFAULTHOST">
+      <endPoint xmi:id="EndPoint_1183122129651" host="*" port="5060"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129652" endPointName="SIP_DEFAULTHOST_SECURE">
+      <endPoint xmi:id="EndPoint_1183122129652" host="*" port="5061"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129653" endPointName="SIB_ENDPOINT_ADDRESS">
+      <endPoint xmi:id="EndPoint_1494007304746" host="*" port="7276"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129654" endPointName="SIB_ENDPOINT_SECURE_ADDRESS">
+      <endPoint xmi:id="EndPoint_1494007304748" host="*" port="7286"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129655" endPointName="SIB_MQ_ENDPOINT_ADDRESS">
+      <endPoint xmi:id="EndPoint_1494007304756" host="*" port="5558"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129656" endPointName="SIB_MQ_ENDPOINT_SECURE_ADDRESS">
+      <endPoint xmi:id="EndPoint_1494007304760" host="*" port="5578"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1183122129657" endPointName="IPC_CONNECTOR_ADDRESS">
+      <endPoint xmi:id="EndPoint_1183122129657" host="${LOCALHOST_NAME}" port="9633"/>
+    </specialEndpoints>
+  </serverEntries>
+</serverindex:ServerIndex>

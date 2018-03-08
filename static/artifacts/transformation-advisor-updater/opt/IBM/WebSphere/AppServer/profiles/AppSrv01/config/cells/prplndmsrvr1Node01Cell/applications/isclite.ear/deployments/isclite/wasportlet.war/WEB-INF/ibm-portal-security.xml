@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ibm-portal-security xmlns="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-security.xsd"
+  xmlns:base="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-topology.xsd ibm-portal-topology.xsd http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd ibm-portal-base.xsd http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-security.xsd">
+
+    </ibm-portal-security>
+  
+

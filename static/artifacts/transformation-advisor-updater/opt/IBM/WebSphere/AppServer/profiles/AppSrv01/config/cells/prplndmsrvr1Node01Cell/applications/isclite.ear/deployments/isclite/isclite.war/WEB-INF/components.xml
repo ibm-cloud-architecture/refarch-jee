@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry:registry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:base="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd" xmlns:registry="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-registry.xsd" xsi:schemaLocation="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-registry.xsd ibm-portal-registry.xsd http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd ibm-portal-base.xsd">
+  <registry:component contextRoot="cells/prplndmsrvr1Node01Cell/applications/isclite.ear/deployments/isclite/ISCAdminPortlet.war/WEB-INF" id="com.ibm.isclite.ISCAdminPortlet" version="6.1.0.0">
+    <registry:title>
+      <base:nls-string lang="en">Integrated Solutions Console</base:nls-string>
+    </registry:title>
+    <registry:portletApplication id="com.ibm.isclite.ISCAdminPortlet" name="ISCAdminPortlet.war"/>
+  </registry:component>
+  <registry:component contextRoot="cells/prplndmsrvr1Node01Cell/applications/isclite.ear/deployments/isclite/wasportlet.war/WEB-INF" id="com.ibm.websphere.product" version="6.1.0.0">
+    <registry:title>
+      <base:nls-string lang="en">WebSphere Application Server</base:nls-string>
+    </registry:title>
+    <registry:about-page>com.ibm.websphere.product.layoutElement.A</registry:about-page>
+    <registry:portletApplication id="com.ibm.websphere.product" name="wasportlet.war"/>
+  </registry:component>
+  <registry:component contextRoot="cells/prplndmsrvr1Node01Cell/applications/isclite.ear/deployments/isclite/WIMPortlet.war/WEB-INF" id="com.ibm.portlet.ear.wim" version="6.1">
+    <registry:title>
+      <base:nls-string lang="en">User and Group Management</base:nls-string>
+    </registry:title>
+    <registry:portletApplication id="com.ibm.wim.management.users.5fdb94f930" name="WIMPortlet.war"/>
+  </registry:component>
+</registry:registry>

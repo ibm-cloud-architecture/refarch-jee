@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rolebasedauthz="http://www.ibm.com/websphere/appserver/schemas/5.0/rolebasedauthz.xmi">
+  <xmi:Documentation>
+    <contact>WebSphere Security</contact>
+  </xmi:Documentation>
+  <rolebasedauthz:AuthorizationTableExt xmi:id="AuthorizationTableExt_1" context="domain">
+    <authorizations xmi:id="RoleAssignmentExt_1" role="SecurityRoleExt_1">
+	<specialSubjects xmi:type="rolebasedauthz:EveryoneExt" xmi:id="EveryoneExt_1"/>
+        <specialSubjects xmi:type="rolebasedauthz:ServerExt" xmi:id="ServerExt_5"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignmentExt_2" role="SecurityRoleExt_2">
+        <specialSubjects xmi:type="rolebasedauthz:ServerExt" xmi:id="ServerExt_6"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignmentExt_3" role="SecurityRoleExt_3">
+        <specialSubjects xmi:type="rolebasedauthz:ServerExt" xmi:id="ServerExt_7"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignmentExt_4" role="SecurityRoleExt_4">
+        <specialSubjects xmi:type="rolebasedauthz:ServerExt" xmi:id="ServerExt_8"/>
+    </authorizations>
+    <roles xmi:id="SecurityRoleExt_1" roleName="CosNamingRead"/>
+    <roles xmi:id="SecurityRoleExt_2" roleName="CosNamingWrite"/>
+    <roles xmi:id="SecurityRoleExt_3" roleName="CosNamingCreate"/>
+    <roles xmi:id="SecurityRoleExt_4" roleName="CosNamingDelete"/>
+  </rolebasedauthz:AuthorizationTableExt>
+</xmi:XMI>

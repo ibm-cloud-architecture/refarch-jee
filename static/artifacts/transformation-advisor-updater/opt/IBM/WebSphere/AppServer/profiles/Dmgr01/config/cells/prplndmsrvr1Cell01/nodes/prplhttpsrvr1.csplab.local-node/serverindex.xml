@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serverindex:ServerIndex xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:serverindex="http://www.ibm.com/websphere/appserver/schemas/5.0/serverindex.xmi" xmi:id="ServerIndex_1494341339821" hostName="prplhttpsrvr1.csplab.local">
+  <serverEntries xmi:id="ServerEntry_1494341340058" serverName="webserver1" serverType="WEB_SERVER">
+    <deployedApplications>CustomerOrderServicesApp.ear/deployments/CustomerOrderServicesApp</deployedApplications>
+    <specialEndpoints xmi:id="NamedEndPoint_1494341340058" endPointName="WEBSERVER_ADDRESS">
+      <endPoint xmi:id="EndPoint_1494341340058" host="prplhttpsrvr1.csplab.local" port="80"/>
+    </specialEndpoints>
+    <specialEndpoints xmi:id="NamedEndPoint_1494341340059" endPointName="WEBSERVER_ADMIN_ADDRESS">
+      <endPoint xmi:id="EndPoint_1494341340059" host="prplhttpsrvr1.csplab.local" port="8008"/>
+    </specialEndpoints>
+  </serverEntries>
+</serverindex:ServerIndex>

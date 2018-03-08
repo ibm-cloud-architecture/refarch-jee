@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<WSSDistributedCacheConfig xmlns="http://www.ibm.com/xmlns/prod/websphere/200711/wssecurity/distributedcache">
+    <Configuration>
+        <Property Value="10" Name="renewIntervalBeforeTimeoutMinutes"/>
+        <Property Value="10" Name="minutesInCacheAfterTimeout"/>
+        <Property Value="false" Name="distributedCache"/>
+        <Property Value="true" Name="synchronousClusterUpdate"/>
+        <Property Value="false" Name="tokenRecovery"/>
+        <Property Value="" Name="Datasource"/>
+    </Configuration>
+</WSSDistributedCacheConfig>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<topology.cluster:ServerCluster xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:topology.cluster="http://www.ibm.com/websphere/appserver/schemas/5.0/topology.cluster.xmi" xmi:id="ServerCluster_1494082072536" name="CustomerOrder" preferLocal="true" nodeGroupName="DefaultNodeGroup">
+  <members xmi:id="ClusterMember_1494082075796" memberName="CustomerOrder_member1" weight="2" uniqueId="1494082074292" nodeName="prplwas7srvr1Node01"/>
+  <members xmi:id="ClusterMember_1495814947349" memberName="CustomerOrder_member2" weight="2" uniqueId="1495814946598" nodeName="prplwas7srvr2Node01"/>
+</topology.cluster:ServerCluster>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DefaultBindings xmlns="http://www.ibm.com/xmlns/prod/websphere/200711/defaultbindings">
+    <Domain name="global">
+        <Provider name="Provider sample"/>
+        <Client name="Client sample"/>
+    </Domain>
+</DefaultBindings>

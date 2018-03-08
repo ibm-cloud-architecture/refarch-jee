@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coregroup:CoreGroup xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:coregroup="http://www.ibm.com/websphere/appserver/schemas/6.0/coregroup.xmi" xmi:id="builtin_CoreGroup_1080665362339" name="DefaultCoreGroup" description="Default Core Group. The default core group cannot be deleted." coreGroupUID="-6a954465:15bc537b2a4:-8000" numCoordinators="1" multiCastPort="23445" multiCastGroupIPStart="239.0.0.0" multiCastGroupIPEnd="239.255.255.255" channelChainName="DCS" transportType="CHANNEL_FRAMEWORK" transportMemorySize="100">
+  <policies xmi:type="coregroup:OneOfNPolicy" xmi:id="OneOfNPolicy_1080665362419" name="Default SIBus Policy" description="SIBus One-Of-N Policy" policyFactory="com.ibm.ws.hamanager.coordinator.policy.impl.OneOfNPolicyFactory" isAlivePeriodSec="120" quorumEnabled="false" failback="false" preferredOnly="false">
+    <MatchCriteria xmi:id="MatchCriteria_1085173008228" name="type" value="WSAF_SIB" description="Default SIBus MatchCriterion"/>
+  </policies>
+  <policies xmi:type="coregroup:OneOfNPolicy" xmi:id="OneOfNPolicy_1080665362420" name="Clustered TM Policy" description="TM One-Of-N Policy" policyFactory="com.ibm.ws.hamanager.coordinator.policy.impl.OneOfNPolicyFactory" isAlivePeriodSec="120" quorumEnabled="false" failback="true" preferredOnly="false">
+    <MatchCriteria xmi:id="MatchCriteria_1085173008229" name="type" value="WAS_TRANSACTIONS" description="Default TM MatchCriteria"/>
+  </policies>
+  <policies xmi:type="coregroup:AllActivePolicy" xmi:id="AllActivePolicy_1203449041659" name="Default Sip Quorum Policy" description="SIP All-active-policy with quorum disabled by default" policyFactory="com.ibm.ws.hamanager.coordinator.policy.impl.AllActivePolicyFactory" isAlivePeriodSec="0" quorumEnabled="false">
+    <MatchCriteria xmi:id="MatchCriteria_1203449180638" name="type" value="SIP_QUORUM" description="Default SIP MatchCriteria"/>
+  </policies>
+  <coreGroupServers xmi:id="CoreGroupServer_1" nodeName="prplndmsrvr1CellManager01" serverName="dmgr"/>
+  <coreGroupServers xmi:id="CoreGroupServer_1493663513260" nodeName="prplwas7srvr1Node01" serverName="nodeagent"/>
+  <coreGroupServers xmi:id="CoreGroupServer_1493664844810" nodeName="prplwas7srvr2Node01" serverName="nodeagent"/>
+  <coreGroupServers xmi:id="CoreGroupServer_1494082074884" nodeName="prplwas7srvr1Node01" serverName="CustomerOrder_member1"/>
+  <coreGroupServers xmi:id="CoreGroupServer_1495814947161" nodeName="prplwas7srvr2Node01" serverName="CustomerOrder_member2"/>
+  <liveness xmi:id="Liveness_1190908177941" discoveryPeriod="60" heartbeatTransmissionPeriod="30000" heartbeatTimeoutPeriod="180000" livenessType="DEFAULT_ONLY"/>
+</coregroup:CoreGroup>

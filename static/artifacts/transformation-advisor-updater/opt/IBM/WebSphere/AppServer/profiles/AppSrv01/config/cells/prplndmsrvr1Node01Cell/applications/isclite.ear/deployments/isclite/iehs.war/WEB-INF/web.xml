@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app id="WebApp_3">
+	<display-name>EHS3.01</display-name>
+	
+	<servlet>
+        <servlet-name>control</servlet-name>
+        <servlet-class>org.eclipse.help.internal.webapp.servlet.ControlServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>content</servlet-name>
+        <servlet-class>org.eclipse.help.internal.webapp.servlet.ContentServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>livehelp</servlet-name>
+        <servlet-class>org.eclipse.help.internal.webapp.servlet.LiveHelpServlet</servlet-class>
+    </servlet>
+  
+    <servlet>
+        <servlet-name>toc</servlet-name>
+        <servlet-class>org.eclipse.help.internal.webapp.servlet.TocServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>search</servlet-name>
+        <servlet-class>org.eclipse.help.internal.webapp.servlet.SearchServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>context</servlet-name>
+        <servlet-class>org.eclipse.help.internal.webapp.servlet.ContextServlet</servlet-class>
+    </servlet>
+          
+
+<!--
+Automatically created by Tomcat JspC.
+Place this fragement in the web.xml before all icon, display-name,
+description, distributable, and context-param elements.
+-->
+<servlet>
+	<servlet-name>InitServlet</servlet-name>
+	<display-name>InitServlet</display-name>
+	<servlet-class>org.eclipse.help.was.InitServlet</servlet-class>
+</servlet>
+
+	<servlet-mapping>
+        <servlet-name>content</servlet-name>
+        <url-pattern>/content/*</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>content</servlet-name>
+        <url-pattern>/topic/*</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>content</servlet-name>
+        <url-pattern>/nftopic/*</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>livehelp</servlet-name>
+        <url-pattern>/livehelp/*</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>toc</servlet-name>
+        <url-pattern>/toc/*</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>search</servlet-name>
+        <url-pattern>/search/*</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>context</servlet-name>
+        <url-pattern>/context/*</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+	<servlet-name>InitServlet</servlet-name>
+	<url-pattern>/InitServlet</url-pattern>
+</servlet-mapping>
+	<servlet-mapping>
+	<servlet-name>control</servlet-name>
+	<url-pattern>/control</url-pattern>
+</servlet-mapping>
+
+<!--
+All session-config, mime-mapping, welcome-file-list, error-page, taglib,
+resource-ref, security-constraint, login-config, security-role,
+env-entry, and ejb-ref elements should follow this fragment.
+-->
+    
+		
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	
+</web-app>

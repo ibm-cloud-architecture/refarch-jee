@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Begin Copyright
+
+  Licensed Materials - Property of IBM
+
+  Virtual Member Manager
+
+  (C) Copyright IBM Corp. 2005 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+  %Z% %W% %I% %E% %U%
+
+  End Copyright
+-->
+<xsd:schema targetNamespace="http://www.yourco.com/wim/yourext" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:yourext="http://www.yourco.com/wim/yourext" ecore:package="com.ibm.websphere.wim.model.ext" xmlns="http://www.ibm.com/websphere/wim">
+<xsd:import schemaLocation="../../../../../../../etc/wim/schema/model/wimdatagraph.xsd" namespace="http://www.ibm.com/websphere/wim"/>
+<!--xsd:schema targetNamespace="http://www.ibm.com/websphere/wim" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:wim="http://www.ibm.com/websphere/wim" ecore:package="com.ibm.websphere.wim.model"  version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="wimdatagraph.xsd"/-->
+	<!-- Custom properties -->
+	<!-- xsd:element name="organizationalStatus" type="xsd:string"/-->
+	<!-- xsd:element name="uid" type="xsd:int"/-->
+	<!-- Custom entities -->
+	<!-- xsd:complexType name="EPerson">
+		<xsd:complexContent>
+			<xsd:extension base="Person">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" ref="yourext:organizationalStatus"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType-->
+</xsd:schema>

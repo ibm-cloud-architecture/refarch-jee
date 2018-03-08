@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns5:Policy xmlns="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:ns2="http://docs.oasis-open.org/ws-tx/wsat/2006/06" xmlns:ns3="http://docs.oasis-open.org/ws-tx/wsba/2006/06" xmlns:ns4="http://schemas.xmlsoap.org/ws/2004/10/wsba" xmlns:ns5="http://www.w3.org/ns/ws-policy">
+    <ns5:ExactlyOne>
+        <ns5:All>
+            <ATAssertion xmlns:ns6="http://www.ibm.com/ws-tx/wsat/2008/02" ns5:Ignorable="true" ns6:WSTXPolicy="supports"/>
+        </ns5:All>
+        <ns5:All>
+            <ns2:ATAssertion xmlns:ns6="http://www.ibm.com/ws-tx/wsat/2008/02" ns5:Ignorable="true" ns6:WSTXPolicy="supports"/>
+        </ns5:All>
+    </ns5:ExactlyOne>
+    <ns5:ExactlyOne>
+        <ns5:All>
+            <ns4:BAAtomicOutcomeAssertion xmlns:ns6="http://www.ibm.com/ws-tx/wsba/2008/02" ns6:WSTXPolicy="supports" ns5:Ignorable="true"/>
+        </ns5:All>
+        <ns5:All>
+            <ns3:BAAtomicOutcomeAssertion xmlns:ns6="http://www.ibm.com/ws-tx/wsba/2008/02" ns6:WSTXPolicy="supports" ns5:Ignorable="true"/>
+        </ns5:All>
+    </ns5:ExactlyOne>
+</ns5:Policy>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process:Server xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:process="http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi" xmlns:processexec="http://www.ibm.com/websphere/appserver/schemas/5.0/processexec.xmi" xmlns:webserver="http://www.ibm.com/websphere/appserver/schemas/6.0/webserver.xmi" xmi:id="Server_1494341340065" name="webserver1">
+  <components xmi:type="webserver:WebServer" xmi:id="WebServer_1494341340065" name="webserver1" webserverInstallRoot="/opt/IBM/HTTPServer" configurationFilename="/opt/IBM/HTTPServer/conf/httpd.conf" logFilenameError="${WEB_INSTALL_ROOT}/logs/error_log" logFilenameAccess="${WEB_INSTALL_ROOT}/logs/access_log">
+    <stateManagement xmi:id="StateManageable_1494341340065" initialState="STOP"/>
+    <pluginProperties xmi:id="PluginProperties_1494341340065" PluginInstallRoot="/opt/IBM/HTTPServer/Plugins" RefreshInterval="60" IgnoreDNSFailures="false" ResponseChunkSize="64" ASDisableNagle="false" IISDisableNagle="false" AcceptAllContent="false" ChunkedResponse="false" LogFilename="/opt/IBM/HTTPServer/Plugins/logs/webserver1/http_plugin.log" ESIEnable="true" ESIMaxCacheSize="1024" ESIInvalidationMonitor="false" AppServerPortPreference="HOSTHEADER" VHostMatchingCompat="false" RemoteConfigFilename="/opt/IBM/HTTPServer/Plugins/config/webserver1/plugin-cfg.xml" RemoteKeyRingFilename="/opt/IBM/HTTPServer/Plugins/config/webserver1/plugin-key.kdb">
+      <pluginServerClusterProperties xmi:id="PluginServerClusterProperties_1494341340065" RetryInterval="60" RemoveSpecialHeaders="true" CloneSeparatorChange="false" PostSizeLimit="-1" PostBufferSize="64"/>
+    </pluginProperties>
+    <adminServerAuthentication xmi:id="AdminServerAuthentication_1494341340065" userid="httpadmin" password="{xor}DyotLzM6bzE6"/>
+  </components>
+  <processDefinitions xmi:type="processexec:JavaProcessDef" xmi:id="JavaProcessDef_1494341340065" executableName="" workingDirectory="" startCommand="" stopCommand="">
+    <startCommandArgs></startCommandArgs>
+    <stopCommandArgs></stopCommandArgs>
+    <execution xmi:id="ProcessExecution_1494341340065" processPriority="20" runAsUser="" runAsGroup=""/>
+    <jvmEntries xmi:id="JavaVirtualMachine_1494341340065" verboseModeClass="false" verboseModeGarbageCollection="false" verboseModeJNI="false" runHProf="false" hprofArguments="" debugMode="false" debugArgs="" genericJvmArguments=""/>
+  </processDefinitions>
+</process:Server>

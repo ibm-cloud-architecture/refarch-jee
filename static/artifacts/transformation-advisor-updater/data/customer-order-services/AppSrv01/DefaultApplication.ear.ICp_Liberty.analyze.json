@@ -1,0 +1,317 @@
+{
+   "report": "analysis",
+   "version": "1.1",
+   "totalRulesFlagged": 12,
+   "filesAffected": 12,
+   "totalResults": 26,
+   "options": [
+      "--sourceAppServer=was70",
+      "--sourceJava=ibm5",
+      "--targetAppServer=liberty",
+      "--targetJava=ibm8",
+      "--targetJavaEE=ee6",
+      "--targetCloud=docker",
+      "--excludePackages=com.ibm.websphere,com.ibm.ws,com.ibm.db2,com.informix,com.microsoft,com.sybase,com.sun,java,javax,net,oracle,org,sqlj,_ibmjsp"
+   ],
+   "severitySummary": [
+      {
+         "severity": "Severe",
+         "totalRulesFlagged": 6,
+         "totalResults": 17
+      },
+      {
+         "severity": "Warning",
+         "totalRulesFlagged": 6,
+         "totalResults": 9
+      }
+   ],
+   "applications": [
+      "/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/prplndmsrvr1Node01Cell/applications/DefaultApplication.ear/DefaultApplication.ear"
+   ],
+   "rules": [
+      {
+         "ruleName": "Behavior change on lookups for Enterprise JavaBeans",
+         "severity": "Severe",
+         "category": "WebSphere traditional to Liberty",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/ibm-web-bnd.xmi",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "ejbRefBindings.jndiName=Increment",
+                     "lineNumber": 4
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Databases",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar/com/ibm/defaultapplication/websphere_deploy/DERBY_V100_1/IncrementBeanFunctionSet_501bb55e.class",
+               "details": [
+                  {
+                     "reference": "Method Create - Catch exception",
+                     "match": "java.sql",
+                     "lineNumber": 0
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Entity Enterprise JavaBeans (EJB) are unavailable",
+         "severity": "Severe",
+         "category": "Java Technology Support for Liberty",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar/META-INF/ejb-jar.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "entity",
+                     "lineNumber": 7
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Java EE security",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/classes/SnoopServlet.class",
+               "details": [
+                  {
+                     "reference": "Method doGet",
+                     "match": "javax.servlet.http.HttpServletRequest.getUserPrincipal(*)",
+                     "lineNumber": 137
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Remote EJB lookups",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud (not Liberty Core)",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/web.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "home",
+                     "lineNumber": 71
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Remote EJB providers",
+         "severity": "Warning",
+         "category": "Technology connectivity considerations for IBM Cloud (not Liberty Core)",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/lib/WsaEJBDeployUtility.jar/com/ibm/defaultapplication/_IncrementHome_Stub.class",
+               "details": [
+                  {
+                     "reference": "Method getEJBMetaData",
+                     "match": "javax.ejb.EJBHome",
+                     "lineNumber": 158
+                  }
+               ]
+            },
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar/com/ibm/defaultapplication/EJSCMPIncrementHomeBean_501bb55e.class",
+               "details": [
+                  {
+                     "reference": "Method create",
+                     "match": "javax.ejb.EJBObject",
+                     "lineNumber": 0
+                  }
+               ]
+            },
+            {
+               "fileName": "DefaultApplication.ear/WsaEJBDeployUtility.jar/com/ibm/defaultapplication/_IncrementHome_Stub.class",
+               "details": [
+                  {
+                     "reference": "Method getEJBMetaData",
+                     "match": "javax.ejb.EJBHome",
+                     "lineNumber": 158
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "The InitialContext lookup method can return primitive types",
+         "severity": "Warning",
+         "category": "WebSphere traditional to Liberty",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/classes/HitCount.class",
+               "details": [
+                  {
+                     "reference": "Method getInc",
+                     "match": "javax.naming.InitialContext.lookup(*)",
+                     "lineNumber": 312
+                  },
+                  {
+                     "reference": "Method service",
+                     "match": "javax.naming.InitialContext.lookup(*)",
+                     "lineNumber": 75
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "The WebSphere Enterprise JavaBeans APIs are unavailable",
+         "severity": "Severe",
+         "category": "WebSphere traditional to Liberty",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar/com/ibm/defaultapplication/websphere_deploy/DERBY_V100_1/IncrementBeanAdaptorBinding_501bb55e.class",
+               "details": [
+                  {
+                     "reference": "Method getAdapter - Method return type",
+                     "match": "com.ibm.websphere.ejbpersistence",
+                     "lineNumber": 0
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "The WebSphere Resource Adapter APIs are unavailable",
+         "severity": "Severe",
+         "category": "WebSphere traditional to Liberty",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar/com/ibm/defaultapplication/websphere_deploy/DERBY_V100_1/IncrementBeanFunctionSet_501bb55e.class",
+               "details": [
+                  {
+                     "reference": "Class implements",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method Create - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method FindByPrimaryKey - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method FindByPrimaryKey444Update - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method PartialStore - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method PartialStoreUsingOCC - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method ReadReadChecking - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method ReadReadCheckingForUpdate - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method Remove - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method Store - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method StoreUsingOCC - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  },
+                  {
+                     "reference": "Method execute - Method parameter",
+                     "match": "com.ibm.websphere.rsadapter",
+                     "lineNumber": 0
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "The WebSphere Servlet API was superseded by a newer implementation",
+         "severity": "Severe",
+         "category": "WebSphere traditional to Liberty",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/DefaultWebApplication.war/WEB-INF/classes/HelloPervasiveServlet.class",
+               "details": [
+                  {
+                     "reference": "Constructor",
+                     "match": "com.ibm.servlet.PageListServlet",
+                     "lineNumber": 32
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "Transaction propagation is not supported for Enterprise JavaBeans (EJB) remote interfaces",
+         "severity": "Severe",
+         "category": "Java Technology Support for Liberty",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar/META-INF/ejb-jar.xml",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "remote",
+                     "lineNumber": 12
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "ruleName": "User-defined EJB binding locations are ignored in Liberty",
+         "severity": "Warning",
+         "category": "WebSphere traditional to Liberty",
+         "results": [
+            {
+               "fileName": "DefaultApplication.ear/Increment.jar/META-INF/ibm-ejb-jar-bnd.xmi",
+               "details": [
+                  {
+                     "reference": null,
+                     "match": "ejbBindings.jndiName=Increment",
+                     "lineNumber": 7
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--The IBM Portal Topology specifies the portlets being used, the layout of those portlets
+    and the navigation for those portlets.
+    application-definition appID:  an unique id for the topology. 
+ -->
+<ibm-portal-topology xmlns="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-topology.xsd" 
+    xmlns:base="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-base.xsd" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.ibm.com/websphere/appserver/schemas/6.0/ibm-portal-topology ibm-portal-topology.xsd">
+
+<!-- 
+  The application definition describes an applications with its components. The definition consists of:
+    component-tree: lists the component definitions (Portlets, resources)
+    layout-tree: defines layouts for the portal pages 
+    navigation-element: the navigation tree that associates layouts with application artifacts and integrate them into the navigation of the ISC.
+    requires: defines depedencies and prerequisite applications before this application can be successfully deployed into ISC     
+-->
+    
+<application-definition appID="com.ibm.portlet.ear.wim" version="6.1">
+  <title>
+    <base:nls-string lang="en">User and Group Management</base:nls-string>
+  </title>
+  <!-- requires uniqueName="com.ibm.portlet.ear.treemerge" version="6.1"/ -->
+
+  <!-- 
+    The component tree specifies all portlets being used.
+      portlet-definition uniqueName: an unique name for the portlet definition.
+      portletName: consist of the context root_portletName specified in portlet.xml file. ( Currently, this is a work around. ISC will be using portlet app id and portlet name from portlet.xml to uniquely identify the portlet.)
+      portletApplication:  is the portlet-app id specified in the portlet.xml file.
+      portlet-entity uniqueName:  a unique name for the portlet.
+      portletDefinitionRef:  is the reference to the portlet-definition uniqueName. 
+  -->
+  
+  <component-tree uniqueName="com.ibm.wim.management.appTree">
+
+    <!-- UserManagementPortlet 1-->        
+    <portlet-definition uniqueName="com.ibm.wim.management.appElementDefinition.users">
+        <title>
+            <base:nls-ref key="manageUsers" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+            <!-- <base:nls-string lang="en">UserPortlet</base:nls-string> -->
+        </title>
+        <resource-link name="WIM User Management" portletApplication="com.ibm.wim.management.users.5fdb94f930" type="static"/>
+    </portlet-definition>  
+    <portlet-entity uniqueName="com.ibm.wim.management.appElement.users" portletDefinitionRef="com.ibm.wim.management.appElementDefinition.users">
+      <title>
+        <base:nls-ref key="manageUsers" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+        <!-- <base:nls-string lang="en">UserPortlet</base:nls-string>  -->
+      </title>
+    </portlet-entity>
+
+    <!-- GroupManagementPortlet 2 -->
+    <portlet-definition uniqueName="com.ibm.wim.management.appElementDefinition.groups">
+        <title>
+            <base:nls-ref key="manageGroups" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+            <!-- <base:nls-string lang="en">GroupPortlet</base:nls-string> -->
+        </title>
+        <resource-link name="WIM Group Management" portletApplication="com.ibm.wim.management.users.5fdb94f930" type="static"/>
+    </portlet-definition>  
+    <portlet-entity uniqueName="com.ibm.wim.management.appElement.groups" portletDefinitionRef="com.ibm.wim.management.appElementDefinition.groups">
+      <title>
+        <base:nls-ref key="manageGroups" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+        <!-- <base:nls-string lang="en">GroupPortlet</base:nls-string> -->
+      </title>
+    </portlet-entity>
+    
+   </component-tree>
+
+  <!-- 
+      The Layout tree specifies how the page will be laid out on the screen, using containers and windows.
+        layout-element uniqueName:  a unique name for the layout.
+        orientation:  is the type of format the container will be in, row or column.
+        simple-container uniqueName:  a unique name for the container.
+        window uniqueName:  a unique name for the window.
+  -->
+
+  <layout-tree>  
+                                          
+      <!--Manage Users contains One Container:
+        The Container has one window inside the container.
+        
+        This layout uses application-element-ref to specify the application for the window.Therefore you do NOT
+        have to specify the navigation-content in the navigation element below that uses this layout element.
+       -->
+    <layout-element uniqueName="com.ibm.wim.management.layoutElement.users">
+       <title>
+           <base:nls-ref key="manageUsers" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+           <!-- <base:nls-string lang="en">Manage Users</base:nls-string> -->
+       </title>
+       <simple-container orientation="row" uniqueName="com.ibm.wim.management.container.users">
+          <window uniqueName="com.ibm.wim.management.window.users">
+             <title>
+                <base:nls-ref key="manageUsers" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+                <!-- <base:nls-string lang="en">Manage Users</base:nls-string> -->
+             </title>
+             <!--component-definition-ref>com.ibm.wim.management.appElement.users</component-definition-ref--> 
+          </window>
+       </simple-container>
+    </layout-element>
+    
+    <!--Manage Groups contains One Container:
+        The Container has one window inside the container.
+        
+        This layout uses application-element-ref to specify the application for the window.Therefore you do NOT
+        have to specify the navigation-content in the navigation element below that uses this layout element.
+       -->
+    <layout-element uniqueName="com.ibm.wim.management.layoutElement.groups">
+       <title>
+           <base:nls-ref key="manageGroups" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+           <!-- <base:nls-string lang="en">Manage Groups</base:nls-string> -->
+       </title>
+       <simple-container orientation="row" uniqueName="com.ibm.wim.management.container.groups">
+          <window uniqueName="com.ibm.wim.management.window.groups">
+             <title>
+                <base:nls-ref key="manageGroups" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+                <!-- <base:nls-string lang="en">Manage Groups</base:nls-string> -->
+             </title>
+             <!--component-definition-ref>com.ibm.wim.management.appElement.groups</component-definition-ref--> 
+          </window>
+       </simple-container>
+    </layout-element>
+
+    
+  </layout-tree>
+
+  <!--
+      The Navigation element is how the menu appears on the left side of the screen
+      and also specifies which portlet goes inside which container/window.
+        navigation-element uniqueName:  an unique name for the navigation element.
+        layoutElementRef:  specifies which layout format to use from the Layout tree
+        navigation-content uniqueName:  an unique name for the content.
+        componentDefinitionRef:  specifies which portlet entity will be used.
+        windowRef:  specifies which window, in the layout, the portlet will be placed into.
+   --> 
+  <!--The Root Navigation Element is an existing WAS parent for User and Group Management. -->
+  
+  <!-- 
+    The navigation element     
+  -->
+
+  <!--This Navigation Element is for Users -->
+    <navigation-element uniqueName="com.ibm.wim.management.navigationElement.users" layoutElementRef="com.ibm.wim.management.layoutElement.users">
+      <title>
+        <base:nls-ref key="manageUsers" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+        <!-- <base:nls-string lang="en">Manage Users</base:nls-string> -->
+      </title>
+      <parent-tree parentTreeRef="com.ibm.wim.management.navigationElement.WIM" />
+      <navigation-content uniqueName="com.ibm.wim.management.navigationContent.users" componentDefinitionRef="com.ibm.wim.management.appElement.users" windowRef="com.ibm.wim.management.window.users"/>
+    </navigation-element>
+    
+     <!--This Navigation Element is for Groups -->
+    <navigation-element uniqueName="com.ibm.wim.management.navigationElement.groups" layoutElementRef="com.ibm.wim.management.layoutElement.groups">
+      <title>
+        <base:nls-ref key="manageGroups" locationName="classes/com/ibm/ws/wim/gui/res/wim"/>
+        <!-- <base:nls-string lang="en">Manage Groups</base:nls-string> -->
+      </title>
+      <parent-tree parentTreeRef="com.ibm.wim.management.navigationElement.WIM" />
+      <navigation-content uniqueName="com.ibm.wim.management.navigationContent.groups" componentDefinitionRef="com.ibm.wim.management.appElement.groups" windowRef="com.ibm.wim.management.window.groups"/>
+    </navigation-element>
+    
+</application-definition>  
+
+</ibm-portal-topology>
+
+
+
+
+                

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<securityBindings xmlns="http://www.ibm.com/xmlns/prod/websphere/200710/ws-securitybinding">
+  <securityBinding name="application">
+    <securityOutboundBindingConfig>
+      <signingInfo order="1" name="asymmetric-signingInfoResponse">
+        <signingPartReference reference="response:app_signparts">
+          <transform algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+        </signingPartReference>
+        <signingKeyInfo reference="gen_signkeyinfo"/>
+      </signingInfo>
+      <keyInfo type="STRREF" name="gen_signkeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentGenerator">
+        <tokenReference reference="gen_signtgen"/>
+      </keyInfo>
+      <tokenGenerator name="gen_signtgen" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator">
+        <valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" uri=""/>
+        <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.X509GenerateCallbackHandler">
+          <key alias="soapprovider" keypass="{xor}LDotKTot" name="CN=SOAPProvider, OU=TRL, O=IBM, ST=Kanagawa, C=JP"/>
+          <keyStore storepass="{xor}LDotKTot" path="${USER_INSTALL_ROOT}/etc/ws-security/samples/dsig-receiver.ks" type="JKS"/>
+        </callbackHandler>
+        <jAASConfig configName="system.wss.generate.x509"/>
+      </tokenGenerator>
+      <encryptionInfo order="3" name="asymmetric-encryptionInfoResponse">
+        <keyEncryptionKeyInfo reference="gen_enckeyinfo"/>
+        <encryptionPartReference reference="response:app_encparts"/>
+      </encryptionInfo>
+      <keyInfo type="KEYID" name="gen_enckeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentGenerator">
+        <tokenReference reference="gen_enctgen"/>
+      </keyInfo>
+      <tokenGenerator name="gen_enctgen" classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator">
+        <valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" uri=""/>
+        <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.X509GenerateCallbackHandler">
+          <key alias="alice" keypass="{xor}" name="CN=Alice, O=IBM, C=US"/>
+          <keyStore storepass="{xor}LCswLTovPiws" path="${USER_INSTALL_ROOT}/etc/ws-security/samples/enc-receiver.jceks" type="JCEKS"/>
+        </callbackHandler>
+        <jAASConfig configName="system.wss.generate.x509"/>
+      </tokenGenerator>
+    </securityOutboundBindingConfig>
+    <securityInboundBindingConfig>
+      <encryptionInfo name="asymmetric-encryptionInfoRequest">
+        <keyEncryptionKeyInfo reference="dec_keyinfo"/>
+        <encryptionPartReference reference="request:app_encparts"/>
+      </encryptionInfo>
+      <keyInfo name="dec_keyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentConsumer">
+        <tokenReference reference="con_tcon"/>
+      </keyInfo>
+      <tokenConsumer classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer" name="con_tcon">
+        <valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" uri=""/>
+        <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.X509ConsumeCallbackHandler">
+          <key alias="bob" keypass="{xor}NDomLz4sLA==" name="CN=Bob, O=IBM, C=US"/>
+          <keyStore storepass="{xor}LCswLTovPiws" path="${USER_INSTALL_ROOT}//etc/ws-security/samples/enc-receiver.jceks" type="JCEKS"/>
+          <certPathSettings>
+            <trustAnyCertificate/>
+          </certPathSettings>
+        </callbackHandler>
+        <jAASConfig configName="system.wss.consume.x509"/>
+      </tokenConsumer>
+      <signingInfo name="asymmetric-signingInfoRequest">
+        <signingPartReference reference="request:app_signparts">
+          <transform algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+        </signingPartReference>
+        <signingKeyInfo reference="con_signkeyinfo"/>
+      </signingInfo>
+      <keyInfo name="con_signkeyinfo" classname="com.ibm.ws.wssecurity.wssapi.CommonContentConsumer">
+        <tokenReference reference="con_vertcon"/>
+      </keyInfo>
+      <tokenConsumer classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer" name="con_vertcon">
+        <valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" uri=""/>
+        <callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.X509ConsumeCallbackHandler">
+          <certPathSettings>
+            <trustAnchorRef reference="DigSigTrustAnchor"/>
+            <certStoreRef reference="DigSigCertStore"/>
+          </certPathSettings>
+        </callbackHandler>
+        <jAASConfig configName="system.wss.consume.x509"/>
+      </tokenConsumer>
+      <trustAnchor name="DigSigTrustAnchor">
+        <keyStore storepass="{xor}LDotKTot" path="${USER_INSTALL_ROOT}/etc/ws-security/samples/dsig-receiver.ks" type="JKS"/>
+      </trustAnchor>
+      <certStoreList>
+        <collectionCertStores provider="IBMCertPath" name="DigSigCertStore">
+          <x509Certificates path="${USER_INSTALL_ROOT}/etc/ws-security/samples/intca2.cer"/>
+        </collectionCertStores>
+      </certStoreList>
+    </securityInboundBindingConfig>
+  </securityBinding>
+</securityBindings>

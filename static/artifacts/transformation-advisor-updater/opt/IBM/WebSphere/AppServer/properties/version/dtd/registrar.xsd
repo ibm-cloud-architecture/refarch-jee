@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright IBM Corp. This is the DTD For the WebSphere product version data 
+files that contain product installation information. -->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="registrar">
+        <xsd:annotation>
+            <xsd:documentation>
+            Copyright IBM Corp, 2005. This is the DTD For the WebSphere V6.0
+            registrar data files that contain registration information
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="id" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="product-name" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="product-id" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="feature-name" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="smf89-type" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute name="name" type ="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="id" type="xsd:string" use="required"/>
+    <xsd:element name="product-name" type="xsd:string" use="required"/>
+    <xsd:element name="product-id" type="xsd:string" use="required"/>
+    <xsd:element name="feature-name" type="xsd:string" use="optional"/>
+    <xsd:element name="smf89-type" type="xsd:integer" use="optional"/>
+
+</xsd:schema>

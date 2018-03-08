@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright IBM Corp. This is the DTD For the WebSphere product version data 
+files that contain product installation information. -->
+
+
+<!ELEMENT event-history (update-event*)>
+<!ATTLIST event-history>
+
+<!ELEMENT update-event (initial-version?,final-version?,update-event*)>
+<!ATTLIST update-event
+    event-type ( efix | ptf | component ) #REQUIRED
+    parent-id CDATA ""
+    id CDATA #REQUIRED
+    is-required ( false  | true | 0 | 1 ) "false"    
+    is-custom ( false  | true | 0 | 1 ) "false"
+    primary-content CDATA ""
+    update-action ( install | uninstall | selective-install | selective-uninstall ) #REQUIRED
+    update-type ( add | replace | remove | patch | composite ) #REQUIRED
+    is-external ( false  | true | 0 | 1 ) "false"    
+    root-property-file CDATA ""
+    root-property-name CDATA ""
+    root-property-value CDATA ""
+    log-name CDATA ""
+    backup-name CDATA ""
+    start-time-stamp CDATA #REQUIRED
+    end-time-stamp CDATA ""
+    result ( success | failure | cancelled | partialSuccess) "failure"
+    result-message CDATA "">
+
+<!ELEMENT initial-version EMPTY>
+<!ATTLIST initial-version
+    component-name CDATA #REQUIRED
+    spec-version CDATA #REQUIRED
+    build-version CDATA #REQUIRED
+    build-date CDATA #REQUIRED>
+
+<!ELEMENT final-version EMPTY>
+<!ATTLIST initial-version
+    component-name CDATA #REQUIRED
+    spec-version CDATA #REQUIRED
+    build-version CDATA #REQUIRED
+    build-date CDATA #REQUIRED>

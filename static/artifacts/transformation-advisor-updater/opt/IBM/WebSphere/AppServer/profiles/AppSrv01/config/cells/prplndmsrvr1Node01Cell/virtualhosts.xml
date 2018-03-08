@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:host="http://www.ibm.com/websphere/appserver/schemas/5.0/host.xmi">
+  <host:VirtualHost xmi:id="VirtualHost_1" name="default_host">
+    <mimeTypes xmi:id="MimeEntry_1" type="application/SLA">
+      <extensions>STL</extensions>
+      <extensions>stl</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_2" type="application/STEP">
+      <extensions>STEP</extensions>
+      <extensions>STP</extensions>
+      <extensions>step</extensions>
+      <extensions>stp</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_3" type="application/acad">
+      <extensions>DGW</extensions>
+      <extensions>dgw</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_4" type="application/clariscad">
+      <extensions>CCAD</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_5" type="application/drafting">
+      <extensions>DRW</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_6" type="application/dxf">
+      <extensions>DXF</extensions>
+      <extensions>dxf</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_7" type="application/i-deas">
+      <extensions>UNV</extensions>
+      <extensions>unv</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_8" type="application/iges">
+      <extensions>IGES</extensions>
+      <extensions>IGS</extensions>
+      <extensions>iges</extensions>
+      <extensions>igs</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_9" type="application/octet-stream">
+      <extensions>bin</extensions>
+      <extensions>class</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_10" type="application/oda">
+      <extensions>oda</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_11" type="application/pdf">
+      <extensions>pdf</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_12" type="application/postscript">
+      <extensions>PS</extensions>
+      <extensions>ai</extensions>
+      <extensions>eps</extensions>
+      <extensions>ps</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_13" type="application/pro_eng">
+      <extensions>PRT</extensions>
+      <extensions>prt</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_14" type="application/set">
+      <extensions>SET</extensions>
+      <extensions>set</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_15" type="application/solids">
+      <extensions>SOL</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_16" type="application/vda">
+      <extensions>VDA</extensions>
+      <extensions>vda</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_17" type="application/vnd.lotus-1-2-3">
+      <extensions>123</extensions>
+      <extensions>wk1</extensions>
+      <extensions>wk3</extensions>
+      <extensions>wk4</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_18" type="application/vnd.lotus-approach">
+      <extensions>apr</extensions>
+      <extensions>vew</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_19" type="application/vnd.lotus-freelance">
+      <extensions>pre</extensions>
+      <extensions>prz</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_20" type="application/vnd.lotus-organizer">
+      <extensions>or2</extensions>
+      <extensions>or3</extensions>
+      <extensions>org</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_21" type="application/vnd.lotus-screencam">
+      <extensions>scm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_22" type="application/vnd.lotus-wordpro">
+      <extensions>lwp</extensions>
+      <extensions>sam</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_23" type="application/x-bcpio">
+      <extensions>bcpio</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_24" type="application/x-bsh">
+      <extensions>bsh</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_25" type="application/x-cpio">
+      <extensions>cpio</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_26" type="application/x-csh">
+      <extensions>csh</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_27" type="application/x-dvi">
+      <extensions>dvi</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_28" type="application/x-freelance">
+      <extensions>prs</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_29" type="application/x-gtar">
+      <extensions>gtar</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_30" type="application/x-hdf">
+      <extensions>hdf</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_31" type="application/x-javascript">
+      <extensions>js</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_32" type="application/x-ksh">
+      <extensions>ksh</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_33" type="application/x-netcdf">
+      <extensions>cdf</extensions>
+      <extensions>nc</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_34" type="application/x-pcl">
+      <extensions>pcl</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_35" type="application/x-rtf">
+      <extensions>rtf</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_36" type="application/x-sh">
+      <extensions>sh</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_37" type="application/x-shar">
+      <extensions>shar</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_38" type="application/x-sv4cpio">
+      <extensions>sv4cpio</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_39" type="application/x-sv4crc">
+      <extensions>sv4crc</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_40" type="application/x-tcl">
+      <extensions>tcl</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_41" type="application/x-tex">
+      <extensions>tex</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_42" type="application/x-texinfo">
+      <extensions>texi</extensions>
+      <extensions>texinfo</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_43" type="application/x-troff">
+      <extensions>roff</extensions>
+      <extensions>t</extensions>
+      <extensions>tr</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_44" type="application/x-troff-man">
+      <extensions>man</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_45" type="application/x-troff-me">
+      <extensions>me</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_46" type="application/x-troff-ms">
+      <extensions>ms</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_47" type="application/x-wais-source">
+      <extensions>src</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_48" type="application/x-x509-ca-cert">
+      <extensions>der</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_49" type="audio/basic">
+      <extensions>au</extensions>
+      <extensions>snd</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_50" type="audio/x-aiff">
+      <extensions>aif</extensions>
+      <extensions>aifc</extensions>
+      <extensions>aiff</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_51" type="audio/x-wav">
+      <extensions>wav</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_52" type="image/bmp">
+      <extensions>bmp</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_53" type="image/cmu-raster">
+      <extensions>ras</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_54" type="image/gif">
+      <extensions>gif</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_55" type="image/ief">
+      <extensions>ief</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_56" type="image/jpeg">
+      <extensions>JPE</extensions>
+      <extensions>JPEG</extensions>
+      <extensions>JPG</extensions>
+      <extensions>jpe</extensions>
+      <extensions>jpeg</extensions>
+      <extensions>jpg</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_57" type="image/tiff">
+      <extensions>tif</extensions>
+      <extensions>tiff</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_58" type="image/x-portable-anymap">
+      <extensions>pnm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_59" type="image/x-portable-bitmap">
+      <extensions>pbm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_60" type="image/x-portable-graymap">
+      <extensions>pgm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_61" type="image/x-portable-pixmap">
+      <extensions>ppm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_62" type="image/x-rgb">
+      <extensions>rgb</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_63" type="image/x-xbitmap">
+      <extensions>xbm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_64" type="image/x-xpixmap">
+      <extensions>xpm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_65" type="image/x-xwindowdump">
+      <extensions>xwd</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_66" type="multipart/x-gzip">
+      <extensions>gz</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_67" type="multipart/x-tar">
+      <extensions>tar</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_68" type="multipart/x-ustar">
+      <extensions>ustar</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_69" type="multipart/x-zip">
+      <extensions>zip</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_70" type="text/css">
+      <extensions>css</extensions>
+      <extensions>s</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_71" type="text/html">
+      <extensions>htm</extensions>
+      <extensions>html</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_72" type="text/plain">
+      <extensions>C</extensions>
+      <extensions>c</extensions>
+      <extensions>cc</extensions>
+      <extensions>com</extensions>
+      <extensions>conf</extensions>
+      <extensions>cxx</extensions>
+      <extensions>def</extensions>
+      <extensions>f90</extensions>
+      <extensions>for</extensions>
+      <extensions>h</extensions>
+      <extensions>hh</extensions>
+      <extensions>java</extensions>
+      <extensions>list</extensions>
+      <extensions>log</extensions>
+      <extensions>lst</extensions>
+      <extensions>m</extensions>
+      <extensions>mar</extensions>
+      <extensions>sdml</extensions>
+      <extensions>txt</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_73" type="text/richtext">
+      <extensions>rtx</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_74" type="text/tab-separated-values">
+      <extensions>tsv</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_75" type="text/x-asm">
+      <extensions>asm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_76" type="text/x-setext">
+      <extensions>etx</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_77" type="text/x-ssi-html">
+      <extensions>htmls</extensions>
+      <extensions>shtml</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_78" type="text/x-uil">
+      <extensions>uil</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_79" type="application/x-latex">
+      <extensions>latex</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_80" type="text/x-uuencode">
+      <extensions>uu</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_81" type="video/mpeg">
+      <extensions>MPE</extensions>
+      <extensions>MPEG</extensions>
+      <extensions>MPG</extensions>
+      <extensions>mpe</extensions>
+      <extensions>mpeg</extensions>
+      <extensions>mpg</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_82" type="video/quicktime">
+      <extensions>mov</extensions>
+      <extensions>qt</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_83" type="video/x-motion-jpeg">
+      <extensions>mjpg</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_84" type="video/x-msvideo">
+      <extensions>avi</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_85" type="video/x-sgi-movie">
+      <extensions>movie</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_86" type="www/mime">
+      <extensions>mime</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_87" type="www/unknown">
+      <extensions>*</extensions>
+      <extensions>*.*</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_88" type="x-world/x-vrml">
+      <extensions>wrl</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_89" type="text/xml">
+      <extensions>xml</extensions>
+      <extensions>dtd</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_90" type="application/xml">
+      <extensions>xsl</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_91" type="application/vnd.mozilla.xul+xml">
+      <extensions>xul</extensions>
+    </mimeTypes>
+    <aliases xmi:id="HostAlias_1" hostname="*" port="9080"/>
+    <aliases xmi:id="HostAlias_2" hostname="*"/>
+    <aliases xmi:id="HostAlias_3" hostname="*" port="9443"/>
+    <aliases xmi:id="HostAlias_6" hostname="*" port="5060"/>
+    <aliases xmi:id="HostAlias_7" hostname="*" port="5061"/>
+    <aliases xmi:id="HostAlias_8" hostname="*" port="443"/>
+  </host:VirtualHost>
+  <host:VirtualHost xmi:id="VirtualHost_2" name="admin_host">
+    <mimeTypes xmi:id="MimeEntry_101" type="application/SLA">
+      <extensions>STL</extensions>
+      <extensions>stl</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_102" type="application/STEP">
+      <extensions>STEP</extensions>
+      <extensions>STP</extensions>
+      <extensions>step</extensions>
+      <extensions>stp</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_103" type="application/acad">
+      <extensions>DGW</extensions>
+      <extensions>dgw</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_104" type="application/clariscad">
+      <extensions>CCAD</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_105" type="application/drafting">
+      <extensions>DRW</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_106" type="application/dxf">
+      <extensions>DXF</extensions>
+      <extensions>dxf</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_107" type="application/i-deas">
+      <extensions>UNV</extensions>
+      <extensions>unv</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_108" type="application/iges">
+      <extensions>IGES</extensions>
+      <extensions>IGS</extensions>
+      <extensions>iges</extensions>
+      <extensions>igs</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_109" type="application/octet-stream">
+      <extensions>bin</extensions>
+      <extensions>class</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_110" type="application/oda">
+      <extensions>oda</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_111" type="application/pdf">
+      <extensions>pdf</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_112" type="application/postscript">
+      <extensions>PS</extensions>
+      <extensions>ai</extensions>
+      <extensions>eps</extensions>
+      <extensions>ps</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_113" type="application/pro_eng">
+      <extensions>PRT</extensions>
+      <extensions>prt</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_114" type="application/set">
+      <extensions>SET</extensions>
+      <extensions>set</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_115" type="application/solids">
+      <extensions>SOL</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_116" type="application/vda">
+      <extensions>VDA</extensions>
+      <extensions>vda</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_117" type="application/vnd.lotus-1-2-3">
+      <extensions>123</extensions>
+      <extensions>wk1</extensions>
+      <extensions>wk3</extensions>
+      <extensions>wk4</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_118" type="application/vnd.lotus-approach">
+      <extensions>apr</extensions>
+      <extensions>vew</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_119" type="application/vnd.lotus-freelance">
+      <extensions>pre</extensions>
+      <extensions>prz</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_120" type="application/vnd.lotus-organizer">
+      <extensions>or2</extensions>
+      <extensions>or3</extensions>
+      <extensions>org</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_121" type="application/vnd.lotus-screencam">
+      <extensions>scm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_122" type="application/vnd.lotus-wordpro">
+      <extensions>lwp</extensions>
+      <extensions>sam</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_123" type="application/x-bcpio">
+      <extensions>bcpio</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_124" type="application/x-bsh">
+      <extensions>bsh</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_125" type="application/x-cpio">
+      <extensions>cpio</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_126" type="application/x-csh">
+      <extensions>csh</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_127" type="application/x-dvi">
+      <extensions>dvi</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_128" type="application/x-freelance">
+      <extensions>prs</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_129" type="application/x-gtar">
+      <extensions>gtar</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_130" type="application/x-hdf">
+      <extensions>hdf</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_131" type="application/x-javascript">
+      <extensions>js</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_132" type="application/x-ksh">
+      <extensions>ksh</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_133" type="application/x-netcdf">
+      <extensions>cdf</extensions>
+      <extensions>nc</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_134" type="application/x-pcl">
+      <extensions>pcl</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_135" type="application/x-rtf">
+      <extensions>rtf</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_136" type="application/x-sh">
+      <extensions>sh</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_137" type="application/x-shar">
+      <extensions>shar</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_138" type="application/x-sv4cpio">
+      <extensions>sv4cpio</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_139" type="application/x-sv4crc">
+      <extensions>sv4crc</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_140" type="application/x-tcl">
+      <extensions>tcl</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_141" type="application/x-tex">
+      <extensions>tex</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_142" type="application/x-texinfo">
+      <extensions>texi</extensions>
+      <extensions>texinfo</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_143" type="application/x-troff">
+      <extensions>roff</extensions>
+      <extensions>t</extensions>
+      <extensions>tr</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_144" type="application/x-troff-man">
+      <extensions>man</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_145" type="application/x-troff-me">
+      <extensions>me</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_146" type="application/x-troff-ms">
+      <extensions>ms</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_147" type="application/x-wais-source">
+      <extensions>src</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_148" type="application/x-x509-ca-cert">
+      <extensions>der</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_149" type="audio/basic">
+      <extensions>au</extensions>
+      <extensions>snd</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_150" type="audio/x-aiff">
+      <extensions>aif</extensions>
+      <extensions>aifc</extensions>
+      <extensions>aiff</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_151" type="audio/x-wav">
+      <extensions>wav</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_152" type="image/bmp">
+      <extensions>bmp</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_153" type="image/cmu-raster">
+      <extensions>ras</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_154" type="image/gif">
+      <extensions>gif</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_155" type="image/ief">
+      <extensions>ief</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_156" type="image/jpeg">
+      <extensions>JPE</extensions>
+      <extensions>JPEG</extensions>
+      <extensions>JPG</extensions>
+      <extensions>jpe</extensions>
+      <extensions>jpeg</extensions>
+      <extensions>jpg</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_157" type="image/tiff">
+      <extensions>tif</extensions>
+      <extensions>tiff</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_158" type="image/x-portable-anymap">
+      <extensions>pnm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_159" type="image/x-portable-bitmap">
+      <extensions>pbm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_160" type="image/x-portable-graymap">
+      <extensions>pgm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_161" type="image/x-portable-pixmap">
+      <extensions>ppm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_162" type="image/x-rgb">
+      <extensions>rgb</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_163" type="image/x-xbitmap">
+      <extensions>xbm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_164" type="image/x-xpixmap">
+      <extensions>xpm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_165" type="image/x-xwindowdump">
+      <extensions>xwd</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_166" type="multipart/x-gzip">
+      <extensions>gz</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_167" type="multipart/x-tar">
+      <extensions>tar</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_168" type="multipart/x-ustar">
+      <extensions>ustar</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_169" type="multipart/x-zip">
+      <extensions>zip</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_170" type="text/css">
+      <extensions>css</extensions>
+      <extensions>s</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_171" type="text/html">
+      <extensions>htm</extensions>
+      <extensions>html</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_172" type="text/plain">
+      <extensions>C</extensions>
+      <extensions>c</extensions>
+      <extensions>cc</extensions>
+      <extensions>com</extensions>
+      <extensions>conf</extensions>
+      <extensions>cxx</extensions>
+      <extensions>def</extensions>
+      <extensions>f90</extensions>
+      <extensions>for</extensions>
+      <extensions>h</extensions>
+      <extensions>hh</extensions>
+      <extensions>java</extensions>
+      <extensions>list</extensions>
+      <extensions>log</extensions>
+      <extensions>lst</extensions>
+      <extensions>m</extensions>
+      <extensions>mar</extensions>
+      <extensions>sdml</extensions>
+      <extensions>txt</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_173" type="text/richtext">
+      <extensions>rtx</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_174" type="text/tab-separated-values">
+      <extensions>tsv</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_175" type="text/x-asm">
+      <extensions>asm</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_176" type="text/x-setext">
+      <extensions>etx</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_177" type="text/x-ssi-html">
+      <extensions>htmls</extensions>
+      <extensions>shtml</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_178" type="text/x-uil">
+      <extensions>uil</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_179" type="application/x-latex">
+      <extensions>latex</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_180" type="text/x-uuencode">
+      <extensions>uu</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_181" type="video/mpeg">
+      <extensions>MPE</extensions>
+      <extensions>MPEG</extensions>
+      <extensions>MPG</extensions>
+      <extensions>mpe</extensions>
+      <extensions>mpeg</extensions>
+      <extensions>mpg</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_182" type="video/quicktime">
+      <extensions>mov</extensions>
+      <extensions>qt</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_183" type="video/x-motion-jpeg">
+      <extensions>mjpg</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_184" type="video/x-msvideo">
+      <extensions>avi</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_185" type="video/x-sgi-movie">
+      <extensions>movie</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_186" type="www/mime">
+      <extensions>mime</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_187" type="www/unknown">
+      <extensions>*</extensions>
+      <extensions>*.*</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_188" type="x-world/x-vrml">
+      <extensions>wrl</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_189" type="text/xml">
+      <extensions>xml</extensions>
+      <extensions>dtd</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_190" type="application/xml">
+      <extensions>xsl</extensions>
+    </mimeTypes>
+    <mimeTypes xmi:id="MimeEntry_191" type="application/vnd.mozilla.xul+xml">
+      <extensions>xul</extensions>
+    </mimeTypes>
+    <aliases xmi:id="HostAlias_4" hostname="*" port="9061"/>
+    <aliases xmi:id="HostAlias_5" hostname="*" port="9044"/>
+  </host:VirtualHost>
+</xmi:XMI>

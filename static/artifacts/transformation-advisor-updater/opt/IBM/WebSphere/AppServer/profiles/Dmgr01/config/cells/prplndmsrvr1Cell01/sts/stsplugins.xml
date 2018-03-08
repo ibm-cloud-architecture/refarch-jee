@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin:STSExtensionMap xmlns:plugin="http://www.ibm.com/xmlns/prod/websphere/200608/securitytokenservice/plugins">
+	<plugin:Extension 
+		LocalName="Security Context Token"
+		URI="http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512/sct"
+ 		HandlerFactory="com.ibm.ws.wssecurity.trust.server.sts.ext.sct.SCTHandlerFactory" >
+		<plugin:Configuration>
+			<plugin:Property Name="lifetimeMinutes" Value="120"/>
+			<plugin:Property Name="renewableAfterExpiration" Value="false"/>
+			<plugin:Property Name="postdatable" Value="false"/>
+			<plugin:Property Name="renewalWindowMinutes" Value="120"/>
+			<plugin:Property Name="com.ibm.wsspi.wssecurity.trust.provider" Value="IBMJCE"/>
+			<plugin:Property Name="com.ibm.wsspi.wssecurity.trust.algorithm" Value="AES"/>
+			<plugin:Property Name="com.ibm.wsspi.wssecurity.trust.keySize" Value="128"/>
+			<plugin:Property Name="com.ibm.wsspi.wssecurity.trust.supportWSTrust10Draft" Value="true"/>
+		</plugin:Configuration>
+	</plugin:Extension>
+</plugin:STSExtensionMap>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+	targetNamespace="http://docs.oasis-open.org/wsrf/rmd-1" 
+	xmlns:tns="http://docs.oasis-open.org/wsrf/rmd-1" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdl-soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsrf-r="http://docs.oasis-open.org/wsrf/r-2" 
+	xmlns:wsrf-bf="http://docs.oasis-open.org/wsrf/bf-2" 
+	xmlns:wsrf-rp="http://docs.oasis-open.org/wsrf/rp-2" 
+	xmlns:wsa="http://www.w3.org/2005/08/addressing" 
+	name="MetadataResource">
+	<wsdl:types>
+		<xsd:schema 
+			elementFormDefault="qualified" 
+			targetNamespace="http://docs.oasis-open.org/wsrf/rp-2">
+			<xsd:include schemaLocation="WS-ResourceProperties-1_2.xsd" />
+		</xsd:schema>
+		<xsd:schema 
+        	elementFormDefault="qualified" 
+			targetNamespace="http://docs.oasis-open.org/wsrf/r-2">
+			<xsd:include schemaLocation="WS-Resource-1_2.xsd" />
+		</xsd:schema>
+		<xsd:schema 
+        	elementFormDefault="qualified" 
+			targetNamespace="http://docs.oasis-open.org/wsrf/rmd-1">
+			<xsd:include schemaLocation="WS-ResourceMetadataDescriptor-CD-01.xsd" />
+			
+			<xsd:element name="MetadataResourceRP">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:MetadataDescriptor"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="ResourceUnknownFault">
+		<wsdl:part name="ResourceUnknownFault" element="wsrf-r:ResourceUnknownFault" />
+	</wsdl:message> 
+	<wsdl:message name="ResourceUnavailableFault">
+		<wsdl:part name="ResourceUnavailableFault" element="wsrf-r:ResourceUnavailableFault" />
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyDocumentRequest">
+		<wsdl:part name="GetResourcePropertyDocumentRequest" element="wsrf-rp:GetResourcePropertyDocument"/>
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyDocumentResponse">
+		<wsdl:part name="GetResourcePropertyDocumentResponse" element="wsrf-rp:GetResourcePropertyDocumentResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyRequest">
+		<wsdl:part name="GetResourcePropertyRequest" element="wsrf-rp:GetResourceProperty" />
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyResponse">
+		<wsdl:part name="GetResourcePropertyResponse" element="wsrf-rp:GetResourcePropertyResponse" />
+	</wsdl:message>
+	<wsdl:message name="InvalidResourcePropertyQNameFault">
+		<wsdl:part name="InvalidResourcePropertyQNameFault" element="wsrf-rp:InvalidResourcePropertyQNameFault" />
+	</wsdl:message>
+	<wsdl:message name="GetMultipleResourcePropertiesRequest">
+    	<wsdl:part name="GetMultipleResourcePropertiesRequest" element="wsrf-rp:GetMultipleResourceProperties" />
+    </wsdl:message>
+    <wsdl:message name="GetMultipleResourcePropertiesResponse">
+    	<wsdl:part name="GetMultipleResourcePropertiesResponse" element="wsrf-rp:GetMultipleResourcePropertiesResponse" />
+    </wsdl:message>
+	<wsdl:portType 
+		name="MetadataResourcePortType" 
+	    wsrf-rp:ResourceProperties="tns:MetadataResourceRP">
+		<wsdl:operation name="GetResourcePropertyDocument">
+			<wsdl:input wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourcePropertyDocument/GetResourcePropertyDocumentRequest" 
+			            name="GetResourcePropertyDocumentRequest" message="tns:GetResourcePropertyDocumentRequest"/>
+			<wsdl:output wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourcePropertyDocument/GetResourcePropertyDocumentResponse" 
+			             name="GetResourcePropertyDocumentResponse" message="tns:GetResourcePropertyDocumentResponse"/>
+			<wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+			<wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetResourceProperty">
+			<wsdl:input wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourceProperty/GetResourcePropertyRequest" 
+			            name="GetResourcePropertyRequest" message="tns:GetResourcePropertyRequest" />
+			<wsdl:output wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourceProperty/GetResourcePropertyResponse" 
+			             name="GetResourcePropertyResponse" message="tns:GetResourcePropertyResponse" />
+			<wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+			<wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+			<wsdl:fault name="InvalidResourcePropertyQNameFault" message="tns:InvalidResourcePropertyQNameFault" />
+		</wsdl:operation>
+		<wsdl:operation name="GetMultipleResourceProperties">
+			<wsdl:input wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetMultipleResourceProperties/GetMultipleResourcePropertiesRequest" 
+			            name="GetMultipleResourcePropertiesRequest" message="tns:GetMultipleResourcePropertiesRequest" />
+			<wsdl:output wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetMultipleResourceProperties/GetMultipleResourcePropertiesResponse" 
+			             name="GetMultipleResourcePropertiesResponse" message="tns:GetMultipleResourcePropertiesResponse" />
+			<wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+			<wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+			<wsdl:fault name="InvalidResourcePropertyQNameFault" message="tns:InvalidResourcePropertyQNameFault" />
+    	</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="MetadataResourceBinding" type="tns:MetadataResourcePortType">
+        <wsdl:operation name="GetResourceProperty">
+        	<wsdl-soap:operation soapAction="GetResourceProperty"/>
+        	<wsdl:input name="GetResourcePropertyRequest">
+        		<wsdl-soap:body use="literal"/>
+        	</wsdl:input>
+		<wsdl:output name="GetResourcePropertyResponse">
+        		<wsdl-soap:body use="literal"/>
+        	</wsdl:output>
+        	<wsdl:fault name="ResourceUnknownFault">
+        		<wsdl-soap:fault 
+        			use="literal" 
+        			name="ResourceUnknownFault"/>
+        	</wsdl:fault>
+        	<wsdl:fault name="ResourceUnavailableFault">
+        		<wsdl-soap:fault 
+        			use="literal" 
+        			name="ResourceUnavailableFault"/>
+        	</wsdl:fault>
+        	<wsdl:fault name="InvalidResourcePropertyQNameFault">
+        		<wsdl-soap:fault 
+        			use="literal" 
+        			name="InvalidResourcePropertyQNameFault"/>
+        	</wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetMultipleResourceProperties">
+        	<wsdl-soap:operation soapAction="GetMultipleResourceProperties"/>
+        	<wsdl:input name="GetMultipleResourcePropertiesRequest">
+        		<wsdl-soap:body use="literal"/>
+        	</wsdl:input>
+		<wsdl:output name="GetMultipleResourcePropertiesResponse">
+        		<wsdl-soap:body use="literal"/>
+        	</wsdl:output>
+        	<wsdl:fault name="ResourceUnknownFault">
+        		<wsdl-soap:fault 
+        			use="literal" 
+        			name="ResourceUnknownFault"/>
+        	</wsdl:fault>
+        	<wsdl:fault name="ResourceUnavailableFault">
+        		<wsdl-soap:fault 
+        			use="literal" 
+        			name="ResourceUnavailableFault"/>
+        	</wsdl:fault>
+        	<wsdl:fault name="InvalidResourcePropertyQNameFault">
+        		<wsdl-soap:fault 
+        			use="literal" 
+        			name="InvalidResourcePropertyQNameFault"/>
+        	</wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetResourcePropertyDocument">
+        	<wsdl-soap:operation soapAction="GetResourcePropertyDocument"/>
+        	<wsdl:input name="GetResourcePropertyDocumentRequest">
+        		<wsdl-soap:body use="literal"/>
+        	</wsdl:input>
+		<wsdl:output name="GetResourcePropertyDocumentResponse">
+        		<wsdl-soap:body use="literal"/>
+        	</wsdl:output>
+        	<wsdl:fault name="ResourceUnknownFault">
+        		<wsdl-soap:fault 
+        			use="literal" 
+        			name="ResourceUnknownFault"/>
+        	</wsdl:fault>
+        	<wsdl:fault name="ResourceUnavailableFault">
+        		<wsdl-soap:fault 
+        			use="literal" 
+        			name="ResourceUnavailableFault"/>
+        	</wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+	<wsdl:service name="MetadataResourceService">
+    	<wsdl:port name="MetadataResourcePort" binding="tns:MetadataResourceBinding">
+    		<wsdl-soap:address location="http://localhost:8080/wsrf/services/MetadataResource"/>
+    	</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

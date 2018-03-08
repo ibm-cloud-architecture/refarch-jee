@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appdeployment:Deployment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:appdeployment="http://www.ibm.com/websphere/appserver/schemas/5.0/appdeployment.xmi" xmi:id="Deployment_1183122148265">
+  <deployedObject xmi:type="appdeployment:ApplicationDeployment" xmi:id="ApplicationDeployment_1183122148265" deploymentId="0" startingWeight="1" binariesURL="$(APP_INSTALL_ROOT)/$(CELL)/DefaultApplication.ear" useMetadataFromBinaries="false" enableDistribution="true" createMBeansForResources="false" reloadEnabled="false" appContextIDForSecurity="href:prplndmsrvr1Node01Cell/DefaultApplication" filePermission=".*\.dll=755#.*\.so=755#.*\.a=755#.*\.sl=755" allowDispatchRemoteInclude="false" allowServiceRemoteInclude="false" asyncRequestDispatchType="DISABLED">
+    <targetMappings xmi:id="DeploymentTargetMapping_1183122148265" enable="true" target="ServerTarget_1183122148265"/>
+    <classloader xmi:id="Classloader_1183122148265" mode="PARENT_FIRST"/>
+    <modules xmi:type="appdeployment:WebModuleDeployment" xmi:id="WebModuleDeployment_1183122148265" deploymentId="1" startingWeight="10000" uri="DefaultWebApplication.war">
+      <targetMappings xmi:id="DeploymentTargetMapping_1183122148266" target="ServerTarget_1183122148265"/>
+      <classloader xmi:id="Classloader_1183122148266"/>
+    </modules>
+    <modules xmi:type="appdeployment:EJBModuleDeployment" xmi:id="EJBModuleDeployment_1183122148265" deploymentId="1" startingWeight="5000" uri="Increment.jar">
+      <targetMappings xmi:id="DeploymentTargetMapping_1183122148267" target="ServerTarget_1183122148265"/>
+    </modules>
+    <properties xmi:id="Property_1213634106890" name="metadata.complete" value="true"/>
+  </deployedObject>
+  <deploymentTargets xmi:type="appdeployment:ServerTarget" xmi:id="ServerTarget_1183122148265" name="server1" nodeName="prplndmsrvr1Node01"/>
+</appdeployment:Deployment>

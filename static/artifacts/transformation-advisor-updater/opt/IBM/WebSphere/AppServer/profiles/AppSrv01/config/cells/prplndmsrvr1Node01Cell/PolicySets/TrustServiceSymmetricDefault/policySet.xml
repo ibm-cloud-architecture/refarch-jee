@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ps:PolicySet xmlns:ps="http://www.ibm.com/xmlns/prod/websphere/200605/policyset" xmlns:psa="http://www.ibm.com/xmlns/prod/websphere/200605/policysetattachment" name="TrustServiceSymmetricDefault" type="system/trust" description="$KEY_policySetDescription005" default="true" version="7.0.0.0">
+ 
+    <ps:PolicyType type="WSSecurity" provides="" enabled="true">
+    </ps:PolicyType>
+
+    <ps:PolicyType type="WSAddressing"  provides="" enabled="true">
+    </ps:PolicyType>
+
+</ps:PolicySet>           

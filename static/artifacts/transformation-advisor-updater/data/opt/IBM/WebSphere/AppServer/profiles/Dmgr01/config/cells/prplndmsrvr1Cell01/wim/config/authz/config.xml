@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<CommonAuthzConfig>
+	
+	<!--  Configuration settings for the XACML Repository.  IndexedDirectoryRepository is default 
+	<Config owner="XACMLCore" enabled="true" name="PolicyRepositoryFactory"  context="com.ibm.sec.authz.xacml.internal.repository">
+        	<Attributes>
+	            <Attr name="provider" 
+			          value="com.ibm.sec.authz.xacml.internal.repository.IndexedDirectoryRepository" 
+			           description="Implementation to use for PolicyRepository" />
+        	</Attributes>
+	</Config>
+	-->
+	
+	<!--  OR  In-Mem repository -->
+	<Config owner="XACMLCore" enabled="true" name="PolicyRepositoryFactory"  context="com.ibm.sec.authz.xacml.internal.repository">
+        	<Attributes>
+			    <Attr name="provider" 
+				      value="com.ibm.sec.authz.xacml.internal.repository.MemoryRepository" 
+				      description="Implementation to use for PolicyRepository" /> 
+        	</Attributes>
+	</Config>
+	
+	<!-- Configuration settings for the XACML engine 	
+	<Config owner="XACMLCore" enabled="true" name="Rule" context="com.ibm.sec.authz.xacml.policy">
+		<Attributes>
+        		<Attr name="logResult" value="true" description="Log the result of each Rule evaluation decision" /> 
+	</Attributes>
+	</Config>
+	<Config owner="XACMLCore" enabled="true" name="Policy" context="com.ibm.sec.authz.xacml.policy">
+		<Attributes>
+			<Attr name="logResult" value="true" description="Log the result of each Policy evaluation decision" /> 
+		</Attributes>
+	</Config>
+	<Config owner="XACMLCore" enabled="true" name="PolicySet" context="com.ibm.sec.authz.xacml.policy">
+		<Attributes>
+			<Attr name="logResult" value="true" description="Log the result of each PolicySet evaluation decision"/> 
+		</Attributes>
+	</Config>
+	-->
+
+	<Config owner="XACMLCore" enabled="true" name="xacml" context="com.ibm.sec.authz">
+		<Attributes>
+			<Attr name="contextSchema" value="access_control-xacml-2.0-context-schema-os.xsd" description="The XACML context schema file"/>
+			<Attr name="policySchema" value="access_control-xacml-2.0-policy-schema-os.xsd" description="The XACML policy schema file"/>
+		</Attributes>
+	</Config>
+
+	<!--	Configuration settings for the JACC++ provider
+	<Config owner="JACCProvider"
+		enabled="true"
+		name="CommonAuthzPolicy"
+		context="com.ibm.sec.authz.provider">
+		<Attributes>
+			<Attr name="useFileSystem" value="false" description="Store the runtime data on the file system" />
+			<Attr name="maxNumOfRoles" value="100" />
+			<Attr name="maxNumOfPermissions" value="1000" />
+			<Attr name="cacheSize" value="20" />
+		</Attributes>
+	</Config>
+
+	<Config owner="JACCProvider"
+		enabled="true"
+		name="CommonAuthzRoleMapping"
+		context="com.ibm.sec.authz.provider">
+		<Attributes>
+			<Attr name="useFileSystem" value="false" description="Store the runtime data on the file system" />
+			<Attr name="maxNumOfPrincipals" value="1000" />
+			<Attr name="maxNumOfRoleConditions" value="100" />
+			<Attr name="cacheSize" value="20" />
+		</Attributes>
+	</Config>
+
+	<Config owner="JACCProvider" enabled="false" name="provider" context="com.ibm.sec.authz">
+		<Attributes>
+			<Attr name="runtimedir" value="/tmp/ibmsecauthz/" />
+		</Attributes>
+	</Config>
+	-->
+	
+    <Config owner="CMDB" enabled="true" name="MCCFile" context="com.ibm.sec.authz.internal.xmt">
+        <Attributes>
+            <Attr name="externalFile" value="wim.xmt" />
+        </Attributes>
+    </Config>
+	
+</CommonAuthzConfig>

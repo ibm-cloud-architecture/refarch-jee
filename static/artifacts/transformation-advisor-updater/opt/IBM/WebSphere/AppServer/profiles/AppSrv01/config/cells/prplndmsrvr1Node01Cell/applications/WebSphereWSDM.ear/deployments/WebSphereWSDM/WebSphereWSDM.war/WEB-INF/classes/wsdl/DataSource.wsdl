@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+	targetNamespace="http://www.ibm.com/xmlns/prod/websphere/management/data-source"
+	xmlns:tns="http://www.ibm.com/xmlns/prod/websphere/management/data-source"
+	xmlns:wsa="http://www.w3.org/2005/08/addressing"
+	xmlns:was-ds="http://www.ibm.com/xmlns/prod/websphere/management/custom/data-source"
+	xmlns:j2ee="http://www.ibm.com/xmlns/prod/websphere/management/j2ee/managed-object"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdl-soap="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
+	xmlns:wsrf-r="http://docs.oasis-open.org/wsrf/r-2"
+	xmlns:wsrf-rl="http://docs.oasis-open.org/wsrf/rl-2"
+	xmlns:wsrf-rp="http://docs.oasis-open.org/wsrf/rp-2"
+	xmlns:wsrf-bf="http://docs.oasis-open.org/wsrf/bf-2"
+	xmlns:muws1="http://docs.oasis-open.org/wsdm/muws1-2.xsd"
+	xmlns:muws2="http://docs.oasis-open.org/wsdm/muws2-2.xsd" name="DataSource">
+	
+	<wsdl:types>
+		<xsd:schema 
+			elementFormDefault="qualified"
+			targetNamespace="http://www.w3.org/2005/08/addressing">
+			<xsd:include schemaLocation="WS-Addressing-2005_08.xsd"/>
+		</xsd:schema>
+		<xsd:schema elementFormDefault="qualified"
+			targetNamespace="http://schemas.xmlsoap.org/ws/2004/09/mex">
+			<xsd:include
+				schemaLocation="WS-MetadataExchange-2004_09.xsd" />
+		</xsd:schema>
+		<xsd:schema 
+			elementFormDefault="qualified" 
+			targetNamespace="http://docs.oasis-open.org/wsrf/rl-2">
+			<xsd:include schemaLocation="WS-ResourceLifetime-1_2.xsd" />
+		</xsd:schema>
+		<xsd:schema elementFormDefault="qualified"
+			targetNamespace="http://docs.oasis-open.org/wsrf/rp-2">
+			<xsd:include schemaLocation="WS-ResourceProperties-1_2.xsd" />
+		</xsd:schema>
+		<xsd:schema elementFormDefault="qualified"
+			targetNamespace="http://docs.oasis-open.org/wsrf/r-2">
+			<xsd:include schemaLocation="WS-Resource-1_2.xsd" />
+		</xsd:schema>
+		<xsd:schema elementFormDefault="qualified"
+			targetNamespace="http://docs.oasis-open.org/wsdm/muws1-2.xsd">
+			<xsd:include schemaLocation="WSDM-MUWS-Part1-1_1.xsd" />
+		</xsd:schema>
+		<xsd:schema elementFormDefault="qualified"
+			targetNamespace="http://docs.oasis-open.org/wsdm/muws2-2.xsd">
+			<xsd:include schemaLocation="WSDM-MUWS-Part2-1_1.xsd" />
+		</xsd:schema>
+		<xsd:schema elementFormDefault="qualified"
+			targetNamespace="http://www.ibm.com/xmlns/prod/websphere/management/j2ee/managed-object">
+			<xsd:include schemaLocation="J2EEManagedObject.xsd" />
+		</xsd:schema>
+		<xsd:schema elementFormDefault="qualified"
+			targetNamespace="http://docs.oasis-open.org/wsrf/bf-2">
+			<xsd:include schemaLocation="WS-BaseFaults-1_2.xsd" />
+		</xsd:schema>
+		<xsd:schema elementFormDefault="qualified"
+			targetNamespace="http://www.ibm.com/xmlns/prod/websphere/management/custom/data-source">
+			<xsd:include schemaLocation="DataSource.xsd" />
+		</xsd:schema>
+
+    <xsd:schema attributeFormDefault="qualified"
+      elementFormDefault="qualified"
+      targetNamespace="http://www.ibm.com/xmlns/prod/websphere/management/data-source"
+      xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      
+	<xsd:import namespace="http://docs.oasis-open.org/wsdm/muws2-2.xsd" schemaLocation="WSDM-MUWS-Part2-1_1.xsd" />	
+	<xsd:import namespace="http://docs.oasis-open.org/wsdm/muws1-2.xsd" schemaLocation="WSDM-MUWS-Part1-1_1.xsd" />
+	<xsd:import namespace="http://docs.oasis-open.org/wsrf/rl-2" schemaLocation="WS-ResourceLifetime-1_2.xsd" />
+	<xsd:import namespace="http://www.ibm.com/xmlns/prod/websphere/management/custom/data-source" schemaLocation="DataSource.xsd" />
+	<xsd:import namespace="http://www.ibm.com/xmlns/prod/websphere/management/j2ee/managed-object" schemaLocation="J2EEManagedObject.xsd" />
+
+      <xsd:element name="DataSourceProperties">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="muws1:ResourceId"/>
+            <xsd:element ref="j2ee:ObjectName"/>
+            <xsd:element ref="j2ee:StateManageable"/>
+            <xsd:element ref="j2ee:EventProvider"/>
+            <xsd:element ref="j2ee:StatisticsProvider"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="muws1:ManageabilityCapability"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="muws2:Caption"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="muws2:Description"/>
+            <xsd:element minOccurs="0" ref="muws2:Version"/>
+            
+         	<!--  WS-ResourceLifeTime -->
+			<xsd:element ref="wsrf-rl:CurrentTime" />
+			<xsd:element ref="wsrf-rl:TerminationTime" />
+						
+            <xsd:element ref="muws2:CurrentTime"/>
+            <xsd:element ref="was-ds:JDBCDriver"/>
+            <xsd:element ref="was-ds:ConnectionFactoryType"/>
+            <xsd:element ref="was-ds:DataSourceName"/>
+            <xsd:element ref="was-ds:DataStoreHelperClass"/>
+            <xsd:element ref="was-ds:LoginTimeout"/>
+            <xsd:element ref="was-ds:StatementCacheSize"/>
+            <xsd:element ref="was-ds:JTAEnabled"/>
+            <xsd:element ref="was-ds:TestConnection"/>
+            <xsd:element ref="was-ds:TestConnectionInterval"/>
+            <xsd:element ref="was-ds:Name"/>
+            <xsd:element ref="was-ds:JNDIName"/>
+            <xsd:element ref="was-ds:StuckTimerTime"/>
+            <xsd:element ref="was-ds:StuckTime"/>
+            <xsd:element ref="was-ds:StuckThreshold"/>
+            <xsd:element ref="was-ds:SurgeThreshold"/>
+            <xsd:element ref="was-ds:SurgeCreationInterval"/>
+            <xsd:element ref="was-ds:ConnectionTimeout"/>
+            <xsd:element ref="was-ds:MaxConnections"/>
+            <xsd:element ref="was-ds:MinConnections"/>
+            <xsd:element ref="was-ds:PurgePolicy"/>
+            <xsd:element ref="was-ds:ReapTime"/>
+            <xsd:element ref="was-ds:UnusedTimeout"/>
+            <xsd:element ref="was-ds:AgedTimeout"/>
+            <xsd:element ref="was-ds:FreePoolDistributionTableSize"/>
+            <xsd:element ref="was-ds:FreePoolPartitions"/>
+            <xsd:element ref="was-ds:SharedPoolPartitions"/>
+            <xsd:element ref="was-ds:PoolContents"/>
+            <xsd:element ref="muws2:OperationalStatus"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ShowPoolContents">
+    <wsdl:part element="was-ds:ShowPoolContents" name="ShowPoolContents"/>
+  </wsdl:message>
+  <wsdl:message name="ShowPoolContentsResponse">
+    <wsdl:part name="ShowPoolContentsResponse" element="was-ds:ShowPoolContentsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ShowPoolContentsFault">
+		<wsdl:part name="ShowPoolContentsFault"	element="was-ds:ShowPoolContentsFault" />
+	</wsdl:message>
+  <wsdl:message name="PurgePoolContents">
+    <wsdl:part element="was-ds:PurgePoolContents" name="PurgePoolContents"/>
+  </wsdl:message>
+  <wsdl:message name="PurgePoolContentsResponse">
+    <wsdl:part name="PurgePoolContentsResponse" element="was-ds:PurgePoolContentsResponse"/>
+  </wsdl:message>
+    <wsdl:message name="PurgePoolContentsFault">
+		<wsdl:part name="PurgePoolContentsFault" element="was-ds:PurgePoolContentsFault" />
+	</wsdl:message>
+  <wsdl:message name="Pause">
+    <wsdl:part element="was-ds:Pause" name="Pause"/>
+  </wsdl:message>
+  <wsdl:message name="PauseResponse">
+    <wsdl:part name="PauseResponse" element="was-ds:PauseResponse"/>
+  </wsdl:message>
+    <wsdl:message name="PauseFault">
+		<wsdl:part name="PauseFault" element="was-ds:PauseFault" />
+	</wsdl:message>
+  <wsdl:message name="Resume">
+    <wsdl:part element="was-ds:Resume" name="Resume"/>
+  </wsdl:message>
+  <wsdl:message name="ResumeResponse">
+    <wsdl:part name="ResumeResponse" element="was-ds:ResumeResponse"/>
+  </wsdl:message>
+    <wsdl:message name="ResumeFault">
+		<wsdl:part name="ResumeFault" element="was-ds:ResumeFault" />
+	</wsdl:message>
+  <wsdl:message name="GetStatus">
+    <wsdl:part element="was-ds:GetStatus" name="GetStatus"/>
+  </wsdl:message>
+  <wsdl:message name="GetStatusResponse">
+  	<wsdl:part name="GetStatusResponse" element="was-ds:GetStatusResponse"/>
+  </wsdl:message>
+    <wsdl:message name="GetStatusFault">
+		<wsdl:part name="GetStatusFault" element="was-ds:GetStatusFault" />
+	</wsdl:message>
+	<wsdl:message name="GetMetadataMsg">
+		<wsdl:part name="GetMetadataMsg" element="wsx:GetMetadata" />
+	</wsdl:message>
+	<wsdl:message name="GetMetadataResponseMsg">
+		<wsdl:part name="GetMetadataResponseMsg" element="wsx:Metadata" />
+	</wsdl:message>
+	<wsdl:message name="ResourceUnknownFault">
+		<wsdl:part name="ResourceUnknownFault"
+			element="wsrf-r:ResourceUnknownFault" />
+	</wsdl:message>
+	<wsdl:message name="ResourceUnavailableFault">
+		<wsdl:part name="ResourceUnavailableFault"
+			element="wsrf-r:ResourceUnavailableFault" />
+	</wsdl:message>
+	<wsdl:message name="DestroyRequest">
+		<wsdl:part name="DestroyRequest" element="wsrf-rl:Destroy" />
+	</wsdl:message>
+	<wsdl:message name="DestroyResponse">
+		<wsdl:part name="DestroyResponse" element="wsrf-rl:DestroyResponse" />
+	</wsdl:message>
+	<wsdl:message name="ResourceNotDestroyedFault">
+		<wsdl:part name="ResourceNotDestroyedFault" element="wsrf-rl:ResourceNotDestroyedFault" />
+	</wsdl:message>
+	<wsdl:message name="SetTerminationTimeRequest">
+		<wsdl:part name="SetTerminationTimeRequest" element="wsrf-rl:SetTerminationTime" />
+	</wsdl:message>
+	<wsdl:message name="SetTerminationTimeResponse">
+		<wsdl:part name="SetTerminationTimeResponse" element="wsrf-rl:SetTerminationTimeResponse" />
+	</wsdl:message>
+	<wsdl:message name="UnableToSetTerminationTimeFault">
+		<wsdl:part name="UnableToSetTerminationTimeFault" element="wsrf-rl:UnableToSetTerminationTimeFault" />
+	</wsdl:message>
+	<wsdl:message name="TerminationTimeChangeRejectedFault">
+		<wsdl:part name="TerminationTimeChangeRejectedFault" element="wsrf-rl:TerminationTimeChangeRejectedFault" />
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyDocumentRequest">
+		<wsdl:part name="GetResourcePropertyDocumentRequest"
+			element="wsrf-rp:GetResourcePropertyDocument" />
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyDocumentResponse">
+		<wsdl:part name="GetResourcePropertyDocumentResponse"
+			element="wsrf-rp:GetResourcePropertyDocumentResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyRequest">
+		<wsdl:part name="GetResourcePropertyRequest"
+			element="wsrf-rp:GetResourceProperty" />
+	</wsdl:message>
+	<wsdl:message name="GetResourcePropertyResponse">
+		<wsdl:part name="GetResourcePropertyResponse"
+			element="wsrf-rp:GetResourcePropertyResponse" />
+	</wsdl:message>
+	<wsdl:message name="InvalidResourcePropertyQNameFault">
+		<wsdl:part name="InvalidResourcePropertyQNameFault"
+			element="wsrf-rp:InvalidResourcePropertyQNameFault" />
+	</wsdl:message>
+	<wsdl:message name="GetMultipleResourcePropertiesRequest">
+		<wsdl:part name="GetMultipleResourcePropertiesRequest"
+			element="wsrf-rp:GetMultipleResourceProperties" />
+	</wsdl:message>
+	<wsdl:message name="GetMultipleResourcePropertiesResponse">
+		<wsdl:part name="GetMultipleResourcePropertiesResponse"
+			element="wsrf-rp:GetMultipleResourcePropertiesResponse" />
+	</wsdl:message>
+    <wsdl:message name="SetResourcePropertiesRequest">
+    	<wsdl:part name="SetResourcePropertiesRequest" element="wsrf-rp:SetResourceProperties" />
+    </wsdl:message>
+    <wsdl:message name="SetResourcePropertiesResponse">
+    	<wsdl:part name="SetResourcePropertiesResponse" element="wsrf-rp:SetResourcePropertiesResponse" />
+    </wsdl:message>
+    <wsdl:message name="InvalidModificationFault">
+    	<wsdl:part name="InvalidModificationFault" element="wsrf-rp:InvalidModificationFault" />
+    </wsdl:message>
+    <wsdl:message name="UnableToModifyResourcePropertyFault">
+    	<wsdl:part name="UnableToModifyResourcePropertyFault" element="wsrf-rp:UnableToModifyResourcePropertyFault" />
+    </wsdl:message>
+    <wsdl:message name="SetResourcePropertyRequestFailedFault">
+    	<wsdl:part name="SetResourcePropertyRequestFailedFault" element="wsrf-rp:SetResourcePropertyRequestFailedFault" />
+    </wsdl:message>
+  <wsdl:portType name="DataSourcePortType" wsrf-rp:ResourceProperties="tns:DataSourceProperties">
+    <wsdl:operation name="ShowPoolContents">
+      <wsdl:input wsa:Action="http://www.ibm.com/xmlns/prod/websphere/management/custom/data-source/ShowPoolContents" 
+			      message="tns:ShowPoolContents" name="ShowPoolContentsRequest"/>
+      <wsdl:output wsa:Action="http://www.ibm.com/websphere/management/data-source/ShowPoolContentsResponse" 
+			       message="tns:ShowPoolContentsResponse" name="ShowPoolContentsResponse"/>
+	  <wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+	  <wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+	  <wsdl:fault name="ShowPoolContentsFault" message="tns:ShowPoolContentsFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="PurgePoolContents">
+      <wsdl:input wsa:Action="http://www.ibm.com/xmlns/prod/websphere/management/custom/data-source/PurgePoolContents" 
+			      message="tns:PurgePoolContents" name="PurgePoolContentsRequest"/>
+      <wsdl:output wsa:Action="http://www.ibm.com/websphere/management/data-source/PurgePoolContentsResponse" 
+			       message="tns:PurgePoolContentsResponse" name="PurgePoolContentsResponse"/>
+	  <wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+	  <wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+	  <wsdl:fault name="PurgePoolContentsFault" message="tns:PurgePoolContentsFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Pause">
+      <wsdl:input wsa:Action="http://www.ibm.com/xmlns/prod/websphere/management/custom/data-source/Pause" 
+			      message="tns:Pause" name="PauseRequest"/>
+      <wsdl:output wsa:Action="http://www.ibm.com/websphere/management/data-source/PauseResponse" 
+			       message="tns:PauseResponse" name="PauseResponse"/>
+	  <wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+	  <wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+	  <wsdl:fault name="PauseFault" message="tns:PauseFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Resume">
+      <wsdl:input wsa:Action="http://www.ibm.com/xmlns/prod/websphere/management/custom/data-source/Resume" 
+			      message="tns:Resume" name="ResumeRequest"/>
+      <wsdl:output wsa:Action="http://www.ibm.com/websphere/management/data-source/ResumeResponse" 
+			      message="tns:ResumeResponse" name="ResumeResponse"/>
+      <wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+	  <wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+	  <wsdl:fault name="ResumeFault" message="tns:ResumeFault"/>
+    </wsdl:operation>
+	<wsdl:operation name="GetStatus">
+      <wsdl:input wsa:Action="http://www.ibm.com/xmlns/prod/websphere/management/custom/data-source/GetStatus" 
+			      message="tns:GetStatus" name="GetStatusRequest"/>
+      <wsdl:output wsa:Action="http://www.ibm.com/websphere/management/data-source/GetStatusResponse" 
+			      message="tns:GetStatusResponse" name="GetStatusResponse"/>
+      <wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+	  <wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+	  <wsdl:fault name="GetStatusFault" message="tns:GetStatusFault"/>
+    </wsdl:operation>
+	    <wsdl:operation name="GetMetadata">
+			<wsdl:input wsa:Action="http://schemas.xmlsoap.org/ws/2004/09/mex/GetMetadata" 
+			            name="GetMetadataMsg" message="tns:GetMetadataMsg"/>
+			<wsdl:output wsa:Action="http://schemas.xmlsoap.org/ws/2004/09/mex/GetMetadataResponse" 
+			             name="GetMetadataResponseMsg" message="tns:GetMetadataResponseMsg"/>
+		</wsdl:operation>
+		<wsdl:operation name="Destroy">
+			<wsdl:input wsa:Action="http://docs.oasis-open.org/wsrf/rlw-2/ImmediateResourceTermination/DestroyRequest" 
+			            name="DestroyRequest" message="tns:DestroyRequest" />
+			<wsdl:output wsa:Action="http://docs.oasis-open.org/wsrf/rlw-2/ImmediateResourceTermination/DestroyResponse" 
+			             name="DestroyResponse" message="tns:DestroyResponse" />
+			<wsdl:fault name="ResourceNotDestroyedFault" message="tns:ResourceNotDestroyedFault" />
+			<wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault" />
+			<wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetTerminationTime">
+			<wsdl:input wsa:Action="http://docs.oasis-open.org/wsrf/rlw-2/ScheduledResourceTermination/SetTerminationTimeRequest" 
+			            name="SetTerminationTimeRequest" message="tns:SetTerminationTimeRequest" />
+			<wsdl:output wsa:Action="http://docs.oasis-open.org/wsrf/rlw-2/ScheduledResourceTermination/SetTerminationTimeResponse" 
+			             name="SetTerminationTimeResponse" message="tns:SetTerminationTimeResponse" />
+			<wsdl:fault name="UnableToSetTerminationTimeFault" message="tns:UnableToSetTerminationTimeFault" />
+			<wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault" />
+			<wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+			<wsdl:fault name="TerminationTimeChangeRejectedFault" message="tns:TerminationTimeChangeRejectedFault" />
+		</wsdl:operation>
+		<wsdl:operation name="GetResourcePropertyDocument">
+			<wsdl:input wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourcePropertyDocument/GetResourcePropertyDocumentRequest" 
+			            name="GetResourcePropertyDocumentRequest" message="tns:GetResourcePropertyDocumentRequest"/>
+			<wsdl:output wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourcePropertyDocument/GetResourcePropertyDocumentResponse" 
+			             name="GetResourcePropertyDocumentResponse" message="tns:GetResourcePropertyDocumentResponse"/>
+			<wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+			<wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetResourceProperty">
+			<wsdl:input wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourceProperty/GetResourcePropertyRequest" 
+			            name="GetResourcePropertyRequest" message="tns:GetResourcePropertyRequest" />
+			<wsdl:output wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetResourceProperty/GetResourcePropertyResponse" 
+			             name="GetResourcePropertyResponse" message="tns:GetResourcePropertyResponse" />
+			<wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+			<wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+			<wsdl:fault name="InvalidResourcePropertyQNameFault" message="tns:InvalidResourcePropertyQNameFault" />
+		</wsdl:operation>
+		<wsdl:operation name="GetMultipleResourceProperties">
+			<wsdl:input wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetMultipleResourceProperties/GetMultipleResourcePropertiesRequest" 
+			            name="GetMultipleResourcePropertiesRequest" message="tns:GetMultipleResourcePropertiesRequest" />
+			<wsdl:output wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/GetMultipleResourceProperties/GetMultipleResourcePropertiesResponse" 
+			             name="GetMultipleResourcePropertiesResponse" message="tns:GetMultipleResourcePropertiesResponse" />
+			<wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+			<wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+			<wsdl:fault name="InvalidResourcePropertyQNameFault" message="tns:InvalidResourcePropertyQNameFault" />
+    	</wsdl:operation>
+    	<wsdl:operation name="SetResourceProperties">
+    		<wsdl:input  wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/SetResourceProperties/SetResourcePropertiesRequest" 
+			             name="SetResourcePropertiesRequest" message="tns:SetResourcePropertiesRequest" />
+    		<wsdl:output wsa:Action="http://docs.oasis-open.org/wsrf/rpw-2/SetResourceProperties/SetResourcePropertiesResponse" 
+			             name="SetResourcePropertiesResponse" message="tns:SetResourcePropertiesResponse" />
+    		<wsdl:fault name="ResourceUnknownFault" message="tns:ResourceUnknownFault"/>
+    		<wsdl:fault name="ResourceUnavailableFault" message="tns:ResourceUnavailableFault"/>
+    		<wsdl:fault name="InvalidModificationFault" message="tns:InvalidModificationFault" />
+    		<wsdl:fault name="UnableToModifyResourcePropertyFault" message="tns:UnableToModifyResourcePropertyFault" />
+    		<wsdl:fault name="InvalidResourcePropertyQNameFault" message="tns:InvalidResourcePropertyQNameFault" />
+    		<wsdl:fault name="SetResourcePropertyRequestFailedFault" message="tns:SetResourcePropertyRequestFailedFault" />
+    	</wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DataSource" type="tns:DataSourcePortType">
+    <wsdl-soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ShowPoolContents">
+      <wsdl-soap:operation soapAction="ShowPoolContents" />
+      <wsdl:input name="ShowPoolContentsRequest">
+        <wsdl-soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ShowPoolContentsResponse">
+        <wsdl-soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ResourceUnknownFault">
+		<wsdl-soap:fault use="literal"
+			name="ResourceUnknownFault" />
+	  </wsdl:fault>
+	  <wsdl:fault name="ResourceUnavailableFault">
+		<wsdl-soap:fault use="literal"
+			name="ResourceUnavailableFault" />
+	  </wsdl:fault>
+      <wsdl:fault name="ShowPoolContentsFault">
+        <wsdl-soap:fault use="literal"
+        	name="ShowPoolContentsFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PurgePoolContents">
+      <wsdl-soap:operation soapAction="PurgePoolContents" />
+      <wsdl:input name="PurgePoolContentsRequest">
+        <wsdl-soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="PurgePoolContentsResponse">
+        <wsdl-soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ResourceUnknownFault">
+		<wsdl-soap:fault use="literal"
+			name="ResourceUnknownFault" />
+	  </wsdl:fault>
+	  <wsdl:fault name="ResourceUnavailableFault">
+		<wsdl-soap:fault use="literal"
+			name="ResourceUnavailableFault" />
+	  </wsdl:fault>
+      <wsdl:fault name="PurgePoolContentsFault">
+        <wsdl-soap:fault use="literal"
+        	name="PurgePoolContentsFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Pause">
+      <wsdl-soap:operation soapAction="Pause" />
+      <wsdl:input name="PauseRequest">
+        <wsdl-soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="PauseResponse">
+        <wsdl-soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="PauseFault">
+        <wsdl-soap:fault use="literal"
+        	name="PauseFault" />
+      </wsdl:fault>
+      <wsdl:fault name="ResourceUnknownFault">
+		<wsdl-soap:fault use="literal"
+			name="ResourceUnknownFault" />
+	  </wsdl:fault>
+	  <wsdl:fault name="ResourceUnavailableFault">
+		<wsdl-soap:fault use="literal"
+			name="ResourceUnavailableFault" />
+	  </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Resume">
+      <wsdl-soap:operation soapAction="Resume" />
+      <wsdl:input name="ResumeRequest">
+        <wsdl-soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ResumeResponse">
+        <wsdl-soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ResumeFault">
+        <wsdl-soap:fault use="literal"
+        	name="ResumeFault" />
+      </wsdl:fault>
+      <wsdl:fault name="ResourceUnknownFault">
+		<wsdl-soap:fault use="literal"
+			name="ResourceUnknownFault" />
+	  </wsdl:fault>
+	  <wsdl:fault name="ResourceUnavailableFault">
+		<wsdl-soap:fault use="literal"
+			name="ResourceUnavailableFault" />
+	  </wsdl:fault>
+	</wsdl:operation>
+    <wsdl:operation name="GetStatus">
+      	  <wsdl-soap:operation soapAction="GetStatus" />
+	      <wsdl:input name="GetStatusRequest">
+	        <wsdl-soap:body use="literal" />
+	      </wsdl:input>
+	      <wsdl:output name="GetStatusResponse">
+	        <wsdl-soap:body use="literal" />
+	      </wsdl:output>
+	      <wsdl:fault name="ResourceUnknownFault">
+			<wsdl-soap:fault use="literal"
+				name="ResourceUnknownFault" />
+		  </wsdl:fault>
+		  <wsdl:fault name="ResourceUnavailableFault">
+			<wsdl-soap:fault use="literal"
+				name="ResourceUnavailableFault" />
+		  </wsdl:fault>
+	      <wsdl:fault name="GetStatusFault">
+	        <wsdl-soap:fault use="literal"
+	        	name="GetStatusFault" />
+	      </wsdl:fault>
+     </wsdl:operation>
+		<wsdl:operation name="GetMetadata">
+			<wsdl-soap:operation soapAction="GetMetadata" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetResourcePropertyDocument">
+			<wsdl-soap:operation
+				soapAction="GetResourcePropertyDocument" />
+			<wsdl:input name="GetResourcePropertyDocumentRequest">
+				<wsdl-soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetResourcePropertyDocumentResponse">
+				<wsdl-soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceUnknownFault" />
+			</wsdl:fault>
+			<wsdl:fault name="ResourceUnavailableFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceUnavailableFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetResourceProperty">
+			<wsdl-soap:operation soapAction="GetResourceProperty" />
+			<wsdl:input name="GetResourcePropertyRequest">
+				<wsdl-soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetResourcePropertyResponse">
+				<wsdl-soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceUnknownFault" />
+			</wsdl:fault>
+			<wsdl:fault name="ResourceUnavailableFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceUnavailableFault" />
+			</wsdl:fault>
+			<wsdl:fault name="InvalidResourcePropertyQNameFault">
+				<wsdl-soap:fault use="literal"
+					name="InvalidResourcePropertyQNameFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMultipleResourceProperties">
+			<wsdl-soap:operation
+				soapAction="GetMultipleResourceProperties" />
+			<wsdl:input name="GetMultipleResourcePropertiesRequest">
+				<wsdl-soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetMultipleResourcePropertiesResponse">
+				<wsdl-soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceUnknownFault" />
+			</wsdl:fault>
+			<wsdl:fault name="ResourceUnavailableFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceUnavailableFault" />
+			</wsdl:fault>
+			<wsdl:fault name="InvalidResourcePropertyQNameFault">
+				<wsdl-soap:fault use="literal"
+					name="InvalidResourcePropertyQNameFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetResourceProperties">
+        	<wsdl-soap:operation soapAction="SetResourceProperties"/>
+        	<wsdl:input name="SetResourcePropertiesRequest">
+        		<wsdl-soap:body use="literal" />
+        	</wsdl:input><wsdl:output name="SetResourcePropertiesResponse">
+        		<wsdl-soap:body use="literal" />
+        	</wsdl:output>
+        	<wsdl:fault name="ResourceUnknownFault">
+        		<wsdl-soap:fault use="literal" name="ResourceUnknownFault"/>
+        	</wsdl:fault>
+        	<wsdl:fault name="ResourceUnavailableFault">
+        		<wsdl-soap:fault use="literal" name="ResourceUnavailableFault"/>
+        	</wsdl:fault>
+        	<wsdl:fault name="InvalidModificationFault">
+        		<wsdl-soap:fault use="literal" name="InvalidModificationFault"/>
+        	</wsdl:fault>
+        	<wsdl:fault name="UnableToModifyResourcePropertyFault">
+        		<wsdl-soap:fault use="literal" name="UnableToModifyResourcePropertyFault"/>
+        	</wsdl:fault>
+        	<wsdl:fault name="InvalidResourcePropertyQNameFault">
+        		<wsdl-soap:fault use="literal" name="InvalidResourcePropertyQNameFault"/>
+        	</wsdl:fault>
+        	<wsdl:fault name="SetResourcePropertyRequestFailedFault">
+        		<wsdl-soap:fault use="literal" name="SetResourcePropertyRequestFailedFault"/>
+        	</wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="Destroy">
+			<wsdl-soap:operation soapAction="Destroy" />
+			<wsdl:input name="DestroyRequest">
+				<wsdl-soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DestroyResponse">
+				<wsdl-soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="ResourceNotDestroyedFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceNotDestroyedFault" />
+			</wsdl:fault>
+			<wsdl:fault name="ResourceUnknownFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceUnknownFault" />
+			</wsdl:fault>
+			<wsdl:fault name="ResourceUnavailableFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceUnavailableFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetTerminationTime">
+			<wsdl-soap:operation soapAction="SetTerminationTime" />
+			<wsdl:input name="SetTerminationTimeRequest">
+				<wsdl-soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="SetTerminationTimeResponse">
+				<wsdl-soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="UnableToSetTerminationTimeFault">
+				<wsdl-soap:fault use="literal"
+					name="UnableToSetTerminationTimeFault" />
+			</wsdl:fault>
+			<wsdl:fault name="ResourceUnknownFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceUnknownFault" />
+			</wsdl:fault>
+			<wsdl:fault name="ResourceUnavailableFault">
+				<wsdl-soap:fault use="literal"
+					name="ResourceUnavailableFault" />
+			</wsdl:fault>
+			<wsdl:fault name="TerminationTimeChangeRejectedFault">
+				<wsdl-soap:fault use="literal"
+					name="TerminationTimeChangeRejectedFault" />
+			</wsdl:fault>
+		</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataSourceService">
+    <wsdl:port binding="tns:DataSource" name="DataSource">
+      <wsdl-soap:address location="http://localhost:8080/DataSourceTest/services/DataSource"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
