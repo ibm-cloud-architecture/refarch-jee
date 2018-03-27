@@ -26,15 +26,16 @@ In order to carry out this tutorial, you will need a development environment wit
 * [Docker](https://docs.docker.com/engine/installation/)
 * [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-In our case, a **Skytap development environment, with the tools aforementioned already installed on it, will be provided**. The user for this environment should be **skytap** and its password **A1rb0rn3**. Common issues and procedures within the Skytap environment can be found on the [troubleshooting section](troubleshooting.md).
+**IMPORTANT: We will provide you with a development environment** ready to use with the aforementioned tools installed on it:
 
-### SkyTap images ###
+* If you are completing this tutorial as part of an **on-site learning or education event** with a proctor/tutor, please ask your proctor/tutor how to get access to your development environment.
+* If you are completing this tutorial on your own and it is not part of an on-site education event, please refer to the instructions on the [IBM Garage Method website](https://www.ibm.com/cloud/garage/content/course/websphere-on-cloud-private/0).
 
-1. Use the [PurpleCompute series of SkyTap images](https://ibm-dte.mybluemix.net/ibm-cloud-private#deep-dive) for this tutorial.
-2. Login to your skytap machine on the Desktop vm image.
-3. Use the password: A1rb0rn3
+### Troubleshooting
 
-### Step 1. Modernise application to run on WebSphere Liberty profile (Optional)
+Common issues and procedures such as opening the terminal, logging into ICP, configure the Kubernetes CLI, restarting the environment can be found on the [troubleshooting section](troubleshooting.md).
+
+### Step 1. Modernise application to run on WebSphere Liberty profile
 
 In this step, we are going to make the modifications needed both at the application level and the server configuration level to migrate our legacy WebSphere Application Server 7 application to run on the WebSphere Application Server Liberty profile.
 
