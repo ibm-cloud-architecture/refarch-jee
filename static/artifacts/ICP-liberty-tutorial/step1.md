@@ -14,7 +14,9 @@ In this step, we are going to make the modifications needed both at the applicat
 7.  [Run the application](#run-the-application)
 
 
-## Analyze the application by using Transformation Advisor
+## Analyze the application by using Transformation Advisor (READ ONLY)
+
+**IMPORTANT:** Since running the Transformation Advisor against an existing WebSphere deployment consumes an important amount of not only resources but also time, **we have already run** the Transformation Advisor for you. Hence, **you only need to read through the following** and understand how the Transformation Advisor is run, how it works, what it produces, its benefits, etc.
 
 Transformation Advisor enables a quick analysis of your on-premise applications for rapid deployment on WebSphere Application Server and Liberty running on a Public, Private, or Hybrid Cloud environment. Using the information available in your existing environments, Transformation Advisor runs a custom data collector on your on-premise application servers, identifying Java EE programming models on the application server, and then creates a high-level inventory of the content and structure of your applications. This analysis includes potential problems that could be encountered while moving the applications to the cloud or current levels of Java.
 
@@ -47,7 +49,7 @@ In this task, you will analyze an existing application that has had the Transfor
 
    ![Transformation Advisor 03](/static/imgs/modernize-app-for-was/Source62.png)
 
-5. Click the **Recommendations** tab at the top.  You will see pre-populated information in this tab already, based on the [Enterprise Application Modernization Reference Architecture](https://github.com/ibm-cloud-architecture/refarch-jee) activities.
+5. Click the **Recommendations** tab at the top. You will see pre-populated information in this tab already, based on the [Enterprise Application Modernization Reference Architecture](https://github.com/ibm-cloud-architecture/refarch-jee) activities.
 
    There is an initial dialog, titled **Development Costs**, that you are presented with upon your initial viewing of the Recommendations tab.  Transformation Advisor provides some numerical analysis on how long certain tasks are expected to take, how difficult they are expected to be, and some baseline overhead costs that are assumed in any software migration project.  As the dialog states, these values should be considered in context what the rest of the application analysis results show and should only be used as a guide, not hard and fast expectations.  These values will fluctuate over time and vary across different real-world applications.
 
@@ -55,7 +57,7 @@ In this task, you will analyze an existing application that has had the Transfor
 
    Select the *Do not show this again* check box and click **Ok**.
 
-6. Click **Dmgr01** at the top of the page to review the applications from the simulated WebSphere Application Server ND production environment.  You are presented with an initial line-item view of all the EARs, WARs, and JARs that the Transformation Advisor's data collector identified.  You can hover over each of the blue information icons in the column headers for a description of the different types of data the tool has calculated.
+6. Click **Dmgr01** at the top of the page to review the applications from the simulated WebSphere Application Server ND production environment (depending on the load the public Transformation Advisor instance you are using in this lab is under, **you may need to wait a bit longer or even refresh the page** until you get the Customer Order Services application displayed as in the picture below). You are presented with an initial line-item view of all the EARs, WARs, and JARs that the Transformation Advisor's data collector identified.  You can hover over each of the blue information icons in the column headers for a description of the different types of data the tool has calculated.
 
    ![Transformation Advisor 05](/static/imgs/modernize-app-for-was/Source64.png)
 
