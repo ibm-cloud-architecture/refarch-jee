@@ -1,4 +1,4 @@
-# Step 1. Modernise application to run on WebSphere Liberty profile (Optional)
+# Step 1. Modernise application to run on WebSphere Liberty profile
 
 In this step, we are going to make the modifications needed both at the application level and the server configuration level to migrate our WebSphere Application Server 7 application to run in WebSphere Liberty.
 
@@ -20,36 +20,44 @@ In this step, we are going to make the modifications needed both at the applicat
 
 Transformation Advisor enables a quick analysis of your on-premise applications for rapid deployment on WebSphere Application Server and Liberty running on a Public, Private, or Hybrid Cloud environment. Using the information available in your existing environments, Transformation Advisor runs a custom data collector on your on-premise application servers, identifying Java EE programming models on the application server, and then creates a high-level inventory of the content and structure of your applications. This analysis includes potential problems that could be encountered while moving the applications to the cloud or current levels of Java.
 
-Transformation Advisor makes extensive use of the freely-available [IBM Websphere Application Server Migration Toolkit for Application Binaries (WAMT)](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries) and the [WebSphere Configuration Migration Toolkit (WCMT)](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Configuration_Migration_Tool). These tools are pre-integrated with the Data Collector and run as an all-in-one package on the target WAS servers. The applications are scanned and results from the Data Collector are sent back up to the Transformation Advisor as input to the recommendations engine.  Transformation Advisor calculates a development cost to perform the move and makes recommendations on the best target environment.
+TTransformation Advisor makes extensive use of the freely-available [IBM Websphere Application Server Migration Toolkit for Application Binaries (WAMT)](https://developer.ibm.com/wasdev/downloads/#asset/tools-Migration_Toolkit_for_Application_Binaries) and the [WebSphere Configuration Migration Toolkit (WCMT)](https://developer.ibm.com/wasdev/downloads/#asset/tools-WebSphere_Configuration_Migration_Tool). These tools are pre-integrated with the Data Collector and run as an all-in-one package on the target WAS servers. The applications are scanned and results from the Data Collector are sent back up to the Transformation Advisor as input to the recommendations engine.  Transformation Advisor calculates a development cost to perform the move and makes recommendations on the best target environment.
 
 For more information on Transformation Advisor, you can reference the [Transformation Advisor homepage](https://developer.ibm.com/product-insights/transformation-advisor/) for more details on getting started, demo videos, and access to the public Slack channel.
 
-In this task, you will analyze an existing application that has had the Transformation Advisor data collector run against it.  This will prepare you for the subsequent steps of this tutorial to transform the application from it's current WebSphere Application Server Version 7 format to a current WebSphere Liberty application.
+In this task, you will review the results of analyzing an existing application that has had the Transformation Advisor data collector run against it.  This will prepare you for the subsequent steps of this tutorial to transform the application from it's current WebSphere Application Server Version 7 format to a current WebSphere Liberty application.
 
-1. Access the public Transformation Advisor homepage at [https://lands-ui.mybluemix.net/](https://lands-ui.mybluemix.net/).  Transformation Advisor is also available in the IBM Cloud Private Catalog and can be [deployed into any IBM Cloud Private installation](https://developer.ibm.com/recipes/tutorials/deploying-transformation-advisor-into-ibm-cloud-private/), but we will be using the hosted version running on the IBM Cloud Platform for this tutorial.
+For a generic overview of using Transformation Advisor, you can reference this [recipe](https://developer.ibm.com/recipes/tutorials/using-the-transformation-advisor-on-ibm-cloud-private/) from the developer.ibm.com/recipes site.
 
-   For a generic overview of using Transformation Advisor, you can reference this [recipe](https://developer.ibm.com/recipes/tutorials/using-the-transformation-advisor-on-ibm-cloud-private/) from the developer.ibm.com/recipes site.
+However, to review the Transfomration Advisor results from the analysis of the Customer Order Services application used in this tutorial, follow the next steps:
 
-2. Enter **purplecompute-tutorial** as the unique identifier here.  A workspace has already been created here, with existing data already uploaded for you to review.  Otherwise, you would have to spend a considerable amount of time setting up a WebSphere Application Server environment, which is most definitely not the goal of this tutorial.
+1. Access the public Transformation Advisor homepage at [http://appmod-tutorial.us-south.containers.mybluemix.net/](http://appmod-tutorial.us-south.containers.mybluemix.net/).  Transformation Advisor is also available in the IBM Cloud Private Catalog and can be [deployed into any IBM Cloud Private installation](https://developer.ibm.com/recipes/tutorials/deploying-transformation-advisor-into-ibm-cloud-private/), but we will be using the hosted version running on the IBM Cloud Platform for this tutorial.
+
+2. Click on the already created **appmod-tutorial** workspace. A workspace has already been created here, with existing data already uploaded for you to review.  Otherwise, you would have to spend a considerable amount of time setting up a WebSphere Application Server environment, which is most definitely not the goal of this tutorial.
 
    ![Transformation Advisor 01](/static/imgs/modernize-app-for-was/Source60.png)
 
-3. You can create multiple tasks for different modernization and migration efforts under a given workspace.  For now, you will use the **LibertyTransform** task that has already been created.  Click **LibertyTransform** from the left menu.
+3. You can create multiple tasks for different modernization and migration efforts under a given workspace.  For now, you will use the **Customer-Order-Services** task that has already been created.  
 
-   You are presented with the *User Preferences* panel, which asks three questions before configuring the data collector tool:
-   * The first question asks *Do you want to move your application to a Private or Public Cloud?*.
-   * The second question asks *Do you want to move your application data to the Cloud?*.
-   * The third question asks *Do you want your application to run in a flexible environment with a small footprint and rapid start up?*.
-
-   ![Transformation Advisor 02](/static/imgs/modernize-app-for-was/Source61.png)
-
-   Your answers to these three questions configure the data collector to target specific options for migration and relocation of the identified applications.  For this tutorial, the desired options that have been pre-selected are *I don't mind* as the answer to the first question, *No* as the answer to the second question, and *Yes* as the answer to the third question.
-
-4. Click the **Data Collector** tab at the top.  This page details the steps required to download and run the data collector in your local environment.  Since you do not have a local WebSphere Application Server environment as part of this tutorial, you do not need to perform anything on this page as time.  However, you should review the *Tell me more about how this tool works* section once you need to run through Transformation Advisor activities on your own systems.
+4. Click the **Data Collector** tab at the top.  This page details the steps required to download and run the data collector in your local environment which will, in turn, upload the results of analyzing your WebSphere environment to the Transformation Advisor.  Since you do not have a local WebSphere Application Server environment as part of this tutorial, you **do not need to perform anything on this page at this time**.  However, you should review the *Tell me more about how this tool works* section once you need to run through Transformation Advisor activities on your own systems.
 
    ![Transformation Advisor 03](/static/imgs/modernize-app-for-was/Source62.png)
 
-5. Click the **Recommendations** tab at the top. You will see pre-populated information in this tab already, based on the [Enterprise Application Modernization Reference Architecture](https://github.com/ibm-cloud-architecture/refarch-jee) activities.
+5. Click **Customer-Order-Services** from the left menu and then click on the **USER PREFERENCES** tab at the top.
+
+   You are presented with the *User Preferences* panel, which asks four questions the Transformation Advisor will use to produce the recommendations:
+
+   * The first question asks *Do you want to move your application to a Private or Public Cloud?*.
+   * The second question asks *Do you want to move your application data to the Cloud?*.
+   * The third question asks *Do you have any legal requirement whereby you must keep the data in-house?*
+   * The fourth and last question asks *Do you want your application to run in a flexible environment with a small footprint and rapid start up?*.
+
+   ![Transformation Advisor 02](/static/imgs/modernize-app-for-was/Source61.png)
+
+   Your answers to these four questions will drive the Transformation Advisor recommendations to target specific options for migration and relocation of the identified applications.  For this tutorial, the desired options that you need to select are *Don't Know* as the answer to the first question, *No* as the answer to the second question, *Yes* as the answer to the third question and *Yes* as the answer to the fourth and last question as the picture above shows.
+
+   You are also presented with some project setting options which enable you to tweak the migration time, effort and cost rough estimates the Transformation Advisor calculates for each of the applications. The development and overhead numbers the Transformation Advisor estimates are based on IBM experience and expertise in Java, WebSphere, migrations, etc. Therefore, you could use the second option *Development Effort* to scale that development effort estimate based on your developers experience and expertise. Finally, the first option under the *Project Settings* section allows you to refine the cost of management, server configuration and unit testing also based on your developers, admins, etc expertise and ability.
+
+6. Click the **Recommendations** tab at the top. You will see pre-populated information in this tab already, based on the [Enterprise Application Modernization Reference Architecture](https://github.com/ibm-cloud-architecture/refarch-jee) activities.
 
    There is an initial dialog, titled **Development Costs**, that you are presented with upon your initial viewing of the Recommendations tab.  Transformation Advisor provides some numerical analysis on how long certain tasks are expected to take, how difficult they are expected to be, and some baseline overhead costs that are assumed in any software migration project.  As the dialog states, these values should be considered in context what the rest of the application analysis results show and should only be used as a guide, not hard and fast expectations.  These values will fluctuate over time and vary across different real-world applications.
 
@@ -57,57 +65,72 @@ In this task, you will analyze an existing application that has had the Transfor
 
    Select the *Do not show this again* check box and click **Ok**.
 
-6. Click **Dmgr01** at the top of the page to review the applications from the simulated WebSphere Application Server ND production environment (depending on the load the public Transformation Advisor instance you are using in this lab is under, **you may need to wait a bit longer or even refresh the page** until you get the Customer Order Services application displayed as in the picture below). You are presented with an initial line-item view of all the EARs, WARs, and JARs that the Transformation Advisor's data collector identified.  You can hover over each of the blue information icons in the column headers for a description of the different types of data the tool has calculated.
+7. Click **AppSrv02** at the top of the page to review the applications from our WebSphere Application Server production environment (depending on the load the public Transformation Advisor instance you are using in this lab is under, **you may need to wait a bit longer or even refresh the page** until you get the Customer Order Services application displayed as in the picture below). You are presented with an initial line-item view of all the EARs, WARs, and JARs that the Transformation Advisor's data collector identified.  You can hover over each of the blue information icons in the column headers for a description of the different types of data the tool has calculated.
 
    ![Transformation Advisor 05](/static/imgs/modernize-app-for-was/Source64.png)
 
    * Under the **Recommendation** column, you will see that **Liberty on Private Cloud** has been selected, as that runtime and platform combination aligns most optimally with our answers to the first and third question on the **User Preferences** tab.
 
-   * Under the **Tech Match** column, you will see a 100% rating for our existing application technology to match our new runtime and platform choices.  We will talk more on this later.
+   * Under the **Complexity** column, you will see an indication of how complex the Transformation Advisor considers the application to be if you were to migrate it to the recommended target environment. In our case, Transformation Advisor considers our application **moderate** in complexity.
 
-   * Under the **Possible Issues** column, you see a series of green, yellow, and red bars.  These are the number of informative, warning, and severe issues identified respectively from the underlying analysis tooling.  Again, this is only a summary here and we will talk more on this later.
+   * Under the **Tech Match** column, you will see a percentage and if less than 100% it indicates that there may be some technologies that are not suitable for the recommended platform (like Java deprecated technologies such as JAX-RPC). You should investigate the details and ensure your application is actually using the technologies. In our case, you will see a 100% rating for our existing application technology to match our new runtime and platform choices.  We will talk more on this later.
+
+   * Under the **Dependencies** column, you will see potential external dependencies detected during the scan. Work may be needed to configure access to these external dependencies. In our case, our Customer Order Application is connecting to a database and an LDAP server. Hence, the results you see.
+
+   * Under the **Issues** column, you see a series of green, yellow, and red bars.  These are the number of informative, warning, and severe issues identified respectively from the underlying analysis tooling.  Again, this is only a summary here and we will talk more on this later.
 
    * The next three columns relate back to the information the previous dialog mentioned, regarding development costs.  These columns breakdown the overall expected amount of time-based effort a single engineer would require to perform the migration.  There is an expectation that it would take 1.25 days to perform the necessary application development work, 5 days to perform the necessary environment configuration & deployment, for a total of around 6.25 days worth of total time.
 
-7. Once you are satisfied with understanding each of the columns in the initial table, click **View Details** to be taken to the **Application Details** section lower down on the page.  It is here that you can review all the gathered information from the data collector that made up the numbers in the above summary table.
+8. Once you are satisfied with understanding each of the columns in the initial table, click **View Details** be taken to a section lower down the page where you can review all the gathered information from the data collector that made up the numbers and recommendations in the above summary table.
 
    ![Transformation Advisor 06](/static/imgs/modernize-app-for-was/Source65.png)
 
-   Under the **Issue** table, you will see the four *Severe* issues at the top.  These are items that are expected when migrating applications between versions with much time lapsed between them.  Some of the work you will do in subsequent steps of the this tutorial will address each of these severe issues, such as confirming correct lookup of Enterprise JavaBeans and providing the necessary runtime libraries that are not packaged in WebSphere Liberty, but were previously packaged in WebSphere Application Server distributions.
+   Under the **Application Details** section you will see more information related to the technology issues.
 
-   Scrolling down, you will see the nine **Warning** issues identified during the data collector's run.  Many of these issues are systematic of moving between Java versions and have follow-up information if you click on the chevron to the left of each item.  Many of the issues also are visible inside Java IDEs when targeting newer Java versions as a target runtime.  You will work with some of these issues, such as the *Check for behavior change in JPA cascade strategy*, in subsequent steps of this tutorial.
+   ![Transformation Advisor 10](/static/imgs/modernize-app-for-was/Source70.png)
+   ![Transformation Advisor 11](/static/imgs/modernize-app-for-was/Source71.png)
 
-   Finally, you will see the seven **Information** issues identified.  Many of these are general best practices that should be adhered to when moving any application, deploying into a hybrid environment, or adopting a new technology.  You will see more on these issues in the next step.
+   Under the **Technology Issues** table, you will see the *Severe* issues at the top.  These are items that are expected when migrating applications between versions with much time lapsed between them.  Some of the work you will do in subsequent steps of the this tutorial will address each of these severe issues, such as confirming correct lookup of Enterprise JavaBeans and providing the necessary runtime libraries that are not packaged in WebSphere Liberty, but were previously packaged in WebSphere Application Server distributions.
 
-8. Now that you've reviewed the initial Transformation Advisor results, you should feel pretty confident about the ability to migrate the tutorials WebSphere Application Server Version 7 application to a current version of WebSphere Liberty.  However, as previously noted, Transformation Advisor uses existing tooling to gather some of it's information and those generated results are provided here as well.
+   Under the **Additional Information** table, you will see the *Low* issues at the top. These are low or minimum risk changes to make or considerations to be taken into account when migrating your application to the target environment.
 
-   If you are comfortable with what has been presented here so far, you can move on to **Step 2**.  If you would like more information, continue on to the next steps for some deeper insight into the generated documentation from the existing production environment.
+   Finally, under the **External Dependencies** table, you will see the potential external dependencies your application might be depending on and may need some consideration as to how to access them when your applications are migrated to the target environment.
 
-9. Click **Analysis Report** at the bottom of the page.  You are presented with a dialog stating that Transformation Advisor uses a dynamic ruleset to evaluate identified issues, which may appear differently than the static ruleset the WAMT tooling uses.  Click **Ok** to move on.
+9. Now that you've reviewed the initial Transformation Advisor results, you should feel pretty confident about the ability to migrate the WebSphere Application Server Version 7 application to a current version of WebSphere Liberty.  However, as previously noted, Transformation Advisor uses existing tooling to gather some of it's information and those generated results are provided here as well.
 
-   A new tab opens and you are presented with the raw **Detailed Migration Analysis Report**.  You will first notice a larger number of rules flagged, files affected, and total results in this report than in Transformation Advisor.  This is because Transformation Advisor's ruleset identifies false positives and factors out unnecessary issues, while this reports capture everything regardless of context.
+If you are comfortable with what has been presented here so far, you can move on to the next section [Install WebSphere Application Server Liberty locally](#install-websphere-application-server-liberty-locally).  If you would like more information, continue on to the next steps for some deeper insight into the generated documentation from the existing production environment.
+
+**IMPORTANT:** When clicking on a report a new browser window will open. However, you need to replace the IP address with **http://appmod-tutorial.us-south.containers.mybluemix.net** leaving the rest (port and web context) in the url as is.
+
+1. Click [Analysis Report**](http://appmod-tutorial.us-south.containers.mybluemix.net:30111/lands_advisor/lands_advisor/landsw/report/analysis_reports?taskName=Customer-Order-Services&appName=CustomerOrderServicesApp.ear&platform=ICp_Liberty&profileName=AppSrv02&tenantId=appmod-tutorial) at the bottom of the page.  You are presented with a dialog stating that Transformation Advisor uses a dynamic ruleset to evaluate identified issues, which may appear differently than the static ruleset the WAMT tooling uses.  Click **Ok** to move on.
+
+   A new tab opens and you are presented with the raw **Detailed Migration Analysis Report**.  You will first notice a larger number of rules flagged and total results in this report than in Transformation Advisor.  This is because Transformation Advisor's ruleset identifies false positives and factors out unnecessary issues, while this reports capture everything regardless of context.
 
    ![Transformation Advisor 07](/static/imgs/modernize-app-for-was/Source66.png)
 
-   Scrolling down, you can see more detail on some of the previous **Information** items. Scroll down until you see **Databases (2)** and click **Show rule help**.  This will explain that this rule is built around Java code that utilizes `java.sql` and `javax.sql`-associated Classes and Methods.  In the raw report, this is identified as a *Warning*, but Transformation Advisor's ruleset has downgraded this to an *Information*-level warning, as following the rest of the [IBM Cloud Garage Method Architecture Center](https://www.ibm.com/cloud/garage/category/architectures) best practices, this requirement will be easily met.  Click **Show results** to see which classes inside our application are actually accessing the necessary database backends.
+   Scrolling down, you can see more detail on some of the previous **Information** items. Scroll down until you see **Databases (1)** and click **Show rule help**.  This will explain that this rule is built around Java code that utilizes `java.sql` and `javax.sql`-associated Classes and Methods.  In the raw report, this is identified as a *Warning*, but Transformation Advisor's ruleset has downgraded this to an *Information*-level warning, as following the rest of the [IBM Cloud Garage Method Architecture Center](https://www.ibm.com/cloud/garage/category/architectures) best practices, this requirement will be easily met.  Click **Show results** to see which classes inside our application are actually accessing the necessary database backends.
 
    Once you are satisfied with reviewing the raw report, close the current tab and return to Transformation Advisor.
 
-10. Next, click **Technology Report** for an understanding into how the **Tech Match** column was calculated.
+2. Next, click [**Technology Report**](http://appmod-tutorial.us-south.containers.mybluemix.net:30111/lands_advisor/lands_advisor/landsw/report/evaluation_reports?taskName=Customer-Order-Services&appName=CustomerOrderServicesApp.ear&profileName=AppSrv02&tenantId=appmod-tutorial) for an understanding into how the **Tech Match** column was calculated.
 
-   This new report is opened to show all the permutations of technology identified inside of the Customer Order Serivces applicatio, including JAX-RS, EJB, JPA, JDBC, other JEE specifications, along with their compatibility across the different available runtimes across the WebSphere family.  These runtimes include Liberty on Bluemix Instant Runtimes, Liberty on Containers & Virtual Machines, traditional WebSphere on Virtual Machines, and both Liberty & traditional WebSphere on z/OS.  The Customer Order Services application is pretty compatible with wherever you'd like to take it, so additional extra credit work can be performed to move it to any of the other runtime/platform columns of your choice.
+   This new report is opened to show all the permutations of technology identified inside of the Customer Order Services application, including JAX-RS, EJB, JPA, JDBC, other JEE specifications, along with their compatibility across the different available runtimes across the WebSphere family.  These runtimes include Liberty on Bluemix Instant Runtimes, Liberty on Containers & Virtual Machines, traditional WebSphere on Virtual Machines, and both Liberty & traditional WebSphere on z/OS.  The Customer Order Services application is pretty compatible with wherever you'd like to take it, so additional extra credit work can be performed to move it to any of the other runtime/platform columns of your choice.
 
    ![Transformation Advisor 08](/static/imgs/modernize-app-for-was/Source67.png)
 
    Once you are satisfied with reviewing the raw report, close the current tab and return to Transformation Advisor.
 
-11. To review the final report generated by Transformation Advisor's analysis, click **Inventory Report** to understand the detailed contents of the application binaries.
+3. To review the final report generated by Transformation Advisor's analysis, click [**Inventory Report**](http://appmod-tutorial.us-south.containers.mybluemix.net:30111/lands_advisor/lands_advisor/landsw/report/inventory_reports?taskName=Customer-Order-Services&appName=CustomerOrderServicesApp.ear&profileName=AppSrv02&tenantId=appmod-tutorial) to understand the detailed contents of the application binaries.
 
    You are presented with the raw **Application Inventory Report**.  This report gives all the fine-grained details of what is included in the applications identified by Transformation Advisor's data collector.  Many Enterprise applications have been built over the course of many years and in the hands of many different teams.  This report helps to identify specific types of Java objects, resources, and artifacts in a given application, interaction across modules, and the provenance of certain libraries - across core Java libraries, Open Source Software, WebSphere, and others.
 
    ![Transformation Advisor 09](/static/imgs/modernize-app-for-was/Source68.png)
 
    Once you are satisfied with reviewing the raw report, close the current tab and return to Transformation Advisor.
+
+Finally, the Transformation Advisor also provides other recommendations as far as migrating your application to different target environments, servers, etc. If you want to see what the other recommendations are, their issues, reports, etc check the *Show All Recommendations* checkbox that appears on the left top corner of the initial application table under the Recommendations tab.
+
+![Transformation Advisor 12](/static/imgs/modernize-app-for-was/Source72.png)
 
 You have now walked through the Transformation Advisor analysis of **Customer Order Services** and are ready to transform the application to run on WebSphere Liberty and IBM Cloud Private.
 
